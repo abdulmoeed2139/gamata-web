@@ -1,0 +1,297 @@
+.community-section {
+    margin-bottom: 50px;
+
+    .wrapper {
+        .col-1 {
+            padding: 0 20px 50px;
+        }
+
+        .col-2 {
+            .community-slider {
+                .owl-stage {
+                    display: flex;
+
+                    .owl-item {
+                        border: 1px solid #E1E1E1;
+                        border-radius: 5px;
+                        transition: all 0.3s ease;
+
+                        &.active {
+                            background: $green;
+
+                            .item {
+                                .icon {
+                                    svg {
+                                        fill: $white;
+                                    }
+                                }
+
+                                .content {
+                                    .title {
+                                        color: $white;
+                                    }
+
+                                    .sub-title {
+                                        color: $white;
+                                    }
+
+                                    .desc {
+                                        color: $white;
+                                    }
+                                }
+                            }
+                        }
+
+                        .item {
+                            padding: 25px 50px;
+
+                            .icon {
+                                text-align: center;
+                                padding-bottom: 20px;
+
+                                svg {
+                                    width: 70px;
+                                    height: 70px;
+                                    fill: #313131;
+                                }
+                            }
+
+                            .content {
+                                .title {
+                                    color: $black;
+                                    text-align: center;
+                                    font-family: $roboto;
+                                    font-size: 25px;
+                                    font-weight: 700;
+                                }
+
+                                .sub-title {
+                                    color: $black;
+                                    text-align: center;
+                                    font-family: $roboto;
+                                    font-size: 20px;
+                                    font-weight: 700;
+                                    padding-bottom: 20px;
+                                }
+
+                                .desc {
+                                    color: $black;
+                                    text-align: center;
+                                    font-family: $roboto;
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .community-section {
+        margin-bottom: get-vw(100px);
+
+        .wrapper {
+            .col-1 {
+                padding: 0 get-vw(240px) get-vw(50px);
+
+                .common-desc {
+                    padding-bottom: 0;
+                }
+            }
+
+            .col-2 {
+                padding: 0 get-vw(240px);
+
+                .community-slider {
+                    .owl-stage {
+                        display: flex;
+
+                        .owl-item {
+                            border: get-vw(1px) solid #E1E1E1;
+                            border-radius: get-vw(5px);
+                            transition: all 0.3s ease;
+                            margin-left: get-vw(2px);
+
+                            &.active {
+                                background: transparent;
+
+                                .item {
+                                    .icon {
+                                        svg {
+                                            fill: $black;
+                                        }
+                                    }
+
+                                    .content {
+                                        .title {
+                                            color: $black;
+                                        }
+
+                                        .sub-title {
+                                            color: $black;
+                                        }
+
+                                        .desc {
+                                            color: $black;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .item {
+                                padding: get-vw(50px) get-vw(80px) get-vw(50px) get-vw(37px);
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+
+                                .icon {
+                                    text-align: left;
+                                    padding-bottom: get-vw(20px);
+
+                                    svg {
+                                        width: get-vw(70px);
+                                        height: get-vw(70px);
+                                        fill: #313131;
+                                    }
+                                }
+
+                                .content {
+                                    .title {
+                                        color: $black;
+                                        text-align: left;
+                                        font-family: $roboto;
+                                        font-size: get-vw(32px);
+                                        font-weight: 700;
+                                    }
+
+                                    .sub-title {
+                                        color: $black;
+                                        text-align: left;
+                                        font-family: $roboto;
+                                        font-size: get-vw(25px);
+                                        font-weight: 700;
+                                        padding-bottom: get-vw(20px);
+                                    }
+
+                                    .desc {
+                                        color: $black;
+                                        text-align: left;
+                                        font-family: $roboto;
+                                        font-size: get-vw(18px);
+                                        font-weight: 400;
+                                    }
+                                }
+
+                            }
+                            &:hover {
+                                background: $green;
+                                .item {
+                                    .icon {
+                                        svg {
+                                            fill: $white;
+                                        }
+                                    }
+
+                                    .content {
+                                        .title {
+                                            color: $white;
+                                        }
+
+                                        .sub-title {
+                                            color: $white;
+                                        }
+
+                                        .desc {
+                                            color: $white;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .owl-nav {
+                        display: flex;
+                        flex-direction: column-reverse;
+                        flex-wrap: nowrap;
+                        justify-content: center;
+                        align-items: center;
+                        gap: get-vw(25px);
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: auto;
+                        right: get-vw(-110px);
+
+                        &.disabled {
+                            display: none;
+                        }
+
+                        .owl-prev {
+                            width: get-vw(70px);
+                            height: get-vw(70px);
+                            border: get-vw(1px) solid #B6E537;
+                            border-radius: 50%;
+                            background: $green;
+                            box-shadow: rgba($green, 0.2) get-vw(0px) get-vw(8px) get-vw(24px);
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: center;
+                            transition: all 0.3s ease;
+
+                            svg {
+                                fill: $white;
+                            }
+
+                            &.disabled {
+                                width: get-vw(50px);
+                                height: get-vw(50px);
+                                border: get-vw(1px) solid #E1E1E1;
+                                background: $white;
+                                box-shadow: none;
+
+                                svg {
+                                    fill: #E1E1E1;
+                                }
+                            }
+                        }
+
+                        .owl-next {
+                            width: get-vw(70px);
+                            height: get-vw(70px);
+                            border: get-vw(1px) solid #B6E537;
+                            border-radius: 50%;
+                            background: $green;
+                            box-shadow: rgba($green, 0.2) get-vw(0px) get-vw(8px) get-vw(24px);
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: center;
+                            transition: all 0.3s ease;
+
+                            svg {
+                                fill: $white;
+                            }
+
+                            &.disabled {
+                                width: get-vw(50px);
+                                height: get-vw(50px);
+                                border: get-vw(1px) solid #E1E1E1;
+                                background: $white;
+                                box-shadow: none;
+
+                                svg {
+                                    fill: #E1E1E1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

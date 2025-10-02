@@ -1,0 +1,297 @@
+.main-card-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+
+.ant-cards-items{
+    border: 1px solid rgba(225, 225, 225, 0.50);
+    margin-bottom: 30px;
+    
+    .wrap {
+        position: relative;
+        padding: 50px 30px;
+
+        .wishlist {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 16px 0 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            svg {
+                width: 22px;
+                height: 20px;
+                stroke: #D9D9D9;
+                fill: transparent;
+            }
+
+            &.active {
+                svg {
+                    fill: $red;
+                    stroke: $red;
+                }
+            }
+        }
+
+        .image {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .content {
+            .pro-name {
+                padding-bottom: 30px;
+
+                .sin {
+                    color: $black;
+                    text-align: center;
+                    font-family: $abhaya;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 26px;
+                    letter-spacing: -1.2px;
+                    padding-bottom: 10px;
+                }
+
+                .eng {
+                    color: $black;
+                    text-align: center;
+                    font-family: $roboto;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 26px;
+                    letter-spacing: -1.2px;
+                    padding-bottom: 10px;
+                }
+
+                .tam {
+                    color: $black;
+                    text-align: center;
+                    font-family: $mukta;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 20px;
+                    letter-spacing: -0.9px;
+                }
+            }
+
+            .price {
+                color: $black;
+                text-align: center;
+                font-family: $roboto;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 22px;
+                letter-spacing: -0.32px;
+                padding-bottom: 10px;
+
+                span {
+                    display: inline-block;
+                    font-weight: 700;
+                }
+            }
+
+            .stock {
+                color: $black;
+                text-align: center;
+                font-family: $roboto;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 22px;
+                padding-bottom: 30px;
+            }
+
+            .common-btn-1 {
+                position: unset;
+            }
+        }
+    }
+}
+.disabled-card{
+    opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+    .ant-main-card-wrap{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .ant-cards-items{
+            width: calc(50% - 17px);
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .main-card-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+.ant-main-card-wrap{
+    .ant-cards-items{
+        border: get-vw(1px) solid rgba(225, 225, 225, 0.50);
+        margin-bottom: 0;
+        width: calc(33.33% - get-vw(3px));
+        overflow: hidden;
+        cursor: default;
+
+        .wrap {
+            padding: get-vw(30px) get-vw(42px) get-vw(240px);
+
+            .wishlist {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: flex-end;
+                align-items: center;
+                padding: get-vw(16px) get-vw(16px) 0 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+                cursor: pointer;
+
+                svg {
+                    width: get-vw(22px);
+                    height: get-vw(20px);
+                    stroke: #D9D9D9;
+                    fill: transparent;
+                }
+
+                &.active {
+                    svg {
+                        fill: $red;
+                        stroke: $red;
+                    }
+                }
+            }
+
+            .image {
+                padding-bottom: get-vw(20px);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .content {
+                transition: all 0.3s ease;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: get-vw(-60px);
+                padding: 0 get-vw(55px) get-vw(30px);
+
+                .pro-name {
+                    padding-bottom: get-vw(30px);
+
+                    .sin {
+                        color: $black;
+                        text-align: center;
+                        font-family: $abhaya;
+                        font-size: get-vw(24px);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: get-vw(26px);
+                        letter-spacing: get-vw(-1.2px);
+                        padding-bottom: get-vw(10px);
+                    }
+
+                    .eng {
+                        color: $black;
+                        text-align: center;
+                        font-family: $roboto;
+                        font-size: get-vw(24px);
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: get-vw(26px);
+                        letter-spacing: get-vw(-1.2px);
+                        padding-bottom: get-vw(10px);
+                    }
+
+                    .tam {
+                        color: $black;
+                        text-align: center;
+                        font-family: $mukta;
+                        font-size: get-vw(18px);
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: get-vw(20px);
+                        letter-spacing: get-vw(-0.9px);
+                    }
+                }
+
+                .price {
+                    color: $black;
+                    text-align: center;
+                    font-family: $roboto;
+                    font-size: get-vw(16px);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: get-vw(22px);
+                    letter-spacing: get-vw(-0.32px);
+                    padding-bottom: get-vw(10px);
+
+                    span {
+                        display: inline-block;
+                        font-weight: 700;
+                    }
+                }
+
+                .stock {
+                    color: $black;
+                    text-align: center;
+                    font-family: $roboto;
+                    font-size: get-vw(14px);
+                    font-weight: 400;
+                    line-height: get-vw(22px);
+                    padding-bottom: get-vw(30px);
+                }
+
+                .common-btn-1 {
+                    position: unset;
+                    padding: 0;
+                }
+            }
+        }
+
+        &:hover {
+            box-shadow: get-vw(20px) get-vw(20px) get-vw(60px) 0px rgba(0, 0, 0, 0.10);
+
+            .wrap {
+                .content {
+                    background: linear-gradient(180deg, rgba(149, 193, 31, 0.00) 0%, #95C11F 100%);
+                    bottom: 0;
+
+                    .common-btn-1 {
+                        position: unset;
+                        padding: 0;
+                        color: $white;
+
+                        svg {
+                            fill: $white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.disabled-card{
+    pointer-events: none;
+}
+}

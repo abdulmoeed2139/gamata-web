@@ -1,0 +1,655 @@
+.explore-section{
+    margin-bottom: 50px;
+    .wrapper{
+        .col-2{
+            .map{
+                display: none;
+            }
+            .adresses{
+                .dropdown{
+                    text-align: center;
+                    select{
+                        padding-right: 10px;
+                        text-align: center;
+                        color: #707070;
+                        font-family: $roboto;
+                        font-size: 20px;
+                        font-weight: 700;
+                        line-height: 35px;
+                        border: none;
+
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                }
+                .address-slider{
+                    padding-top: 160px;
+                    .owl-stage-outer{
+                        .owl-stage{
+                            display: flex;
+                            .owl-item{
+                                margin-bottom: 2px;
+                                position: relative;
+                                .item{
+                                    border: 1px solid #E1E1E1;
+                                    padding: 0;
+                                    height: 100%;
+                                    .wrap{
+                                        padding-bottom: 80px;
+                                        .location{
+                                            color: $black;
+                                            text-align: center;
+                                            font-family: $roboto;
+                                            font-size: 23px;
+                                            font-weight: 700;
+                                            line-height: 35px;
+                                            padding: 30px 20px 40px;
+                                        }
+                                        .tel{
+                                            text-align: center;
+                                            padding: 0 20px 15px;
+                                            .icon{
+                                                padding-bottom: 10px;
+                                                svg{
+                                                    width: 25px;
+                                                    height: 25px;
+                                                    fill: $green;
+                                                }
+                                            }
+                                            .number{
+                                                text-decoration: none;
+                                                color: $black;
+                                                font-family: $roboto;
+                                                font-size: 18px;
+                                                font-weight: 400;
+                                                line-height: 22px;
+                                                letter-spacing: -0.36px;
+                                            }
+                                        }
+                                        .mail{
+                                            text-align: center;
+                                            padding: 0 20px 50px;
+                                            .icon{
+                                                padding-bottom: 10px;
+                                                svg{
+                                                    width: 25px;
+                                                    height: 25px;
+                                                    fill: $green;
+                                                }
+                                            }
+                                            .email{
+                                                text-decoration: none;
+                                                color: $black;
+                                                font-family: $roboto;
+                                                font-size: 18px;
+                                                font-weight: 400;
+                                                line-height: 22px;
+                                                letter-spacing: -0.36px;
+                                            }
+                                        }
+                                        .common-btn-1{
+                                            position: absolute;
+                                            bottom: 0;
+                                            left: 0;
+                                            right: 0;
+                                            padding: 25px 0;
+                                            border-top: 1px solid #E1E1E1;
+                                        }
+                                    }
+                                }
+                                &.active{
+                                    background: $green;
+                                    transition: all 0.3s ease;
+                                    .item{
+                                        border: 1px solid #E1E1E1;
+                                        .wrap{
+                                            .location{
+                                                color: $white;
+                                            }
+                                            .tel{
+                                                .icon{
+                                                    svg{
+                                                        fill: $white;
+                                                    }
+                                                }
+                                                .number{
+                                                    color: $white;
+                                                }
+                                            }
+                                            .mail{
+                                                .icon{
+                                                    svg{
+                                                        fill: $white;
+                                                    }
+                                                }
+                                                .email{
+                                                    color: $white;
+                                                }
+                                            }
+                                            .common-btn-1{
+                                                color: $white;
+                                                svg{
+                                                    fill: $white;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .owl-nav {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 25px;
+    
+                        position: absolute;
+                        top: 50px;
+                        left: 0;
+                        right: 0;
+    
+                        .owl-prev {
+                            width: 57px;
+                            height: 57px;
+                            border: 1px solid #B6E537;
+                            border-radius: 50%;
+                            background: $green;
+                            box-shadow: rgba($green, 0.2) 0px 8px 24px;
+    
+                            svg {
+                                fill: $white;
+                            }
+    
+                            &.disabled {
+                                border: 1px solid #E1E1E1;
+                                background: $white;
+                                box-shadow: none;
+    
+                                svg {
+                                    fill: #E1E1E1;
+                                }
+                            }
+                        }
+    
+                        .owl-next {
+                            width: 57px;
+                            height: 57px;
+                            border: 1px solid #B6E537;
+                            border-radius: 50%;
+                            background: $green;
+                            box-shadow: rgba($green, 0.2) 0px 8px 24px;
+    
+                            svg {
+                                fill: $white;
+                            }
+    
+                            &.disabled {
+                                border: 1px solid #E1E1E1;
+                                background: $white;
+                                box-shadow: none;
+    
+                                svg {
+                                    fill: #E1E1E1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .explore-section{
+        margin-bottom: get-vw(100px);
+        .wrapper{
+            padding: 0 get-vw(240px);
+            .col-1{
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                gap: get-vw(50px);
+                justify-content: space-between;
+                padding-bottom: get-vw(50px);
+                .common-title{
+                    text-align: left;
+                    padding: 0;
+                }
+                .common-desc{
+                    padding: 0;
+                    margin: 0;
+                    text-align: left;
+                    width: get-vw(600px);
+                }
+            }
+            .col-2{
+                display: flex;
+                border: get-vw(1px) solid #E1E1E1;
+                .map{
+                    width: calc(100% - get-vw(856px));
+                    display: block;
+                    position: relative;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                    .locations{
+                        position: absolute;
+                        top: 0;
+                        height: 100%;
+                        width: 100%;
+                        .loc1{
+                            display: flex;
+                            flex-direction: row-reverse;
+                            flex-wrap: nowrap;
+                            position: absolute;
+                            left: 42%;
+                            top: 42%;
+                            .text{
+                                color: $green2;
+                                text-align: left;
+                                font-family: $barlow;
+                                font-size: get-vw(20px);
+                                font-weight: 400;
+                                line-height: get-vw(30px);
+                                position: relative;
+
+                                &::after{
+                                    content: '';
+                                    position: absolute;
+                                    background: $green2;
+                                    box-shadow: 0px get-vw(1.133px) get-vw(1.133px) 0px rgba(255, 255, 255, 0.25) inset;
+                                    filter: drop-shadow(0px get-vw(2.266px) get-vw(4.532px) rgba(0, 0, 0, 0.25));
+                                    width: get-vw(7px);
+                                    height: get-vw(7px);
+                                    top: get-vw(15px);
+                                    left: get-vw(-17px);
+                                    border-radius: 50%;
+                                }
+                            }
+                            svg{
+                                width: get-vw(50px);
+                                height: get-vw(60px);
+                                opacity: 0;
+                            }
+
+                            &:hover{
+                                .text{
+                                    font-weight: 700;
+                                    &::after{
+                                        position: unset;
+                                    }
+                                }
+                                svg{
+                                    opacity: 1;
+                                    position: relative;
+                                    bottom: get-vw(10px);
+                                    transition: all 0.3s ease;
+                                }
+                            }
+                        }
+                        .loc2{
+                            display: flex;
+                            flex-direction: row-reverse;
+                            flex-wrap: nowrap;
+                            position: absolute;
+                            left: 45%;
+                            top: 60%;
+                            .text{
+                                color: $green2;
+                                text-align: left;
+                                font-family: $barlow;
+                                font-size: get-vw(20px);
+                                font-weight: 400;
+                                line-height: get-vw(30px);
+
+                                &::after{
+                                    content: '';
+                                    position: absolute;
+                                    background: $green2;
+                                    box-shadow: 0px get-vw(1.133px) get-vw(1.133px) 0px rgba(255, 255, 255, 0.25) inset;
+                                    filter: drop-shadow(0px get-vw(2.266px) get-vw(4.532px) rgba(0, 0, 0, 0.25));
+                                    width: get-vw(7px);
+                                    height: get-vw(7px);
+                                    top: get-vw(15px);
+                                    left: get-vw(35px);
+                                    border-radius: 50%;
+                                }
+                            }
+                            svg{
+                                width: get-vw(50px);
+                                height: get-vw(60px);
+                                opacity: 0;
+                            }
+
+                            &:hover{
+                                .text{
+                                    font-weight: 700;
+                                    &::after{
+                                        position: unset;
+                                    }
+                                }
+                                svg{
+                                    opacity: 1;
+                                    position: relative;
+                                    bottom: get-vw(10px);
+                                    transition: all 0.3s ease;
+                                }
+                            }
+                        }
+                        .loc3{
+                            display: flex;
+                            flex-direction: row-reverse;
+                            flex-wrap: nowrap;
+                            position: absolute;
+                            left: 19%;
+                            top: 65%;
+                            .text{
+                                color: $green2;
+                                text-align: left;
+                                font-family: $barlow;
+                                font-size: get-vw(20px);
+                                font-weight: 400;
+                                line-height: get-vw(25px);
+
+                                span{
+                                    display: block;
+                                    font-size: get-vw(13px);
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: get-vw(13px);
+                                }
+
+                                &::after{
+                                    content: '';
+                                    position: absolute;
+                                    background: $green2;
+                                    box-shadow: 0px get-vw(1.133px) get-vw(1.133px) 0px rgba(255, 255, 255, 0.25) inset;
+                                    filter: drop-shadow(0px get-vw(2.266px) get-vw(4.532px) rgba(0, 0, 0, 0.25));
+                                    width: get-vw(7px);
+                                    height: get-vw(7px);
+                                    top: get-vw(15px);
+                                    left: get-vw(35px);
+                                    border-radius: 50%;
+                                }
+                            }
+                            svg{
+                                width: get-vw(50px);
+                                height: get-vw(60px);
+                                opacity: 0;
+                            }
+
+                            &:hover{
+                                .text{
+                                    font-weight: 700;
+                                    &::after{
+                                        position: unset;
+                                    }
+                                }
+                                svg{
+                                    opacity: 1;
+                                    position: relative;
+                                    bottom: get-vw(10px);
+                                    transition: all 0.3s ease;
+                                }
+                            }
+                        }
+                        .loc4{
+                            display: flex;
+                            flex-direction: row-reverse;
+                            flex-wrap: nowrap;
+                            position: absolute;
+                            left: 24%;
+                            top: 83%;
+                            .text{
+                                color: $green2;
+                                text-align: left;
+                                font-family: $barlow;
+                                font-size: get-vw(20px);
+                                font-weight: 400;
+                                line-height: get-vw(30px);
+
+                                &::after{
+                                    content: '';
+                                    position: absolute;
+                                    background: $green2;
+                                    box-shadow: 0px get-vw(1.133px) get-vw(1.133px) 0px rgba(255, 255, 255, 0.25) inset;
+                                    filter: drop-shadow(0px get-vw(2.266px) get-vw(4.532px) rgba(0, 0, 0, 0.25));
+                                    width: get-vw(7px);
+                                    height: get-vw(7px);
+                                    top: get-vw(15px);
+                                    left: get-vw(35px);
+                                    border-radius: 50%;
+                                }
+                            }
+                            svg{
+                                width: get-vw(50px);
+                                height: get-vw(60px);
+                                opacity: 0;
+                            }
+
+                            &:hover{
+                                .text{
+                                    font-weight: 700;
+                                    &::after{
+                                        position: unset;
+                                    }
+                                }
+                                svg{
+                                    opacity: 1;
+                                    position: relative;
+                                    bottom: get-vw(10px);
+                                    transition: all 0.3s ease;
+                                }
+                            }
+                        }
+                        .loc5{
+                            display: flex;
+                            flex-direction: row-reverse;
+                            flex-wrap: nowrap;
+                            position: absolute;
+                            left: 55%;
+                            top: 83%;
+                            .text{
+                                color: $green2;
+                                text-align: left;
+                                font-family: $barlow;
+                                font-size: get-vw(20px);
+                                font-weight: 400;
+                                line-height: get-vw(30px);
+
+                                &::after{
+                                    content: '';
+                                    position: absolute;
+                                    background: $green2;
+                                    box-shadow: 0px get-vw(1.133px) get-vw(1.133px) 0px rgba(255, 255, 255, 0.25) inset;
+                                    filter: drop-shadow(0px get-vw(2.266px) get-vw(4.532px) rgba(0, 0, 0, 0.25));
+                                    width: get-vw(7px);
+                                    height: get-vw(7px);
+                                    top: get-vw(15px);
+                                    left: get-vw(35px);
+                                    border-radius: 50%;
+                                }
+                            }
+                            svg{
+                                width: get-vw(50px);
+                                height: get-vw(60px);
+                                opacity: 0;
+                            }
+
+                            &:hover{
+                                .text{
+                                    font-weight: 700;
+                                    &::after{
+                                        position: unset;
+                                    }
+                                }
+                                svg{
+                                    opacity: 1;
+                                    position: relative;
+                                    bottom: get-vw(10px);
+                                    transition: all 0.3s ease;
+                                }
+                            }
+                        }
+                    }
+                }
+                .adresses{
+                    width: get-vw(856px);
+                    border-left: get-vw(1px) solid #E1E1E1;
+                    .dropdown{
+                        text-align: left;
+                        border-bottom: get-vw(1px) solid #E1E1E1;
+                        padding: get-vw(22px) get-vw(36px);
+                        select{
+                            padding-right: get-vw(10px);
+                            font-size: get-vw(20px);
+                            line-height: get-vw(35px);
+                            text-align: left;
+    
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                    }
+                    .address-slider{
+                        padding-top: 0;
+                        display: flex;
+                        flex-wrap: wrap;
+                        max-height: get-vw(730px);
+                        overflow-y: auto;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        .item{
+                            position: relative;
+                            border-right: get-vw(1px) solid #E1E1E1;
+                            border-bottom: get-vw(1px) solid #E1E1E1;
+                            padding: get-vw(35px) 0 get-vw(60px);
+                            width: calc(50% - 1px);
+                            .wrap{
+                                .location{
+                                    color: $black;
+                                    text-align: left;
+                                    font-family: $roboto;
+                                    font-size: get-vw(23px);
+                                    font-weight: 700;
+                                    line-height: get-vw(35px);
+                                    padding: 0 get-vw(20px) get-vw(40px) get-vw(50px);
+                                }
+                                .tel{
+                                    text-align: center;
+                                    padding: 0 get-vw(20px) get-vw(15px) get-vw(50px);
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: nowrap;
+                                    align-items: center;
+                                    gap: get-vw(25px);
+                                    .icon{
+                                        padding-bottom: 0;
+                                        svg{
+                                            width: get-vw(25px);
+                                            height: get-vw(25px);
+                                            fill: $green;
+                                        }
+                                    }
+                                    .number{
+                                        text-decoration: none;
+                                        color: $black;
+                                        font-family: $roboto;
+                                        font-size: get-vw(18px);
+                                        font-weight: 400;
+                                        line-height: get-vw(22px);
+                                        letter-spacing: get-vw(-0.36px);
+                                    }
+                                }
+                                .mail{
+                                    text-align: center;
+                                    padding: 0 get-vw(20px) get-vw(50px) get-vw(50px);
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: nowrap;
+                                    align-items: center;
+                                    gap: get-vw(25px);
+                                    .icon{
+                                        padding-bottom: 0;
+                                        svg{
+                                            width: get-vw(25px);
+                                            height: get-vw(25px);
+                                            fill: $green;
+                                        }
+                                    }
+                                    .email{
+                                        text-decoration: none;
+                                        color: $black;
+                                        font-family: $roboto;
+                                        font-size: get-vw(18px);
+                                        font-weight: 400;
+                                        line-height: get-vw(22px);
+                                        letter-spacing: get-vw(-0.36px);
+                                    }
+                                }
+                                .common-btn-1{
+                                    width: 100%;
+                                    padding: get-vw(13px) 0;
+                                    border-top: get-vw(1px) solid #E1E1E1;
+                                    margin: 0;
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 0;
+                                    right: 0;
+                                    justify-content: flex-start;
+                                    svg{
+                                        margin-left: get-vw(50px);
+                                    }
+                                }
+                            }
+
+                            &:hover{
+                                background: $green;
+                                transition: all 0.3s ease;
+                                .wrap{
+                                    .location{
+                                        color: $white;
+                                    }
+                                    .tel{
+                                        .icon{
+                                            svg{
+                                                fill: $white;
+                                            }
+                                        }
+                                        .number{
+                                            color: $white;
+                                        }
+                                    }
+                                    .mail{
+                                        .icon{
+                                            svg{
+                                                fill: $white;
+                                            }
+                                        }
+                                        .email{
+                                            color: $white;
+                                        }
+                                    }
+                                    .common-btn-1{
+                                        color: $white;
+                                        svg{
+                                            margin-left: get-vw(50px);
+                                            fill: $white;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

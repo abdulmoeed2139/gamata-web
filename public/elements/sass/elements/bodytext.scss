@@ -1,0 +1,45 @@
+.ant-body-wrapper{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+
+.element-head{
+    text-align: center;
+    font-family: $roboto;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: $black;
+    font-size: 24px;
+    line-height: 18px;
+    margin-bottom: 10px;
+}
+
+.ant-body-text{
+    font-family: $barlow;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0.32px;
+    color: $grey;
+    text-align: center;
+}
+
+
+@media (min-width: 1200px) {
+    .ant-body-text{
+        font-size: get-vw(18px);
+        line-height: get-vw(24px);
+        letter-spacing: get-vw(0.32px);
+    }
+    .element-head{
+        font-size: get-vw(24px);
+        line-height: get-vw(24px);
+        margin-bottom: get-vw(10px);
+    }
+    .ant-body-wrapper{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+}

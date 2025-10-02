@@ -1,0 +1,269 @@
+.main-button-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-primary-bttn-wrap{
+    margin-bottom: 10px;
+    width: fit-content;
+    .ant-primary-bttn{
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 20px;
+            color: $white;
+            text-decoration: none;
+            font-family: $barlow;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 27px;
+            letter-spacing: 3.92px;
+            text-transform: uppercase;
+            background: $green;
+
+            svg {
+                transform: rotate(315deg);
+                width: 30px;
+                height: 30px;
+                fill: $white;
+            }
+    }
+}
+.ant-secondary-bttn-wrap{
+    margin-bottom: 10px;
+    width: fit-content;
+    .ant-secondary-bttn{
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 20px;
+            color: $black;
+            text-decoration: none;
+            font-family: $barlow;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 27px;
+            letter-spacing: 3.92px;
+            text-transform: uppercase;
+
+            svg {
+                transform: rotate(315deg);
+                width: 30px;
+                height: 30px;
+                fill: $green;
+            }
+    }
+}
+.ant-outlined-bttn-wrap{
+    width: fit-content;
+    .ant-outlined-bttn{
+            padding: 5px;
+            border: 1px solid $green;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 20px;
+            color: $green;
+            text-decoration: none;
+            font-family: $barlow;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 27px;
+            letter-spacing: 3.92px;
+            text-transform: uppercase;
+
+            svg {
+                transform: rotate(315deg);
+                width: 30px;
+                height: 30px;
+                fill: $green;
+            }
+    }
+}
+.ant-outlined-sec-bttn-wrap{
+    // padding: 10px;
+    // border-radius: 5px;
+    // background: $green;
+    width: fit-content;
+    // padding: 0 20px;
+    .ant-outlined-sec-bttn{
+            padding: 5px;
+            border-radius: 5px;
+            background: $green;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: center;
+            // padding: 0;
+            gap: 20px;
+            color: $white;
+            text-decoration: none;
+            font-family: $barlow;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 27px;
+            letter-spacing: 3.92px;
+            text-transform: uppercase;
+
+            svg {
+                transform: rotate(315deg);
+                width: 30px;
+                height: 30px;
+                fill: $white;
+            }
+    }
+}
+
+.disable-bttn{
+    opacity: 0.4;
+}
+
+
+@media (min-width: 1200px) {
+
+    .main-button-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+    .ant-primary-bttn-wrap{
+        padding: 0;
+        background: #9fcd22;
+        border-radius: get-vw(5px);
+        margin-bottom: 0;
+        .ant-primary-bttn{
+            padding: get-vw(25px) get-vw(55px);
+            gap: get-vw(20px);
+            width: fit-content;
+            font-size: get-vw(14px);
+            line-height: get-vw(27px);
+            letter-spacing: get-vw(4px);
+            margin: 0 auto;
+
+            svg {
+                transition: all 0.3s ease;
+                transform: rotate(315deg);
+                width: get-vw(30px);
+                height: get-vw(30px);
+            }
+            &:hover {
+                svg {
+                    transform: rotate(360deg);
+                    width: get-vw(30px);
+                    height: get-vw(30px);
+                }
+            }
+        }
+    }
+
+    .ant-secondary-bttn-wrap{
+        padding: 0;
+        border-radius: get-vw(5px);
+        margin-bottom: 0;
+        .ant-secondary-bttn{
+            padding: get-vw(25px) get-vw(55px);
+            gap: get-vw(20px);
+            width: fit-content;
+            font-size: get-vw(14px);
+            line-height: get-vw(27px);
+            letter-spacing: get-vw(4px);
+            margin: 0 auto;
+
+            svg {
+                transition: all 0.3s ease;
+                transform: rotate(315deg);
+                width: get-vw(30px);
+                height: get-vw(30px);
+            }
+            &:hover {
+                svg {
+                    transform: rotate(360deg);
+                    width: get-vw(30px);
+                    height: get-vw(30px);
+                }
+            }
+        }
+    }
+    .ant-outlined-bttn-wrap{
+        padding: 0;
+        .ant-outlined-bttn{
+            border-radius: get-vw(5px);
+            border: get-vw(1px) solid $green;
+            padding: get-vw(25px) get-vw(55px);
+            gap: get-vw(20px);
+            width: fit-content;
+            font-size: get-vw(14px);
+            line-height: get-vw(27px);
+            letter-spacing: get-vw(4px);
+            margin: 0 auto;
+            transition: all 0.3s ease;
+
+            svg {
+                transition: all 0.3s ease;
+                transform: rotate(315deg);
+                width: get-vw(30px);
+                height: get-vw(30px);
+            }
+            &:hover {
+                background: $green;
+                color: $white;
+
+                svg{
+                    fill: $white;
+                }
+            }
+
+        }
+    }
+    .ant-outlined-sec-bttn-wrap{
+        padding: 0;
+        margin-bottom: 0;
+        .ant-outlined-sec-bttn{
+                border-radius: get-vw(5px);
+                padding: get-vw(5px) get-vw(10px);
+                gap: get-vw(20px);
+                width: fit-content;
+                font-size: get-vw(14px);
+                line-height: get-vw(27px);
+                letter-spacing: get-vw(4px);
+                margin: 0 auto;
+                transition: all 0.3s ease;
+
+                svg {
+                    transition: all 0.3s ease;
+                    transform: rotate(315deg);
+                    width: get-vw(30px);
+                    height: get-vw(30px);
+                }
+                &:hover {
+                background: $white;
+                color: $green;
+
+                svg{
+                    fill: $green;
+                }
+            }
+        }
+    }
+}

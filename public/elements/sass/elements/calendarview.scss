@@ -1,0 +1,266 @@
+.main-calend-wrap{
+    border: 1px solid $black;
+    margin: 0 0px 30px 0px;
+    padding: 20px 0px;
+}
+
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-main-cale{
+    padding: 0 10px;
+    margin-bottom: 50px;
+    .ant-calendar{
+        background-color: $white;
+        border-radius: 20px;
+        border: 1px solid $green;
+        width: 350px;
+        padding: 10px;
+        box-sizing: border-box;
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            .nav-button {
+                color: $white;
+                border: none;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.right-butt{
+                    background-color: $green;
+                    svg{
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+                &.left-butt{
+                    border: 1px solid $green;
+                    background-color: $white;
+                    .left-cal{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+
+            .month-year {
+
+                display: flex;
+                gap: 3px;
+                .month,.year{
+                    border: 1px solid $green;
+                    border-radius: 5px;
+                    padding: 5px 8px;
+                    color: $green; 
+                    font-family: $roboto;
+                    font-weight: 700;
+                    font-size: 20px;
+                    line-height: 20px;
+                    letter-spacing: -0.2px;
+                    text-align: center;
+
+                }
+            }
+        }
+
+        .calendar-days-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: $roboto;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 16px;
+            text-align: center;
+            vertical-align: middle;
+            color: $black;
+
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            row-gap: 5px;
+            div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35px; // keep square
+                height: 30px; // keep square
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.2s ease, color 0.2s ease;
+                font-family: $roboto;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 14px;
+                text-align: center;
+                vertical-align: middle;
+                
+                &.date{
+                    padding: 5px;
+                    box-shadow: 0px 1px 1px 0px rgba(0, 14, 51, 0.05);
+
+                }
+                &.faded {
+                    opacity: 0.4;
+                    cursor: default;
+                    box-shadow: none;
+                }
+
+                &.highlighted {
+                    border: 1px solid $green;
+                    color: $green;
+                }
+                &.highlighted-range-start{
+                    background-color: $green;
+                    border-radius: 5px;
+                    border: 1px solid $green;
+                    color: $white;
+                }
+
+                &.highlighted-range,
+                &.highlighted-range-end {
+                    background-color: rgba(208, 226, 161, 1);
+                    border-bottom: 1px solid rgba(208, 226, 161, 1);
+                    width: 100%;
+                    border-radius: 5px;
+                    border-radius: 0;
+                    color: #555;
+                }
+                &.highlighted-selected{
+                    background-color: $green;
+                    border-radius: 5px;
+                    border: 1px solid $green;
+                    color: $white;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px){
+    .main-calend-wrap{
+        border: 1px solid $black;
+        margin: 0 20px 30px 20px;
+        padding: 20px 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .main-calend-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+
+    .ant-main-cale{
+        padding: 0 get-vw(20px);
+        .ant-calendar{
+            border-radius: get-vw(20px);
+            width: get-vw(426px);
+            padding: get-vw(21px);
+
+            .calendar-header {
+                margin-bottom: get-vw(20px);
+                .nav-button {
+                    width: get-vw(44px);
+                    height: get-vw(44px);
+
+                    &.right-butt{
+                        background-color: $green;
+                        svg{
+                            width: get-vw(25px);
+                            height: get-vw(25px);
+                        }
+                    }
+                    &.left-butt{
+                        border: 1px solid $green;
+                        background-color: $white;
+                        .left-cal{
+                            width: get-vw(20px);
+                            height: get-vw(20px);
+                        }
+                    }
+                }
+
+                .month-year {
+                    display: flex;
+                    gap: get-vw(3px);
+                    .month,.year{
+                        border-radius: get-vw(5px);
+                        padding: get-vw(7px) get-vw(11px);
+                        font-size: get-vw(24px);
+                        line-height: get-vw(24px);
+                        letter-spacing: get-vw(-0.24px);
+
+                    }
+                }
+            }
+
+            .calendar-days-header {
+                margin-bottom: get-vw(10px);
+                font-size: get-vw(18px);
+                line-height: get-vw(18px);
+            }
+            .calendar-grid {
+                row-gap: get-vw(5px);
+                div {
+                    width: get-vw(44px); // keep square
+                    height: get-vw(35px); // keep square
+                    border-radius: get-vw(5px);
+                    font-size: get-vw(18px);
+                    line-height: get-vw(18px);
+                    
+                    &.date{
+                        padding: get-vw(5px);
+                    }
+                    &.faded {
+                        opacity: 0.4;
+                        cursor: default;
+                    }
+
+                    &.highlighted {
+                        border: 1px solid $green;
+                        color: $green;
+                    }
+                    &.highlighted-range-start{
+                        background-color: $green;
+                        border-radius: get-vw(5px);
+                        border: 1px solid $green;
+                        color: $white;
+                    }
+
+                    &.highlighted-range,
+                    &.highlighted-range-end {
+                        background-color: rgba(208, 226, 161, 1);
+                        border-bottom: 1px solid rgba(208, 226, 161, 1);
+                        width: 100%;
+                        border-radius: get-vw(5px);
+                        border-radius: 0;
+                        color: #555;
+                    }
+                    &.highlighted-selected{
+                        background-color: $green;
+                        border-radius: get-vw(5px);
+                        border: 1px solid $green;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+
+}

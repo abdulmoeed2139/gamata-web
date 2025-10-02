@@ -1,0 +1,232 @@
+.main-upload-wrap{
+    border: 1px solid $black;
+    margin: 0 0px 30px 0px;
+    padding: 20px 0px;
+}
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-main-upload{
+    padding: 0 20px;
+    margin-bottom: 30px;
+    .ant-upload-container{
+        background-color: #ffffff;
+        border-radius: 15px;
+        border: 1px solid $green;
+        width: 100%;
+        max-width: 500px;
+        box-sizing: border-box;
+        .upload-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 10px 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid $green;
+
+            .header-icon {
+                position: relative;
+                width: 50px;
+                height: 50px;
+                border: 2px solid #ccc;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #888;
+                    svg{
+                        position: absolute;
+                        top: 50%;
+                        right: 50%;
+                        transform: translate(50% ,-50%);
+                        width: 30px;
+                        height: 30px;
+                    }
+            }
+
+            .header-text {
+                .up-title{
+                    margin-bottom: 5px;
+                    font-family: $roboto;
+                    font-weight: 400;
+                    font-size: 21px;
+                    line-height: 21px;
+                    color: $black;
+
+                }
+                .up-para{
+                    font-family: $roboto;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 16px;
+                    color: $grey;
+                }
+            }
+        }
+
+        .upload-divider{
+            padding: 0 30px 20px;
+            .drag-drop-area {
+                padding: 30px;
+                border: 2px dashed $green;
+                border-radius: 10px;
+                padding: 40px 20px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 250px;
+                box-sizing: border-box;
+
+                .drag-drop-content {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 15px;
+
+                    .drag-drop-icon {
+                        svg{
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+
+                    .drag-drop-text {
+                        font-family: $roboto;
+                        font-weight: 700;
+                        font-size: 21px;
+                        line-height: 21px;
+                        text-align: center;
+                        color: $black;
+
+                    }
+
+                    .file-formats {
+                        font-family: $roboto;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 16px;
+                        color: $grey;
+                    }
+
+                    .browse-button {
+                        background-color: $green;
+                        color: $white;
+                        font-family: $roboto;
+                        font-weight: 500;
+                        font-size: 18px;
+                        line-height: 18px;
+                        text-align: center;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 12px 25px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+                        margin-top: 20px;
+
+                    }
+                }
+            }
+    }
+    }
+}
+
+@media (min-width: 768px){
+    .main-upload-wrap{
+        border: 1px solid $black;
+        margin: 0 20px 30px 20px;
+        padding: 20px 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .main-upload-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+    .ant-main-upload{
+        padding: 0 get-vw(20px);
+        margin-bottom: get-vw(30px);
+        .ant-upload-container{
+            border-radius: get-vw(15px);
+            border: 1px solid $green;
+            max-width: get-vw(850px);
+            .upload-header {
+                gap: get-vw(25px);
+                padding: get-vw(35px) get-vw(40px) get-vw(40px);
+                margin-bottom: get-vw(40px);
+
+                .header-icon {
+                    position: relative;
+                    width: get-vw(80px);
+                    height: get-vw(80px);
+                    border: get-vw(2px) solid $grey;
+                        svg{
+                            width: get-vw(40px);
+                            height: get-vw(40px);
+                        }
+                }
+
+                .header-text {
+                    .up-title{
+                        margin-bottom: get-vw(5px);
+                        font-size: get-vw(30px);
+                        line-height: get-vw(30px);
+
+                    }
+                    .up-para{
+                        font-size: get-vw(26px);
+                        line-height: get-vw(26px);
+                    }
+                }
+            }
+
+            .upload-divider{
+                padding: 0 get-vw(40px) get-vw(47px);
+                .drag-drop-area {
+                    border: get-vw(2px) dashed $green;
+                    border-radius: get-vw(10px);
+                    padding: get-vw(40px) get-vw(20px);
+                    min-height: get-vw(387px);
+
+                    .drag-drop-content {
+                        gap: get-vw(15px);
+
+                        .drag-drop-icon {
+                            margin-bottom: get-vw(20px);
+                            svg{
+                                width: get-vw(40px);
+                                height: get-vw(40px);
+                            }
+                        }
+
+                        .drag-drop-text {
+                            font-size: get-vw(27px);
+                            line-height: get-vw(27px);
+
+                        }
+
+                        .file-formats {
+                            font-size: get-vw(23px);
+                            line-height: get-vw(23px);
+                        }
+
+                        .browse-button {
+                            font-size: get-vw(27px);
+                            line-height: get-vw(27px);
+                            border-radius: get-vw(8px);
+                            padding: get-vw(12px) get-vw(25px);
+                            cursor: pointer;
+                            transition: background-color 0.3s ease;
+                            margin-top: get-vw(20px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

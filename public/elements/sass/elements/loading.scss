@@ -1,0 +1,143 @@
+.main-load-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+.element-head {
+    &.ant-text-left{
+        text-align: left;
+    }
+
+}
+
+.ant-loading {
+    display: flex;
+    padding: 0 20px;
+    gap: 30px;
+    margin-bottom: 30px;
+    .ant-loading-1 {
+        text-align: center;
+        .ant-circle-full{
+            width: 70px;
+            height: 70px;
+            border-width: 11px;
+            border-radius: 50%;
+            border: 11px solid rgba(149, 193, 31, 1);
+        }
+
+        .load-1{
+            font-family: $roboto;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 32px;
+            letter-spacing: -0.8px;
+            vertical-align: middle;
+
+        }
+    }
+
+    .ant-loading-2 {
+        text-align: center;
+        .ant-circle-load{
+            width: 70px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 11px solid $green;
+            animation:
+                l20-1 1.6s infinite linear alternate,
+                l20-2 3.2s infinite linear;
+            }
+            @keyframes l20-1{
+            0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
+            12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
+            25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
+            50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+            62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+            75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
+            100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+            }
+            @keyframes l20-2{ 
+            0%    {transform:scaleY(1)  rotate(0deg)}
+            49.99%{transform:scaleY(1)  rotate(135deg)}
+            50%   {transform:scaleY(-1) rotate(0deg)}
+            100%  {transform:scaleY(-1) rotate(-135deg)}
+            }
+        /* HTML: <div class="loader"></div> */
+        .load-2{
+            font-family: $roboto;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 32px;
+            letter-spacing: -0.8px;
+            vertical-align: middle;
+
+        }
+
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .main-load-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+    .ant-loading {
+        display: flex;
+        padding: 0 get-vw(20px);
+        gap: get-vw(30px);
+        margin-bottom: get-vw(30px);
+        .ant-loading-1 {
+            
+            .ant-circle-full{
+                width: get-vw(109px);
+                height: get-vw(109px);
+                border-width: get-vw(11px);
+                border-radius: 50%;
+                border: get-vw(11px) solid rgba(149, 193, 31, 1);
+            }
+
+            .load-1{
+                font-size: get-vw(20px);
+                line-height:get-vw(32px);
+                letter-spacing: get-vw(-0.8px);
+
+            }
+        }
+
+        .ant-loading-2 {
+            .ant-circle-load{
+                width: get-vw(109px);
+                aspect-ratio: 1;
+                border-radius: 50%;
+                border: get-vw(11px) solid $green;
+                animation:
+                    l20-1 1.6s infinite linear alternate,
+                    l20-2 3.2s infinite linear;
+                }
+                @keyframes l20-1{
+                0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
+                12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
+                25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
+                50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+                62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+                75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
+                100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+                }
+                @keyframes l20-2{ 
+                0%    {transform:scaleY(1)  rotate(0deg)}
+                49.99%{transform:scaleY(1)  rotate(135deg)}
+                50%   {transform:scaleY(-1) rotate(0deg)}
+                100%  {transform:scaleY(-1) rotate(-135deg)}
+                }
+            /* HTML: <div class="loader"></div> */
+            .load-2{
+                font-size: get-vw(20px);
+                line-height: get-vw(32px);
+                letter-spacing: get-vw(-0.8px);
+
+            }
+
+        }
+    }
+}

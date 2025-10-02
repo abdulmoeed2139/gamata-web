@@ -1,0 +1,159 @@
+.main-time-wrap{
+    border: 1px solid $black;
+    margin: 0 0px 30px 0px;
+    padding: 20px 0px;
+}
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-timer-picker {
+    display: flex;
+    gap: 15px; 
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+    padding: 0 20px;
+    .ant-dropdown {
+        position: relative;
+        .ant-select {
+            cursor: pointer;
+            font-family: $roboto;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.72px;
+            color: $black;
+            border: 1px solid $green;
+            border-radius: 5px;
+            padding: 10px 45px 10px 10px;
+            position: relative;
+            &::after{
+                content: "";
+                height: 80%;
+                display: block;
+                position: absolute;
+                right: 30px;
+                border-right: 1px solid $green;
+                top: 50%;
+                transform: translate(0, -50%);
+            }
+        }
+        svg{
+            top: 50%;
+            transform: translate(0, -50%);
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            right: 6px;
+            pointer-events: none;
+        }
+        .ant-options {
+            position: absolute;
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0 10px;
+            background: $white;
+            border-radius: 5px;
+            border: 1px solid $green;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80px;
+            top: 50px;
+            height: 80px;
+            overflow: auto;
+            li {
+                cursor: pointer;
+                font-family: $roboto;
+                font-weight: 400;
+                font-size: 16px;
+                letter-spacing: -0.64px;
+                color: $black;
+
+                &.active {
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &.open {
+            .ant-options {
+                display: block;
+            }
+        }
+
+        input[type="hidden"] {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 768px){
+    .main-time-wrap{
+        border: 1px solid $black;
+        margin: 0 20px 30px 20px;
+        padding: 20px 20px;
+    }
+}
+@media (min-width: 1200px) {
+    .main-time-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+
+    .ant-timer-picker {
+        gap: get-vw(20px); 
+        margin-bottom: get-vw(130px);
+        padding: 0 get-vw(20px);
+        .ant-dropdown {
+            .ant-select {
+                font-size: get-vw(20px);
+                letter-spacing: get-vw(-0.8px);
+                border-radius: get-vw(5px);
+                padding: get-vw(15px) get-vw(100px) get-vw(15px) get-vw(10px);
+
+                &::after{
+                    content: "";
+                    height: 80%;
+                    display: block;
+                    position: absolute;
+                    right: get-vw(40px);
+                    border-right: 1px solid $green;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                }
+            }
+            svg{
+                width: get-vw(18px);
+                height: get-vw(18px);
+                right: get-vw(6px);
+            }
+            .ant-options {
+                padding: 0 get-vw(10px);
+                border-radius: get-vw(5px);
+                width: get-vw(100px);
+                top: get-vw(60px);
+                height: get-vw(100px);
+                li {
+                    font-size: get-vw(18px);
+                    letter-spacing: get-vw(-0.72px);
+
+                    &.active {
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            &.open {
+                .ant-options {
+                    display: block;
+                }
+            }
+
+            input[type="hidden"] {
+                display: none;
+            }
+        }
+    }
+}
+

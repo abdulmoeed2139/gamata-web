@@ -1,0 +1,217 @@
+.sec-1 {
+    margin-bottom: 50px;
+
+    .wrapper {
+        .col-1 {
+            background: $green2;
+            padding-top: 55px;
+
+            .title {
+                color: $white;
+                text-align: center;
+                font-family: $roboto;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 35px;
+                letter-spacing: -1.5px;
+                padding: 0 45px 20px;
+            }
+
+            .desc {
+                color: $white;
+                text-align: center;
+                font-family: $roboto;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 26px;
+                letter-spacing: -0.8px;
+                padding: 0 45px 40px;
+            }
+
+            .steps-cards {
+                .owl-stage {
+                    display: flex;
+                    margin-bottom: 50px;
+                    padding-left: 50px !important;
+
+                    .owl-item {
+                        border: 1px solid rgba(255, 255, 255, 0.20);
+                        background: #004216;
+
+                        // height: 100%;
+                        &.active {
+                            box-shadow: 0px 230px 64px 0px rgba(0, 0, 0, 0.00), 0px 147px 59px 0px rgba(0, 0, 0, 0.01), 0px 83px 50px 0px rgba(0, 0, 0, 0.05), 0px 37px 37px 0px rgba(0, 0, 0, 0.09), 0px 9px 20px 0px rgba(0, 0, 0, 0.10);
+                        }
+
+                        .item {
+                            padding: 35px 25px;
+                            height: auto;
+
+                            .title {
+                                color: $white;
+                                font-family: $roboto;
+                                font-size: 20px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: 35px;
+                                letter-spacing: -1px;
+                                padding: 0;
+                            }
+
+                            .desc {
+                                color: $white;
+                                text-align: center;
+                                font-family: $roboto;
+                                font-size: 18px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 26px;
+                                letter-spacing: -0.9px;
+                                padding: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .col-2 {
+            position: relative;
+
+            .image {
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: 0;
+                right: 0;
+                background: $green2;
+                height: 50%;
+                width: 100%;
+                z-index: -1;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .sec-1 {
+        .wrapper {
+            .col-1 {
+                padding: 55px 50px 0;
+
+                .steps-cards {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    padding: 0;
+                    row-gap: 25px;
+
+                    .item {
+                        width: 42%;
+                        padding: 30px;
+                        height: auto;
+                        border: 1px solid rgba(255, 255, 255, 0.20);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .sec-1 {
+        margin-bottom: get-vw(100px);
+        padding: get-vw(60px) get-vw(240px) get-vw(50px) get-vw(130px);
+        background: $green2;
+
+        .wrapper {
+            display: flex;
+            flex-direction: row-reverse;
+
+            .col-1 {
+                padding-top: get-vw(35px);
+                width: calc(100% - get-vw(705px));
+                padding-left: 0;
+                padding-right: 0;
+
+                .title {
+                    text-align: left;
+                    font-size: get-vw(32px);
+                    line-height: get-vw(35px);
+                    letter-spacing: get-vw(-1.5px);
+                    padding: 0 0 get-vw(22px);
+                }
+
+                .desc {
+                    text-align: left;
+                    font-size: get-vw(18px);
+                    line-height: get-vw(26px);
+                    letter-spacing: get-vw(-0.8px);
+                    padding: 0 0 get-vw(65px);
+                }
+
+                .steps-cards {
+                    row-gap: get-vw(18px);
+
+                    .item {
+                        padding: get-vw(35px) get-vw(25px);
+                        height: auto;
+                        border-radius: get-vw(5px);
+                        width: get-vw(360px);
+                        transition: all 0.3s ease;
+
+                        .title {
+                            text-align: left;
+                            font-size: get-vw(20px);
+                            line-height: get-vw(35px);
+                            letter-spacing: get-vw(0.5px);
+                            padding: 0;
+                            padding-bottom: get-vw(30px);
+                        }
+
+                        .desc {
+                            text-align: left;
+                            font-size: get-vw(18px);
+                            line-height: get-vw(26px);
+                            letter-spacing: get-vw(-0.9px);
+                            padding: 0 0 0 get-vw(20px);
+                        }
+
+                        &:hover {
+                            box-shadow: 0px get-vw(367px) get-vw(103px) 0px rgba(0, 0, 0, 0.00), 0px get-vw(235px) get-vw(94px) 0px rgba(0, 0, 0, 0.01), 0px get-vw(132px) get-vw(79px) 0px rgba(0, 0, 0, 0.05), 0px get-vw(59px) get-vw(59px) 0px rgba(0, 0, 0, 0.09), 0px get-vw(15px) get-vw(32px) 0px rgba(0, 0, 0, 0.10);
+                        }
+                    }
+                }
+            }
+
+            .col-2 {
+                background: $green2;
+                position: relative;
+                width: get-vw(705px);
+
+                .image {
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+}

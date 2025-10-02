@@ -1,0 +1,97 @@
+.main-acc-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+
+
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-accordion{
+    padding: 20px 20px;
+    border: 1px solid $green;
+    border-radius: 5px;
+    margin: 0 20px 20px;
+    .ant-acc-inner{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .acc-title{
+            font-family: $barlow;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.72px;
+            vertical-align: middle;
+            text-transform: capitalize;
+            color: $black;
+
+
+        }
+        .toggle-icon{
+            display: contents;
+            padding-top: 4px;
+            svg{
+                width: 18px;
+                height: 18px;
+                transition: transform 0.3s ease;
+                &.rotated{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+    .ant-acc-content{
+        display: none;
+        padding: 20px 20px 20px 0;
+        font-family: $barlow;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: -0.64px;
+        vertical-align: middle;
+        text-transform: capitalize;
+        color: $grey;
+
+    }
+}
+@media (min-width: 1200px) {
+    .main-acc-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+    .ant-accordion{
+        padding: get-vw(20px) get-vw(20px);
+        border: 1px solid $green;
+        margin: 0 0 get-vw(20px) 0;
+        width: 30%;
+        border-radius: get-vw(5px);
+        .ant-acc-inner{
+            .acc-title{
+                font-size: get-vw(20px);
+                letter-spacing: get-vw(-0.8px);
+
+
+            }
+            .toggle-icon{
+                svg{
+                    width: get-vw(18px);
+                    height: get-vw(18px);
+                    transition: transform 0.3s ease;
+                    &.rotated{
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+        .ant-acc-content{
+            display: none;
+            padding: get-vw(30px) get-vw(80px) get-vw(30px) 0;
+            font-size: get-vw(18px);
+            letter-spacing: -0.72px;
+
+        }
+    }
+}

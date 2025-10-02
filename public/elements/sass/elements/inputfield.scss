@@ -1,0 +1,99 @@
+.main-input-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-input{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    label{
+        font-family: $roboto;
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        vertical-align: middle;
+        color: $black;
+        margin-bottom: 10px;
+    }
+    input{
+        border: 1px solid rgba(225, 225, 225, 1);
+        border-radius: 5px;
+        appearance: none;
+        width: 200px;
+        height: 40px;
+        font-family: $roboto;
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        vertical-align: middle;
+        padding: 0 0 0 10px;
+        color: $grey;
+        &::placeholder {
+            font-family: $roboto;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.72px;
+            vertical-align: middle;
+            // padding: 0 0 0 10px;
+            color: $grey;
+        }
+        &:focus{
+            color: $green;
+        }
+        &:focus::placeholder{
+            color: $green;
+        }
+    }
+    input[type="text"]:focus {
+        border: 1px solid $green;
+        outline: none;
+    }
+    &.ant-error{
+        label{color: $red;}
+
+        input{
+            border: 1px solid $red;
+        }
+        input[type="text"]:focus {
+        border: 1px solid $red;
+        outline: none;
+    }
+    }
+}
+@media (min-width: 1200px) {
+    .main-input-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+    .ant-input{
+        display: flex;
+        flex-direction: column;
+        padding: 0 get-vw(20px);
+        margin-bottom: get-vw(20px);
+        label{
+            font-size: get-vw(20px);
+            letter-spacing: get-vw(-0.8px);
+            margin-bottom: get-vw(10px);
+        }
+        input{
+            border-radius: get-vw(5px);
+            width: get-vw(290px);
+            height: get-vw(71px);
+            font-size: get-vw(20px);
+            letter-spacing: get-vw(-0.8px);
+            padding: 0 0 0 get-vw(10px);
+            &::placeholder {
+                font-size: get-vw(20px);
+                letter-spacing: get-vw(-0.8px);
+            }
+        }
+    }
+}

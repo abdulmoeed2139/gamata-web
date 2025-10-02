@@ -1,0 +1,96 @@
+.main-arr-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+
+.ant-button-nav{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    &.ant-disabled-arr{
+        .ant-next{
+            border: none;
+            background: rgba(208, 208, 208, 1);
+            box-shadow: none;
+        }
+    }
+    .ant-prev {
+        width: 57px;
+        height: 57px;
+        border: 1px solid #B6E537;
+        border-radius: 50%;
+        background: $green;
+        box-shadow: rgba($green, 0.2) 0px 8px 24px;
+
+        svg {
+            fill: $white;
+        }
+
+        &.disabled {
+            border: 1px solid #E1E1E1;
+            background: $white;
+            box-shadow: none;
+
+            svg {
+                fill: #E1E1E1;
+            }
+        }
+    }
+
+    .ant-next{
+        width: 77px;
+        height: 77px;
+        border: 1px solid #B6E537;
+        border-radius: 50%;
+        background: $green;
+        box-shadow: rgba($green, 0.2) 0px 8px 24px;
+
+        svg {
+            fill: $white;
+        }
+
+        &.disabled {
+            border: 1px solid #E1E1E1;
+            background: $white;
+            box-shadow: none;
+
+            svg {
+                fill: #E1E1E1;
+            }
+        }
+    }
+}
+
+
+
+@media (min-width: 1200px) {
+
+    .main-arr-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+    .ant-button-nav{
+        gap: get-vw(25px);
+        &.ant-disabled-arr{
+            .ant-next{
+                border: none;
+                background: rgba(208, 208, 208, 1);
+                box-shadow: none;
+            }
+        }
+        .ant-prev {
+            width: get-vw(57px);
+            height: get-(57px);
+            box-shadow: rgba($green, 0.2) 0px get-vw(8px) get-vw(24px);
+        }
+
+        .ant-next{
+            width: get-vw(77px);
+            height: get-vw(77px);
+            box-shadow: rgba($green, 0.2) 0px get-vw(8px) get-vw(24px);
+        }
+    }
+}

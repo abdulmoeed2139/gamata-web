@@ -1,0 +1,1164 @@
+.product-listing {
+    margin-bottom: 50px;
+
+    .wrapper {
+        padding: 0 20px;
+
+        .col-1 {
+            .search-bars {
+                margin: 0 0 20px;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                .wrapper {
+                    border-bottom: 1px solid rgba($color: #9B9B9B, $alpha: 0.5);
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: row;
+                    align-items: center;
+
+                    input {
+                        color: $black;
+                        text-align: left;
+                        font-family: $roboto;
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 35px;
+                        border: none;
+                        padding-bottom: 7px;
+
+                        &::placeholder {
+                            color: #CDCDCD;
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                        fill: #CDCDCD;
+                    }
+                }
+            }
+
+            .filter {
+                background: #f8f8f8;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 10px;
+
+                .filter-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .filter-title {
+                        color: $black;
+                        font-family: $roboto;
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 35px;
+                    }
+
+                    .toggle-icon {
+                        color: $black;
+                        font-family: $roboto;
+                        font-size: 18px;
+                        font-weight: 700;
+                        cursor: pointer;
+                    }
+                }
+
+                .filter-content {
+                    margin-top: 10px;
+                    display: none;
+
+                    label {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        justify-content: flex-start;
+                        align-items: center;
+                        gap: 12px;
+                        color: $black;
+                        font-family: Helvetica;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 35px;
+
+                        input {
+                            margin-right: 8px;
+                        }
+                    }
+
+                    .price {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        flex-wrap: nowrap;
+                        align-items: center;
+                        gap: 10px;
+                        padding-bottom: 30px;
+
+                        .price-input {
+                            display: flex;
+                            border-bottom: 2px solid #E0E0E0;
+
+                            label {
+                                color: $black;
+                                font-family: $roboto;
+                                font-size: 16px;
+                                font-weight: 400;
+                                line-height: 35px;
+                                padding-right: 7px;
+                            }
+
+                            input {
+                                color: $black;
+                                font-family: $roboto;
+                                font-size: 16px;
+                                font-weight: 400;
+                                line-height: 35px;
+                                background: transparent;
+                                width: 100%;
+
+                                border: none;
+
+                                &::placeholder {
+                                    color: #8E8E8E;
+                                }
+
+                                &:focus {
+                                    outline: none;
+                                }
+                            }
+                        }
+                    }
+
+                    .common-btn-1 {
+                        width: fit-content;
+                        background: $green;
+                        padding: 5px 20px;
+                        border-radius: 5px;
+                        margin: 0 auto;
+                        color: $white;
+
+                        svg {
+                            fill: $white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .col-2 {
+            .top-bar {
+                background: #F8F8F8;
+                padding: 5px 10px;
+                border-radius: 5px;
+                margin-bottom: 10px;
+
+                .row-1 {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-wrap: nowrap;
+
+                    .left {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-start;
+                        flex-wrap: nowrap;
+                        gap: 7px;
+
+                        .text {
+                            color: #9B9B9B;
+                            text-align: center;
+                            font-family: $roboto;
+                            font-size: 16px;
+                            font-weight: 700;
+                            line-height: 35px;
+                            padding-right: 10px;
+                        }
+
+                        svg {
+                            width: 20px;
+                            height: 20px;
+                            fill: #9E9E9E;
+
+                            &.active {
+                                fill: $green;
+                            }
+                        }
+                    }
+
+                    .right {
+                        .text {
+                            color: #9B9B9B;
+                            text-align: center;
+                            font-family: $roboto;
+                            font-size: 16px;
+                            font-weight: 700;
+                            line-height: 35px;
+                        }
+                    }
+                }
+            }
+
+            .row-2 {
+                .food-list {
+                    .items {
+                        border: 1px solid rgba(225, 225, 225, 0.50);
+                        margin-bottom: 30px;
+
+                        .wrap {
+                            position: relative;
+                            padding: 50px 30px;
+
+                            .wishlist {
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: nowrap;
+                                justify-content: flex-end;
+                                align-items: center;
+                                padding: 16px 16px 0 0;
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+
+                                svg {
+                                    width: 22px;
+                                    height: 20px;
+                                    stroke: #D9D9D9;
+                                    fill: transparent;
+                                }
+
+                                &.active {
+                                    svg {
+                                        fill: $red;
+                                        stroke: $red;
+                                    }
+                                }
+                            }
+
+                            .image {
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            .content {
+                                .pro-name {
+                                    padding-bottom: 30px;
+
+                                    .sin {
+                                        color: $black;
+                                        text-align: center;
+                                        font-family: $abhaya;
+                                        font-size: 24px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 26px;
+                                        letter-spacing: -1.2px;
+                                        padding-bottom: 10px;
+                                    }
+
+                                    .eng {
+                                        color: $black;
+                                        text-align: center;
+                                        font-family: $roboto;
+                                        font-size: 24px;
+                                        font-style: normal;
+                                        font-weight: 700;
+                                        line-height: 26px;
+                                        letter-spacing: -1.2px;
+                                        padding-bottom: 10px;
+                                    }
+
+                                    .tam {
+                                        color: $black;
+                                        text-align: center;
+                                        font-family: $mukta;
+                                        font-size: 18px;
+                                        font-style: normal;
+                                        font-weight: 700;
+                                        line-height: 20px;
+                                        letter-spacing: -0.9px;
+                                    }
+                                }
+
+                                .price {
+                                    color: $black;
+                                    text-align: center;
+                                    font-family: $roboto;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 22px;
+                                    letter-spacing: -0.32px;
+                                    padding-bottom: 10px;
+
+                                    span {
+                                        display: inline-block;
+                                        font-weight: 700;
+                                    }
+                                }
+
+                                .stock {
+                                    color: $black;
+                                    text-align: center;
+                                    font-family: $roboto;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    line-height: 22px;
+                                    padding-bottom: 30px;
+                                }
+
+                                .common-btn-1 {
+                                    position: unset;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .pagination {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+
+                .arrow-left {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    border: 1px solid #D9D9D9;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+
+                    svg {
+                        width: 15px;
+                        height: 15px;
+                        fill: #E1E1E1;
+                    }
+                }
+
+                .numbers {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 20px;
+
+                    .num {
+                        color: #707070;
+                        text-align: center;
+                        font-family: $roboto;
+                        font-size: 19px;
+                        font-weight: 700;
+                        line-height: 14px;
+
+                        &.active {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: center;
+                            color: $white;
+                            background: $green;
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.30));
+
+                        }
+                    }
+                }
+
+                .arrow-right {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    border: none;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    background: $green;
+
+                    svg {
+                        width: 15px;
+                        height: 15px;
+                        fill: $white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .product-listing {
+        .wrapper {
+            padding: 0 20px;
+
+            .col-1 {
+                .search-bars {
+                    margin: 0 0 20px;
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+
+                    .wrapper {
+                        border-bottom: 1px solid rgba($color: #9B9B9B, $alpha: 0.5);
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        flex-direction: row;
+                        align-items: center;
+
+                        input {
+                            color: $black;
+                            text-align: left;
+                            font-family: $roboto;
+                            font-size: 18px;
+                            font-weight: 700;
+                            line-height: 35px;
+                            border: none;
+                            padding-bottom: 7px;
+
+                            &::placeholder {
+                                color: #CDCDCD;
+                            }
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+
+                        svg {
+                            width: 20px;
+                            height: 20px;
+                            fill: #CDCDCD;
+                        }
+                    }
+                }
+
+                .filter {
+                    background: #f8f8f8;
+                    padding: 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 10px;
+
+                    .filter-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .filter-title {
+                            color: $black;
+                            font-family: $roboto;
+                            font-size: 18px;
+                            font-weight: 700;
+                            line-height: 35px;
+                        }
+
+                        .toggle-icon {
+                            color: $black;
+                            font-family: $roboto;
+                            font-size: 18px;
+                            font-weight: 700;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .filter-content {
+                        margin-top: 10px;
+                        display: none;
+
+                        label {
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: nowrap;
+                            justify-content: flex-start;
+                            align-items: center;
+                            gap: 12px;
+                            color: $black;
+                            font-family: Helvetica;
+                            font-size: 16px;
+                            font-weight: 400;
+                            line-height: 35px;
+
+                            input {
+                                margin-right: 8px;
+                            }
+                        }
+
+                        .price {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            flex-wrap: nowrap;
+                            align-items: center;
+                            gap: 10px;
+                            padding-bottom: 30px;
+
+                            .price-input {
+                                display: flex;
+                                border-bottom: 2px solid #E0E0E0;
+
+                                label {
+                                    color: $black;
+                                    font-family: $roboto;
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                    line-height: 35px;
+                                    padding-right: 7px;
+                                }
+
+                                input {
+                                    color: $black;
+                                    font-family: $roboto;
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                    line-height: 35px;
+                                    background: transparent;
+                                    width: 100%;
+
+                                    border: none;
+
+                                    &::placeholder {
+                                        color: #8E8E8E;
+                                    }
+
+                                    &:focus {
+                                        outline: none;
+                                    }
+                                }
+                            }
+                        }
+
+                        .common-btn-1 {
+                            width: fit-content;
+                            background: $green;
+                            padding: 5px 20px;
+                            border-radius: 5px;
+                            margin: 0 auto;
+                            color: $white;
+
+                            svg {
+                                fill: $white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .col-2 {
+                .row-2 {
+                    .food-list {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        gap: 30px;
+                        margin-bottom: 50px;
+
+                        .items {
+                            width: calc(50% - 17px);
+                            border: 1px solid rgba(225, 225, 225, 0.50);
+                            margin-bottom: 0;
+
+                            .wrap {
+                                position: relative;
+                                padding: 50px 30px;
+
+                                .wishlist {
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: nowrap;
+                                    justify-content: flex-end;
+                                    align-items: center;
+                                    padding: 16px 16px 0 0;
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+
+                                    svg {
+                                        width: 22px;
+                                        height: 20px;
+                                        stroke: #D9D9D9;
+                                        fill: transparent;
+                                    }
+
+                                    &.active {
+                                        svg {
+                                            fill: $red;
+                                            stroke: $red;
+                                        }
+                                    }
+                                }
+
+                                .image {
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                    }
+                                }
+
+                                .content {
+                                    .pro-name {
+                                        padding-bottom: 30px;
+
+                                        .sin {
+                                            color: $black;
+                                            text-align: center;
+                                            font-family: $abhaya;
+                                            font-size: 24px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: 26px;
+                                            letter-spacing: -1.2px;
+                                            padding-bottom: 10px;
+                                        }
+
+                                        .eng {
+                                            color: $black;
+                                            text-align: center;
+                                            font-family: $roboto;
+                                            font-size: 24px;
+                                            font-style: normal;
+                                            font-weight: 700;
+                                            line-height: 26px;
+                                            letter-spacing: -1.2px;
+                                            padding-bottom: 10px;
+                                        }
+
+                                        .tam {
+                                            color: $black;
+                                            text-align: center;
+                                            font-family: $mukta;
+                                            font-size: 18px;
+                                            font-style: normal;
+                                            font-weight: 700;
+                                            line-height: 20px;
+                                            letter-spacing: -0.9px;
+                                        }
+                                    }
+
+                                    .price {
+                                        color: $black;
+                                        text-align: center;
+                                        font-family: $roboto;
+                                        font-size: 16px;
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: 22px;
+                                        letter-spacing: -0.32px;
+                                        padding-bottom: 10px;
+
+                                        span {
+                                            display: inline-block;
+                                            font-weight: 700;
+                                        }
+                                    }
+
+                                    .stock {
+                                        color: $black;
+                                        text-align: center;
+                                        font-family: $roboto;
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        line-height: 22px;
+                                        padding-bottom: 30px;
+                                    }
+
+                                    .common-btn-1 {
+                                        position: unset;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .product-listing {
+        margin-bottom: get-vw(100px);
+
+        .wrapper {
+            padding: 0 get-vw(240px);
+            display: flex;
+            gap: get-vw(30px);
+
+            .col-1 {
+                width: get-vw(325px);
+
+                .search-bars {
+                    margin: 0 0 get-vw(20px);
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+
+                    .wrapper {
+                        border-bottom: get-vw(1px) solid rgba($color: #9B9B9B, $alpha: 0.5);
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        flex-direction: row;
+                        align-items: center;
+                        padding: 0;
+
+                        input {
+                            color: $black;
+                            text-align: left;
+                            font-family: $roboto;
+                            font-size: get-vw(18px);
+                            font-weight: 700;
+                            line-height: get-vw(35px);
+                            border: none;
+                            padding-bottom: get-vw(7px);
+
+                            &::placeholder {
+                                color: #CDCDCD;
+                            }
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+
+                        svg {
+                            width: get-vw(20px);
+                            height: get-vw(20px);
+                            fill: #CDCDCD;
+                        }
+                    }
+                }
+
+                .filter {
+                    background: #f8f8f8;
+                    padding: get-vw(20px);
+                    border-radius: get-vw(5px);
+                    box-shadow: 0 get-vw(2px) get-vw(4px) rgba(0, 0, 0, 0.1);
+                    margin-bottom: get-vw(10px);
+
+                    .filter-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
+
+                        .filter-title {
+                            color: $black;
+                            font-family: $roboto;
+                            font-size: get-vw(18px);
+                            font-weight: 700;
+                            line-height: get-vw(35px);
+                        }
+
+                        .toggle-icon {
+                            color: $black;
+                            font-family: $roboto;
+                            font-size: get-vw(18px);
+                            font-weight: 700;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .filter-content {
+                        margin-top: get-vw(10px);
+                        display: none;
+
+                        label {
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: nowrap;
+                            justify-content: flex-start;
+                            align-items: center;
+                            gap: get-vw(12px);
+                            color: $black;
+                            font-family: Helvetica;
+                            font-size: get-vw(16px);
+                            font-weight: 400;
+                            line-height: get-vw(35px);
+                            cursor: pointer;
+
+                            input {
+                                margin-right: get-vw(8px);
+                            }
+                        }
+
+                        .price {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            flex-wrap: nowrap;
+                            align-items: center;
+                            gap: get-vw(10px);
+                            padding-bottom: get-vw(30px);
+
+                            .price-input {
+                                display: flex;
+                                border-bottom: get-vw(2px) solid #E0E0E0;
+
+                                label {
+                                    color: $black;
+                                    font-family: $roboto;
+                                    font-size: get-vw(16px);
+                                    font-weight: 400;
+                                    line-height: get-vw(35px);
+                                    padding-right: get-vw(7px);
+                                }
+
+                                input {
+                                    color: $black;
+                                    font-family: $roboto;
+                                    font-size: get-vw(16px);
+                                    font-weight: 400;
+                                    line-height: get-vw(35px);
+                                    background: transparent;
+                                    width: 100%;
+
+                                    border: none;
+
+                                    &::placeholder {
+                                        color: #8E8E8E;
+                                    }
+
+                                    &:focus {
+                                        outline: none;
+                                    }
+                                }
+                            }
+                        }
+
+                        .common-btn-1 {
+                            width: fit-content;
+                            background: $green;
+                            padding: get-vw(5px) get-vw(20px);
+                            border-radius: get-vw(5px);
+                            margin: 0 auto;
+                            color: $white;
+
+                            svg {
+                                fill: $white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .col-2 {
+                width: calc(100% - get-vw(355px));
+
+                .top-bar {
+                    background: #F8F8F8;
+                    padding: get-vw(5px) get-vw(10px);
+                    border-radius: get-vw(5px);
+                    margin-bottom: get-vw(20px);
+
+                    .row-1 {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        flex-wrap: nowrap;
+
+                        .left {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: flex-start;
+                            flex-wrap: nowrap;
+                            gap: get-vw(7px);
+
+                            .text {
+                                color: #9B9B9B;
+                                text-align: center;
+                                font-family: $roboto;
+                                font-size: get-vw(16px);
+                                font-weight: 700;
+                                line-height: get-vw(35px);
+                                padding-right: get-vw(10px);
+                            }
+
+                            svg {
+                                width: get-vw(20px);
+                                height: get-vw(20px);
+                                fill: #9E9E9E;
+
+                                &.active {
+                                    fill: $green;
+                                }
+                            }
+                        }
+
+                        .right {
+                            .text {
+                                color: #9B9B9B;
+                                text-align: center;
+                                font-family: $roboto;
+                                font-size: get-vw(16px);
+                                font-weight: 400;
+                                line-height: get-vw(35px);
+                            }
+                        }
+                    }
+                }
+
+                .row-2 {
+                    .food-list {
+                        margin-bottom: get-vw(100px);
+                        gap: 0;
+
+                        .items {
+                            border: get-vw(1px) solid rgba(225, 225, 225, 0.50);
+                            margin-bottom: 0;
+                            width: calc(33.33% - get-vw(3px));
+                            overflow: hidden;
+                            cursor: default;
+
+                            .wrap {
+                                padding: get-vw(30px) get-vw(42px) get-vw(240px);
+
+                                .wishlist {
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: nowrap;
+                                    justify-content: flex-end;
+                                    align-items: center;
+                                    padding: get-vw(16px) get-vw(16px) 0 0;
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                    cursor: pointer;
+
+                                    svg {
+                                        width: get-vw(22px);
+                                        height: get-vw(20px);
+                                        stroke: #D9D9D9;
+                                        fill: transparent;
+                                    }
+
+                                    &.active {
+                                        svg {
+                                            fill: $red;
+                                            stroke: $red;
+                                        }
+                                    }
+                                }
+
+                                .image {
+                                    padding-bottom: get-vw(20px);
+
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                    }
+                                }
+
+                                .content {
+                                    transition: all 0.3s ease;
+                                    position: absolute;
+                                    left: 0;
+                                    right: 0;
+                                    bottom: get-vw(-60px);
+                                    padding: 0 get-vw(55px) get-vw(30px);
+
+                                    .pro-name {
+                                        padding-bottom: get-vw(30px);
+
+                                        .sin {
+                                            color: $black;
+                                            text-align: center;
+                                            font-family: $abhaya;
+                                            font-size: get-vw(24px);
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: get-vw(26px);
+                                            letter-spacing: get-vw(-1.2px);
+                                            padding-bottom: get-vw(10px);
+                                        }
+
+                                        .eng {
+                                            color: $black;
+                                            text-align: center;
+                                            font-family: $roboto;
+                                            font-size: get-vw(24px);
+                                            font-style: normal;
+                                            font-weight: 700;
+                                            line-height: get-vw(26px);
+                                            letter-spacing: get-vw(-1.2px);
+                                            padding-bottom: get-vw(10px);
+                                        }
+
+                                        .tam {
+                                            color: $black;
+                                            text-align: center;
+                                            font-family: $mukta;
+                                            font-size: get-vw(18px);
+                                            font-style: normal;
+                                            font-weight: 700;
+                                            line-height: get-vw(20px);
+                                            letter-spacing: get-vw(-0.9px);
+                                        }
+                                    }
+
+                                    .price {
+                                        color: $black;
+                                        text-align: center;
+                                        font-family: $roboto;
+                                        font-size: get-vw(16px);
+                                        font-style: normal;
+                                        font-weight: 400;
+                                        line-height: get-vw(22px);
+                                        letter-spacing: get-vw(-0.32px);
+                                        padding-bottom: get-vw(10px);
+
+                                        span {
+                                            display: inline-block;
+                                            font-weight: 700;
+                                        }
+                                    }
+
+                                    .stock {
+                                        color: $black;
+                                        text-align: center;
+                                        font-family: $roboto;
+                                        font-size: get-vw(14px);
+                                        font-weight: 400;
+                                        line-height: get-vw(22px);
+                                        padding-bottom: get-vw(30px);
+                                    }
+
+                                    .common-btn-1 {
+                                        position: unset;
+                                        padding: 0;
+                                    }
+                                }
+                            }
+
+                            &:hover {
+                                box-shadow: get-vw(20px) get-vw(20px) get-vw(60px) 0px rgba(0, 0, 0, 0.10);
+
+                                .wrap {
+                                    .content {
+                                        background: linear-gradient(180deg, rgba(149, 193, 31, 0.00) 0%, #95C11F 100%);
+                                        bottom: 0;
+
+                                        .common-btn-1 {
+                                            position: unset;
+                                            padding: 0;
+                                            color: $white;
+
+                                            svg {
+                                                fill: $white;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .pagination {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: get-vw(60px);
+
+                    .arrow-left {
+                        width: get-vw(50px);
+                        height: get-vw(50px);
+                        border-radius: 50%;
+                        border: get-vw(1px) solid #D9D9D9;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+
+                        svg {
+                            width: get-vw(15px);
+                            height: get-vw(15px);
+                            fill: #E1E1E1;
+                        }
+                    }
+
+                    .numbers {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        gap: get-vw(50px);
+
+                        .num {
+                            color: #707070;
+                            text-align: center;
+                            font-family: $roboto;
+                            font-size: get-vw(19px);
+                            font-weight: 400;
+                            line-height: get-vw(14px);
+
+                            &.active {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: center;
+                                color: $white;
+                                background: $green;
+                                width: get-vw(47px);
+                                height: get-vw(47px);
+                                border-radius: 50%;
+                                box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.30));
+                            }
+                        }
+                    }
+
+                    .arrow-right {
+                        width: get-vw(70px);
+                        height: get-vw(70px);
+                        border-radius: 50%;
+                        border: none;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        background: $green;
+
+                        svg {
+                            width: get-vw(15px);
+                            height: get-vw(15px);
+                            fill: $white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+.main-check-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-filter-content{
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    .ant-custom-checkbox{
+            position: relative;
+            padding-left: 24px;
+            cursor: pointer;
+            display: inline-block;
+            user-select: none;
+            font-family: $roboto;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.72px;
+            margin-bottom: 15px;
+
+    
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+    
+                &:checked~.checkmark {
+                    background-color: $green;
+    
+                    &::after {
+                        display: block;
+                    }
+                }
+            }
+    
+            .checkmark {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                height: 13px;
+                width: 13px;
+                border: 1px solid $green;
+                background-color: transparent;
+    
+                &::after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                    left: 3px;
+                    top: 0px;
+                    width: 4px;
+                    height: 8px;
+                    border: solid $white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+}
+
+@media (min-width: 1200px) {
+    .main-check-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+    .ant-filter-content{
+        padding: 0 get-vw(20px);
+        .ant-custom-checkbox{
+            padding-left: get-vw(40px);
+            font-size: get-vw(20px);
+            letter-spacing: get-vw(-0.14px);
+            margin-bottom: get-vw(15px);
+            input {
+                &:checked~.checkmark {
+                    background-color: $green;
+    
+                    &::after {
+                        display: block;
+                    }
+                }
+            }
+    
+            .checkmark {
+                transform: translateY(-50%);
+                height: get-vw(25px);
+                width: get-vw(25px);
+                &::after {
+                    left: get-vw(7px);
+                    width: get-vw(8px);
+                    height: get-vw(18px);
+                    border-width: 0 get-vw(2px) get-vw(2px) 0;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+
+}

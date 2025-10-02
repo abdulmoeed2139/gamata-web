@@ -1,0 +1,314 @@
+.banner-wrapper {
+    height: 100%;
+
+    .banner-slider {
+        height: 100%;
+
+        .owl-stage-outer {
+            height: 100%;
+
+            .owl-stage {
+                height: 100%;
+
+                .owl-item {
+                    height: 100%;
+
+                    .banner {
+                        position: relative;
+                        height: 100%;
+                        display: flex;
+
+                        &.video-banner {
+                            video {
+                                height: calc(100vh - 137px);
+                                width: 100%;
+                                object-fit: cover;
+                            }
+                        }
+
+                        &.image-banner {
+                            img {
+                                height: calc(100vh - 137px);
+                                width: 100%;
+                                object-fit: cover;
+                            }
+                        }
+
+                        .banner-content {
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+
+                            .banner-subtitle {
+                                color: $white;
+                                text-align: center;
+                                font-family: $roboto;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: 27px;
+                                letter-spacing: -0.32px;
+                                padding: 0 80px 20px;
+                            }
+
+                            .banner-title {
+                                color: $white;
+                                text-align: center;
+                                font-family: $roboto;
+                                font-size: 40px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: normal;
+                                letter-spacing: -1.6px;
+                                padding: 0 80px 40px;
+
+                                span {
+                                    color: $green;
+                                }
+                            }
+
+                            .banner-button {
+                                background: $green;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                flex-wrap: nowrap;
+                                justify-content: center;
+                                padding: 23px 0;
+                                gap: 20px;
+
+                                color: $white;
+                                text-decoration: none;
+                                font-family: $barlow;
+                                font-size: 14px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: 27px;
+                                letter-spacing: 3.92px;
+                                text-transform: uppercase;
+
+                                svg {
+                                    transform: rotate(315deg);
+                                    width: 21px;
+                                    height: 21px;
+                                    fill: $white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .banner-wrapper {
+        height: 100%;
+
+        .banner-slider {
+            height: 100%;
+            position: relative;
+
+            .owl-stage-outer {
+                height: 100%;
+
+                .owl-stage {
+                    height: 100%;
+
+                    .owl-item {
+                        height: 100%;
+
+                        .banner {
+                            position: relative;
+                            height: 100%;
+                            display: grid;
+
+                            &.video-banner {
+                                video {
+                                    height: calc(100vh - get-vw(87px));
+                                    width: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            &.image-banner {
+                                img {
+                                    height: calc(100vh - get-vw(87px));
+                                    width: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            .banner-content {
+                                position: absolute;
+                                bottom: get-vw(60px);
+                                left: 0;
+                                right: 0;
+
+                                &::after {
+                                    content: '';
+                                    position: absolute;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 1px;
+                                    background: rgba(#E1E1E1, 0.3);
+                                }
+
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    bottom: get-vw(72px);
+                                    width: 100%;
+                                    height: 1px;
+                                    background: rgba(#E1E1E1, 0.3);
+                                }
+
+                                .banner-subtitle {
+                                    font-size: get-vw(16px);
+                                    line-height: get-vw(27px);
+                                    letter-spacing: get-vw(-0.32px);
+                                    padding: 0 get-vw(600px) get-vw(10px);
+                                }
+
+                                .banner-title {
+                                    font-size: get-vw(70px);
+                                    font-weight: 700;
+                                    line-height: get-vw(70px);
+                                    letter-spacing: get-vw(-1.6px);
+                                    padding: 0 get-vw(600px) get-vw(50px);
+
+                                    span {
+                                        color: $green;
+                                    }
+                                }
+
+                                .banner-button {
+                                    background: $green;
+                                    padding: get-vw(23px) get-vw(55px);
+                                    gap: get-vw(20px);
+                                    width: fit-content;
+                                    font-size: get-vw(14px);
+                                    line-height: get-vw(27px);
+                                    letter-spacing: get-vw(4px);
+                                    margin: 0 auto;
+
+                                    svg {
+                                        transition: all 0.3s ease;
+                                        transform: rotate(315deg);
+                                        width: get-vw(25px);
+                                        height: get-vw(25px);
+                                    }
+
+                                    &:hover {
+                                        svg {
+                                            transform: rotate(360deg);
+                                            width: get-vw(25px);
+                                            height: get-vw(25px);
+                                            fill: $white;
+                                        }
+                                    }
+                                }
+
+                                @keyframes arrowBounce {
+
+                                    0%,
+                                    100% {
+                                        transform: translateY(0);
+                                    }
+
+                                    50% {
+                                        transform: translateY(get-vw(20px));
+                                    }
+                                }
+
+                                .arrow-down {
+                                    position: absolute;
+                                    display: inline-block;
+                                    width: get-vw(25px);
+                                    height: get-vw(10px);
+                                    bottom: get-vw(-25px);
+                                    left: 0;
+                                    right: 0;
+                                    margin: 0 auto;
+                                    animation: arrowBounce 2s infinite ease-in-out;
+
+                                    &::before,
+                                    &::after {
+                                        content: "";
+                                        position: absolute;
+                                        width: get-vw(20px);
+                                        height: get-vw(1px);
+                                        background-color: $white;
+                                        top: 50%;
+                                        transform: translateY(-50%) rotate(45deg);
+                                    }
+
+                                    &::after {
+                                        left: get-vw(14px);
+                                        transform: translateY(-50%) rotate(-45deg);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            .owl-nav {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: fit-content;
+                display: flex;
+                height: get-vw(60px);
+
+                .owl-prev {
+                    padding: 0 get-vw(50px);
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                    border-left: get-vw(1px) solid rgba(#E1E1E1, 0.3);
+
+                    svg {
+                        width: get-vw(21px);
+                        height: get-vw(21px);
+                        fill: $green;
+                    }
+
+                    &.disabled {
+                        svg {
+                            fill: rgba($color: $white, $alpha: 0.5);
+                        }
+                    }
+                }
+
+                .owl-next {
+                    padding: 0 get-vw(50px);
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                    border-left: get-vw(1px) solid rgba(#E1E1E1, 0.3);
+
+                    svg {
+                        width: get-vw(21px);
+                        height: get-vw(21px);
+                        fill: $green;
+                    }
+
+                    &.disabled {
+                        svg {
+                            fill: rgba($color: $white, $alpha: 0.5);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

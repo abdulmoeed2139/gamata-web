@@ -1,0 +1,68 @@
+.main-bread-wrap{
+    border: 1px solid $black;
+    margin: 0 20px 30px 20px;
+    padding: 20px 20px;
+}
+.element-head{
+    &.ant-text-left{
+        text-align: left;
+    }
+}
+
+.ant-bread-crumbs{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .ant-bread-link{
+        text-decoration: none;
+        color: $grey;
+        font-family: $barlow;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 22px;
+        letter-spacing: -0.51px;
+
+    }
+    svg{
+        width: 14px;
+        height: 14px;
+    }
+    .ant-current{
+        font-family: $barlow;
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 22px;
+        letter-spacing: -0.51px;
+        color: $black;
+
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .main-bread-wrap{
+        margin: 0 get-vw(100px) get-vw(60px) get-vw(100px);
+        padding: get-vw(30px) get-vw(30px);
+    }
+
+    .ant-bread-crumbs{
+        gap: get-vw(10px);
+        .ant-bread-link{
+            font-size: get-vw(17px);
+            line-height: get-vw(22px);
+            letter-spacing: get-vw(-0.51px);
+
+        }
+        svg{
+            width: get-vw(14px);
+            height: get-vw(14px);
+        }
+        .ant-current{
+            font-size: get-vw(17px);
+            line-height: get-vw(22px);
+            letter-spacing: get-vw(-0.51px);
+
+        }
+    }
+
+}
