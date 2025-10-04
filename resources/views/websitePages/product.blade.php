@@ -78,10 +78,13 @@
                     <span class="toggle-icon">−</span>
                 </div>
                 <div class="filter-content">
-                    <label><input type="checkbox"> All Products</label>
+                    {{-- <label><input type="checkbox"> All Products</label>
                     <label><input type="checkbox"> Fruits</label>
                     <label><input type="checkbox"> Processed Foods</label>
-                    <label><input type="checkbox"> Organic Products</label>
+                    <label><input type="checkbox"> Organic Products</label> --}}
+                    @foreach ($ctg as $item)
+                    <label><input type="checkbox">{{ $item['productNameEnglish'] }}</label>
+                    @endforeach
                 </div>
             </div>
             <div class="filter">
@@ -118,7 +121,7 @@
                         </svg>
                       Price
                     </a>
-                   
+
                 </div>
             </div>
              {{-- <a href="#" target="_blank" class="common-btn-1 btn-p">
@@ -220,66 +223,36 @@
                 @endphp
 
                 <div id="food-list" class="food-list grid-view">
-                    @foreach ($bestSellingItems as $item)
-                    
-                        <!--<div class="items">-->
-                        <!--    <div class="wrap">-->
-                        <!--        <div class="wishlist">-->
-                        <!--            <svg>-->
-                        <!--                <use xlink:href="#heart"></use>-->
-                        <!--            </svg>-->
-                        <!--        </div>-->
-                        <!--        <div class="image">-->
-                        <!--            <img src="{{$item['image']}}" alt="Best Selling Item">-->
-                        <!--        </div>-->
-                        <!--        <div class="content">-->
-                        <!--            <div class="pro-name">-->
-                        <!--                <div class="sin">{{$item['sin']}}</div>-->
-                        <!--                <div class="eng">{{$item['eng']}}</div>-->
-                        <!--                <div class="tam">{{$item['tam']}}</div>-->
-                        <!--            </div>-->
-                        <!--            <div class="price">{!!$item['price']!!}</div>-->
-                        <!--            <div class="stock">{{$item['stock']}}</div>-->
-                        <!--            <a href="{{'product-view' }}" class="common-btn-1">-->
-                        <!--                <svg>-->
-                        <!--                    <use xlink:href="#btn_arr"></use>-->
-                        <!--                </svg>-->
-                        <!--                Buy Now-->
-                        <!--            </a>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
-                     <a href="{{ 'product-view' }}" class="product-link">
-                        <div class="items">
-                            <div class="wrap">
-                                <div class="wishlist">
-                                    <svg>
-                                        <use xlink:href="#heart"></use>
-                                    </svg>
-                                </div>
-                                <div class="image">
-                                    <img src="{{$item['image']}}" alt="Best Selling Item">
-                                </div>
-                                <div class="content">
-                                    <div class="pro-name">
-                                        <div class="sin">{{$item['sin']}}</div>
-                                        <div class="eng">{{$item['eng']}}</div>
-                                        <div class="tam">{{$item['tam']}}</div>
-                                    </div>
-                                    <div class="price">{!!$item['price']!!}</div>
-                                    <div class="stock">{{$item['stock']}}</div>
-                                    <div class="common-btn-1">
+                    @foreach ($products as $item)
+                        <a href="{{ url('product-view/'.$item['childCode']) }}" class="product-link">
+                            <div class="items">
+                                <div class="wrap">
+                                    <div class="wishlist">
                                         <svg>
-                                            <use xlink:href="#btn_arr"></use>
+                                            <use xlink:href="#heart"></use>
                                         </svg>
-                                        Buy Now
+                                    </div>
+                                    <div class="image">
+                                        <img src="{{$item['imageUrl'].'/'.$item['childImage']}}" alt="Best Selling Item">
+                                    </div>
+                                    <div class="content">
+                                        <div class="pro-name">
+                                            <div class="sin">{{$item['childNameSinhala']}}</div>
+                                            <div class="eng">{{$item['childNameEnglish']}}</div>
+                                            <div class="tam">{{$item['childNameTamil']}}</div>
+                                        </div>
+                                        <div class="price">{!!$item['avgPrice']!!}</div>
+                                        <div class="stock">{{$item['totalAvlQty']}}</div>
+                                        <div class="common-btn-1">
+                                            <svg>
+                                                <use xlink:href="#btn_arr"></use>
+                                            </svg>
+                                            Buy Now
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-
-                     
+                        </a>
                     @endforeach
                 </div>
             </div>

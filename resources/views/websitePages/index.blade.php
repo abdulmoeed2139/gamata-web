@@ -264,71 +264,34 @@
         </div>
         <div class="col-2">
             <div class="hm-food-slider owl-carousel">
-                {{-- @if (session('is_logged_in')) --}}
-                    @foreach ($bestSellingItems as $item)
-                        <a href="{{ url('product-view') }}" class="item-link">
-                            <div class="item">
-                                <div class="wrap">
-                                    <div class="wishlist">
-                                        <svg><use xlink:href="#heart"></use></svg>
+                @foreach ($bestSellingItems as $item)
+                    <a href="{{ url('product-view') }}" class="item-link">
+                        <div class="item">
+                            <div class="wrap">
+                                <div class="wishlist">
+                                    <svg><use xlink:href="#heart"></use></svg>
+                                </div>
+                                <div class="image">
+                                    <img src="{{ $item['imageUri'].'/'.$item['image']}}"
+                                        alt="{{ $item['name_English'] ?? 'Product' }}">
+                                </div>
+                                <div class="content">
+                                    <div class="pro-name">
+                                        <div class="sin">{{ $item['name_Sinhala'] ?? 'N/A' }}</div>
+                                        <div class="eng">{{ $item['name_English'] ?? 'N/A' }}</div>
+                                        <div class="tam">{{ $item['name_Tamil'] ?? 'N/A' }}</div>
                                     </div>
-                                    <div class="image">
-                                        {{-- <img src="http://feapi.aethriasolutions.com/images/{{ $item['image'] ?? 'no-image.png' }}"
-                                            alt="{{ $item['name_English'] ?? 'Product' }}"> http://feapi.aethriasolutions.com/uploads/Products/07e321a1-057d-4fe8-bc57-72af2d977f8f.jpeg--}}
-                                        <img src="http://feapi.aethriasolutions.com/uploads/Products/{{ $item['image'] ?? '07e321a1-057d-4fe8-bc57-72af2d977f8f.jpeg' }}"
-                                            alt="{{ $item['name_English'] ?? 'Product' }}">
-                                    </div>
-                                    <div class="content">
-                                        <div class="pro-name">
-                                            <div class="sin">{{ $item['name_Sinhala'] ?? 'N/A' }}</div>
-                                            <div class="eng">{{ $item['name_English'] ?? 'N/A' }}</div>
-                                            <div class="tam">{{ $item['name_Tamil'] ?? 'N/A' }}</div>
-                                        </div>
-                                        <div class="price">Rs. {{ $item['average_Price'] ?? 0 }}</div>
-                                        <div class="stock">Stock: {{ $item['total_Quantity'] ?? 0 }}</div>
-                                        <span class="common-btn-1">
-                                            <svg><use xlink:href="#btn_arr"></use></svg>
-                                            Buy Now
-                                        </span>
-                                    </div>
+                                    <div class="price">Rs. {{ $item['average_Price'] ?? 0 }}</div>
+                                    <div class="stock">Stock: {{ $item['total_Quantity'] ?? 0 }}</div>
+                                    <span class="common-btn-1">
+                                        <svg><use xlink:href="#btn_arr"></use></svg>
+                                        Buy Now
+                                    </span>
                                 </div>
                             </div>
-                        </a>
-                    @endforeach
-                {{-- @else
-                    @foreach ($bestSellingProducts as $item)
-                        <a href="{{url('product-view')}}" class="item-link">
-                            <div class="item">
-                                <div class="wrap">
-                                    <div class="wishlist">
-                                        <svg>
-                                            <use xlink:href="#heart"></use>
-                                        </svg>
-                                    </div>
-                                    <div class="image">
-                                        <img src="{{$item['image']}}" alt="Best Selling Item">
-                                    </div>
-                                    <div class="content">
-                                        <div class="pro-name">
-                                            <div class="sin">{{$item['sin']}}</div>
-                                            <div class="eng">{{$item['eng']}}</div>
-                                            <div class="tam">{{$item['tam']}}</div>
-                                        </div>
-                                        <div class="price">{!!$item['price']!!}</div>
-                                        <div class="stock">{{$item['stock']}}</div>
-                                        <span class="common-btn-1">
-                                            <svg>
-                                                <use xlink:href="#btn_arr"></use>
-                                            </svg>
-                                            Buy Now
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                    @endforeach
-                @endif --}}
+                        </div>
+                    </a>
+                @endforeach
             </div>
         </div>
     </div>
@@ -717,7 +680,7 @@
                 @foreach ($exploreTeam as $member)
                     <div class="item">
                         <div class="image">
-                            <img src="{{ 'http://feapi.aethriasolutions.com' . $member['imageUrl']  }}" alt="{{$member['imageUrl']}}">
+                            <img src="{{ $member['imageUri']  }}" alt="{{$member['imageUri']}}">
                         </div>
                         <div class="content">
                             <div class="name">{{$member['name']}}</div>

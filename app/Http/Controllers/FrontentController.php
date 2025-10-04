@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Token;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class FrontentController extends Controller
 {
@@ -31,10 +32,10 @@ class FrontentController extends Controller
                 // $userName = ($profile['firstName'] ?? '') . ' ' . ($profile['lastName'] ?? '');
                 $userName = $profile['firstName'] ?? '';
             } else {
-                $userName = 'Login';
+                $userName = 'Admin';
             }
         } else {
-            $userName = 'Login';
+            $userName = 'Admin';
         }
         return $userName;
     }
@@ -159,17 +160,21 @@ class FrontentController extends Controller
 
     public function verifyOTP()
     {
-        return view('auth.verify-otp');
+        if(session('access_token')){
+            return redirect()->route('index');
+        } else {
+            return view('auth.verify-otp');
+        }
     }
 
     public function blogs()
     {
         $accessToken = session('access_token');
         $userName= $this->getProfile();
-
-        $getBlogs = Http::withToken($accessToken)
-            ->acceptJson()
-            ->get('http://feapi.aethriasolutions.com/api/Blog/v1/GetAllWithOutPagination');
+        $getBlogs = $this->apiRequest(
+            'http://feapi.aethriasolutions.com/api/Blog/v1/GetAllWithOutPagination',
+            $this->token ?? null
+        );
         $blogs = $getBlogs->json('data');
         return view('websitePages.blogs', compact('userName','blogs'));
     }
@@ -177,9 +182,10 @@ class FrontentController extends Controller
     public function getSingleBlog($id)
     {
         $accessToken = session('access_token');
-        $getBlog = Http::withToken($accessToken)
-            ->acceptJson()
-            ->get('http://feapi.aethriasolutions.com/api/Blog/v1/GetById/'.$id);
+        $getBlog = $this->apiRequest(
+            'http://feapi.aethriasolutions.com/api/Blog/v1/GetById/'.$id,
+            $this->token ?? null
+        );
         $blog = $getBlog->json('data');
         return response()->json([
             'data' => $blog,
@@ -204,18 +210,56 @@ class FrontentController extends Controller
         ], 200);
     }
 
-    public function producttInner()
+    public function product()
+    {
+        $getAllProduct = $this->apiRequest(
+            'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En&parentId=1',
+            $this->token ?? null
+        );
+        $responseData = $getAllProduct->json();
+        $products = $responseData['data'] ?? [];
+        $ctg = $responseData['payload']['categories'] ?? [];
+        return view('websitePages.product', compact('products', 'ctg'));
+    }
+
+    public function producttInner($id)
     {
         $accessToken = session('access_token');
-        $userName= $this->getProfile();
-        return view('websitePages.productt-inner', compact('userName'));
+        $userName = $this->getProfile();
+        $getProduct = $this->apiRequest(
+            'http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId='.$id,
+            $this->token ?? null
+        );
+
+        $getBestSellingProduct = $this->apiRequest(
+            'http://feapi.aethriasolutions.com/api/v1/Product/BestSelling',
+            $this->token ?? null
+        );
+
+        if (
+            $getProduct->successful() &&
+            $getBestSellingProduct->successful()
+        ){
+            $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
+            $productArray = $getProduct->json()['data'] ?? [];
+            $product = $productArray[0] ?? null;
+            return view('websitePages.productt-inner', compact('userName', 'product', 'bestSellingItems'));
+        }
     }
+
 
     public function community()
     {
         $accessToken = session('access_token');
         $userName= $this->getProfile();
-        return view('websitePages.community', compact('userName'));
+        $getCommunity = $this->apiRequest(
+            'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=12&sort=id&order=desc&postType=Pending&page=1',
+            $this->token ?? null
+        );
+        if($getCommunity->successful()){
+            $community = $getCommunity->json('data') ?? [];
+            return view('websitePages.community', compact('userName','community'));
+        }
     }
 
 
@@ -226,6 +270,62 @@ class FrontentController extends Controller
         return view('websitePages.app-banner', compact('userName'));
     }
 
+    public function contact()
+    {
+        return view('websitePages.contact');
+    }
 
+    public function InsertAnonymousInquiry(Request $request)
+    {
+        $validator= Validator::make($request->all(), [
+            'subject' => 'required',
+            'message' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $params= [
+                'Subject' => $request['subject'],
+                'Message' => $request['message'],
+                'FirstName' => $request['first_name'],
+                'LastName' => $request['last_name'],
+                'Email' => $request['email'],
+            ];
+
+            $response = Http::withOptions([
+                'verify' => false
+            ])->post('http://feapi.aethriasolutions.com/api/v1/UserRequest/InsertAnonymousInquiry', $params);
+            $result= $response->json('text');
+            return redirect()->back()->with('message', $result);
+        }
+    }
+
+    public function createComment(Request $request)
+    {
+        $validator= Validator::make($request->all(), [
+            'comment' => 'required'
+        ]);
+        if($validator->fails()){
+            return response()->json('error', $validator->errors());
+        } else {
+            $params= [
+                'Comment' => $request['comment'],
+                'Commented_DateTime' => $request['dateTime'],
+                'FK_UserID' => $request['fK_UserID'],
+                'FK_Post_Code' => $request['FK_Post_Code'],
+                'Isdelete' => $request['isdelete'],
+            ];
+            $response = Http::withOptions([
+                'verify' => false
+            ])->post('http://feapi.aethriasolutions.com/api/PostComment/v1/Insert', $params);
+            $resultArray = $response->json();
+            $resultText = $resultArray['text'] ?? null;
+            return redirect()->back()->with('message', $resultText);
+        }
+    }
 
 }

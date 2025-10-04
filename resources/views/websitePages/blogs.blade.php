@@ -57,7 +57,7 @@
                         @foreach ($blogs as $item)
                         <a href="#" data-code="{{ $item['code'] }}"; class="open-modal-btn item" style="text-decoration: none; color: inherit;">
                                 <div class="image">
-                                    <img src="http://feapi.aethriasolutions.com/uploads/Blog/{{ $item['image'] }}" alt="journal Image">
+                                    <img src="{{ $item['imageUri'].'/'.$item['image'] }}" alt="journal Image">
                                 </div>
 
                                 <div class="content">
@@ -173,7 +173,7 @@ $(document).ready(function () {
                 $("#blog-content").html(response.data.body_English);
                 $("#blog-date").text(formattedDate);
                 $("#blog-ctg").text(response.data.category);
-                $("#blog-img").attr("src", "http://feapi.aethriasolutions.com/uploads/Blog/" + response.data.image);
+                $("#blog-img").attr("src", response.data.imageUri + "/" + response.data.image);
                 $(".blog-content").text(response.data.subject);
                 $(".blog-content").text(response.data.subject);
                 $(".blog-content").text(response.data.subject);

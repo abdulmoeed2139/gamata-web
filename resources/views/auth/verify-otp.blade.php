@@ -27,7 +27,7 @@
                         <line x1="12" y1="8" x2="12" y2="8"></line>
                     </svg>
                     <span class="custom-popover">Enter the 6-digit code sent to your mobile</span>
-                </span>  
+                </span>
 
                 </label>
 
@@ -50,7 +50,17 @@
                 </form>
 
                 <div class="resendOtp" style="padding-top:20px;">
-                    <a href="{{ route('password.request') }}" class="backButton">Resend OTP 00:34s</a>
+                    {{-- <a href="{{ route('password.request') }}" class="backButton">Resend OTP 00:34s</a> --}}
+                    {{-- <a href="{{ route('password.request') }}" class="backButton" id="resendLink" style="pointer-events:none; opacity:0.6;">
+                        Resend OTP 01:00s
+                    </a>
+                    <a href="" id="resendOTP">Resend OTP</a> --}}
+
+                    <a href="javascript:void(0)" class="backButton" id="resendLink" style="pointer-events:none; opacity:0.6;">
+                        Resend OTP 01:00s
+                    </a>
+                    <a href="javascript:void(0)" id="resendOTP" style="display:none;">Resend OTP</a>
+                    {{-- <p id="otpError" class="error-message hidden" style="color:red; font-size: 14px; margin-top: 5px;"></p> --}}
                 </div>
             </div>
         </form>
@@ -76,6 +86,77 @@
                     $(this).prev(".otp-input").focus();
                 }
             });
+
+            let timerDuration = 60;
+            let resendLink = document.getElementById("resendLink");
+            let resendOTP = document.getElementById("resendOTP");
+            let phoneNumber = new URLSearchParams(window.location.search).get("mobile");
+            function startTimer() {
+                let timer = timerDuration;
+                resendLink.style.display = "inline-block";
+                resendOTP.style.display = "none";
+                resendLink.style.pointerEvents = "none";
+                resendLink.style.opacity = "0.6";
+
+                let countdown = setInterval(() => {
+                    let minutes = Math.floor(timer / 60);
+                    let seconds = timer % 60;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                    resendLink.textContent = `Resend OTP ${minutes}:${seconds}s`;
+
+                    if (timer <= 0) {
+                        clearInterval(countdown);
+                        resendLink.style.display = "none";
+                        resendOTP.style.display = "inline-block";
+                    }
+                    timer--;
+                }, 1000);
+            }
+
+            startTimer();
+
+            resendOTP.addEventListener("click", function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "resend-otp",
+                    type: "get",
+                    data: { phoneNumber: phoneNumber },
+                    success: function(response) {
+                        console.log(response);
+                        if(response && response.message){
+                            let otpError = $("#otpError");
+                            otpError.text(response.message).css('color', 'green').removeClass('hidden').show();
+                            setTimeout(() => { otpError.fadeOut(); }, 5000);
+                        }
+                        startTimer();
+                    }
+                });
+            });
+
+
+            // let urlParams = new URLSearchParams(window.location.search);
+            // let phoneNumber = urlParams.get("mobile");
+            // $("#resendOTP").click(function(e){
+            //     e.preventDefault();
+            //     $.ajax({
+            //         url: "resend-otp",
+            //         type: "get",
+            //         data: {
+            //             phoneNumber: phoneNumber
+            //         },
+            //         success: function(response){
+            //             console.log(response);
+            //             if(response && response.message){
+            //                 let otpError = $("#otpError");
+            //                 otpError.text(response.message).removeClass("hidden").show();
+            //                 setTimeout(() => {
+            //                     otpError.fadeOut();
+            //                 }, 3000);
+            //             }
+            //         }
+            //     });
+            // });
+
 
             $("#OTPForm").submit(function(e){
                 e.preventDefault();
@@ -120,6 +201,25 @@
                     }
                 });
             });
+
+            // // Timer Code :
+            // let timer = 60; // 60 seconds
+            // let resendLink = document.getElementById("resendLink");
+            // let countdown = setInterval(() => {
+            //     let minutes = Math.floor(timer / 60);
+            //     let seconds = timer % 60;
+            //     // Format seconds to always show 2 digits
+            //     seconds = seconds < 10 ? "0" + seconds : seconds;
+            //     resendLink.textContent = `Resend OTP ${minutes}:${seconds}s`;
+            //     if (timer <= 0) {
+            //         clearInterval(countdown);
+            //         resendLink.textContent = "Resend OTP";
+            //         resendLink.style.pointerEvents = "auto";
+            //         resendLink.style.opacity = "1";
+            //     }
+            //     timer--;
+            // }, 1000);
+
         });
     </script>
 @endsection

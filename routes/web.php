@@ -20,8 +20,8 @@ use App\Http\Controllers\Auth\ForgotPasswordCustomController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/community', [FrontentController::class, 'community']);
-Route::get('/product', [HomeController::class, 'product']);
-Route::get('/product-view', [FrontentController::class, 'producttInner']);
+Route::get('/product', [FrontentController::class, 'product']);
+Route::get('/product-view/{product_id}', [FrontentController::class, 'producttInner']);
 Route::get('/element', [HomeController::class, 'element']);
 Route::get('/welcome', [HomeController::class, 'welcome']);
 
@@ -67,10 +67,11 @@ Route::get('/my-plans', function () {
 
 Route::get('/index', [FrontentController::class, 'index'])->name('index');
 Route::get('/verify-otp', [FrontentController::class, 'verifyOTP']);
+Route::get('/resend-otp', [AuthController::class, 'resendOTP']);
 
-Route::get('/contact', function () {
-    return view('websitePages.contact');
-})->name('contact');
+Route::get('/contact', [FrontentController::class, 'contact'])->name('contact');
+Route::post('/insert-anonymous-inquiry', [FrontentController::class, 'InsertAnonymousInquiry'])->name('contact');
+Route::post('/create-comment', [FrontentController::class, 'createComment'])->name('create-comment');
 
 
 Route::post('/otp-verify', [AuthController::class, 'verifyOTP']);

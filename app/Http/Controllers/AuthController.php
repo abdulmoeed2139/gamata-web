@@ -49,19 +49,34 @@ class AuthController extends Controller
     // Register new user
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed'
+        $validator= Validator::make($request->all(), [
+            'first_name' => 'required',
+            'email' => 'required|email',
+            'Phone' => 'required|min:9',
+            'password' => 'required|confirmed|min:8',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        } else {
+            $response= Http::post('http://feapi.aethriasolutions.com/api/v1/Account/UserSignUp', [
+                'firstName' => $request->first_name,
+                'lastName' => $request->last_name,
+                'email' => $request->email,
+                'phoneNumber' => $request->phone,
+                'Password' => $request->password,
+            ]);
+            $responseData = $response->json();
+            return redirect()->back()->with('message', $responseData['text'] ?? 'Something went wrong');
+        }
 
-        return redirect()->route('login.form')->with('success', 'Account created, please login.');
+        // User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        // return redirect()->route('login.form')->with('success', 'Account created, please login.');
     }
 
     // Logout
@@ -160,6 +175,18 @@ class AuthController extends Controller
                 'message' => 'Error: ' . $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function resendOTP(Request $request)
+    {
+        $mobile= $request['phoneNumber'];
+        $response = Http::acceptJson()->get('http://feapi.aethriasolutions.com/api/v1/Account/ReSendOtp', [
+            'mobile' => $mobile,
+            'lan' => 'Si'
+        ]);
+        $result= $response->json()['result'];
+
+        return response()->json(['message' => $result['text']]);
     }
 
 }

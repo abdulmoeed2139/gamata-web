@@ -27,14 +27,20 @@
     </div>
 </div>
 </section>
-        
+
+{{-- Flash message --}}
+@if(session('message'))
+    <div id="flash-message" class="alert-message">
+        {{ session('message') }}
+    </div>
+@endif
 
 <div class="contactContainer">
 <div class="contact-wrapper-uni">
     <div class="contact-wrapper">
         <!--<img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">-->
 
-        <form class="login-form-uni" id="contactForm" action="" method="POST">
+        <form class="login-form-uni" id="contactForm" action="{{ url('/insert-anonymous-inquiry') }}" method="POST">
             @csrf
             <div id="Contactform">
                 <!--<label class="login-label-uni" style="margin-bottom:30px">Contact Us</label>-->
@@ -43,11 +49,13 @@
                 <div class="inline-field" style="display: flex; gap: 10px; margin-bottom:15px;">
                     <div style="flex:1;">
                         <label for="first-name" class="login-label-uni">First Name</label>
-                        <input type="text" id="first-name" name="first_name" class="login-input-uni" required>
+                        <input type="text" id="first_name" name="first_name" class="login-input-uni" required>
+                        @error('first_name')<p class="text-danger"> {{ $message }} </p>@enderror
                     </div>
                     <div style="flex:1;">
                         <label for="last-name" class="login-label-uni">Last Name</label>
-                        <input type="text" id="last-name" name="last_name" class="login-input-uni" required>
+                        <input type="text" id="last_name" name="last_name" class="login-input-uni" required>
+                        @error('last_name')<p class="text-danger"> {{ $message }} </p>@enderror
                     </div>
                 </div>
 
@@ -55,18 +63,21 @@
                 <div style="margin-bottom:15px;">
                     <label for="email" class="login-label-uni">Email</label>
                     <input type="email" id="email" name="email" class="login-input-uni" required>
+                    @error('email')<p class="text-danger"> {{ $message }} </p>@enderror
                 </div>
 
                 <!-- Subject -->
                 <div style="margin-bottom:15px;">
                     <label for="subject" class="login-label-uni">Subject</label>
                     <input type="text" id="subject" name="subject" class="login-input-uni" required>
+                    @error('subject')<p class="text-danger"> {{ $message }} </p>@enderror
                 </div>
 
                 <!-- Message -->
                 <div style="margin-bottom:15px;">
                     <label for="message" class="login-label-uni">Message</label>
-                    <textarea id="message" name="message" class="login-input-uni" rows="5" required></textarea>
+                    <textarea id="message" name="message" class="login-input-uni" name="message" rows="5" required></textarea>
+                    @error('message')<p class="text-danger"> {{ $message }} </p>@enderror
                 </div>
 
                 <button type="submit" class="auth-btn common-btn-1">
