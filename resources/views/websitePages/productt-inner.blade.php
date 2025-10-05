@@ -68,7 +68,7 @@ font-size:18px !important;
             <use xlink:href="#breadcrum"></use>
         </svg>
         <div class="current">
-            {{$product['product_Name_English'] ?? 'Product Not Found'}}
+            {{$product['name_English'] ?? 'Product Not Found'}}
         </div>
     </div>
 </div>
@@ -84,22 +84,26 @@ font-size:18px !important;
                 <div class="owl-carousel product-img-carousel">
                     <div class="item" data-id="0">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image01'] }}" alt="Main Image 1">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 1"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                     <div class="item" data-id="1">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image02'] }}" alt="Main Image 2">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 2"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                     <div class="item" data-id="2">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image03'] }}" alt="Main Image 3">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 3"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                     <div class="item" data-id="3">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image04'] }}" alt="Main Image 4">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 4"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                 </div>
@@ -108,22 +112,26 @@ font-size:18px !important;
                 <div class="owl-carousel product-thumb-carousel">
                     <div class="item" data-id="0">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image01'] }}" alt="Main Image 1">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 1"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                     <div class="item" data-id="1">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image02'] }}" alt="Main Image 2">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 2"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                     <div class="item" data-id="2">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image03'] }}" alt="Main Image 3">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 3"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                     <div class="item" data-id="3">
                         <div class="image">
-                            <img src="{{ $product['imageUri'].'/'.$product['image04'] }}" alt="Main Image 4">
+                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 4"> --}}
+                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
                         </div>
                     </div>
                 </div>
@@ -136,10 +144,10 @@ font-size:18px !important;
                         <div class="text-1">Saving: </div>
                         <div class="text-2">26% off</div>
                     </div>
-                    <div class="title">{{ $product['product_Name_English'] }}</div>
-                    <div class="price-1">Rs. <span>260.00</span> {{ $product['uom'] }}</div>
-                    <div class="price-2">Rs. <span>{{ number_format($product['unit_Price']) }}</span> {{ $product['uom'] }}</div>
-                    <div class="desc">Freshly harvested green lettuce, perfect for salads and wraps. Organically grown and handpicked for quality.</div>
+                    <div class="title">{{ $product['name_English'] }}</div>
+                    <div class="price-1">Rs. <span>260.00</span> {{ $product['uomGroups'] }}</div>
+                    <div class="price-2">Rs. <span>250.00</span> {{ $product['uomGroups'] }}</div>
+                    <div class="desc">{{ $product['product_Description'] }}</div>
                 </div>
                 <div class="row-2">
                     <div class="title">Package Sizes:</div>

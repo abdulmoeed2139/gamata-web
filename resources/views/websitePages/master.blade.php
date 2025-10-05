@@ -509,7 +509,7 @@
                          </svg>
                             <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
                         @endif
-                        <label for="profile">{{ $userName ?? 'User' }}</label>
+                        <label for="profile">{{ $username ?? 'User' }}</label>
                         <div class="arrow-down"></div>
                     </a>
                     <div class="profile-dropdown">
@@ -1305,7 +1305,7 @@ $("#subscribeBtn").on("click", function (e) {
     $("#emailForSubscribe").val(emailValue);
 
     $.ajax({
-        url: "/subscribe",
+        url: "{{ url('subscribe') }}",
         type: "POST",
         data: $("#subscribeForm").serialize(),
         success: function (response) {
@@ -1425,8 +1425,14 @@ document.getElementById("mobile").addEventListener("input", function (e) {
 
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
-
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#flash-message').fadeOut('slow');
+        }, 3000);
+    });
+</script>
 </body>
 
 </html>

@@ -1,9 +1,10 @@
 <?php
-// $token= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ5YXRodXNoYW5AZ21haWwuY29tIiwianRpIjoiYmE4ZGI2YWEtYWUxNC00MTE5LTk3NjAtYjQyZTMxNDcxOWY3IiwidWlkIjoiOGZhOTIwNjYtNTQxMi00MWI2LTllZDYtMmU5NDkzYWNlMmVkIiwiUGhvbmVOdW1iZXIiOiIwNzc3Mzk3ODYwIiwiRnVsbE5hbWUiOiJZYXRodXNoYW4gTXVydWdlc3UiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoieWF0aHVzaGFuQGdtYWlsLmNvbSIsImVtYWlsIjoieWF0aHVzaGFuQGdtYWlsLmNvbSIsInJvbGVzIjoiVXNlciIsImV4cCI6MTc1OTQ1NzA3NSwiaXNzIjoiU2VjdXJlQXBpIiwiYXVkIjoiU2VjdXJlQXBpVXNlciJ9.50AWzWloUeT249PK47z6bWykxd--NGmy9fVGMu20-CU';
 // $phone = '0777397860';
 namespace App\Http\Controllers;
 
+use \Exception;
 use App\Models\Token;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
@@ -11,33 +12,32 @@ use Illuminate\Support\Facades\Validator;
 class FrontentController extends Controller
 {
 
-    // public $token;
-    // public function __construct() {
-    //     // $accessToken= Token::find(1)->access_token;
-    //     $accessToken = session('access_token');
-    //     $this->token = $accessToken;
-    // }
-
     public function getProfile()
     {
         $accessToken = session('access_token');
         $userName ="";
         if ($accessToken) {
-            $phone = session('phone_number');
+            $phone = '0'.session('phone_number');
             $profileResponse = Http::withToken($accessToken)
                 ->acceptJson()
                 ->get("http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
             $profile = $profileResponse->json('data') ?? [];
             if ($profile) {
-                // $userName = ($profile['firstName'] ?? '') . ' ' . ($profile['lastName'] ?? '');
                 $userName = $profile['firstName'] ?? '';
+                $code = $profile['code'];
             } else {
                 $userName = 'Admin';
+                $code = '';
             }
         } else {
             $userName = 'Admin';
+            $code = '';
         }
-        return $userName;
+
+        return [
+            'username' => $userName,
+            'FK_UserID' => $code,
+        ];
     }
 
     // Helper method for API calls
@@ -52,42 +52,9 @@ class FrontentController extends Controller
 
     public function index()
     {
-        // $accessToken = session('access_token');
-        // if ($accessToken) {
-        //     $phone = session('phone_number');
-        //     $profileResponse = Http::withToken($accessToken)
-        //         ->acceptJson()
-        //         ->get("http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
-        //     $profile = $profileResponse->json('data') ?? [];
-        //     if ($profile) {
-        //         $userName = ($profile['firstName'] ?? '') . ' ' . ($profile['lastName'] ?? '');
-        //     } else {
-        //         $userName = 'Admindadada';
-        //     }
-        // } else {
-        //     $userName = 'Admin';
-        //     $profile = [];
-        // }
-
         $accessToken = session('access_token');
-        $userName= $this->getProfile();
-
-        // $getBestSellingProduct = Http::withToken($accessToken)
-        //     ->acceptJson()
-        //     ->get('http://feapi.aethriasolutions.com/api/v1/Product/BestSelling');
-
-        // $getExploreNetwork = Http::withToken($accessToken)
-        //     ->acceptJson()
-        //     ->get('http://feapi.aethriasolutions.com/api/v1/Home/ExploreNetwork');
-
-        // $getCommunityStats = Http::withToken($accessToken)
-        //     ->acceptJson()
-        //     ->get('http://feapi.aethriasolutions.com/api/v1/Home/CommunityStats');
-
-        // $getExploreTeam = Http::withToken($accessToken)
-        //     ->acceptJson()
-        //     ->get('http://feapi.aethriasolutions.com/api/v1/Home/ExploreTeam');
-
+        $profile= $this->getProfile();
+        $username= $profile['username'];
 
         $getBestSellingProduct = $this->apiRequest(
             'http://feapi.aethriasolutions.com/api/v1/Product/BestSelling',
@@ -146,7 +113,7 @@ class FrontentController extends Controller
             ];
 
             return view('websitePages.index', compact(
-                'userName',
+                'username',
                 'bestSellingItems',
                 'exploreNetwork',
                 'communityStats',
@@ -170,13 +137,14 @@ class FrontentController extends Controller
     public function blogs()
     {
         $accessToken = session('access_token');
-        $userName= $this->getProfile();
+        $profile= $this->getProfile();
+        $username= $profile['username'];
         $getBlogs = $this->apiRequest(
             'http://feapi.aethriasolutions.com/api/Blog/v1/GetAllWithOutPagination',
             $this->token ?? null
         );
         $blogs = $getBlogs->json('data');
-        return view('websitePages.blogs', compact('userName','blogs'));
+        return view('websitePages.blogs', compact('username','blogs'));
     }
 
     public function getSingleBlog($id)
@@ -202,7 +170,6 @@ class FrontentController extends Controller
             ->post('http://feapi.aethriasolutions.com/api/v1/subscribe/Insert', [
                 'email' => $request->email,
             ]);
-
         $response = $apiResponse->json();
 
         return response()->json([
@@ -222,12 +189,13 @@ class FrontentController extends Controller
         return view('websitePages.product', compact('products', 'ctg'));
     }
 
-    public function producttInner($id)
+    public function producttInner($sellcode)
     {
         $accessToken = session('access_token');
-        $userName = $this->getProfile();
+        $profile= $this->getProfile();
+        $username= $profile['username'];
         $getProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId='.$id,
+            'http://feapi.aethriasolutions.com/api/v1/Product/ViewMore/6?mobile=0776563157&lan=En&parent=0'.$sellcode,
             $this->token ?? null
         );
 
@@ -241,33 +209,87 @@ class FrontentController extends Controller
             $getBestSellingProduct->successful()
         ){
             $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
-            $productArray = $getProduct->json()['data'] ?? [];
-            $product = $productArray[0] ?? null;
-            return view('websitePages.productt-inner', compact('userName', 'product', 'bestSellingItems'));
+            $product = $getProduct->json()['data'] ?? [];
+            // $product = $productArray[0] ?? null;
+            return view('websitePages.productt-inner', compact('username', 'product', 'bestSellingItems'));
         }
     }
 
+
+    public function relatedProducts($childCode)
+    {
+        $accessToken = session('access_token');
+        $profile= $this->getProfile();
+        $username= $profile['username'];
+        $getRelatedProduct = $this->apiRequest(
+            'http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId='.$childCode,
+            $this->token ?? null
+        );
+
+        if ($getRelatedProduct->successful()) {
+            $productArray = $getRelatedProduct->json()['data'] ?? [];
+            if (empty($productArray)) {
+                return response()->json(['message' => 'Product not found']);
+            }
+            return response()->json(['related_products' => $productArray], 200);
+        }
+    }
+
+
+    // public function community()
+    // {
+    //     $accessToken = session('access_token');
+    //     $profile= $this->getProfile();
+    //     $username= $profile['username'];
+    //     $params= 'items_per_page=12&sort=id&order=desc&postType=Pending&page=1';
+    //     $getCommunity = $this->apiRequest(
+    //         'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=50&order=desc&postType=Pending&page=1',
+    //         $this->token ?? null
+    //     );
+    //     if($getCommunity->successful()){
+    //         $community = $getCommunity->json('data') ?? [];
+    //         return view('websitePages.community', compact('username','community'));
+    //     }
+    // }
 
     public function community()
     {
         $accessToken = session('access_token');
-        $userName= $this->getProfile();
+        $profile = $this->getProfile();
+        $username = $profile['username'];
         $getCommunity = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=12&sort=id&order=desc&postType=Pending&page=1',
+            'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=50&order=desc&postType=Pending&page=1',
             $this->token ?? null
         );
-        if($getCommunity->successful()){
+
+        if ($getCommunity->successful()) {
             $community = $getCommunity->json('data') ?? [];
-            return view('websitePages.community', compact('userName','community'));
+            foreach ($community as &$post) {
+                $getPostComment = $this->apiRequest(
+                    'http://feapi.aethriasolutions.com/api/PostComment/v1/GetDetails/' . $post['code'],
+                    $accessToken ?? null
+                );
+                $comments = $getPostComment->successful() ? $getPostComment->json('data') : [];
+
+                // ✅ Latest comment top order By DESC Code (jugaar)
+                usort($comments, function($a, $b) {
+                    return strtotime($b['commented_DateTime']) - strtotime($a['commented_DateTime']);
+                });
+                $post['comments'] = $comments;
+            }
+
+            return view('websitePages.community', compact('username', 'community'));
         }
     }
+
 
 
     public function appBanner()
     {
         $accessToken = session('access_token');
-        $userName= $this->getProfile();
-        return view('websitePages.app-banner', compact('userName'));
+        $profile= $this->getProfile();
+        $username= $profile['username'];
+        return view('websitePages.app-banner', compact('username'));
     }
 
     public function contact()
@@ -306,25 +328,123 @@ class FrontentController extends Controller
 
     public function createComment(Request $request)
     {
-        $validator= Validator::make($request->all(), [
-            'comment' => 'required'
-        ]);
-        if($validator->fails()){
-            return response()->json('error', $validator->errors());
+        if(session('access_token')){
+            $profile= $this->getProfile();
+            $username= $profile['username'];
+            $validator= Validator::make($request->all(), [
+                'comment' => 'required'
+            ]);
+            if($validator->fails()){
+                return response()->json('error', $validator->errors());
+            } else {
+                try {
+                    $response = Http::asForm()
+                        ->withHeaders([
+                            'Authorization' => 'Bearer '.session('access_token'),
+                        ])
+                        ->withOptions(['verify' => false])
+                        ->post('http://feapi.aethriasolutions.com/api/PostComment/v1/Insert', [
+                            'Comment' => $request['comment'],
+                            'Commented_DateTime' => $request['dateTime'],
+                            'FK_UserID' => $request['fK_UserID'],
+                            'FK_Post_Code' => $request['FK_Post_Code'],
+                            // 'Isdelete' => $request['is_delete'] ?? false,
+                        ]);
+                    $resultArray = $response->json();
+                    $resultText = $resultArray['text'] ?? null;
+                    return response()->json(['message' => $resultText, 'username' => $username], 200);
+                } catch (Exception $exp) {
+                    return response()->json(['error' => $exp->getMessage()], 500);
+                }
+            }
         } else {
-            $params= [
-                'Comment' => $request['comment'],
-                'Commented_DateTime' => $request['dateTime'],
-                'FK_UserID' => $request['fK_UserID'],
-                'FK_Post_Code' => $request['FK_Post_Code'],
-                'Isdelete' => $request['isdelete'],
-            ];
-            $response = Http::withOptions([
-                'verify' => false
-            ])->post('http://feapi.aethriasolutions.com/api/PostComment/v1/Insert', $params);
-            $resultArray = $response->json();
-            $resultText = $resultArray['text'] ?? null;
-            return redirect()->back()->with('message', $resultText);
+            return response()->json(['error' => 'Please Login First'], 401);
+        }
+    }
+
+    public function createPost(Request $request)
+    {
+        if(session('access_token')){
+            $profile= $this->getProfile();
+            $FK_UserID= $profile['FK_UserID'];
+            $validator= Validator::make($request->all(), [
+                'coverImageUpload' => 'required',
+                'post_name' => 'required',
+            ]);
+            if($validator->fails()){
+                return response()->json('error', $validator->errors());
+            } else {
+                try {
+                $http = Http::withHeaders([
+                                'Authorization' => 'Bearer ' . session('access_token'),
+                            ])->withOptions(['verify' => false]);
+
+                    if ($request->hasFile('image01')) {
+                        $http = $http->attach(
+                            'ImageFile1',
+                            fopen($request->file('image01')->getRealPath(), 'r'),
+                            $request->file('image01')->getClientOriginalName()
+                        );
+                    }
+
+                    if ($request->hasFile('coverImageUpload')) {
+                        $http = $http->attach(
+                            'Cover_Image1',
+                            fopen($request->file('coverImageUpload')->getRealPath(), 'r'),
+                            $request->file('coverImageUpload')->getClientOriginalName()
+                        );
+                    }
+
+                    $response = $http->post('http://feapi.aethriasolutions.com/api/v1/community/NewPost', [
+                        'FK_UserID' => $FK_UserID,
+                        'Post_English' => $request->post_name,
+                        'Publish_DateTime' => Carbon::now(),
+                        'Status' => 'Pending',
+                        'Language' => 'si',
+                    ]);
+
+                    $resultArray = $response->json();
+                    return response()->json(['message' => $resultArray['text'] ?? 'No response'], 200);
+
+                } catch (Exception $exp) {
+                    return response()->json(['error' => $exp->getMessage()], 500);
+                }
+            }
+        } else {
+            return response()->json(['error' => 'Please Login First'], 401);
+        }
+    }
+
+    public function likePost(Request $request)
+    {
+        if(session('access_token')){
+                try {
+                    $profile= $this->getProfile();
+                    $FK_UserID= $profile['FK_UserID'];
+                    $params = [
+                        'FK_UserID' => $FK_UserID,
+                        'FK_Post_Code' => $request->FK_Post_Code,
+                        'Isdelete' => $request->is_delete
+                    ];
+
+                    $response = Http::withHeaders([
+                            'Authorization' => 'Bearer '.session('access_token'),
+                        ])
+                        ->withOptions(['verify' => false])
+                        ->asJson()
+                        ->post('http://feapi.aethriasolutions.com/api/Postlike/v1/Insert', $params);
+
+                    $resultArray = $response->json();
+                    dd($resultArray);
+
+                    return response()->json(['message' => $resultArray['text'] ?? 'No response'], 200);
+
+                } catch (Exception $exp) {
+                    return response()->json(['error' => $exp->getMessage()], 500);
+                }
+
+        } else {
+            return response()->json(['error' => 'Please Login First'], 401);
         }
     }
 

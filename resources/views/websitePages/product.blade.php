@@ -224,7 +224,7 @@
 
                 <div id="food-list" class="food-list grid-view">
                     @foreach ($products as $item)
-                        <a href="{{ url('product-view/'.$item['childCode']) }}" class="product-link">
+                        <a href="#" data-child-code="{{ $item['childCode'] }}" class="product-link">
                             <div class="items">
                                 <div class="wrap">
                                     <div class="wishlist">
@@ -285,6 +285,68 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.product-link').click(function(e){
+        e.preventDefault();
+        var childCode = $(this).data('child-code');
+        $.ajax({
+            url: '{{ url("related-products") }}/' + childCode,
+            type: 'GET',
+            success: function(response){
+                var $foodList = $('#food-list');
+                $foodList.empty(); // Existing products ko remove kar do
+
+                if(response.related_products && response.related_products.length > 0){
+                    response.related_products.forEach(function(item){
+                        var productHtml = `
+                            <a href="{{ url('product-view') }}/${item.sell_Code}" class="product-link">
+                                <div class="items">
+                                    <div class="wrap">
+                                        <div class="wishlist">
+                                            <svg>
+                                                <use xlink:href="#heart"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="image">
+                                            <img src="${item.imageUri}/${item.image01}" alt="Best Selling Item">
+                                        </div>
+                                        <div class="content">
+                                            <div class="pro-name">
+                                                <div class="sin">${item.product_Name_Sinhala}</div>
+                                                <div class="eng">${item.product_Name_English}</div>
+                                                <div class="tam">${item.product_Name_Tamil}</div>
+                                            </div>
+                                            <div class="price">${item.unit_Price}</div>
+                                            <div class="stock">${item.quantity}</div>
+                                            <div class="common-btn-1">
+                                                <svg>
+                                                    <use xlink:href="#btn_arr"></use>
+                                                </svg>
+                                                Buy Now
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>`;
+                        $foodList.append(productHtml);
+                    });
+                } else {
+                    $foodList.html('<div class="no-product">Product not found</div>');
+                }
+            },
+            error: function(xhr){
+                console.log('Error:', xhr.responseText);
+                $('#food-list').html('<div class="no-product">Something went wrong!</div>');
+            }
+        });
+    });
+
+});
+</script>
 
 
 @endsection
+
+

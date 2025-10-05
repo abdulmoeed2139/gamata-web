@@ -1,3 +1,6 @@
+{{-- 750800036,777397860,0750800984
+khabeeskhan123@gmail.com --}}
+
 @extends('websitePages.master')
 @section('content')
 
@@ -21,6 +24,11 @@
         @if(session('message'))
             <div id="flash-message" class="alert-message">
                 {{ session('message') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div id="flash-message" class="alert-message" style="background-color: #df1717;">
+                {{ session('error') }}
             </div>
         @endif
         <form id="registerForm" method="POST" action="{{ url('/register') }}">
@@ -68,7 +76,7 @@
                                 <span class="custom-popover">Please enter your first name</span>
                             </span>
                         </label>
-                        <input type="text" id="first_name" class="login-input-uni" name="first_name" required>
+                        <input type="text" id="first_name" value="{{ old('first_name') }}" class="login-input-uni" name="first_name" required>
                         @error('first_name')<p class="text-danger"> {{ $message }} </p> @enderror
                     </div>
                     <div style="flex: 1;">
@@ -89,7 +97,7 @@
                                 <span class="custom-popover">Please enter your Last name</span>
                             </span>
                         </label>
-                        <input type="text" id="last_name" class="login-input-uni" name="last_name">
+                        <input type="text" id="last_name" value="{{ old('last_name') }}"  class="login-input-uni" name="last_name">
                         @error('last_name') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
@@ -113,7 +121,7 @@
                             <span class="custom-popover">Please enter valid email</span>
                         </span>
                     </label>
-                    <input type="email" id="email" class="login-input-uni" name="email" required>
+                    <input type="email" id="email" value="{{ old('email') }}"  class="login-input-uni" name="email" required>
                     @error('email') <p class="text-danger"> {{ $message }}</p> @enderror
                 </div>
 
@@ -135,7 +143,7 @@
                             </svg>
                         </span>
                     </label>
-                    <input type="text" id="Phone" class="login-input-uni" name="Phone">
+                    <input type="text" id="Phone" class="login-input-uni" value="{{ request('mobile') ?? '' }}" name="Phone">
                 </div>
 
                 <!-- District -->
