@@ -116,11 +116,14 @@
                 data: formData,
                 success:function(response){
                     console.log("OTP verified", response);
-                    if(response.result){
-                        setTimeout(() => {
-                            $("#passwordError").text(response.result).removeClass("hidden");
-                        }, 2000);
-                        window.location.href="{{ url('/forgot-password/reset') }}";
+                    if (response.message) {
+                        $("#passwordError")
+                            .text(response.message) // ✅ fixed key
+                            .removeClass("hidden")
+                            .show()
+                            .delay(3000)
+                            .fadeOut();
+                            window.location.href="{{ url('/') }}";
                     }
                 },
                 error: function(xhr){
@@ -135,8 +138,11 @@
                         }
                     }
                     $("#passwordError")
-                        .text(errorMsg).removeClass("hidden").show()
-                        .delay(3000).fadeOut();
+                        .text(errorMsg)
+                        .removeClass("hidden")
+                        .show()
+                        .delay(3000)
+                        .fadeOut();
                 }
             });
         });

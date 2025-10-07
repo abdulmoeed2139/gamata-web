@@ -33,9 +33,9 @@ Route::get('/app-banner', [FrontentController::class, 'appBanner'])->name('appBa
 Route::get('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-// Route::get('/forgot-password', function () {
-//     return view('auth.forgot-password');
-// })->name('password.request');
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('password.request');
 
 
 // Protected Dashboard

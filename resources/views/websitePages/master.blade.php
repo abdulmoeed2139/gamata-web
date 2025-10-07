@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,21 +17,22 @@
     <link rel="stylesheet" href="{{ asset('assets/sass/home.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/sass/style.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
 
 
 
 
     <style>
-
-
         .login-right-uni {
             flex: 1;
             background: url('/assets/Images/login-page.jpg') no-repeat center center/cover;
         }
 
-        ..auth-btn{
+        ..auth-btn {
 
-            text-decoration:none;
+            text-decoration: none;
         }
 
 
@@ -61,24 +61,24 @@
                 visibility: hidden;
             }
 
-            footer .wrapper .col-1 .row-1{
-                border-top:.0520833333vw solid #e1e1e1 !important;
+            footer .wrapper .col-1 .row-1 {
+                border-top: .0520833333vw solid #e1e1e1 !important;
             }
 
-                body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message .chat-bot-text {
-                      background: #f1f5f9;
-                      width: 16.9270833333vw;
-                      padding: .5208333333vw .5208333333vw;
-                      border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
-                      font-size: .9375vw;
-                      line-height: 1.0416666667vw;
-                      max-width:100%;
-                      }
+            body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message .chat-bot-text {
+                background: #f1f5f9;
+                width: 16.9270833333vw;
+                padding: .5208333333vw .5208333333vw;
+                border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
+                font-size: .9375vw;
+                line-height: 1.0416666667vw;
+                max-width: 100%;
+            }
 
 
             .message-inner {
-            height: 100% !important;
-        }
+                height: 100% !important;
+            }
 
 
         }
@@ -145,9 +145,10 @@
         .chat-box {
             display: none;
             position: fixed;
-            right: 6.604167vw;;
+            right: 6.604167vw;
+            ;
             bottom: 2.8645833333vw;
-            height:  35.458333vw;
+            height: 35.458333vw;
             width: 20.8333333333vw;
             background-color: #fff;
             /* border-radius: 10px; */
@@ -219,16 +220,17 @@
             max-width: 200px;
         }
 
-      .chat-bot-text {
-        background: #f1f5f9;
-        width:100%;
-        padding: .5208333333vw .5208333333vw;
-        border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
-        font-size: 16px;
-        line-height: 26px;
-        font-family: "Roboto", serif;
-        font-weight: 400;
-    }
+        .chat-bot-text {
+            background: #f1f5f9;
+            width: 100%;
+            padding: .5208333333vw .5208333333vw;
+            border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
+            font-size: 16px;
+            line-height: 26px;
+            font-family: "Roboto", serif;
+            font-weight: 400;
+        }
+
         .chat-type-area {
             border-top: 1px solid #ddd;
             padding: 10px;
@@ -268,188 +270,190 @@
             height: .9375vw;
         }
 
-        .product-listing .wrapper .col-2 .top-bar .row-1{
-            width:100%;
+        .product-listing .wrapper .col-2 .top-bar .row-1 {
+            width: 100%;
         }
 
         .product-listing .wrapper .col-1 .search-bars input::placeholder {
-        opacity:0.3;
+            opacity: 0.3;
         }
 
-        .journal-section .wrapper::after{
-            background:url('{{ asset('assets/Images/jdbg.png') }}') !important;
+        .journal-section .wrapper::after {
+            background: url('{{ asset('assets/Images/jdbg.png') }}') !important;
 
         }
 
-        footer::before{
-            background:none !important;
+        footer::before {
+            background: none !important;
         }
 
-         /*modal css*/
+        /*modal css*/
 
-            .custom-modal {
-              display: none;
-              position: fixed;
-              z-index: 1000;
-              left: 0;
-              top: 0;
-              width: 100%;
-              /*height: 100%;*/
-              overflow: auto;
-              /*background-color: #fff;*/
+        .custom-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            /*height: 100%;*/
+            overflow: auto;
+            /*background-color: #fff;*/
+        }
+
+        .custom-modal .modal-content {
+            position: relative;
+            background: #fff;
+            /*margin: 5% auto;*/
+            padding: 20px;
+            border-radius: 12px;
+            width: 100vw
+                /*max-width: 800px;*/
+                position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /*padding-top:30px;*/
+        }
+
+        .custom-modal .close {
+            position: absolute;
+            top: 5px;
+            right: 12px;
+            font-size: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            color: #92bd26;
+        }
+
+        @media (max-width: 1200px) {
+
+            body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message img {
+                width: 15px;
+                height: 15px;
             }
 
-            .custom-modal .modal-content {
-              position: relative ;
-              background: #fff;
-              /*margin: 5% auto;*/
-              padding: 20px;
-              border-radius: 12px;
-              width:100vw
-              /*max-width: 800px;*/
-              position: relative ;
-              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-              /*padding-top:30px;*/
+            .chat-box {
+
+                width: 27.833333vw;
             }
 
-            .custom-modal .close {
-                 position: absolute;
-                 top: 5px;
-                 right: 12px;
-                 font-size: 40px;
-                 cursor: pointer;
-                 font-weight: 700;
-                 color: #92bd26;
+        }
+
+        @media screen and (max-width: 1200px) and (min-width:768px) {
+            .profile-dropdown.active {
+                background: #fff !important;
             }
 
-         @media (max-width: 1200px) {
-
-        body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message img{
-            width:15px;
-            height:15px;
+            .profile-dropdown {
+                top: 80px;
+                box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
+                transition: .5s;
+            }
         }
-
-        .chat-box {
-
-        width: 27.833333vw;
-        }
-
-        }
-
-         @media screen and (max-width: 1200px) and (min-width:768px) {
-    .profile-dropdown.active {
-        background: #fff !important;
-    }
-    .profile-dropdown {
-        top: 80px;
-        box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
-        transition: .5s;
-    }
- }
 
         @media (max-width: 1024px) {
-           .chat-box{
-         max-height:350px !important;
-         bottom:180px;
-         margin:auto;
-         width: 320px;
-         right: 30px;
+            .chat-box {
+                max-height: 350px !important;
+                bottom: 180px;
+                margin: auto;
+                width: 320px;
+                right: 30px;
 
-        }
+            }
 
-        body .message-inner{
-        max-height:350px !important;
-        }
+            body .message-inner {
+                max-height: 350px !important;
+            }
 
-        .chat-box{
-        height:auto;
-        }
+            .chat-box {
+                height: auto;
+            }
 
 
-         body .popup {
-         bottom:20px;
-         }
+            body .popup {
+                bottom: 20px;
+            }
 
-             .chat-box {
-                 bottom:80px;
-             }
+            .chat-box {
+                bottom: 80px;
+            }
 
-              .card-container {
+            .card-container {
                 grid-template-columns: repeat(2, 1fr) !important;
 
             }
-            .blog-container{
-                flex-direction:column;
+
+            .blog-container {
+                flex-direction: column;
             }
         }
 
-         @media (max-width: 767px) {
+        @media (max-width: 767px) {
             .journal-section .wrapper .col-1 {
-            background: url(/assets/Images/jdbg.png) !important;
-            background-repeat: no-repeat, repeat;
-            background-size: cover;
-            background-position: center;
-            padding: 20px;
-        }
-
-        .profile-dropdown{
-         top: 80px;
-         box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
-         transition: .5s;
-        }
-
-        .profile-dropdown.active{
-        background:#fff !important
-        }
-
-         .profile-menus a{
-         font-size:14px !important
-         }
-
-         footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu a li{
-             font-size:16px;
-         }
-
-         .chat-box{
-         max-height:350px !important;
-         bottom:180px;
-         margin:auto;
-         width: 320px;
-         right: 30px;
-
-        }
-
-        body .message-inner{
-        max-height:350px !important;
-        }
-
-        .chat-box{
-        height:auto;
-        }
-
-        body .popup {
-         bottom:106px;
-         }
-
-
-        .login-wrapper-uni{
-        flex-direction:column;
+                background: url(/assets/Images/jdbg.png) !important;
+                background-repeat: no-repeat, repeat;
+                background-size: cover;
+                background-position: center;
+                padding: 20px;
             }
 
-            .login-right-uni{
+            .profile-dropdown {
+                top: 80px;
+                box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
+                transition: .5s;
+            }
+
+            .profile-dropdown.active {
+                background: #fff !important
+            }
+
+            .profile-menus a {
+                font-size: 14px !important
+            }
+
+            footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu a li {
+                font-size: 16px;
+            }
+
+            .chat-box {
+                max-height: 350px !important;
+                bottom: 180px;
+                margin: auto;
+                width: 320px;
+                right: 30px;
+
+            }
+
+            body .message-inner {
+                max-height: 350px !important;
+            }
+
+            .chat-box {
+                height: auto;
+            }
+
+            body .popup {
+                bottom: 106px;
+            }
+
+
+            .login-wrapper-uni {
+                flex-direction: column;
+            }
+
+            .login-right-uni {
                 /*min-height:300px !important;*/
-                display:none !important;
+                display: none !important;
             }
 
             .login-left-uni {
 
-                min-height:80vh;
-                padding-top:0 !important;
+                min-height: 80vh;
+                padding-top: 0 !important;
             }
 
             p.recaptcha-note {
-                width:100%;
-                padding:0;
+                width: 100%;
+                padding: 0;
             }
 
             .card-container {
@@ -458,58 +462,62 @@
             }
 
             body .account-wrapper {
-                  padding: 30px 8.5vw;
+                padding: 30px 8.5vw;
             }
 
-            .card-container .card{
-                  padding: 20px 22px;
+            .card-container .card {
+                padding: 20px 22px;
             }
 
         }
-
     </style>
 
 
 
 </head>
 
-<body class="{{ auth()->check() ? 'logged-in' : 'logged-out' }} {{ request()->segment(count(request()->segments())) }}" >
+<body class="{{ auth()->check() ? 'logged-in' : 'logged-out' }} {{ request()->segment(count(request()->segments())) }}">
 
     <header class="">
         <nav class="nav-container">
-            <a href="{{url('index')}}" class="logo">
+            <a href="{{ url('index') }}" class="logo">
                 <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
             </a>
 
             <!-- Menu Links (Desktop & Mobile) -->
             <div class="main-menu">
 
-                 <ul>
-                    <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
-                    <li><a href="{{ url('/product') }}" class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                    <li><a href="{{ url('/community') }}" class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                    <li><a href="{{ url('/app-banner') }}" class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                    <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
-                    <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
-                  </ul>
+                <ul>
+                    <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
+                    </li>
+                    <li><a href="{{ url('/product') }}"
+                            class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
+                    <li><a href="{{ url('/community') }}"
+                            class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
+                    <li><a href="{{ url('/app-banner') }}"
+                            class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
+                    <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
+                    </li>
+                    <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
+                            Us</a></li>
+                </ul>
             </div>
 
             <!-- Right-Side Icons -->
             <div class="nav-icons">
                 <div class="user-bag">
                     <a href="#" class="icon user" id="profile-menu">
-                        @if(auth()->check())
+                        @if (auth()->check())
                             <svg>
                                 <use xlink:href="#user"></use>
                             </svg>
                         @else
-
-                         <svg>
+                            <svg>
                                 <use xlink:href="#user"></use>
-                         </svg>
+                            </svg>
                             <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
                         @endif
-                        <label for="profile">{{ $username ?? 'User' }}</label>
+                        <label for="profile">{{ $username ?? 'Login' }}</label>
                         <div class="arrow-down"></div>
                     </a>
                     <div class="profile-dropdown">
@@ -582,7 +590,8 @@
                     <svg>
                         <use xlink:href="#search"></use>
                     </svg>
-                    <input type="text" name="search" placeholder="Search Your Keyword" class="search-input" autocomplete="off">
+                    <input type="text" name="search" placeholder="Search Your Keyword" class="search-input"
+                        autocomplete="off">
                     <button type="submit" class="search-button">Search</button>
                 </div>
             </form>
@@ -599,8 +608,8 @@
 
 
     @yield('content')
-            <!-- Modal -->
-            {{-- <div class="custom-modal" id="modal1">
+    <!-- Modal -->
+    {{-- <div class="custom-modal" id="modal1">
               <div class="modal-content">
                 <span class="close">&times;</span>
                   <div class="blog-container">
@@ -690,15 +699,21 @@
                 <div class="wrapper-1">
                     <div class="row-1">
                         <div class="box">
-                            <ul class="footer-menu">
+                            <ul class="footer-menu mobile-fmenu">
 
 
-                    <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
-                    <li><a href="{{ url('/product') }}" class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                    <li><a href="{{ url('/community') }}" class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                    <li><a href="{{ url('/app-banner') }}" class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                    <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
-                    <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
+                                <li><a href="{{ url('/index') }}"
+                                        class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
+                                <li><a href="{{ url('/product') }}"
+                                        class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
+                                <li><a href="{{ url('/community') }}"
+                                        class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
+                                <li><a href="{{ url('/app-banner') }}"
+                                        class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
+                                <li><a href="{{ url('/posts') }}"
+                                        class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
+                                <li><a href="{{ url('/contact') }}"
+                                        class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
                                 <!--<a href="{{ url('/index') }}" class="active">-->
                                 <!--    <li>Home</li>-->
                                 <!--</a>-->
@@ -726,7 +741,8 @@
                                 Head Office
                             </div>
                             <div class="text">
-                                Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo 01, Sri Lanka
+                                Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo
+                                01, Sri Lanka
                             </div>
                         </div>
                         <div class="box-2">
@@ -750,12 +766,18 @@
                         <div class="box-1">
                             <ul class="footer-menu">
 
-                                 <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
-                                <li><a href="{{ url('/product') }}" class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                                <li><a href="{{ url('/community') }}" class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                                <li><a href="{{ url('/app-banner') }}" class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                                <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
-                                <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
+                                <li><a href="{{ url('/index') }}"
+                                        class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
+                                <li><a href="{{ url('/product') }}"
+                                        class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
+                                <li><a href="{{ url('/community') }}"
+                                        class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
+                                <li><a href="{{ url('/app-banner') }}"
+                                        class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
+                                <li><a href="{{ url('/posts') }}"
+                                        class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
+                                <li><a href="{{ url('/contact') }}"
+                                        class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
                                 <!--<a href="{{ url('/index') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
                                 <!--    <li>Home</li>-->
                                 <!--</a>-->
@@ -846,7 +868,8 @@
                 <div class="bottom-cont">
                     <div class="chat-display">
                         <div class="chat-bot-message">
-                            <img class="chat-bot-img" src="{{ asset('assets/Images/gamata-chat-icon.png') }}" alt="chat-bot-icon">
+                            <img class="chat-bot-img" src="{{ asset('assets/Images/gamata-chat-icon.png') }}"
+                                alt="chat-bot-icon">
                             <div class="chat-bot-text">
                                 Welcome to Gamata! How can I help you today?
                             </div>
@@ -1284,46 +1307,45 @@
     </svg>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$.ajaxSetup({
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-    }
-});
-
-$("#subscribeBtn").on("click", function (e) {
-    e.preventDefault();
-
-    let emailValue = $("#email").val().trim();
-    if (emailValue === "") {
-        alert("Please enter your email.");
-        return;
-    }
-
-    // hidden input fill karo
-    $("#emailForSubscribe").val(emailValue);
-
-    $.ajax({
-        url: "{{ url('subscribe') }}",
-        type: "POST",
-        data: $("#subscribeForm").serialize(),
-        success: function (response) {
-            alert(response.msg); // jo bhi text aaye API se, show karo
-            console.log(response);
-        },
-        error: function (xhr) {
-            let errorMsg = "Something went wrong!";
-            if (xhr.responseJSON && xhr.responseJSON.msg) {
-                errorMsg = xhr.responseJSON.msg;
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
             }
-            alert(errorMsg);
-            console.error(xhr);
-        }
-    });
-});
+        });
 
-</script>
+        $("#subscribeBtn").on("click", function(e) {
+            e.preventDefault();
+
+            let emailValue = $("#email").val().trim();
+            if (emailValue === "") {
+                alert("Please enter your email.");
+                return;
+            }
+
+            // hidden input fill karo
+            $("#emailForSubscribe").val(emailValue);
+
+            $.ajax({
+                url: "{{ url('subscribe') }}",
+                type: "POST",
+                data: $("#subscribeForm").serialize(),
+                success: function(response) {
+                    alert(response.msg); // jo bhi text aaye API se, show karo
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    let errorMsg = "Something went wrong!";
+                    if (xhr.responseJSON && xhr.responseJSON.msg) {
+                        errorMsg = xhr.responseJSON.msg;
+                    }
+                    alert(errorMsg);
+                    console.error(xhr);
+                }
+            });
+        });
+    </script>
 
     <script src="{{ asset('assets/js/scripts-libs.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -1351,88 +1373,97 @@ $("#subscribeBtn").on("click", function (e) {
         });
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-  const dropdown = document.querySelector(".custom-dropdown");
-  const header = dropdown.querySelector(".dropdown-header");
-  const list = dropdown.querySelector(".dropdown-list");
-  const selected = dropdown.querySelector(".dropdown-selected");
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdown = document.querySelector(".custom-dropdown");
+            const header = dropdown.querySelector(".dropdown-header");
+            const list = dropdown.querySelector(".dropdown-list");
+            const selected = dropdown.querySelector(".dropdown-selected");
 
-  header.addEventListener("click", function () {
-    header.classList.toggle("active");
-    list.classList.toggle("active");
-  });
+            header.addEventListener("click", function() {
+                header.classList.toggle("active");
+                list.classList.toggle("active");
+            });
 
-  list.querySelectorAll("li").forEach(item => {
-    item.addEventListener("click", function () {
-      selected.textContent = this.textContent;
-      header.classList.remove("active");
-      list.classList.remove("active");
-    });
-  });
+            list.querySelectorAll("li").forEach(item => {
+                item.addEventListener("click", function() {
+                    selected.textContent = this.textContent;
+                    header.classList.remove("active");
+                    list.classList.remove("active");
+                });
+            });
 
-  // Outside click close
-  document.addEventListener("click", function (e) {
-    if (!dropdown.contains(e.target)) {
-      header.classList.remove("active");
-      list.classList.remove("active");
-    }
-  });
-});
+            // Outside click close
+            document.addEventListener("click", function(e) {
+                if (!dropdown.contains(e.target)) {
+                    header.classList.remove("active");
+                    list.classList.remove("active");
+                }
+            });
+        });
 
-document.addEventListener("DOMContentLoaded", function() {
-    if (window.location.pathname === "/") {
-        document.body.classList.add("no-slug");
-    }
-});
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname === "/") {
+                document.body.classList.add("no-slug");
+            }
+        });
 
-document.addEventListener("DOMContentLoaded", function() {
-  const modal = document.getElementById("modal1");
-  const openBtns = document.querySelectorAll(".open-modal-btn");
-  const closedBtn = modal.querySelector(".close");
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById("modal1");
+            const openBtns = document.querySelectorAll(".open-modal-btn");
+            const closedBtn = modal.querySelector(".close");
 
-  // Open modal on any button click
-  openBtns.forEach(btn => {
-    btn.addEventListener("click", function(e) {
-      e.preventDefault();
-      modal.style.display = "flex";
+            // Open modal on any button click
+            openBtns.forEach(btn => {
+                btn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    modal.style.display = "flex";
 
-    });
-  });
+                });
+            });
 
-  // Close modal
-  closedBtn.addEventListener("click", function() {
-    modal.style.display = "none";
-    document.body.style.overflow = "auto";
+            // Close modal
+            closedBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
 
-  });
+            });
 
-});
+        });
 
-document.addEventListener("DOMContentLoaded", function() {
-  var input = document.querySelector("#mobile");
-  window.intlTelInput(input, {
-    initialCountry: "lk", // default Sri Lanka
-    preferredCountries: ["lk", "pk", "in"],
-    separateDialCode: true
-  });
-});
+        document.addEventListener("DOMContentLoaded", function() {
+            var input = document.querySelector("#mobile");
+            window.intlTelInput(input, {
+                initialCountry: "lk", // default Sri Lanka
+                preferredCountries: ["lk", "pk", "in"],
+                separateDialCode: true
+            });
+        });
 
-document.getElementById("mobile").addEventListener("input", function (e) {
-  this.value = this.value.replace(/[^0-9]/g, ''); // non-numeric ko hata do
-});
-
-
-
+        document.getElementById("mobile").addEventListener("input", function(e) {
+            this.value = this.value.replace(/[^0-9]/g, ''); // non-numeric ko hata do
+        });
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-    $(document).ready(function() {
-        setTimeout(function() {
-            $('#flash-message').fadeOut('slow');
-        }, 3000);
-    });
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#flash-message').fadeOut('slow');
+            }, 3000);
+        });
+
+        <
+        !--jQuery first-- >
+        <
+        script src = "https://code.jquery.com/jquery-3.6.0.min.js" >
+    </script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Your custom scripts -->
+    <script src="scripts.js"></script>
+    </script>
 </body>
 
 </html>

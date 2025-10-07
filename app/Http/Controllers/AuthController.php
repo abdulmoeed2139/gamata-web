@@ -62,11 +62,16 @@ class AuthController extends Controller
         } else {
             try {
 
+                // Phone number check
+                $phone = $request->Phone;
+                if (substr($phone, 0, 1) !== '0') {
+                    $phone = '0' . $phone;
+                }
                 $params= [
                     'firstName' => $request->first_name,
                     'lastName' => $request->last_name,
                     'email' => $request->email,
-                    'phoneNumber' => $request->Phone,
+                    'phoneNumber' => $phone,
                     'Password' => $request->password,
                 ];
 
@@ -91,7 +96,7 @@ class AuthController extends Controller
     public function logout()
     {
         session()->flush();
-        return redirect()->back();
+        return redirect('/index');
     }
 
     // Send OTP
@@ -316,6 +321,35 @@ class AuthController extends Controller
         }
     }
 
+    // public function resetPassword(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'mobile' => 'required|string|min:9|max:10',
+    //         'new_password' => 'required|min:8',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'message' => $validator->errors()
+    //         ], 422);
+    //     }
+
+    //     try {
+    //         $params= [
+    //             'mobile' => $request['mobile'],
+    //             'newPassword' => $request['new_password'],
+    //             'lan' => 'e',
+    //         ];
+    //         $response= Http::withOptions([
+    //                 'verify' => false
+    //             ])->post('http://feapi.aethriasolutions.com/api/v1/Account/ResetPassword', $params);
+    //         dd($response->json(), $params);
+    //     } catch (\Exception $exp) {
+    //         return response()->json(['error' => $exp->getMessage()], 500);
+    //     }
+    // }
+
+
     public function resetPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -330,18 +364,21 @@ class AuthController extends Controller
         }
 
         try {
-            $params= [
-                'mobile' => $request['mobile'],
-                'newPassword' => $request['new_password'],
-                'lan' => 'e',
+            $params = [
+                'mobile' => $request->input('mobile'),
+                'newPassword' => $request->input('new_password'),
+                'lan' => 'en',
             ];
-            $response= Http::withOptions([
+
+            $response = Http::asForm()->withOptions([
                     'verify' => false
                 ])->post('http://feapi.aethriasolutions.com/api/v1/Account/ResetPassword', $params);
-            dd($response->json(), $params);
+            $data= $response->json();
+            return response()->json(['message' => $data['message']], 200);
         } catch (\Exception $exp) {
             return response()->json(['error' => $exp->getMessage()], 500);
         }
     }
+
 
 }
