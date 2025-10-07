@@ -204,7 +204,11 @@ class AuthController extends Controller
 
     public function PasswordForm()
     {
-        return view('auth.password-screen');
+        if(session('access_token')){
+            return redirect()->route('index');
+        } else{
+            return view('auth.password-screen');
+        }
     }
 
     public function loginByPassword(Request $request)

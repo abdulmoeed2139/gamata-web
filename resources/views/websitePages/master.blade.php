@@ -476,132 +476,161 @@
 
 </head>
 
-<body class="{{ auth()->check() ? 'logged-in' : 'logged-out' }} {{ request()->segment(count(request()->segments())) }}">
+<body
+    {{-- class="{{ auth()->check() ? 'logged-in' : 'logged-out' }} {{ request()->segment(count(request()->segments())) }}" --}}
+>
+    @if (
+        !Request::is('/') &&
+        !Request::is('login') &&
+        !Request::is('register') &&
+        !Request::is('forgot-password') &&
+        !Request::is('forgot-password/verify-otp') &&
+        !Request::is('forgot-password/reset') &&
+        !Request::is('login-by-password')
+    )
+        <header class="">
+            <nav class="nav-container">
+                <a href="{{ url('index') }}" class="logo">
+                    <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
+                </a>
 
-    <header class="">
-        <nav class="nav-container">
-            <a href="{{ url('index') }}" class="logo">
-                <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
-            </a>
+                <!-- Menu Links (Desktop & Mobile) -->
+                <div class="main-menu">
 
-            <!-- Menu Links (Desktop & Mobile) -->
-            <div class="main-menu">
+                    <ul>
+                        <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
+                        </li>
+                        <li><a href="{{ url('/product') }}"
+                                class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
+                        <li><a href="{{ url('/community') }}"
+                                class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
+                        <li><a href="{{ url('/app-banner') }}"
+                                class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
+                        <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
+                        </li>
+                        <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
+                                Us</a></li>
+                    </ul>
+                </div>
 
-                <ul>
-                    <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
-                    </li>
-                    <li><a href="{{ url('/product') }}"
-                            class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                    <li><a href="{{ url('/community') }}"
-                            class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                    <li><a href="{{ url('/app-banner') }}"
-                            class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                    <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
-                    </li>
-                    <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
-                            Us</a></li>
-                </ul>
-            </div>
-
-            <!-- Right-Side Icons -->
-            <div class="nav-icons">
-                <div class="user-bag">
-                    <a href="#" class="icon user" id="profile-menu">
-                        @if (auth()->check())
-                            <svg>
-                                <use xlink:href="#user"></use>
-                            </svg>
+                <!-- Right-Side Icons -->
+                <div class="nav-icons">
+                    <div class="user-bag">
+                        @if (session('access_token'))
+                            <a href="#" class="icon user" id="profile-menu">
+                                <svg>
+                                    <use xlink:href="#user"></use>
+                                </svg>
+                                <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
+                                <label for="profile">{{ $username ?? 'Login' }}</label>
+                                <div class="arrow-down"></div>
+                            </a>
                         @else
-                            <svg>
-                                <use xlink:href="#user"></use>
-                            </svg>
-                            <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
+                            <a href="{{ url('/login') }}" class="icon user" id="">
+                                <svg>
+                                    <use xlink:href="#user"></use>
+                                </svg>
+                                <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
+                                <label for="profile">Login</label>
+                                <div class="arrow-down"></div>
+                            </a>
                         @endif
-                        <label for="profile">{{ $username ?? 'Login' }}</label>
-                        <div class="arrow-down"></div>
-                    </a>
-                    <div class="profile-dropdown">
-                        <ul>
-                            <li class="profile-menus">
-                                <a href="#">My Dashboard</a>
-                            </li>
-                            <li class="profile-menus">
-                                <a href="#">My Profile</a>
-                            </li>
-                            <li class="profile-menus">
-                                <a href="#">Settings</a>
-                            </li>
-                            <li class="profile-menus">
-                                <a href="{{ route('logout') }}">Logout</a>
-                            </li>
-                        </ul>
+
+
+                        @if (session('access_token'))
+                            <div class="profile-dropdown">
+                                <ul>
+                                    <li class="profile-menus">
+                                        <a href="#">My Dashboard</a>
+                                    </li>
+                                    <li class="profile-menus">
+                                        <a href="#">My Profile</a>
+                                    </li>
+                                    <li class="profile-menus">
+                                        <a href="#">Settings</a>
+                                    </li>
+                                    <li class="profile-menus">
+                                        <a href="{{ route('logout') }}">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+
+                        <a href="{{ url('/app-banner') }}" class="icon cart">
+                            <svg>
+                                <use xlink:href="#bag"></use>
+                            </svg>
+                        </a>
                     </div>
 
-                    <a href="{{ url('/app-banner') }}" class="icon cart">
+                    <!-- Language Selector -->
+                    <div class="language">
+                        <div class="title">
+                            Select your Language
+                        </div>
+                        <div class="wrap">
+                            <a href="#" class="lan active">
+                                <svg>
+                                    <use xlink:href="#sinhala"></use>
+                                </svg>
+                            </a>
+                            <a href="#" class="lan">
+                                <svg>
+                                    <use xlink:href="#english"></use>
+                                </svg>
+                            </a>
+                            <a href="#" class="lan">
+                                <svg>
+                                    <use xlink:href="#tamil"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button class="search-toggle">
                         <svg>
-                            <use xlink:href="#bag"></use>
+                            <use xlink:href="#search"></use>
                         </svg>
-                    </a>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <label class="main-menu-btn" for="main-menu-state">
+                        <span class="main-menu-btn-icon"></span>
+                        <div class="menu-txt">Menu</div>
+                    </label>
                 </div>
+            </nav>
 
-                <!-- Language Selector -->
-                <div class="language">
-                    <div class="title">
-                        Select your Language
+            <!-- Search Bar (Hidden by Default) -->
+            <div class="search-bar">
+                <form class="search-form" action="{{ url('/product') }}" method="GET">
+                    <div class="wrapper">
+                        <svg>
+                            <use xlink:href="#search"></use>
+                        </svg>
+                        <input type="text" name="search" placeholder="Search Your Keyword" class="search-input"
+                            autocomplete="off">
+                        <button type="submit" class="search-button">Search</button>
                     </div>
-                    <div class="wrap">
-                        <a href="#" class="lan active">
-                            <svg>
-                                <use xlink:href="#sinhala"></use>
-                            </svg>
-                        </a>
-                        <a href="#" class="lan">
-                            <svg>
-                                <use xlink:href="#english"></use>
-                            </svg>
-                        </a>
-                        <a href="#" class="lan">
-                            <svg>
-                                <use xlink:href="#tamil"></use>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Search Button -->
-                <button class="search-toggle">
-                    <svg>
-                        <use xlink:href="#search"></use>
-                    </svg>
-                </button>
-
-                <!-- Mobile Menu Toggle -->
-                <label class="main-menu-btn" for="main-menu-state">
-                    <span class="main-menu-btn-icon"></span>
-                    <div class="menu-txt">Menu</div>
-                </label>
+                </form>
             </div>
-        </nav>
 
-        <!-- Search Bar (Hidden by Default) -->
-        <div class="search-bar">
-            <form class="search-form" action="{{ url('/product') }}" method="GET">
-                <div class="wrapper">
-                    <svg>
-                        <use xlink:href="#search"></use>
-                    </svg>
-                    <input type="text" name="search" placeholder="Search Your Keyword" class="search-input"
-                        autocomplete="off">
-                    <button type="submit" class="search-button">Search</button>
-                </div>
-            </form>
+        </header>
+    @endif
+    @if (
+        !Request::is('login') &&
+        !Request::is('register') &&
+        !Request::is('forgot-password') &&
+        !Request::is('forgot-password/verify-otp') &&
+        !Request::is('forgot-password/reset') &&
+        !Request::is('login-by-password')
+    )
+        <div class="popup">
+            <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
         </div>
+    @endif
 
-    </header>
-
-    <div class="popup">
-        <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
-    </div>
 
 
 
@@ -658,7 +687,15 @@
               </div>
             </div> --}}
 
-
+    @if (
+        !Request::is('/') &&
+        !Request::is('login') &&
+        !Request::is('register') &&
+        !Request::is('forgot-password') &&
+        !Request::is('forgot-password/verify-otp') &&
+        !Request::is('forgot-password/reset') &&
+        !Request::is('login-by-password')
+    )
 
     <footer class="site-footer">
 
@@ -889,7 +926,7 @@
 
     </footer>
 
-
+    @endif
 
     <!-- svg inline sprite -->
     <svg xmlns="//www.w3.org/2000/svg" style="display:none" aria-hidden="true">

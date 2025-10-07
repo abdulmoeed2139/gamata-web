@@ -113,7 +113,7 @@ khabeeskhan123@gmail.com --}}
                     </div>
 
                     <!-- Phone -->
-                    <div style="margin-bottom: 15px;">
+                    <div style="margin-bottom: 15px; display: none;">
                         <label for="Phone" class="login-label-uni">Phone
                             <span class="info-wrapper">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"

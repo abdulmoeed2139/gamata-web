@@ -24,22 +24,6 @@ body.login-by-password footer,
     display: none;
 }
 
-.verify-otp header ,.verify-otp  footer{
-display:none;
-}
-
-a#resendOTP{
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: capitalize;
-    color: #000 ;
-    font-family: "Roboto", serif;
-}
-
-body.login-by-password header, body.login-by-password footer, .register  header, .register  footer , body.verify-otp header , .verify-otp footer{
-display:none !important;
-}
-
 div#flash-message {
     color: #fff;
     padding: 10px 18px;
@@ -513,7 +497,7 @@ p.recaptcha-note {
     width: 283px;
     height: 40px;
     font-size: 16px;
-    /*margin-bottom: 20px;*/
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 6px;
     outline: none;

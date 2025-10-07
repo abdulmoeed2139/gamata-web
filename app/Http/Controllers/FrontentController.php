@@ -385,6 +385,8 @@ class FrontentController extends Controller
 
     public function product()
     {
+        $profile = $this->getProfile();
+        $username = $profile['username'];
         $getAllProduct = $this->apiRequest(
             'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En&parentId=1',
             $this->token ?? null
@@ -392,7 +394,7 @@ class FrontentController extends Controller
         $responseData = $getAllProduct->json();
         $products = $responseData['data'] ?? [];
         $ctg = $responseData['payload']['categories'] ?? [];
-        return view('websitePages.product', compact('products', 'ctg'));
+        return view('websitePages.product', compact('products', 'ctg', 'username'));
     }
 
     public function producttInner($sellcode)

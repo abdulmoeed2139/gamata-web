@@ -109,17 +109,17 @@
                     },
                     success: function(response) {
                         if (response.message == 'OTP_SEND') {
-                            $("#mobileError")
-                                .text('OTP sent successfully')
-                                .removeClass("text-danger")
-                                .addClass("text-success")
-                                .show().delay(3000).fadeOut();
+                            // $("#mobileError")
+                            //     .text('OTP sent successfully')
+                            //     .removeClass("text-danger")
+                            //     .addClass("text-success")
+                            //     .show().delay(3000).fadeOut();
 
-                            setTimeout(function() {
+                            // setTimeout(function() {
                                 window.location.href =
                                     "{{ url('/register') }}?mobile=" + $("#mobile")
                                     .val();
-                            }, 1000);
+                            // }, 1000);
                         } else if (response.message == 'password_already_exists') {
                             $("#mobileError")
                                 // .text(response.message)

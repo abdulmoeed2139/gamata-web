@@ -18,7 +18,8 @@ use App\Http\Controllers\Auth\ForgotPasswordCustomController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [AuthController::class, 'loginForm']);
 Route::get('/community', [FrontentController::class, 'community']);
 Route::get('/product', [FrontentController::class, 'product']);
 Route::get('/product-view/{product_id}', [FrontentController::class, 'producttInner']);

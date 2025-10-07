@@ -205,8 +205,7 @@
                                     </svg>
                                     <div class="text">Add Cover Image</div>
                                 </label>
-                                <input type="file" id="coverImageUpload" name="coverImageUpload" accept="image/*"
-                                    required>
+                                <input type="file" id="coverImageUpload" name="coverImageUpload" accept="image/*" required style="display: none">
                                 <div class="file-name" id="imageFileName"></div>
                             </div>
 
