@@ -638,56 +638,6 @@
 
 
     @yield('content')
-    <!-- Modal -->
-    {{-- <div class="custom-modal" id="modal1">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                  <div class="blog-container">
-
-                    <!-- Left Column -->
-                    <div class="blog-left-column">
-                      <img src="{{ asset('assets/Images/j1.png') }}" alt="Blog Image" class="blog-main-image">
-
-                      <div class="blog-post-meta">
-                       <svg>
-                          <use xlink:href="#user"></use>
-                         </svg>
-                        <span>Posted by Admin · November 18, 2024</span>
-                      </div>
-
-                      <div class="blog-content">
-                        <h2> Breaking Barriers Connecting Farmers to Markets</h2>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed at ligula non nulla posuere varius.
-                          Phasellus id tortor nec lorem suscipit gravida. Duis feugiat, felis et aliquet cursus, erat justo eleifend sem,
-                          sit amet facilisis eros lacus id justo.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ligula non nulla posuere varius.
-                          Phasellus id tortor nec lorem suscipit gravida. Duis feugiat erat justo eleifend sem.
-                        </p>
-                      </div>
-                    </div>
-
-                    <!-- Right Column -->
-                    <div class="blog-right-column">
-                        <h3>Categories</h3>
-                      <div class="blog-search-box">
-                        <input type="text" placeholder="Search...">
-                      </div>
-
-                      <div class="blog-categories">
-                        <ul>
-                          <li>Market Access</li>
-
-                        </ul>
-                      </div>
-                    </div>
-
-                  </div>
-              </div>
-            </div> --}}
-
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
@@ -929,6 +879,44 @@
 
     @endif
 
+
+    <!-- All Blogs Modal Code Start -->
+    <div class="custom-modal" id="modal1">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="blog-container">
+                <!-- Left Column -->
+                <div class="blog-left-column">
+                    <img id="blog-img" src="http://feapi.aethriasolutions.com/uploads/Blog/" alt="Blog Image" class="blog-main-image">
+                    <div class="blog-post-meta">
+                    <svg>
+                        <use xlink:href="#user"></use>
+                        </svg>
+                    <span>Posted by Admin · <span id="blog-date"> </span></span>
+                    </div>
+
+                    <div id="blog-content"></div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="blog-right-column">
+                    <h3>Categories</h3>
+                    <div class="blog-search-box">
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <div class="blog-categories">
+                        <ul>
+                            <li id="blog-ctg"></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- All Blogs Modal Code End -->
+
+
     <!-- svg inline sprite -->
     <svg xmlns="//www.w3.org/2000/svg" style="display:none" aria-hidden="true">
         <!-- Sinhala Icon -->
@@ -1005,8 +993,8 @@
 
         <!-- Heart -->
         <!-- <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 16">
-  <path d="M17.4735 1.56783C15.4071 -0.522327 12.0455 -0.522327 9.97966 1.56783L9.49983 2.05302L9.02028 1.56783C6.95443 -0.52261 3.59255 -0.52261 1.52671 1.56783C-0.497192 3.61555 -0.510334 6.8614 1.49623 9.11819C3.32635 11.1758 8.72388 15.6212 8.95289 15.8094C9.10836 15.9372 9.29542 15.9995 9.48137 15.9995C9.48752 15.9995 9.49367 15.9995 9.49955 15.9992C9.69193 16.0082 9.8857 15.9415 10.0462 15.8094C10.2752 15.6212 15.6733 11.1758 17.504 9.11791C19.5103 6.8614 19.4971 3.61555 17.4735 1.56783ZM16.2569 7.98258C14.83 9.58641 10.9077 12.8942 9.49955 14.068C8.09137 12.8945 4.16997 9.58698 2.74334 7.98287C1.34355 6.40874 1.33041 4.16694 2.71286 2.76823C3.4189 2.05416 4.34613 1.69684 5.27335 1.69684C6.20057 1.69684 7.1278 2.05387 7.83384 2.76823L8.88857 3.83537C9.01412 3.9624 9.17239 4.03822 9.33848 4.06481C9.60804 4.12338 9.90052 4.04727 10.1102 3.83565L11.1655 2.76823C12.5779 1.3398 14.8753 1.34008 16.2868 2.76823C17.6692 4.16694 17.6561 6.40874 16.2569 7.98258Z"/>
- </symbol> -->
+        <path d="M17.4735 1.56783C15.4071 -0.522327 12.0455 -0.522327 9.97966 1.56783L9.49983 2.05302L9.02028 1.56783C6.95443 -0.52261 3.59255 -0.52261 1.52671 1.56783C-0.497192 3.61555 -0.510334 6.8614 1.49623 9.11819C3.32635 11.1758 8.72388 15.6212 8.95289 15.8094C9.10836 15.9372 9.29542 15.9995 9.48137 15.9995C9.48752 15.9995 9.49367 15.9995 9.49955 15.9992C9.69193 16.0082 9.8857 15.9415 10.0462 15.8094C10.2752 15.6212 15.6733 11.1758 17.504 9.11791C19.5103 6.8614 19.4971 3.61555 17.4735 1.56783ZM16.2569 7.98258C14.83 9.58641 10.9077 12.8942 9.49955 14.068C8.09137 12.8945 4.16997 9.58698 2.74334 7.98287C1.34355 6.40874 1.33041 4.16694 2.71286 2.76823C3.4189 2.05416 4.34613 1.69684 5.27335 1.69684C6.20057 1.69684 7.1278 2.05387 7.83384 2.76823L8.88857 3.83537C9.01412 3.9624 9.17239 4.03822 9.33848 4.06481C9.60804 4.12338 9.90052 4.04727 10.1102 3.83565L11.1655 2.76823C12.5779 1.3398 14.8753 1.34008 16.2868 2.76823C17.6692 4.16694 17.6561 6.40874 16.2569 7.98258Z"/>
+        </symbol> -->
         <symbol id="heart" enable-background="new 0 0 24 24" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1347,42 +1335,87 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-            }
-        });
 
-        $("#subscribeBtn").on("click", function(e) {
-            e.preventDefault();
 
-            let emailValue = $("#email").val().trim();
-            if (emailValue === "") {
-                alert("Please enter your email.");
-                return;
-            }
+        /*------- Modal Jquery Code Start -------*/
+        $(document).ready(function () {
+            var modal = $("#modal1");
+            $(".open-modal-btn").on("click", function () {
+                var code = $(this).data("code");
+                $.ajax({
+                    url: "{{ url('get-blog') }}/"+ code,
+                    type: "get",
+                    success:function(response){
 
-            // hidden input fill karo
-            $("#emailForSubscribe").val(emailValue);
+                        var rawDate = response.data.createdOn;
+                        var date = new Date(rawDate);
 
-            $.ajax({
-                url: "{{ url('subscribe') }}",
-                type: "POST",
-                data: $("#subscribeForm").serialize(),
-                success: function(response) {
-                    alert(response.msg); // jo bhi text aaye API se, show karo
-                    console.log(response);
-                },
-                error: function(xhr) {
-                    let errorMsg = "Something went wrong!";
-                    if (xhr.responseJSON && xhr.responseJSON.msg) {
-                        errorMsg = xhr.responseJSON.msg;
+                        var months = [
+                            "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ];
+                        var formattedDate = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+                        $("#blog-content").html(response.data.body_English);
+                        $("#blog-date").text(formattedDate);
+                        $("#blog-ctg").text(response.data.category);
+                        $("#blog-img").attr("src", response.data.imageUri + "/" + response.data.image);
+                        $(".blog-content").text(response.data.subject);
+                        $(".blog-content").text(response.data.subject);
+                        $(".blog-content").text(response.data.subject);
                     }
-                    alert(errorMsg);
-                    console.error(xhr);
+                });
+                modal.show();
+            });
+
+            $(".close").on("click", function () {
+                modal.hide();
+            });
+
+            $(window).on("click", function (e) {
+                if ($(e.target).is(modal)) {
+                    modal.hide();
                 }
             });
         });
+        /*------- Modal Jquery Code End -------*/
+
+        /*------- Email Subscribe Jquery Code Start -------*/
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                }
+            });
+            $("#subscribeBtn").on("click", function(e) {
+                e.preventDefault();
+                let emailValue = $("#email").val().trim();
+                if (emailValue === "") {
+                    alert("Please enter your email.");
+                    return;
+                }
+
+                // hidden input fill karo
+                $("#emailForSubscribe").val(emailValue);
+                $.ajax({
+                    url: "{{ url('subscribe') }}",
+                    type: "POST",
+                    data: $("#subscribeForm").serialize(),
+                    success: function(response) {
+                        alert(response.msg);
+                        console.log(response);
+                    },
+                    error: function(xhr) {
+                        let errorMsg = "Something went wrong!";
+                        if (xhr.responseJSON && xhr.responseJSON.msg) {
+                            errorMsg = xhr.responseJSON.msg;
+                        }
+                        alert(errorMsg);
+                        console.error(xhr);
+                    }
+                });
+            });
+        });
+        /*------- Email Subscribe Jquery Code End -------*/
     </script>
 
     <script src="{{ asset('assets/js/scripts-libs.js') }}"></script>
@@ -1528,8 +1561,8 @@
   });
 });
 
-            
-                
+
+
     </script>
     <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
     <!-- Owl Carousel JS -->

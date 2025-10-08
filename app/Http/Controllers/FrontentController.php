@@ -206,11 +206,17 @@ class FrontentController extends Controller
                 $this->token ?? null
             );
 
+            $getBlogs = $this->apiRequest(
+                'http://feapi.aethriasolutions.com/api/Blog/v1/GetAllWithOutPagination',
+                $this->token ?? null
+            );
+
             if (
                 $getBestSellingProduct->successful() &&
                 $getExploreNetwork->successful() &&
                 $getCommunityStats->successful() &&
-                $getExploreTeam->successful()
+                $getExploreTeam->successful() &&
+                $getBlogs->successful()
             ) {
 
                 $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
@@ -219,6 +225,7 @@ class FrontentController extends Controller
                 $exploreTeamText = $getExploreTeam->json('text') ?? [];
                 $result = $getCommunityStats->json('result') ?? [];
                 $communityText = $getCommunityStats->json('text') ?? [];
+                $blogs = $getBlogs->json('data') ?? [];
 
                 $communityStats = [
                     [
@@ -249,6 +256,7 @@ class FrontentController extends Controller
                     'communityText',
                     'exploreTeam',
                     'exploreTeamText',
+                    'blogs',
                 ));
             }
 

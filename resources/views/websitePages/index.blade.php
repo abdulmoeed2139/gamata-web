@@ -598,75 +598,32 @@
             </div>
             <div class="col-2">
                 <div class="journal-carousel owl-carousel">
-                    <div class="open-modal-btn item" style="cursor:pointer">
-                        <div class="image">
-                            <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image">
-                        </div>
-                        <div class="content">
-                            <div class="category">Market Access</div>
-                            <div class="desc">
-                                <div class="title">
-                                    Breaking Barriers Connecting Farmers to Markets
-                                </div>
-                                <div class="date">
-                                    November 18, 2024
-                                </div>
-                                <span class="open-modal-btn common-btn-1 btn-secondary">
-                                    <svg>
-                                        <use xlink:href="#btn_arr"></use>
-                                    </svg>
-                                    Explore
-                                </span>
+                    @foreach ($blogs as $item)
+                        <a href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item">
+                        {{-- <div class="item open-modal-btn" style="cursor:pointer"> --}}
+                            <div class="image">
+                                {{-- <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image"> --}}
+                                <img src="{{ $item['imageUri'].'/'.$item['image'] }}" alt="journal Image">
                             </div>
-                        </div>
-                    </div>
+                            <div class="content">
+                                <div class="category">{{ $item['category'] ?? 'Market Access' }}</div>
+                                <div class="desc">
+                                    <div class="title">
+                                        {{ $item['subject'] ?? 'Breaking Barriers Connecting Farmers to Markets' }}
+                                    </div>
+                                    <div class="date">
+                                        {{ Carbon\Carbon::parse($item['createdOn'])->format('F d, Y') }}
+                                    </div>
+                                    <span class="common-btn-1">
+                                        <svg><use xlink:href="#btn_arr"></use></svg>
+                                        Explore
+                                    </span>
 
-                    <div class="item white open-modal-btn" style="cursor:pointer">
-                        <div class="image">
-                            <img src="{{ asset('assets/Images/jwbg.jpg') }}" alt="journal Image">
-                        </div>
-                        <div class="content">
-                            <div class="category">Market Access</div>
-                            <div class="desc">
-                                <div class="title">
-                                    Breaking Barriers Connecting Farmers to Markets
                                 </div>
-                                <div class="date">
-                                    November 18, 2024
-                                </div>
-                                <span class="open-modal-btn common-btn-1 btn-secondary">
-                                    <svg>
-                                        <use xlink:href="#btn_arr"></use>
-                                    </svg>
-                                    Explore
-                                </span>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="item open-modal-btn" style="cursor:pointer">
-                        <div class="image">
-                            <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image">
-                        </div>
-                        <div class="content">
-                            <div class="category">Market Access</div>
-                            <div class="desc">
-                                <div class="title">
-                                    Breaking Barriers Connecting Farmers to Markets
-                                </div>
-                                <div class="date">
-                                    November 18, 2024
-                                </div>
-                                <span class="common-btn-1">
-                                    <svg>
-                                        <use xlink:href="#btn_arr"></use>
-                                    </svg>
-                                    Explore
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
+                        {{-- </div> --}}
+                            </a>
+                    @endforeach
                 </div>
             </div>
         </div>
