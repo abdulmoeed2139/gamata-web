@@ -391,19 +391,47 @@ class FrontentController extends Controller
     }
 
 
-    public function product()
+    // public function product()
+    // {
+    //     $profile = $this->getProfile();
+    //     $username = $profile['username'];
+    //     $getAllProduct = $this->apiRequest(
+    //         'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En',
+    //         $this->token ?? null
+    //     );
+    //     $responseData = $getAllProduct->json();
+    //     $products = $responseData['data'] ?? [];
+    //     $ctg = $responseData['payload']['categories'] ?? [];
+    //     return view('websitePages.product', compact('products', 'ctg', 'username'));
+    // }
+
+    public function product(Request $request)
     {
+        $page = $request->get('page', 1); // current page, default 1
+        $perPage = 9; // 9 products per page
+
         $profile = $this->getProfile();
         $username = $profile['username'];
+
         $getAllProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En&parentId=1',
+            'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En',
             $this->token ?? null
         );
         $responseData = $getAllProduct->json();
         $products = $responseData['data'] ?? [];
+        $offset = ($page - 1) * $perPage;
+        $paginatedProducts = array_slice($products, $offset, $perPage);
+
+        $totalProducts = count($products);
+        $totalPages = ceil($totalProducts / $perPage);
+
         $ctg = $responseData['payload']['categories'] ?? [];
-        return view('websitePages.product', compact('products', 'ctg', 'username'));
+
+        return view('websitePages.product', compact(
+            'paginatedProducts', 'ctg', 'username', 'page', 'totalPages'
+        ));
     }
+
 
     public function producttInner($sellcode)
     {
