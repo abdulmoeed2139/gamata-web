@@ -1338,45 +1338,88 @@
 
 
         /*------- Modal Jquery Code Start -------*/
-        $(document).ready(function () {
-            var modal = $("#modal1");
-            $(".open-modal-btn").on("click", function () {
-                var code = $(this).data("code");
-                $.ajax({
-                    url: "{{ url('get-blog') }}/"+ code,
-                    type: "get",
-                    success:function(response){
+        // $(document).ready(function () {
+        //     var modal = $("#modal1");
+        //     $(".open-modal-btn").on("click", function () {
+        //         var code = $(this).data("code");
+        //         $.ajax({
+        //             url: "{{ url('get-blog') }}/"+ code,
+        //             type: "get",
+        //             success:function(response){
 
-                        var rawDate = response.data.createdOn;
-                        var date = new Date(rawDate);
+        //                 var rawDate = response.data.createdOn;
+        //                 var date = new Date(rawDate);
 
-                        var months = [
-                            "January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"
-                        ];
-                        var formattedDate = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-                        $("#blog-content").html(response.data.body_English);
-                        $("#blog-date").text(formattedDate);
-                        $("#blog-ctg").text(response.data.category);
-                        $("#blog-img").attr("src", response.data.imageUri + "/" + response.data.image);
-                        $(".blog-content").text(response.data.subject);
-                        $(".blog-content").text(response.data.subject);
-                        $(".blog-content").text(response.data.subject);
-                    }
-                });
-                modal.show();
-            });
+        //                 var months = [
+        //                     "January", "February", "March", "April", "May", "June",
+        //                     "July", "August", "September", "October", "November", "December"
+        //                 ];
+        //                 var formattedDate = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+        //                 $("#blog-content").html(response.data.body_English);
+        //                 $("#blog-date").text(formattedDate);
+        //                 $("#blog-ctg").text(response.data.category);
+        //                 $("#blog-img").attr("src", response.data.imageUri + "/" + response.data.image);
+        //                 $(".blog-content").text(response.data.subject);
+        //                 $(".blog-content").text(response.data.subject);
+        //                 $(".blog-content").text(response.data.subject);
+        //             }
+        //         });
+               
+        //         modal.style.display = "flex";
+        //     });
 
-            $(".close").on("click", function () {
-                modal.hide();
-            });
+        //     $(".close").on("click", function () {
+        //         modal.style.display = "none";
+        //     });
 
-            $(window).on("click", function (e) {
-                if ($(e.target).is(modal)) {
-                    modal.hide();
-                }
-            });
+        //     $(window).on("click", function (e) {
+        //         if ($(e.target).is(modal)) {
+        //             // modal.hide();
+        //             modal.style.display = "none";
+
+        //         }
+        //     });
+        // });
+
+    $(document).ready(function () {
+    var modal = $("#modal1");
+
+    $(".open-modal-btn").on("click", function () {
+        var code = $(this).data("code");
+        $.ajax({
+            url: "{{ url('get-blog') }}/" + code, // Laravel blade me chalega
+            type: "get",
+            success: function (response) {
+                var rawDate = response.data.createdOn;
+                var date = new Date(rawDate);
+                var months = [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                var formattedDate = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+
+                $("#blog-content").html(response.data.body_English);
+                $("#blog-date").text(formattedDate);
+                $("#blog-ctg").text(response.data.category);
+                $("#blog-img").attr("src", response.data.imageUri + "/" + response.data.image);
+                $(".blog-content").text(response.data.subject);
+
+                modal.css("display", "flex");
+            }
         });
+    });
+
+    $(".close").on("click", function () {
+        modal.css("display", "none");
+    });
+
+    $(window).on("click", function (e) {
+        if ($(e.target).is(modal)) {
+            modal.css("display", "none");
+        }
+    });
+});
+
         /*------- Modal Jquery Code End -------*/
 
         /*------- Email Subscribe Jquery Code Start -------*/
