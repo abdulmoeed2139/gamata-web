@@ -5,10 +5,15 @@
 
             {{-- Flash message --}}
             @if (session('message'))
-                <div id="flash-message" class="alert-message">
+                <div id="flash-message" class="alert-message alert alert-success p-4 text-success">
                     {{ session('message') }}
                 </div><br>
+            @elseif (session('error'))
+                <div id="flash-message" class="alert-message alert alert-danger p-4 text-danger">
+                    {{ session('error') }}
+                </div><br>
             @endif
+
 
             <a href="{{ url('index') }}">
                 <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
@@ -16,6 +21,9 @@
             <form class="login-form-uni" id="numberForm" action="">
                 <!-- STEP 1: MOBILE NUMBER -->
                 <div id="stepMobile">
+                     <small id="mobileError" class="error-text alert-danger"
+                        style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Mobile number is
+                        incorrect</small>
                     <label for="mobile" id="mobileLabel" class="login-label-uni">
                         Enter Mobile Number
                         <span class="info-wrapper">
@@ -33,9 +41,7 @@
 
                     <input type="tel" id="mobile" class="login-input-uni " placeholder="" inputmode="numeric"
                         maxlength="9" pattern="[0-9]*" required>
-                    <small id="mobileError" class="error-text"
-                        style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Mobile number is
-                        incorrect</small>
+                   
 
                     <button type="submit" id="continueBtn" class="auth-btn common-btn-1">
                         Continue <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">

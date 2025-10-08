@@ -21,12 +21,12 @@ khabeeskhan123@gmail.com --}}
             </a>
             {{-- Flash message --}}
             @if (session('message'))
-                <div id="flash-message" class="alert-message">
+                <div id="flash-message" class="register-success alert-message alert alert-success p-4 text-success">
                     {{ session('message') }}
                 </div>
             @endif
             @if (session('error'))
-                <div id="flash-message" class="alert-message" style="background-color: #df1717;">
+                <div id="flash-message" class="register-error alert-message alert alert-danger p-4 text-danger" >
                     {{ session('error') }}
                 </div>
             @endif
@@ -226,5 +226,38 @@ khabeeskhan123@gmail.com --}}
                 $('#flash-message').fadeOut('slow');
             }, 3000);
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".auth-btn");
+
+  buttons.forEach(button => {
+    if (!button.querySelector(".spinner")) {
+      const spinner = document.createElement("span");
+      spinner.classList.add("spinner");
+      button.appendChild(spinner);
+    }
+
+    button.addEventListener("click", function(e) {
+      // Show spinner
+      button.classList.add("loading");
+      const spinner = button.querySelector(".spinner");
+      const icon = button.querySelector("img");
+
+      if (icon) icon.style.display = "none";
+      if (spinner) spinner.style.display = "inline-block";
+
+      // Prevent multiple clicks
+      button.style.pointerEvents = "none";
+
+      // ✅ Auto-hide spinner after 3s if no redirect happens
+      setTimeout(() => {
+        button.classList.remove("loading");
+        if (spinner) spinner.style.display = "none";
+        if (icon) icon.style.display = "";
+        button.style.pointerEvents = "auto";
+      }, 1000);
+    });
+  });
+});
     </script>
 @endsection

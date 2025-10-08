@@ -344,6 +344,66 @@ $(document).ready(function(){
     });
 
 });
+
+$(document).ready(function(){
+
+    $(document).ready(function(){
+
+    // Jab number pe click ho
+    $('.pagination .num').on('click', function(){
+        $('.pagination .num').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    // Right arrow (Next)
+    $('.pagination .arrow-right').on('click', function(){
+        var $active = $('.pagination .num.active');
+        var $next = $active.next('.num');
+
+        if ($next.length) { // agar next element exist karta hai
+            $active.removeClass('active');
+            $next.addClass('active');
+        }
+    });
+
+    // Left arrow (Previous)
+    $(document).ready(function(){
+
+// Jab number pe click ho
+$('.pagination .num').on('click', function(){
+    $('.pagination .num').removeClass('active');
+    $(this).addClass('active');
+});
+
+// Right arrow (Next)
+$('.pagination .arrow-right').on('click', function(){
+    var $active = $('.pagination .num.active');
+    var $next = $active.next('.num');
+
+    if ($next.length) { // agar next element exist karta hai
+        $active.removeClass('active');
+        $next.addClass('active');
+    }
+});
+
+// Left arrow (Previous)
+$('.pagination .arrow-left').on('click', function(){
+    var $active = $('.pagination .num.active');
+    var $prev = $active.prev('.num');
+
+    if ($prev.length) { // agar previous element exist karta hai
+        $active.removeClass('active');
+        $prev.addClass('active');
+    }
+});
+
+});
+
+});
+
+});
+
+
 </script>
 
 

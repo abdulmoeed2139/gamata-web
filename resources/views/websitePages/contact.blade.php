@@ -38,10 +38,15 @@
                 <!--<img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">-->
                 {{-- Flash message --}}
                 @if (session('message'))
-                    <div id="flash-message" class="alert-message alert alert-success p-4 text-success">
-                        {{ session('message') }}
+                <div id="flash-message" class="alert-message alert alert-success p-4 text-success">
+                    {{ session('message') }}
+                </div>
+                @elseif (session('error'))
+                    <div id="flash-message" class="alert-message alert alert-danger p-4 text-danger">
+                        {{ session('error') }}
                     </div>
                 @endif
+
 
                 <form class="login-form-uni" id="contactForm" action="{{ url('/insert-anonymous-inquiry') }}"
                     method="POST">

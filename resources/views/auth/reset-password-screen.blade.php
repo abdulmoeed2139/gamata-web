@@ -10,7 +10,10 @@
         <form class="login-form-uni" id="resetPasswordForm">
             @csrf
             <!-- STEP 3: PASSWORD RESET -->
+
             <div id="stepPassword">
+            <small id="passwordError" class="error-text alert-danger" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Password must be at least 8 characters</small>
+
                 <label class="login-label-uni">New Password
 
                     <span class="info-wrapper">
@@ -34,7 +37,7 @@
                 <input type="password" id="password" name="new_password" class="login-input-uni">
                 <input type="hidden" value="{{ request('mobile') }}" name="mobile">
 
-                <label class="login-label-uni" style="margin-top:10px;">Confirm Password
+                <label class="login-label-uni" >Confirm Password
                     <span class="info-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -51,8 +54,7 @@
                     <span class="custom-popover">Enter match password</span>
                   </span>
                 </label>
-                <input type="password" id="confirmPassword" name="confirmPassword" class="login-input-uni"><br><br>
-                <small id="passwordError" class="error-text" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Password must be at least 8 characters</small>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="login-input-uni">
 
                 <button type="submit" class="auth-btn common-btn-1">
                     Reset Password <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
@@ -148,6 +150,40 @@
         });
 
     });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".auth-btn");
+
+  buttons.forEach(button => {
+    if (!button.querySelector(".spinner")) {
+      const spinner = document.createElement("span");
+      spinner.classList.add("spinner");
+      button.appendChild(spinner);
+    }
+
+    button.addEventListener("click", function(e) {
+      // Show spinner
+      button.classList.add("loading");
+      const spinner = button.querySelector(".spinner");
+      const icon = button.querySelector("img");
+
+      if (icon) icon.style.display = "none";
+      if (spinner) spinner.style.display = "inline-block";
+
+      // Prevent multiple clicks
+      button.style.pointerEvents = "none";
+
+      // ✅ Auto-hide spinner after 3s if no redirect happens
+      setTimeout(() => {
+        button.classList.remove("loading");
+        if (spinner) spinner.style.display = "none";
+        if (icon) icon.style.display = "";
+        button.style.pointerEvents = "auto";
+      }, 1000);
+    });
+  });
+});
 </script>
 
 @endsection

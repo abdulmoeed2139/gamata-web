@@ -10,6 +10,8 @@
         <form class="login-form-uni" id="verifyOtpForPasswordResetForm">
             <!-- STEP 2: OTP -->
             <div id="stepOtp" class="">
+            <span id="otpError" class="error-text alert-danger hidden">Please enter a valid 6-digit OTP</span>
+
                  <label for="mobile" class="login-label-uni">
                     Enter OTP
 
@@ -39,7 +41,6 @@
                     <input type="text" maxlength="1" class="otp-input" />
                     <input type="text" maxlength="1" class="otp-input" />
                 </div>
-                <span id="otpError" class="error-text hidden">Please enter a valid 6-digit OTP</span>
 
                 <button type="submit" class="auth-btn common-btn-1">
                     Continue <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
@@ -181,6 +182,40 @@
                     }
                 });
             });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".auth-btn");
+
+  buttons.forEach(button => {
+    if (!button.querySelector(".spinner")) {
+      const spinner = document.createElement("span");
+      spinner.classList.add("spinner");
+      button.appendChild(spinner);
+    }
+
+    button.addEventListener("click", function(e) {
+      // Show spinner
+      button.classList.add("loading");
+      const spinner = button.querySelector(".spinner");
+      const icon = button.querySelector("img");
+
+      if (icon) icon.style.display = "none";
+      if (spinner) spinner.style.display = "inline-block";
+
+      // Prevent multiple clicks
+      button.style.pointerEvents = "none";
+
+      // ✅ Auto-hide spinner after 3s if no redirect happens
+      setTimeout(() => {
+        button.classList.remove("loading");
+        if (spinner) spinner.style.display = "none";
+        if (icon) icon.style.display = "";
+        button.style.pointerEvents = "auto";
+      }, 1000);
+    });
+  });
 });
 </script>
 

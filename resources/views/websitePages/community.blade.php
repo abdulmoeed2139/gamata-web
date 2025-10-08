@@ -25,7 +25,7 @@
             text-transform: uppercase;
             background: #9fcd22;
             border-color: #9fcd22;
-            padding: 8px 35px;
+            padding: 2px 27px;
             cursor: pointer;
 
         }
@@ -187,28 +187,30 @@
 
                         <div class="wrap-2">
                             <div class="box">
-                                <label for="imageUpload">
+                                <label for="imageUploadd">
                                     <svg>
                                         <use xlink:href="#upload_image"></use>
                                     </svg>
                                     <div class="text">Add an Image</div>
                                 </label>
-                                <input type="file" id="imageUpload" name="image01" accept="image/*"
+                                <input type="file" id="imageUploadd" name="image01" accept="image/*"
                                     style="display: none;">
                                 <div class="file-name" id="imageFileName"></div>
                             </div>
 
-                            <div class="box">
-                                <label for="imageUpload">
-                                    <svg>
-                                        <use xlink:href="#upload_image"></use>
-                                    </svg>
-                                    <div class="text">Add Cover Image</div>
-                                </label>
-                                <input type="file" id="coverImageUpload" name="coverImageUpload" accept="image/*" required style="display: none">
-                                <div class="file-name" id="imageFileName"></div>
-                            </div>
+                      
 
+                        <!-- Add Cover Image -->
+                        <div class="box">
+                        <label for="coverUpload">
+                            <svg>
+                            <use xlink:href="#upload_image"></use>
+                            </svg>
+                            <div class="text">Add Cover Image</div>
+                        </label>
+                        <input type="file" id="coverUpload" name="coverUpload" accept="image/*" style="display: none">
+                        <div class="file-name" id="coverImagefile"></div>
+                        </div>
                             <div class="box">
                                 <button type="submit">Post</button>
                             </div>
@@ -625,15 +627,16 @@
 
 
     <script>
-        document.getElementById("imageUpload").addEventListener("change", function() {
+        document.getElementById("imageUploadd").addEventListener("change", function() {
             let fileName = this.files[0] ? this.files[0].name : "";
             document.getElementById("imageFileName").textContent = fileName;
         });
 
         // Video File Name Show
-        document.getElementById("videoUpload").addEventListener("change", function() {
-            let fileName = this.files[0] ? this.files[0].name : "";
-            document.getElementById("videoFileName").textContent = fileName;
+        // Cover Image File Name Show - ADD THIS
+        document.getElementById("coverUpload").addEventListener("change", function() {
+        let fileName = this.files[0] ? this.files[0].name : "";
+        document.getElementById("coverImagefile").textContent = fileName;
         });
     </script>
 
@@ -665,7 +668,7 @@
                             <div class="row-1">
                                 <div class="pofile">
                                     <div class="image">
-                                        <img src="${URL.createObjectURL(formData.get('coverImageUpload'))}" alt="user">
+                                        <img src="${URL.createObjectURL(formData.get('coverUpload'))}" alt="user">
                                     </div>
                                     <div class="name">
                                         <div class="text">You</div>
@@ -942,25 +945,7 @@
 
         });
 
-        // const commentInput = document.querySelector('.comment');
-        // const submitBtn = document.querySelector('.submitBtn');
-        // const loader = document.querySelector('.loader');
 
-        // let typingTimer;
-        // const typingDelay = 500; // half a second
-
-        // commentInput.addEventListener('input', () => {
-        //     // Show loader and hide submit button immediately
-        //     submitBtn.style.display = 'none';
-        //     loader.style.display = 'inline-block';
-
-        //     clearTimeout(typingTimer);
-        //     typingTimer = setTimeout(() => {
-        //         // Stop typing => show submit button again
-        //         submitBtn.style.display = 'inline-block';
-        //         loader.style.display = 'none';
-        //     }, typingDelay);
-        // });
 
         $(document).ready(function() {
             // ✅ Show loader when typing a comment

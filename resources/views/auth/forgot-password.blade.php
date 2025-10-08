@@ -11,6 +11,8 @@
             @csrf
             <!-- STEP 1: MOBILE NUMBER -->
             <div id="stepMobile">
+            <span id="mobileError" class="error-text alert-danger" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Please enter a valid number</span>
+
                 <label for="mobile" id="mobileLabel" class="login-label-uni">
                     Enter Mobile Number
 
@@ -33,7 +35,6 @@
                 </label>
                 <input type="text" id="mobile" name="mobile" class="login-input-uni" inputmode="numeric" maxlength="10" pattern="[0-9]*">
                 <input type="hidden" id="mode" name="mode" value="forgot_password">
-                <span id="mobileError" class="error-text" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Please enter a valid number</span>
 
                 <button type="submit" id="continueBtn" class="auth-btn common-btn-1">
                     Get OTP <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
@@ -111,6 +112,39 @@
             }
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".auth-btn");
+
+  buttons.forEach(button => {
+    if (!button.querySelector(".spinner")) {
+      const spinner = document.createElement("span");
+      spinner.classList.add("spinner");
+      button.appendChild(spinner);
+    }
+
+    button.addEventListener("click", function(e) {
+      // Show spinner
+      button.classList.add("loading");
+      const spinner = button.querySelector(".spinner");
+      const icon = button.querySelector("img");
+
+      if (icon) icon.style.display = "none";
+      if (spinner) spinner.style.display = "inline-block";
+
+      // Prevent multiple clicks
+      button.style.pointerEvents = "none";
+
+      // ✅ Auto-hide spinner after 3s if no redirect happens
+      setTimeout(() => {
+        button.classList.remove("loading");
+        if (spinner) spinner.style.display = "none";
+        if (icon) icon.style.display = "";
+        button.style.pointerEvents = "auto";
+      }, 1000);
+    });
+  });
+});
 </script>
 
 @endsection

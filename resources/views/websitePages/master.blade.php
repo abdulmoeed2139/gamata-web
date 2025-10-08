@@ -448,7 +448,7 @@
             .login-left-uni {
 
                 min-height: 80vh;
-                padding-top: 0 !important;
+
             }
 
             p.recaptcha-note {
@@ -619,6 +619,7 @@
         </header>
     @endif
     @if (
+        !Request::is('/') &&
         !Request::is('login') &&
         !Request::is('register') &&
         !Request::is('forgot-password') &&
@@ -1489,12 +1490,48 @@
             }, 3000);
         });
 
-        <
-        !--jQuery first-- >
-        <
-        script src = "https://code.jquery.com/jquery-3.6.0.min.js" >
-    </script>
+        document.getElementById("mobile").addEventListener("input", function (e) {
+            // Remove non-numeric characters
+            this.value = this.value.replace(/[^0-9]/g, '');
+            });
 
+            document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".auth-btn");
+
+  buttons.forEach(button => {
+    if (!button.querySelector(".spinner")) {
+      const spinner = document.createElement("span");
+      spinner.classList.add("spinner");
+      button.appendChild(spinner);
+    }
+
+    button.addEventListener("click", function(e) {
+      // Show spinner
+      button.classList.add("loading");
+      const spinner = button.querySelector(".spinner");
+      const icon = button.querySelector("img");
+
+      if (icon) icon.style.display = "none";
+      if (spinner) spinner.style.display = "inline-block";
+
+      // Prevent multiple clicks
+      button.style.pointerEvents = "none";
+
+      // ✅ Auto-hide spinner after 3s if no redirect happens
+      setTimeout(() => {
+        button.classList.remove("loading");
+        if (spinner) spinner.style.display = "none";
+        if (icon) icon.style.display = "";
+        button.style.pointerEvents = "auto";
+      }, 1000);
+    });
+  });
+});
+
+            
+                
+    </script>
+    <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
     <!-- Owl Carousel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 

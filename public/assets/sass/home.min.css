@@ -24,11 +24,26 @@ body.login-by-password footer,
     display: none;
 }
 
-div#flash-message {
-    color: #fff;
+
+
+div#flash-message.alert-success {
+    color: #9fcd22;
     padding: 10px 18px;
-    background: #9fcd22;
-    border-radius: 10px;
+    background: #beff0b30;
+    border-radius: 6px;
+    border: 1px solid #9fcd22;
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+
+div#flash-message.alert-danger, .error-text.alert-danger {
+    color: #f46a91;
+    padding: 10px 18px;
+    background: #fef5f8;
+    border-radius: 6px;
+    border: 1px solid #f46a91;
+    font-size: 14px;
+    margin-bottom: 35px;
 }
 
 .community-inner .wrapper .col-2 .image-post .wrapper .row-5 .wrap .main-cmnt .has-sub .wrp .rw-2 .cl-1 {
@@ -146,7 +161,7 @@ div#Contactform button {
     cursor: pointer;
     font-weight: 300;
     margin-left: 4px;
-    color: #333;
+    color: #fff;
 }
 
 .recaptcha-note a {
@@ -204,11 +219,19 @@ p.recaptcha-note {
 }
 
 /* Info icon styling */
-#stepRegistration label span {
+#stepRegistration form label span {
     font-size: 12px;
     cursor: pointer;
     margin-left: 4px;
-    color: #666;
+    color: #fff;
+}
+
+#stepRegistration .checkbox-label span{
+    color: #000;
+}
+
+#stepRegistration label svg{
+    color:#000;
 }
 
 #stepRegistration input[type="checkbox"] {
@@ -441,6 +464,7 @@ p.recaptcha-note {
     background-color: #f6f6f6;
 }
 
+
 .login-left-uni {
     flex: 1;
     display: flex;
@@ -467,16 +491,23 @@ p.recaptcha-note {
     /* max-width: 283px; */
 }
 
+.box .file-name {
+    font-size:12px;
+    
+}
+
+
+
 .otp-wrapper {
     display: flex;
     gap: 12px;
-    justify-content: center;
+    justify-content: space-between;
     margin: 20px 0;
 }
 
 .otp-input {
-    width: 30px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     background-color: #f4f1f1;
     text-align: center;
     font-size: 22px;
@@ -494,7 +525,7 @@ p.recaptcha-note {
 }
 
 .login-input-uni {
-    width: 283px;
+    width: 330px;
     height: 40px;
     font-size: 16px;
     margin-bottom: 20px;
@@ -678,9 +709,13 @@ body.logged-in .user-bag .icon.cart {
     box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.2);
 }
 
+.error-text{
+    width: 295px;
+}
+
 /* Button */
 .auth-btn {
-    width: 283px;
+    width: 330px;
     height: 42px;
     padding: 12px;
     background: #9fcd22;
@@ -1121,6 +1156,10 @@ body.no-slug footer,
     display: none !important;
 }
 
+
+.register-success , .register-error{
+max-width: 500px;
+}
 .product .product-listing .grid-view .common-btn-1 {
     background: transparent;
 }
@@ -1193,6 +1232,42 @@ footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu li a.active {
     color: #fff;
     fill: #fff
 }
+
+.auth-btn {
+    position: relative;
+ 
+  }
+  
+  .auth-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  
+  .auth-btn .spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  .auth-btn.loading .spinner {
+    display: inline-block;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  .product-listing .wrapper .col-2 .pagination .arrow-right svg {
+    filter: invert(0.54) contrast(8);
+  }
+
 
 @media (min-width: 1200px) {
     .banner-wrapper {
@@ -1808,8 +1883,12 @@ div#stepRegistration form label svg {
     margin-left: -6px;
 }
 
-div#stepPassword .auth-btn {
+/* div#stepPassword .auth-btn {
     margin-top: 15px;
+} */
+
+.error-text{
+    margin-bottom: 8px;
 }
 
 
@@ -4895,9 +4974,10 @@ header.is-sticky,
     box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.3));
 }
 
-.product-listing .wrapper .col-2 .pagination .arrow-right {
-    width: 60px;
-    height: 60px;
+.product-listing .wrapper .col-2 .pagination .arrow-right:hover,
+.product-listing .wrapper .col-2 .pagination .arrow-left:hover  {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: none;
     display: flex;
@@ -4911,7 +4991,6 @@ header.is-sticky,
     width: 15px;
     height: 15px;
     fill: #fff;
-    filter: invert(1) brightness(10);
 }
 
 @media (min-width: 768px) {
@@ -5013,6 +5092,8 @@ header.is-sticky,
     .product-listing .wrapper .col-1 .filter .filter-content label input {
         margin-right: 8px;
     }
+
+    
 
     .product-listing .wrapper .col-1 .filter .filter-content .price {
         display: flex;
@@ -5596,7 +5677,8 @@ header.is-sticky,
         gap: 3.125vw;
     }
 
-    .product-listing .wrapper .col-2 .pagination .arrow-left {
+    .product-listing .wrapper .col-2 .pagination .arrow-left,
+    .product-listing .wrapper .col-2 .pagination .arrow-right {
         width: 2.6041666667vw;
         height: 2.6041666667vw;
         border-radius: 50%;
@@ -5647,9 +5729,10 @@ header.is-sticky,
         box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.3));
     }
 
-    .product-listing .wrapper .col-2 .pagination .arrow-right {
-        width: 3.6458333333vw;
-        height: 3.6458333333vw;
+    .product-listing .wrapper .col-2 .pagination .arrow-right:hover,
+    .product-listing .wrapper .col-2 .pagination .arrow-left:hover  {
+        /* width: 3.6458333333vw;
+        height: 3.6458333333vw; */
         border-radius: 50%;
         border: none;
         display: flex;
@@ -5659,7 +5742,8 @@ header.is-sticky,
         background: #9fcd22;
     }
 
-    .product-listing .wrapper .col-2 .pagination .arrow-right svg {
+    .product-listing .wrapper .col-2 .pagination .arrow-right svg,
+    .product-listing .wrapper .col-2 .pagination .arrow-left svg {
         width: 8.78125vw;
         height: 1.625vw;
         fill: #fff;
@@ -8852,6 +8936,11 @@ label.login-label-uni svg {
 }
 
 @media (max-width: 767px) {
+
+    form#registerForm {
+        padding:0 20px;
+        
+    }
 
     #Contactform {
         width: 100%;
