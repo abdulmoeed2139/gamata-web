@@ -482,6 +482,7 @@
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
+        !Request::is('verify-otp') &&
         !Request::is('register') &&
         !Request::is('forgot-password') &&
         !Request::is('forgot-password/verify-otp') &&
@@ -621,6 +622,7 @@
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
+        !Request::is('verify-otp') &&
         !Request::is('register') &&
         !Request::is('forgot-password') &&
         !Request::is('forgot-password/verify-otp') &&
@@ -1364,7 +1366,7 @@
         //                 $(".blog-content").text(response.data.subject);
         //             }
         //         });
-               
+
         //         modal.style.display = "flex";
         //     });
 

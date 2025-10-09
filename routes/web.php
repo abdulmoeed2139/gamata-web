@@ -66,7 +66,8 @@ Route::post('/like-post', [FrontentController::class, 'likePost'])->name('like-p
 
 
 Route::get('/resend-otp', [AuthController::class, 'resendOTP']);
-Route::post('/otp-verify', [AuthController::class, 'getToken']);
+// Route::post('/otp-verify', [AuthController::class, 'getToken']);
+Route::post('/otp-verify', [AuthController::class, 'verifyOtp']);
 // Route::get('/send-otp', [AuthController::class, 'verifyNumber']);
 Route::get('/get-result', [AuthController::class, 'verifyMobileNumber']);
 Route::get('/sign-in', [AuthController::class, 'signIn']);

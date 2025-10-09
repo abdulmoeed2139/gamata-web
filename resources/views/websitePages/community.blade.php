@@ -198,7 +198,7 @@
                                 <div class="file-name" id="imageFileName"></div>
                             </div>
 
-                      
+
 
                         <!-- Add Cover Image -->
                         <div class="box">
@@ -318,7 +318,7 @@
                                                     <use xlink:href="#share"></use>
                                                 </svg>
                                             </div>
-                                            <div class="text">32</div>
+                                            <div class="text">{{ number_format_short($item['totalsharesCount'] ?? 0) }}</div>
                                         </div>
                                     </div>
                                     <div class="col-2">
@@ -430,7 +430,8 @@
                                                                 <div class="cl-1">
                                                                     <div class="name">{{ $comment['usersName'] }}</div>
                                                                     <div class="time">
-                                                                        {{ $comment['commented_DateTime'] }}</div>
+                                                                        {{ \Carbon\Carbon::parse(\Carbon\Carbon::parse($comment['commented_DateTime'])->format('Y-m-d H:i:s'))->diffForHumans() }}
+                                                                    </div>
                                                                 </div>
                                                                 <div class="cl-2">
                                                                     <div class="comment">{{ $comment['comment'] }}</div>

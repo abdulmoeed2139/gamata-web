@@ -12,7 +12,7 @@
             <div id="stepOtp">
             <!-- ✅ Custom Formik-like error message -->
             <p id="otpError" class="error-message hidden error-text alert-danger" style="color:red; font-size: 14px; margin-top: 5px;"></p>
-            
+
                 <label for="mobile" class="login-label-uni">
                     Enter OTP
 
@@ -43,9 +43,10 @@
                     <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" />
                 </div>
 
-             
+
 
                 <form id="OTPForm">
+                    <input type="hidden" name="mobile" value="{{ request('mobile') }}"/>
                     <button type="submit" class="auth-btn common-btn-1 ">
                         Continue <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
                     </button>
@@ -75,6 +76,8 @@
     <script>
         $(document).ready(function(){
 
+            let phoneNumber = new URLSearchParams(window.location.search).get("mobile");
+
             const inputs = $(".otp-input");
             inputs.on("input", function () {
                 const $this = $(this);
@@ -92,7 +95,7 @@
             let timerDuration = 60;
             let resendLink = document.getElementById("resendLink");
             let resendOTP = document.getElementById("resendOTP");
-            let phoneNumber = new URLSearchParams(window.location.search).get("mobile");
+
             function startTimer() {
                 let timer = timerDuration;
                 resendLink.style.display = "inline-block";
@@ -120,9 +123,9 @@
             resendOTP.addEventListener("click", function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ url('resend-otp') }}",
+                    url: "{{ url('get-result') }}",
                     type: "get",
-                    data: { phoneNumber: phoneNumber },
+                    data: { mobile: phoneNumber },
                     success: function(response) {
                         console.log(response);
                         if(response && response.message){
@@ -134,31 +137,6 @@
                     }
                 });
             });
-
-
-            // let urlParams = new URLSearchParams(window.location.search);
-            // let phoneNumber = urlParams.get("mobile");
-            // $("#resendOTP").click(function(e){
-            //     e.preventDefault();
-            //     $.ajax({
-            //         url: "resend-otp",
-            //         type: "get",
-            //         data: {
-            //             phoneNumber: phoneNumber
-            //         },
-            //         success: function(response){
-            //             console.log(response);
-            //             if(response && response.message){
-            //                 let otpError = $("#otpError");
-            //                 otpError.text(response.message).removeClass("hidden").show();
-            //                 setTimeout(() => {
-            //                     otpError.fadeOut();
-            //                 }, 3000);
-            //             }
-            //         }
-            //     });
-            // });
-
 
             $("#OTPForm").submit(function(e){
                 e.preventDefault();
@@ -172,14 +150,12 @@
                     return;
                 }
 
-                let urlParams = new URLSearchParams(window.location.search);
-                let phoneNumber = urlParams.get("mobile");
                 $.ajax({
                     url: "{{ url('otp-verify') }}",
                     type: "POST",
                     data: {
                         otpCode: otpCode,
-                        phoneNumber: phoneNumber,
+                        mobile : phoneNumber,
                         _token: "{{ csrf_token() }}"
                     },
                     success:function(response){
@@ -189,7 +165,7 @@
                                 $("#otpError").text(response.data.message).removeClass("hidden");
                             }, 2000);
                         } else {
-                            window.location.href="{{ url('/index') }}";
+                            window.location.href="{{ url('/register?mobile=') }}"+phoneNumber;
                         }
                     },
                     error: function(xhr){
@@ -203,25 +179,6 @@
                     }
                 });
             });
-
-            // // Timer Code :
-            // let timer = 60; // 60 seconds
-            // let resendLink = document.getElementById("resendLink");
-            // let countdown = setInterval(() => {
-            //     let minutes = Math.floor(timer / 60);
-            //     let seconds = timer % 60;
-            //     // Format seconds to always show 2 digits
-            //     seconds = seconds < 10 ? "0" + seconds : seconds;
-            //     resendLink.textContent = `Resend OTP ${minutes}:${seconds}s`;
-            //     if (timer <= 0) {
-            //         clearInterval(countdown);
-            //         resendLink.textContent = "Resend OTP";
-            //         resendLink.style.pointerEvents = "auto";
-            //         resendLink.style.opacity = "1";
-            //     }
-            //     timer--;
-            // }, 1000);
-
         });
 
 

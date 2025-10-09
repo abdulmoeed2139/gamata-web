@@ -363,30 +363,32 @@ class FrontentController extends Controller
         }
     }
 
-    public function product(Request $request)
+    public function product()
     {
-        $page = $request->get('page', 1); // current page, default 1
-        $perPage = 9; // 9 products per page
-
         $profile = $this->getProfile();
         $username = $profile['username'];
-
+        $page = request('page', 1);
+        $itemsPerPage = 9; // per page items
         $getAllProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En',
+            'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page='.$itemsPerPage.'&page='.$page.'&Lan=En',
             $this->token ?? null
         );
         $responseData = $getAllProduct->json();
-        $products = $responseData['data'] ?? [];
-        $offset = ($page - 1) * $perPage;
-        $paginatedProducts = array_slice($products, $offset, $perPage);
-
-        $totalProducts = count($products);
-        $totalPages = ceil($totalProducts / $perPage);
-
+        $paginatedProducts = $responseData['data'] ?? [];
+        $pagination = $responseData['payload']['pagination'] ?? [];
         $ctg = $responseData['payload']['categories'] ?? [];
+        $sellers = $responseData['payload']['sellers'] ?? [];
+        $fresh_products = $responseData['payload']['fresh_products'] ?? [];
+        $districts = $responseData['payload']['districts'] ?? [];
 
         return view('websitePages.product', compact(
-            'paginatedProducts', 'ctg', 'username', 'page', 'totalPages'
+            'paginatedProducts',
+            'pagination',
+            'ctg',
+            'sellers',
+            'fresh_products',
+            'districts',
+            'username',
         ));
     }
 
@@ -412,7 +414,6 @@ class FrontentController extends Controller
         ){
             $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
             $product = $getProduct->json()['data'] ?? [];
-            // $product = $productArray[0] ?? null;
             return view('websitePages.productt-inner', compact('username', 'product', 'bestSellingItems'));
         }
     }
@@ -424,7 +425,7 @@ class FrontentController extends Controller
         $profile= $this->getProfile();
         $username= $profile['username'];
         $getRelatedProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId='.$childCode,
+            'http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=6',
             $this->token ?? null
         );
 

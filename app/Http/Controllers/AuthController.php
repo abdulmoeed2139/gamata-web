@@ -197,9 +197,14 @@ class AuthController extends Controller
             'mobile' => $mobile,
             'lan' => 'Si'
         ]);
-        $result= $response->json()['result'];
+        $data= $response->json();
+        if(isset($data['result'])){
+            $result= $response->json()['result']['text'];
+        } else {
+            $result= $response->json()['text'];
+        }
 
-        return response()->json(['message' => $result['text']]);
+        return response()->json(['message' => $result]);
     }
 
     public function PasswordForm()

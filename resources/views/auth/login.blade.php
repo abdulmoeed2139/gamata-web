@@ -41,7 +41,7 @@
 
                     <input type="tel" id="mobile" class="login-input-uni " placeholder="" inputmode="numeric"
                         maxlength="9" pattern="[0-9]*" required>
-                   
+
 
                     <button type="submit" id="continueBtn" class="auth-btn common-btn-1">
                         Continue <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
@@ -115,29 +115,14 @@
                     },
                     success: function(response) {
                         if (response.message == 'OTP_SEND') {
-                            // $("#mobileError")
-                            //     .text('OTP sent successfully')
-                            //     .removeClass("text-danger")
-                            //     .addClass("text-success")
-                            //     .show().delay(3000).fadeOut();
-
-                            // setTimeout(function() {
-                                window.location.href =
-                                    "{{ url('/register') }}?mobile=" + $("#mobile")
-                                    .val();
-                            // }, 1000);
+                            window.location.href =
+                                "{{ url('/verify-otp') }}?mobile=" + $("#mobile")
+                                .val();
                         } else if (response.message == 'password_already_exists') {
                             $("#mobileError")
-                                // .text(response.message)
-                                // .removeClass("text-success")
-                                // .addClass("text-danger")
-                                // .show().delay(3000).fadeOut();
-
-                            // setTimeout(function() {
                                 window.location.href =
                                     "{{ url('/login-by-password') }}?mobile=" + $(
                                         "#mobile").val();
-                            // }, 1000);
                         }
                     },
                     error: function(xhr) {
