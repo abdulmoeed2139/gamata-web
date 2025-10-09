@@ -617,12 +617,10 @@ class FrontentController extends Controller
                         'Authorization' => 'Bearer '.session('access_token'),
                     ])
                     ->withOptions(['verify' => false])
-                    ->asJson()
+                    ->asForm()
                     ->post('http://feapi.aethriasolutions.com/api/Postlike/v1/Insert', $params);
 
                 $resultArray = $response->json();
-                // dd($resultArray);
-
                 return response()->json(['message' => $resultArray['text'] ?? 'No response'], 200);
 
             } catch (Exception $exp) {

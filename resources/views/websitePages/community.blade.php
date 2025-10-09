@@ -294,7 +294,7 @@
                                 @endphp
                                 <div class="row-4">
                                     <div class="col-1">
-                                        <div class="box post-like red" data-post-id="{{ $item['code'] }}">
+                                        <div class="box post-like" data-post-id="{{ $item['code'] }}">
                                             <div class="icon">
                                                 <svg>
                                                     <use xlink:href="#heart"></use>
@@ -861,7 +861,7 @@
                     },
                     error: function(xhr) {
                         console.log('Error:', xhr.responseText);
-                        alert('Something went wrong!');
+                        window.location.href = "{{ url('/login') }}";
                     }
                 });
             });
@@ -925,6 +925,11 @@
                 let wrapper = likeBox.closest('.image-post');
                 let FK_Post_Code = wrapper.find('#FK_Post_Code').val();
                 let is_delete = wrapper.find('#is_delete').val() ?? false;
+
+                // Get current count number
+                let countElement = likeBox.find('.text');
+                let currentCount = parseInt(countElement.text().replace(/,/g, '')) || 0;
+
                 $.ajax({
                     url: '{{ url('/like-post') }}', // apni route ka URL
                     type: 'POST',
@@ -936,10 +941,20 @@
                     },
                     success: function(response) {
                         console.log('Post liked:', response);
+                        if (response.message.includes('added')) {
+                            likeBox.addClass('red');
+                            countElement.text(currentCount + 1);
+                        }
+                        else if (response.message.includes('removed')) {
+                            likeBox.removeClass('red');
+                            if (currentCount > 0) {
+                                countElement.text(currentCount - 1);
+                            }
+                        }
                     },
                     error: function(xhr) {
                         console.log('Error:', xhr.responseText);
-                        alert('Something went wrong!');
+                        window.location.href ="{{ url('/login') }}";
                     }
                 });
             });
