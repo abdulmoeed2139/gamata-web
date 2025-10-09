@@ -914,7 +914,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.log(error);
-                        alert(error);
+                        window.location.href = "{{ url('/login') }}";
                     }
                 })
             });
