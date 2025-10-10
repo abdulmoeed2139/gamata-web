@@ -88,7 +88,7 @@
                         .text(response.message)
                         .removeClass("text-success")
                         .addClass("text-danger")
-                        .show().delay(3000).fadeOut();
+                        .show()
 
                         setTimeout(function(){
                             window.location.href = "{{ url('/login-by-password') }}?mobile=" + $("#mobile").val();
@@ -108,7 +108,7 @@
                     .text(message)
                     .removeClass("text-success")
                     .addClass("text-danger")
-                    .show().delay(3000).fadeOut();
+                    .show()
             }
         });
     });
@@ -120,11 +120,13 @@
     if (!button.querySelector(".spinner")) {
       const spinner = document.createElement("span");
       spinner.classList.add("spinner");
+      spinner.style.display = "none";
       button.appendChild(spinner);
     }
 
+    const originalText = button.textContent.trim(); 
+
     button.addEventListener("click", function(e) {
-      // Show spinner
       button.classList.add("loading");
       const spinner = button.querySelector(".spinner");
       const icon = button.querySelector("img");
@@ -132,19 +134,23 @@
       if (icon) icon.style.display = "none";
       if (spinner) spinner.style.display = "inline-block";
 
-      // Prevent multiple clicks
+      button.textContent = "Please wait...";
+      button.appendChild(spinner);
+
       button.style.pointerEvents = "none";
 
-      // ✅ Auto-hide spinner after 3s if no redirect happens
       setTimeout(() => {
         button.classList.remove("loading");
         if (spinner) spinner.style.display = "none";
         if (icon) icon.style.display = "";
         button.style.pointerEvents = "auto";
+        button.textContent = originalText; 
+        if (icon) button.appendChild(icon); 
       }, 1000);
     });
   });
 });
+
 </script>
 
 @endsection

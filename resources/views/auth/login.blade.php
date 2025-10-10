@@ -71,7 +71,7 @@
                                 .text(response.message)
                                 .removeClass("text-danger")
                                 .addClass("text-success")
-                                .show().delay(3000).fadeOut();
+                                .show()
 
                             setTimeout(function() {
                                 window.location.href =
@@ -83,7 +83,7 @@
                                 .text(response.message)
                                 .removeClass("text-success")
                                 .addClass("text-danger")
-                                .show().delay(3000).fadeOut();
+                                .show()
                         }
                     },
                     error: function(xhr) {
@@ -99,7 +99,7 @@
                             .text(message)
                             .removeClass("text-success")
                             .addClass("text-danger")
-                            .show().delay(3000).fadeOut();
+                            .show()
                     }
                 });
             });
@@ -153,7 +153,7 @@
                             .text(message)
                             .removeClass("text-success")
                             .addClass("text-danger")
-                            .show().delay(3000).fadeOut();
+                            .show()
                     }
                 });
             });

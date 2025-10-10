@@ -38,14 +38,19 @@
                 <!--<img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">-->
                 {{-- Flash message --}}
                 @if (session('message'))
-                <div id="flash-message" class="alert-message alert alert-success p-4 text-success">
-                    {{ session('message') }}
-                </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            toastr.success("{{ session('message') }}");
+                        });
+                    </script>
                 @elseif (session('error'))
-                    <div id="flash-message" class="alert-message alert alert-danger p-4 text-danger">
-                        {{ session('error') }}
-                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            toastr.error("{{ session('error') }}", "Error");
+                        });
+                    </script>
                 @endif
+
 
 
                 <form class="login-form-uni" id="contactForm" action="{{ url('/insert-anonymous-inquiry') }}"
@@ -115,4 +120,45 @@
             </div>
         </div>
     </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".auth-btn");   
+
+  buttons.forEach(button => {
+    if (!button.querySelector(".spinner")) {
+      const spinner = document.createElement("span");
+      spinner.classList.add("spinner");
+      spinner.style.display = "none";
+      button.appendChild(spinner);
+    }
+
+    const originalText = button.textContent.trim(); 
+
+    button.addEventListener("click", function(e) {
+      button.classList.add("loading");
+      const spinner = button.querySelector(".spinner");
+      const icon = button.querySelector("img");
+
+      if (icon) icon.style.display = "none";
+      if (spinner) spinner.style.display = "inline-block";
+
+      button.textContent = "Please wait...";
+      button.appendChild(spinner);
+
+      button.style.pointerEvents = "none";
+
+      setTimeout(() => {
+        button.classList.remove("loading");
+        if (spinner) spinner.style.display = "none";
+        if (icon) icon.style.display = "";
+        button.style.pointerEvents = "auto";
+        button.textContent = originalText; // Text wapas "Continue"
+        if (icon) button.appendChild(icon); // Icon ko wapas attach karo agar tha
+      }, 1000);
+    });
+  });
+});
+
+</script>
 @endsection

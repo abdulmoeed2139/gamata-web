@@ -97,8 +97,7 @@
                 $("#passwordError")
                     .text("Both fields are required.")
                     .show()
-                    .delay(3000)
-                    .fadeOut();
+                   
                 return;
             }
 
@@ -106,8 +105,7 @@
                 $("#passwordError")
                     .text("Passwords do not match.")
                     .show()
-                    .delay(3000)
-                    .fadeOut();
+                  
                 return;
             }
 
@@ -123,8 +121,7 @@
                             .text(response.message) // ✅ fixed key
                             .removeClass("hidden")
                             .show()
-                            .delay(3000)
-                            .fadeOut();
+                          
                             window.location.href="{{ url('/') }}";
                     }
                 },
@@ -143,8 +140,7 @@
                         .text(errorMsg)
                         .removeClass("hidden")
                         .show()
-                        .delay(3000)
-                        .fadeOut();
+                       
                 }
             });
         });
@@ -159,11 +155,13 @@
     if (!button.querySelector(".spinner")) {
       const spinner = document.createElement("span");
       spinner.classList.add("spinner");
+      spinner.style.display = "none";
       button.appendChild(spinner);
     }
 
+    const originalText = button.textContent.trim(); 
+
     button.addEventListener("click", function(e) {
-      // Show spinner
       button.classList.add("loading");
       const spinner = button.querySelector(".spinner");
       const icon = button.querySelector("img");
@@ -171,15 +169,18 @@
       if (icon) icon.style.display = "none";
       if (spinner) spinner.style.display = "inline-block";
 
-      // Prevent multiple clicks
+      button.textContent = "Please wait...";
+      button.appendChild(spinner);
+
       button.style.pointerEvents = "none";
 
-      // ✅ Auto-hide spinner after 3s if no redirect happens
       setTimeout(() => {
         button.classList.remove("loading");
         if (spinner) spinner.style.display = "none";
         if (icon) icon.style.display = "";
         button.style.pointerEvents = "auto";
+        button.textContent = originalText; // Text wapas "Continue"
+        if (icon) button.appendChild(icon); // Icon ko wapas attach karo agar tha
       }, 1000);
     });
   });

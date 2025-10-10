@@ -11,6 +11,12 @@ body img[alt="Flowers"] {
     height: auto !important;
 }
 
+.language a.lan.active ,a.lan.active  svg{
+    background:#9fcd22;
+    color:#fff;
+    fill:#fff;
+}
+
 .product-listing .wrapper .col-2 .pagination .arrow-right {
     width: 50px;
     height: 50px;
@@ -24,9 +30,30 @@ body img[alt="Flowers"] {
     border: 0.0520833333vw solid #d9d9d9;
 }
 
+.product-listing .food-list .common-btn-1{
+background: transparent !important;
+}
+
+.product-listing .no-product {
+    width:100%;
+    text-align:center;
+    padding:20px;
+    color: #9fcd22;
+        padding: 10px 18px;
+        background: #beff0b30;
+        border-radius: 6px;
+        border: 1px solid #9fcd22;
+        font-size: 14px;
+        margin-top:30px
+      
+    }
+
+/* body.logged-out .banner-button{
+        display:none !important;
+} */
 
 ul.footer-menu.mobile-fmenu {
-    display: none
+    display: none;
 }
 
 body.login-by-password header,
@@ -1256,12 +1283,19 @@ footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu li a.active {
     pointer-events: none;
     opacity: 0.7;
   }
+
+  /* span.spinner {
+    position:absolute;
+    right:20px;
+    } */
+
+    
   
   .auth-btn .spinner {
     display: none;
     width: 16px;
     height: 16px;
-    border: 2px solid #fff;
+    border: 2px solid #000;
     border-top: 2px solid transparent;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
@@ -3515,7 +3549,9 @@ body .product-listing .common-btn-1 svg {
         transition: all 0.3s ease;
     }
 
-    .explore-section .wrapper .col-2 .adresses .address-slider .item:hover .wrap .location {
+    .explore-section .wrapper .col-2 .adresses .address-slider .item:hover .wrap .location ,
+    .explore-section .wrapper .col-2 .adresses .address-slider .item:hover .wrap .location span
+    {
         color: #fff;
     }
 

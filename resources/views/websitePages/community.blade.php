@@ -1,6 +1,21 @@
 @extends('websitePages.master')
 @section('content')
     <style>
+
+        .comment-item {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+            margin-bottom: 0;
+        }
+
+        .comment-item.show {
+            max-height: 500px; /* enough height for each comment */
+            opacity: 1;
+            margin-bottom: 10px;
+        }
+
         form.write-post label {
             width: 100%;
             display: flex;
@@ -34,7 +49,7 @@
             display: flex !important;
             align-items: center;
             flex-direction: column;
-            gap: 0 !important;
+            gap: 5px !important;
         }
 
         div.box .file-name {
@@ -47,8 +62,8 @@
             display: none;
             width: 18px;
             height: 18px;
-            border: 2px solid #ccc;
-            border-top: 2px solid #333;
+            border: 3px solid #9fcd22;
+            border-top: 3px solid #9fcd22;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
             vertical-align: middle;
@@ -339,7 +354,7 @@
                                                 <svg class="submitBtn">
                                                     <use xlink:href="#send"></use>
                                                 </svg>
-                                                <div class="loader" style="display: none;">⏳</div>
+                                                <div class="loader" style="display: none;"></div>
                                             </button>
                                         </form>
                                     </div>
@@ -410,211 +425,47 @@
                                                 <use xlink:href="#send"></use>
                                             </svg>
                                         </div>
-                                        <div class="loader" style="display: none;">⏳</div>
+                                        <div class="loader" style="display: none;"></div>
                                     </div>
                                 </div>
-                                <div class="row-5">
-                                    <div class="wrap">
-                                        <ul class="main-cmnt">
-                                            <li class="has-sub">
-                                                @if (session('access_token'))
-                                                    @forelse ($item['comments'] as $comment)
-                                                        <div class="wrp">
-                                                            <div class="rw-1">
-                                                                <div class="image">
-                                                                    <img src="{{ asset('assets/Images/community/user.jpg') }}"
-                                                                        alt="user">
-                                                                </div>
-                                                            </div>
-                                                            <div class="rw-2">
-                                                                <div class="cl-1">
-                                                                    <div class="name">{{ $comment['usersName'] }}</div>
-                                                                    <div class="time">
-                                                                        {{ $comment['commented_DateTime'] }}</div>
-                                                                </div>
-                                                                <div class="cl-2">
-                                                                    <div class="comment">{{ $comment['comment'] }}</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @empty
-                                                        <div class="wrp">
-                                                            <div class="rw-1">
-                                                                <div class="image">
-                                                                    <img src="{{ asset('assets/Images/community/user.jpg') }}"
-                                                                        alt="user">
-                                                                </div>
-                                                            </div>
-                                                            <div class="rw-2">
-                                                                <div class="cl-1">
-                                                                    <div class="name">Comment Not Yet</div>
-                                                                    <div class="time"></div>
-                                                                </div>
-                                                                <div class="cl-2">
-                                                                    <div class="comment"> </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforelse
-                                                @else
-                                                    <div class="wrp">
-                                                        <div class="rw-1">
-                                                            <div class="image">
-                                                                <img src="{{ asset('assets/Images/community/user.jpg') }}"
-                                                                    alt="dsvv">
-                                                            </div>
-                                                        </div>
-                                                        <div class="rw-2">
-                                                            <div class="cl-1">
-                                                                <div class="name">Kai Kyle</div>
-                                                                <div class="time">12 minutes ago</div>
-                                                            </div>
-                                                            <div class="cl-2">
-                                                                <div class="comment">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                                                    sed do eiusmod tempor incididunt
-                                                                    ut labore et dolore magna aliqua. Ut enim ad minim
-                                                                    veniam, quis nostrud exercitation ullamco
-                                                                    laboris nisi ut aliquip ex ea commodo consequat. Duis
-                                                                    aute irure dolor in reprehenderit
-                                                                    in voluptate velit esse
-                                                                </div>
-                                                            </div>
-                                                            <div class="cl-3">
-                                                                <div class="wrap">
-                                                                    <div class="icon">
-                                                                        <svg>
-                                                                            <use xlink:href="#heart"></use>
-                                                                        </svg>
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        2.3k
-                                                                    </div>
-                                                                </div>
-                                                                <div class="wrap">
-                                                                    <div class="icon">
-                                                                        <svg>
-                                                                            <use xlink:href="#msgs"></use>
-                                                                        </svg>
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        Reply
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
+<div class="row-5">
+    <div class="wrap">
+        <ul class="main-cmnt">
+            <li class="has-sub">
+                @forelse ($item['comments'] as $comment)
+                <div class="wrp comment-item">
+                        <div class="rw-1">
+                            <div class="image">
+                                <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="user">
+                            </div>
+                        </div>
+                        <div class="rw-2">
+                            <div class="cl-1">
+                                <div class="name">{{ $comment['usersName'] }}</div>
+                                <div class="time">{{ $comment['commented_DateTime'] }}</div>
+                            </div>
+                            <div class="cl-2">
+                                <div class="comment">{{ $comment['comment'] }}</div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                     <div class="wrp comment-item show">
+                        <div class="rw-2">
+                            <div class="cl-1"><div class="name">Comment Not Yet</div></div>
+                        </div>
+                    </div>
+                @endforelse
+            </li>
+        </ul>
+    </div>
+</div>
 
-                                                <ul class="sub-com">
-                                                    <li>
-                                                        <div class="wrp">
-                                                            <div class="rw-1">
-                                                                <div class="image">
-                                                                    <img src="{{ asset('assets/Images/community/user.jpg') }}"
-                                                                        alt="dsvv">
-                                                                </div>
-                                                            </div>
-                                                            <div class="rw-2">
-                                                                <div class="cl-1">
-                                                                    <div class="name">Kai Kyle</div>
-                                                                    <div class="time">12 minutes ago</div>
-                                                                </div>
-                                                                <div class="cl-2">
-                                                                    <div class="comment">
-                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                        elit, sed do eiusmod tempor incididunt
-                                                                        ut labore et dolore magna aliqua. Ut enim ad minim
-                                                                        veniam, quis nostrud exercitation ullamco
-                                                                        laboris nisi ut aliquip ex ea commodo consequat.
-                                                                        Duis aute irure dolor in reprehenderit
-                                                                        in voluptate velit esse
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cl-3">
-                                                                    <div class="wrap">
-                                                                        <div class="icon">
-                                                                            <svg>
-                                                                                <use xlink:href="#heart"></use>
-                                                                            </svg>
-                                                                        </div>
-                                                                        <div class="text">
-                                                                            2.3k
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="wrap">
-                                                                        <div class="icon">
-                                                                            <svg>
-                                                                                <use xlink:href="#msgs"></use>
-                                                                            </svg>
-                                                                        </div>
-                                                                        <div class="text">
-                                                                            Reply
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="wrp">
-                                                            <div class="rw-1">
-                                                                <div class="image">
-                                                                    <img src="{{ asset('assets/Images/community/user.jpg') }}"
-                                                                        alt="dsvv">
-                                                                </div>
-                                                            </div>
-                                                            <div class="rw-2">
-                                                                <div class="cl-1">
-                                                                    <div class="name">Kai Kyle</div>
-                                                                    <div class="time">12 minutes ago</div>
-                                                                </div>
-                                                                <div class="cl-2">
-                                                                    <div class="comment">
-                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                        elit, sed do eiusmod tempor incididunt
-                                                                        ut labore et dolore magna aliqua. Ut enim ad minim
-                                                                        veniam, quis nostrud exercitation ullamco
-                                                                        laboris nisi ut aliquip ex ea commodo consequat.
-                                                                        Duis aute irure dolor in reprehenderit
-                                                                        in voluptate velit esse
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cl-3">
-                                                                    <div class="wrap">
-                                                                        <div class="icon">
-                                                                            <svg>
-                                                                                <use xlink:href="#heart"></use>
-                                                                            </svg>
-                                                                        </div>
-                                                                        <div class="text">
-                                                                            2.3k
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="wrap">
-                                                                        <div class="icon">
-                                                                            <svg>
-                                                                                <use xlink:href="#msgs"></use>
-                                                                            </svg>
-                                                                        </div>
-                                                                        <div class="text">
-                                                                            Reply
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="row-6">
-                                    <div class="sub-btn">
-                                        <a href="#">Show more</a>
-                                    </div>
-                                </div>
+<div class="row-6">
+    <div class="sub-btn">
+        <a href="#" id="toggle-comments">Show more</a>
+    </div>
+</div>
                             </div>
                         </div>
                     @endforeach
@@ -638,6 +489,62 @@
         let fileName = this.files[0] ? this.files[0].name : "";
         document.getElementById("coverImagefile").textContent = fileName;
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+    const allPosts = document.querySelectorAll(".comment-container"); // har post ka container
+
+    allPosts.forEach(post => {
+        const comments = post.querySelectorAll(".comment-item");
+        const toggleBtn = post.querySelector("#toggle-comments");
+        if (!toggleBtn || comments.length === 0) return;
+
+        const step = 3;
+        let visibleCount = step;
+
+        // Pehle 3 comments show karo
+        comments.forEach((comment, index) => {
+            if (index < visibleCount) comment.classList.add("show");
+        });
+
+        // Agar 3 se kam comments hain to button hide kar do
+        if (comments.length <= step) {
+            toggleBtn.style.display = "none";
+            return; // Is post ke liye aage kuch mat karo
+        }
+
+        // Button click functionality
+        toggleBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            if (toggleBtn.textContent === "Show more") {
+                // Next 3 comments show karo
+                let nextCount = visibleCount + step;
+                for (let i = visibleCount; i < nextCount && i < comments.length; i++) {
+                    comments[i].classList.add("show");
+                }
+                visibleCount = Math.min(nextCount, comments.length);
+
+                // Agar sab show ho gaye to button text change karo
+                if (visibleCount >= comments.length) {
+                    toggleBtn.textContent = "Show less";
+                }
+            } else {
+                // Last wale 3 comments hide karo (pehle 3 visible rehne do)
+                let hideCount = visibleCount - step;
+                for (let i = visibleCount - 1; i >= hideCount && i >= 0; i--) {
+                    if (i >= step) comments[i].classList.remove("show");
+                }
+                visibleCount = Math.max(hideCount, step);
+
+                // Agar sirf 3 comments visible hain to button text reset karo
+                if (visibleCount <= step) {
+                    toggleBtn.textContent = "Show more";
+                }
+            }
+        });
+    });
+});
+
     </script>
 
 
