@@ -61,12 +61,16 @@
                     <div class="banner-content">
                         <div class="banner-subtitle">{{ $banner['subtitle'] }}</div>
                         <div class="banner-title">{!! $banner['title'] !!}</div>
-                        <a href="{{ $banner['button_link'] }}" class="banner-button">
-                            <svg>
-                                <use xlink:href="#btn_arr"></use>
-                            </svg>
-                            {{ $banner['button_text'] }}
-                        </a>
+                        @if (session('access_token'))
+                               <a> </a>
+                            @else
+                            <a href="{{ $banner['button_link'] }}" class="banner-button ">
+                                <svg>
+                                    <use xlink:href="#btn_arr"></use>
+                                </svg>
+                                {{ $banner['button_text'] }}
+                            </a>
+                        @endif
                         <div class="arrow-down"></div>
                     </div>
                 </div>
@@ -442,7 +446,7 @@
                                 <div class="item">
                                     <div class="wrap">
                                         <div class="location">
-                                            <span style="color: #94c11e">{{ $item['city'] }}</span><br>
+                                            <span>{{ $item['city'] }}</span><br>
                                             {{ $item['address'] }}
                                         </div>
                                         <div class="tel">

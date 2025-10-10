@@ -142,7 +142,29 @@ popoverTriggerList.map(function (popoverTriggerEl) {
   })
 })
 
+document.addEventListener("DOMContentLoaded", function() {
+    var input = document.querySelector("#mobile");
+    window.intlTelInput(input, {
+        initialCountry: "lk", // default Sri Lanka
+        preferredCountries: ["lk", "pk", "in"],
+        separateDialCode: true
+    });
+});
 
+
+const languages = document.querySelectorAll(".lan");
+
+languages.forEach(lang => {
+    lang.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        // sab se active class hatao
+        languages.forEach(l => l.classList.remove("active"));
+
+        // jis par click hua hai usko active karo
+        this.classList.add("active");
+    });
+});
 
 /*
 *****************

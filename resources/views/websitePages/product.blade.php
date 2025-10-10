@@ -128,7 +128,7 @@
                         <svg>
                             <use xlink:href="#btn_arr"></use>
                         </svg>
-                      Price
+                      Filter
                     </a>
 
                 </div>

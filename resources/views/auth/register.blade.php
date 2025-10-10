@@ -234,11 +234,13 @@ khabeeskhan123@gmail.com --}}
     if (!button.querySelector(".spinner")) {
       const spinner = document.createElement("span");
       spinner.classList.add("spinner");
+      spinner.style.display = "none";
       button.appendChild(spinner);
     }
 
+    const originalText = button.textContent.trim(); 
+
     button.addEventListener("click", function(e) {
-      // Show spinner
       button.classList.add("loading");
       const spinner = button.querySelector(".spinner");
       const icon = button.querySelector("img");
@@ -246,15 +248,18 @@ khabeeskhan123@gmail.com --}}
       if (icon) icon.style.display = "none";
       if (spinner) spinner.style.display = "inline-block";
 
-      // Prevent multiple clicks
+      button.textContent = "Please wait...";
+      button.appendChild(spinner);
+
       button.style.pointerEvents = "none";
 
-      // ✅ Auto-hide spinner after 3s if no redirect happens
       setTimeout(() => {
         button.classList.remove("loading");
         if (spinner) spinner.style.display = "none";
         if (icon) icon.style.display = "";
         button.style.pointerEvents = "auto";
+        button.textContent = originalText; // Text wapas "Continue"
+        if (icon) button.appendChild(icon); // Icon ko wapas attach karo agar tha
       }, 1000);
     });
   });

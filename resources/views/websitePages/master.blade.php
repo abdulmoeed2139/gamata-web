@@ -17,10 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/sass/home.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/sass/style.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
 
@@ -476,9 +474,15 @@
 
 </head>
 
-<body
-    {{-- class="{{ auth()->check() ? 'logged-in' : 'logged-out' }} {{ request()->segment(count(request()->segments())) }}" --}}
->
+@php
+    $bodyClass =  session('access_token') ? 'logged-in' : 'logged-out';
+
+    $currentSegment = request()->segment(count(request()->segments()));
+
+    $finalClass = trim("$bodyClass $currentSegment");
+@endphp
+
+<body class="{{ $finalClass }}">
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
@@ -523,7 +527,7 @@
                                     <use xlink:href="#user"></use>
                                 </svg>
                                 <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
-                                <label for="profile">{{ $username ?? 'Login' }}</label>
+                                <label for="profile ">{{ $username ?? 'Login' }}</label>
                                 <div class="arrow-down"></div>
                             </a>
                         @else
@@ -533,7 +537,7 @@
                                 </svg>
                                 <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
                                 <label for="profile">Login</label>
-                                <div class="arrow-down"></div>
+                               
                             </a>
                         @endif
 
@@ -570,12 +574,12 @@
                             Select your Language
                         </div>
                         <div class="wrap">
-                            <a href="#" class="lan active">
+                            <a href="#" class="lan">
                                 <svg>
                                     <use xlink:href="#sinhala"></use>
                                 </svg>
                             </a>
-                            <a href="#" class="lan">
+                            <a href="#" class="lan active">
                                 <svg>
                                     <use xlink:href="#english"></use>
                                 </svg>
@@ -1435,7 +1439,8 @@
                 e.preventDefault();
                 let emailValue = $("#email").val().trim();
                 if (emailValue === "") {
-                    alert("Please enter your email.");
+                    toastr.error("Please enter your valid email", "Error");
+
                     return;
                 }
 
@@ -1446,7 +1451,8 @@
                     type: "POST",
                     data: $("#subscribeForm").serialize(),
                     success: function(response) {
-                        alert(response.msg);
+                        toastr.success(response.msg);
+
                         console.log(response);
                     },
                     error: function(xhr) {
@@ -1469,10 +1475,27 @@
         const profileBtn = document.getElementById('profile-menu');
         const profileDropdown = document.querySelector('.profile-dropdown');
 
-        profileBtn.addEventListener('click', function(event) {
+        // profileBtn.addEventListener('click', function(event) {
+        //     event.preventDefault();
+        //     profileDropdown.classList.toggle('active');
+        // });
+
+        profileBtn.addEventListener('mouseenter', function(event) {
             event.preventDefault();
             profileDropdown.classList.toggle('active');
         });
+
+        profileDropdown.addEventListener('mouseleave', function(event) {
+            event.preventDefault();
+            profileDropdown.classList.toggle('active');
+        });
+
+        // profileBtn.addEventListener('mouseleave', function(event) {
+        // event.preventDefault();
+        // profileDropdown.classList.remove('active');
+        // });
+
+        
 
 
         const openBtn = document.querySelector('.popup');
@@ -1580,11 +1603,13 @@
     if (!button.querySelector(".spinner")) {
       const spinner = document.createElement("span");
       spinner.classList.add("spinner");
+      spinner.style.display = "none";
       button.appendChild(spinner);
     }
 
+    const originalText = button.textContent.trim(); 
+
     button.addEventListener("click", function(e) {
-      // Show spinner
       button.classList.add("loading");
       const spinner = button.querySelector(".spinner");
       const icon = button.querySelector("img");
@@ -1592,27 +1617,30 @@
       if (icon) icon.style.display = "none";
       if (spinner) spinner.style.display = "inline-block";
 
-      // Prevent multiple clicks
+      button.textContent = "Please wait...";
+      button.appendChild(spinner);
+
       button.style.pointerEvents = "none";
 
-      // ✅ Auto-hide spinner after 3s if no redirect happens
       setTimeout(() => {
         button.classList.remove("loading");
         if (spinner) spinner.style.display = "none";
         if (icon) icon.style.display = "";
         button.style.pointerEvents = "auto";
+        button.textContent = originalText; // Text wapas "Continue"
+        if (icon) button.appendChild(icon); // Icon ko wapas attach karo agar tha
       }, 1000);
     });
   });
 });
 
 
-
     </script>
     <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
     <!-- Owl Carousel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Your custom scripts -->
     <script src="scripts.js"></script>
     </script>
