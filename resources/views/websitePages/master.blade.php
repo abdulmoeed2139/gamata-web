@@ -623,6 +623,22 @@
 
         </header>
     @endif
+    <!-- @if (
+        !Request::is('/') &&
+        !Request::is('login') &&
+        !Request::is('verify-otp') &&
+        !Request::is('register') &&
+        !Request::is('forgot-password') &&
+        !Request::is('forgot-password/verify-otp') &&
+        !Request::is('forgot-password/reset') &&
+        !Request::is('login-by-password')
+    )
+
+    
+        <div class="popup">
+            <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
+        </div>
+    @endif -->
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
@@ -633,12 +649,17 @@
         !Request::is('forgot-password/reset') &&
         !Request::is('login-by-password')
     )
-        <div class="popup">
-            <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
-        </div>
+    @if (session('access_token'))
+         <div class="popup">
+              <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
+              </div>
+              @else
+               <div class="popup">
+                                    <!-- <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup"> -->
+               </div>
+                                        
+          @endif
     @endif
-
-
 
 
 
@@ -1596,43 +1617,64 @@
             this.value = this.value.replace(/[^0-9]/g, '');
             });
 
-            document.addEventListener("DOMContentLoaded", function() {
-  const buttons = document.querySelectorAll(".auth-btn");
 
-  buttons.forEach(button => {
-    if (!button.querySelector(".spinner")) {
-      const spinner = document.createElement("span");
-      spinner.classList.add("spinner");
-      spinner.style.display = "none";
-      button.appendChild(spinner);
-    }
-
-    const originalText = button.textContent.trim(); 
-
-    button.addEventListener("click", function(e) {
-      button.classList.add("loading");
+    document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".auth-btn");
+  
+    buttons.forEach(button => {
+      if (!button.querySelector(".spinner")) {
+        const spinner = document.createElement("span");
+        spinner.classList.add("spinner");
+        spinner.style.display = "none";
+        spinner.innerHTML = `
+          <img src="{{ asset('assets/Images/iconn.png') }}" 
+               alt="Gamata Logo"
+               class="login-logo-uni">
+        `;
+        button.appendChild(spinner);
+      }
+  
       const spinner = button.querySelector(".spinner");
-      const icon = button.querySelector("img");
-
-      if (icon) icon.style.display = "none";
-      if (spinner) spinner.style.display = "inline-block";
-
-      button.textContent = "Please wait...";
-      button.appendChild(spinner);
-
-      button.style.pointerEvents = "none";
-
-      setTimeout(() => {
+      const originalHTML = button.innerHTML; // button ka original content save
+      const icon = button.querySelector("img"); // button ke andar icon agar ho
+  
+      // Back press par button restore ho jaye
+      window.addEventListener("pageshow", function () {
         button.classList.remove("loading");
         if (spinner) spinner.style.display = "none";
         if (icon) icon.style.display = "";
         button.style.pointerEvents = "auto";
-        button.textContent = originalText; // Text wapas "Continue"
-        if (icon) button.appendChild(icon); // Icon ko wapas attach karo agar tha
-      }, 1000);
+        button.innerHTML = originalHTML;
+      });
+  
+      button.addEventListener("click", function (e) {
+  
+        // Button disable aur loading state
+        button.classList.add("loading");
+        button.style.pointerEvents = "none";
+  
+        spinner.style.display = "inline-block";
+        button.innerHTML = `
+          Please wait...  <span class="spinner">
+          
+          </span>
+        `;
+  
+        // Spinner animation (optional)
+        const newImg = button.querySelector(".spin-anim");
+      //   if (newImg) {
+      //     newImg.style.transition = "transform 0.3s linear";
+      //     newImg.style.animation = "spin 1s linear infinite";
+      //   }
+  
+        setTimeout(() => {
+          button.classList.remove("loading");
+          button.innerHTML = originalHTML;
+          button.style.pointerEvents = "auto";
+        }, 1000);
+      });
     });
   });
-});
 
 
     </script>

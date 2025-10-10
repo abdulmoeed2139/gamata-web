@@ -20,6 +20,90 @@
   animation: spin 0.8s linear infinite;
 }
 
+
+/* .postsPagination .arrow-right {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 0.0520833333vw solid #d9d9d9;
+    }
+
+ .postsPagination .numbers {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+    }
+
+.postsPagination .num.active {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: #9fcd22;
+        width: 2.4479166667vw;
+        height: 2.4479166667vw;
+        border-radius: 50%;
+        box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.3));
+    }
+
+.postsPagination .num.active a{
+color:#fff  !important;
+}
+
+.postsPagination.numbers .num {
+        color: #707070;
+        text-align: center;
+        font-family: "Roboto", serif;
+        font-size: 0.9895833333vw;
+        font-weight: 400;
+        line-height: 0.7291666667vw;
+    }
+
+.postsPagination .arrow-right {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 0.0520833333vw solid #d9d9d9;
+    }
+
+ .postsPagination .arrow-left:hover {
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background: #9fcd22;
+        border: 1px solid #9fcd22;
+    }
+
+.postsPagination .arrow-right:hover,  .postsPagination .arrow-left:hover {
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #9fcd22;
+    border: 0.0520833333vw solid #9fcd22;
+} */
+
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -204,7 +288,7 @@
                 </div>
             </div>
 
-            <div class="pagination">
+            <div class="postsPagination">
                 {{-- Left Arrow --}}
                 <div class="arrow-left">
                     @if($paginatedProducts->onFirstPage() == false)

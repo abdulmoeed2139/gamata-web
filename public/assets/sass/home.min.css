@@ -1,3 +1,154 @@
+.postsPagination .arrow-left a, .postsPagination .arrow-right a {
+    width: 2.6041666667vw;
+    height: 2.6041666667vw;
+    border-radius: 50%;
+    /* border: 0.0520833333vw solid #d9d9d9; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.postsPagination .arrow-left a {
+    border: 0.0520833333vw solid #d9d9d9;
+    width: 2.6041666667vw;
+    height: 2.6041666667vw;
+    border-radius: 50%;
+}
+
+
+.postsPagination .arrow-left svg path , .postsPagination .arrow-right svg path {
+    fill: #e1e1e1;
+}
+
+.postsPagination .arrow-left:hover svg path , .postsPagination .arrow-right:hover svg path {
+    fill: #e1e1e1;
+}
+
+.postsPagination  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* gap: 3.125vw; */
+    gap: 3.125vw;
+}
+
+.postsPagination .arrow-right svg {
+    width: 8.78125vw;
+    height: 1.625vw;
+    fill: #fff;
+    color: #fff;
+}
+
+.postsPagination .arrow-left svg {
+    fill: #fff;
+    color: #fff;
+    width:1.604167vw;
+    height: 1.604167vw;
+}
+
+.postsPagination .arrow-left:hover svg{
+    width: 1.604167vw;
+    height: 1.604167vw;
+
+}
+.postsPagination .arrow-left a{
+display:  flex;
+align-items: center;
+justify-content: center;
+border: 0.0520833333vw solid #d9d9d9;
+
+}
+
+.postsPagination .arrow-right a{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0.0520833333vw solid #d9d9d9;
+}
+
+.postsPagination .numbers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    
+}
+
+.postsPagination .num.active {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: #9fcd22;
+    width: 2.4479166667vw;
+    height: 2.4479166667vw;
+    border-radius: 50%;
+    box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.3));
+}
+
+.postsPagination .num.active a{
+color:#fff  !important;
+}
+
+.postsPagination .numbers .num {
+    color: #707070;
+    text-align: center;
+    font-family: "Roboto", serif;
+    font-size: 0.9895833333vw;
+    font-weight: 400;
+    line-height: 0.7291666667vw;
+}
+
+.postsPagination .arrow-right a{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0.0520833333vw solid #d9d9d9;
+}
+
+.postsPagination .arrow-left:hover {
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #9fcd22;
+    border: 1px solid #9fcd22;
+}
+
+.postsPagination .arrow-right:hover,  .postsPagination .arrow-left:hover {
+border-radius: 50%;
+border: none;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+background: #9fcd22;
+/* border: 0.0520833333vw solid #9fcd22; */
+border-color: #9fcd22;
+}
+
+body.logged-in .banner-wrapper .banner-slider .owl-stage-outer .owl-stage .owl-item .banner .banner-content::after ,body.logged-in  .banner-wrapper .banner-slider .owl-stage-outer .owl-stage .owl-item .banner .banner-content::before{
+    width:0;
+ }
+
 body.login .popup,
 body.login2 .popup,
 body.forgot-password .popup {
@@ -1315,6 +1466,10 @@ footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu li a.active {
   .product-listing .wrapper .col-2 .pagination .arrow-right svg {
     filter: invert(0.54) contrast(8);
   }
+
+  .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .common-btn-1{
+    margin-right:4.392386530014641vw;
+    }
 
 
 @media (min-width: 1200px) {
@@ -4907,13 +5062,15 @@ header.is-sticky,
     color: #1d1d1b;
     text-align: center;
     font-family: "Abhaya Libre", serif;
-    font-size: 24px;
+    font-size: 24px !important;
     font-style: normal;
     font-weight: 400;
     line-height: 26px;
     letter-spacing: -1.2px;
     padding-bottom: 10px;
 }
+
+
 
 .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name .eng {
     color: #1d1d1b;
@@ -4931,7 +5088,7 @@ header.is-sticky,
     color: #1d1d1b;
     text-align: center;
     font-family: "Mukta Malar", serif;
-    font-size: 18px;
+    font-size: 18px !important;
     font-style: normal;
     font-weight: 700;
     line-height: 20px;
@@ -4954,6 +5111,8 @@ header.is-sticky,
     display: inline-block;
     font-weight: 700;
 }
+
+    
 
 .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .stock {
     color: #1d1d1b;
@@ -9020,6 +9179,60 @@ label.login-label-uni svg {
 }
 
 @media (max-width: 767px) {
+
+    body .food-list.list-view .items .wrap .content .pro-name .eng{
+        color: #1d1d1b;
+        text-align: center;
+        font-family: "Roboto", serif;
+        font-size: 24px !important;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 26px;
+        letter-spacing: -1.2px;
+        padding-bottom: 10px;
+
+    }  
+
+
+    body .product-listing .food-list.list-view .items .wrap, .food-list.list-view .items .wrap .content,
+    body .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap
+    {
+        display: flex;
+        flex-direction:column !important;
+      
+        gap:20px;
+        padding:20px 0px !important;
+        padding-bottom: 0 !important;
+    }
+
+   body .product-listing .wrapper .col-2 .row-2 .food-list .items:hover .wrap .content{
+        padding-bottom: 0;
+    }
+        
+        body .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .common-btn-1{
+        margin-right:auto;
+        margin-bottom: 20px;
+        border: none;
+    }
+
+    /* body .product-listing .food-list.list-view .items .wrap .image{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        } */
+
+        body .product-listing .wrapper .col-2 .row-2 .food-list.list-view .items .wrap .content .pro-name{
+            padding-bottom: 30px !important;
+
+        }
+
+        body  .food-list.list-view .items .wishlist {
+            padding-top: 16px !important;
+        }
+
+        .product-listing .wrapper .col-2 .row-2 .food-list .items .image{
+            text-align:center;
+        }
 
     .product-listing .wrapper .col-2 .pagination .arrow-left,
     .product-listing .wrapper .col-2 .pagination .arrow-right {

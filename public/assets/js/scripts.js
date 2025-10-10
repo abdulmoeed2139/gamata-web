@@ -166,6 +166,67 @@ languages.forEach(lang => {
     });
 });
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".auth-btn");
+  
+    buttons.forEach(button => {
+      if (!button.querySelector(".spinner")) {
+        const spinner = document.createElement("span");
+        spinner.classList.add("spinner");
+        spinner.style.display = "none";
+        spinner.innerHTML = `
+          <img src="{{ asset('assets/Images/iconn.png') }}" 
+               alt="Gamata Logo"
+               class="login-logo-uni">
+        `;
+        button.appendChild(spinner);
+      }
+  
+      const spinner = button.querySelector(".spinner");
+      const originalHTML = button.innerHTML; // button ka original content save
+      const icon = button.querySelector("img"); // button ke andar icon agar ho
+  
+      // Back press par button restore ho jaye
+      window.addEventListener("pageshow", function () {
+        button.classList.remove("loading");
+        if (spinner) spinner.style.display = "none";
+        if (icon) icon.style.display = "";
+        button.style.pointerEvents = "auto";
+        button.innerHTML = originalHTML;
+      });
+  
+      button.addEventListener("click", function (e) {
+  
+        // Button disable aur loading state
+        button.classList.add("loading");
+        button.style.pointerEvents = "none";
+  
+        spinner.style.display = "inline-block";
+        button.innerHTML = `
+          Please wait...  <span class="spinner">
+          
+          </span>
+        `;
+  
+        // Spinner animation (optional)
+        const newImg = button.querySelector(".spin-anim");
+      //   if (newImg) {
+      //     newImg.style.transition = "transform 0.3s linear";
+      //     newImg.style.animation = "spin 1s linear infinite";
+      //   }
+  
+        setTimeout(() => {
+          button.classList.remove("loading");
+          button.innerHTML = originalHTML;
+          button.style.pointerEvents = "auto";
+        }, 1000);
+      });
+    });
+  });
+  
+  
+
 /*
 *****************
      Sliders

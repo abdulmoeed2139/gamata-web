@@ -148,43 +148,6 @@
     });
 
 
-    document.addEventListener("DOMContentLoaded", function() {
-  const buttons = document.querySelectorAll(".auth-btn");
-
-  buttons.forEach(button => {
-    if (!button.querySelector(".spinner")) {
-      const spinner = document.createElement("span");
-      spinner.classList.add("spinner");
-      spinner.style.display = "none";
-      button.appendChild(spinner);
-    }
-
-    const originalText = button.textContent.trim(); 
-
-    button.addEventListener("click", function(e) {
-      button.classList.add("loading");
-      const spinner = button.querySelector(".spinner");
-      const icon = button.querySelector("img");
-
-      if (icon) icon.style.display = "none";
-      if (spinner) spinner.style.display = "inline-block";
-
-      button.textContent = "Please wait...";
-      button.appendChild(spinner);
-
-      button.style.pointerEvents = "none";
-
-      setTimeout(() => {
-        button.classList.remove("loading");
-        if (spinner) spinner.style.display = "none";
-        if (icon) icon.style.display = "";
-        button.style.pointerEvents = "auto";
-        button.textContent = originalText; // Text wapas "Continue"
-        if (icon) button.appendChild(icon); // Icon ko wapas attach karo agar tha
-      }, 1000);
-    });
-  });
-});
 </script>
 
 @endsection

@@ -497,8 +497,8 @@
                             </a>
                         @endif
                     </div> -->
-
-                    <div class="pagination">
+ 
+                    <div class="pagination postsPagination">
                         {{-- Left Arrow --}}
                         <div class="arrow-left">
                             @if(isset($pagination['page']) && $pagination['page'] > 1)
