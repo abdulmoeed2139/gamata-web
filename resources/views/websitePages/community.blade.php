@@ -428,48 +428,120 @@
                                         <div class="loader" style="display: none;"></div>
                                     </div>
                                 </div>
-<div class="row-5">
-    <div class="wrap">
-        <ul class="main-cmnt">
-            <li class="has-sub">
-                @forelse ($item['comments'] as $comment)
-                <div class="wrp comment-item">
-                        <div class="rw-1">
-                            <div class="image">
-                                <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="user">
-                            </div>
-                        </div>
-                        <div class="rw-2">
-                            <div class="cl-1">
-                                <div class="name">{{ $comment['usersName'] }}</div>
-                                <div class="time">{{ \Carbon\Carbon::parse(\Carbon\Carbon::parse($comment['commented_DateTime'])->format('Y-m-d H:i:s'))->diffForHumans() }}
-                                                                    </div>
-                            </div>
-                            <div class="cl-2">
-                                <div class="comment">{{ $comment['comment'] }}</div>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                     <div class="wrp comment-item show">
-                        <div class="rw-2">
-                            <div class="cl-1"><div class="name">Comment Not Yet</div></div>
-                        </div>
-                    </div>
-                @endforelse
-            </li>
-        </ul>
-    </div>
-</div>
+                                <div class="row-5">
+                                    <div class="wrap">
+                                        <ul class="main-cmnt">
+                                            <li class="has-sub">
+                                                @forelse ($item['comments'] as $comment)
+                                                <div class="wrp comment-item">
+                                                        <div class="rw-1">
+                                                            <div class="image">
+                                                                <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="user">
+                                                            </div>
+                                                        </div>
+                                                        <div class="rw-2">
+                                                            <div class="cl-1">
+                                                                <div class="name">{{ $comment['usersName'] }}</div>
+                                                                <div class="time">{{ \Carbon\Carbon::parse(\Carbon\Carbon::parse($comment['commented_DateTime'])->format('Y-m-d H:i:s'))->diffForHumans() }}
+                                                                                                    </div>
+                                                            </div>
+                                                            <div class="cl-2">
+                                                                <div class="comment">{{ $comment['comment'] }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @empty
+                                                    <div class="wrp comment-item show no-commentt">
+                                                        <div class="rw-2">
+                                                            <div class="cl-1"><div class="name">Comment Not Yet</div></div>
+                                                        </div>
+                                                    </div>
+                                                @endforelse
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-<div class="row-6">
-    <div class="sub-btn">
-        <a href="#" id="toggle-comments">Show more</a>
-    </div>
-</div>
+                                <div class="row-6">
+                                    <div class="sub-btn">
+                                        <a href="#" id="toggle-comments">Show more</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
+
+
+                    <!-- <div class="pagination">
+                        {{-- Left Arrow --}}
+                        @if($pagination['page'] > 1)
+                            <a href="{{ url()->current() }}?page={{ $pagination['page'] - 1 }}">
+                                &laquo; Previous
+                            </a>
+                        @endif
+
+                        {{-- Page Numbers --}}
+                        @foreach($pagination['links'] as $link)
+                            @if($link['label'] != 'Next &raquo;' && $link['label'] != '&laquo; Previous')
+                                <a href="{{ url()->current() }}?page={{ $link['page'] }}"
+                                class="{{ $link['active'] ? 'active' : '' }}">
+                                {{ $link['label'] }}
+                                </a>
+                            @endif
+                        @endforeach
+
+                        {{-- Right Arrow --}}
+                        @if($pagination['page'] < $pagination['last_page'])
+                            <a href="{{ url()->current() }}?page={{ $pagination['page'] + 1 }}">
+                                Next &raquo;
+                            </a>
+                        @endif
+                    </div> -->
+
+                    <div class="pagination">
+                        {{-- Left Arrow --}}
+                        <div class="arrow-left">
+                            @if(isset($pagination['page']) && $pagination['page'] > 1)
+                                <a href="{{ url()->current() }}?page={{ $pagination['page'] - 1 }}">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z"
+                                            fill="#000000"></path>
+                                    </svg>
+                                </a>
+                            @endif
+                        </div>
+
+                        {{-- Page Numbers --}}
+                        <div class="numbers">
+                            @if(isset($pagination['links']))
+                                @foreach($pagination['links'] as $link)
+                                    @if(is_numeric($link['label'])) {{-- Sirf numbers show kare --}}
+                                        <div class="num {{ $link['active'] ? 'active' : '' }}">
+                                            <a href="{{ url()->current() }}?page={{ $link['page'] }}" style="text-decoration: none; color: #707070;">
+                                                {{ $link['label'] }}
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+
+                        {{-- Right Arrow --}}
+                        <div class="arrow-right">
+                            @if(isset($pagination['page'], $pagination['last_page']) && $pagination['page'] < $pagination['last_page'])
+                                <a href="{{ url()->current() }}?page={{ $pagination['page'] + 1 }}">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z"
+                                            fill="#000000"></path>
+                                    </svg>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
@@ -813,6 +885,10 @@
                             .find('.has-sub');
 
                         if (targetUL.length) {
+                            var noCommentDiv = targetUL.find('.no-commentt');
+                            if (noCommentDiv.length) {
+                                noCommentDiv.remove();
+                            }
                             targetUL.prepend(newComment);
                             commentInput.val(''); // clear box
                         } else {

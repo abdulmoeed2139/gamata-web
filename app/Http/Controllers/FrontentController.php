@@ -400,18 +400,55 @@ class FrontentController extends Controller
     
     
 
+    // public function community()
+    // {
+    //     $accessToken = session('access_token');
+    //     $profile = $this->getProfile();
+    //     $username = $profile['username'];
+    //     $getCommunity = $this->apiRequest(
+    //         'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=12&sort=id&order=desc&postType=Pending&page=1',
+    //         $this->token ?? null
+    //     );
+
+    //     if ($getCommunity->successful()) { 
+    //         $community = $getCommunity->json('data') ?? [];
+    //         foreach ($community as &$post) {
+    //             $getPostComment = $this->apiRequest(
+    //                 'http://feapi.aethriasolutions.com/api/PostComment/v1/GetDetails/' . $post['code'],
+    //                 $accessToken ?? null
+    //             );
+    //             $comments = $getPostComment->successful() ? $getPostComment->json('data') : [];
+
+    //             // ✅ Latest comment top order By DESC Code (jugaar)
+    //             usort($comments, function($a, $b) {
+    //                 return strtotime($b['commented_DateTime']) - strtotime($a['commented_DateTime']);
+    //             });
+    //             $post['comments'] = $comments;
+    //         }
+
+    //         return view('websitePages.community', compact('username', 'community'));
+    //     }
+    // }
+
     public function community()
     {
         $accessToken = session('access_token');
         $profile = $this->getProfile();
         $username = $profile['username'];
+
+        $page = request()->get('page', 1);
+        $itemsPerPage = 12; // API ka default
+
         $getCommunity = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=50&order=desc&postType=Pending&page=1',
+            "http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page={$itemsPerPage}&sort=id&order=desc&postType=Pending&page={$page}",
             $this->token ?? null
         );
 
-        if ($getCommunity->successful()) {
-            $community = $getCommunity->json('data') ?? [];
+        
+        if ($getCommunity->successful()) { 
+            $responseData = $getCommunity->json();
+            $community = $responseData['data'] ?? [];
+            $pagination = $responseData['payload']['pagination'] ?? [];
             foreach ($community as &$post) {
                 $getPostComment = $this->apiRequest(
                     'http://feapi.aethriasolutions.com/api/PostComment/v1/GetDetails/' . $post['code'],
@@ -426,7 +463,7 @@ class FrontentController extends Controller
                 $post['comments'] = $comments;
             }
 
-            return view('websitePages.community', compact('username', 'community'));
+            return view('websitePages.community', compact('username', 'community', 'pagination'));
         }
     }
 
