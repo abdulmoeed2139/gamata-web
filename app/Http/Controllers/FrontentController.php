@@ -8,37 +8,11 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class FrontentController extends Controller
 {
-
-    // public function getProfile()
-    // {
-    //     $accessToken = session('access_token');
-    //     $userName ="";
-    //     if ($accessToken) {
-    //         $phone = '0'.session('phone_number');
-    //         $profileResponse = Http::withToken($accessToken)
-    //             ->acceptJson()
-    //             ->get("http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
-    //         $profile = $profileResponse->json('data') ?? [];
-    //         if ($profile) {
-    //             $userName = $profile['firstName'] ?? '';
-    //             $code = $profile['code'];
-    //         } else {
-    //             $userName = 'Admin';
-    //             $code = '';
-    //         }
-    //     } else {
-    //         $userName = 'Admin';
-    //         $code = '';
-    //     }
-
-    //     return [
-    //         'username' => $userName,
-    //         'FK_UserID' => $code,
-    //     ];
-    // }
 
     public function getProfile()
     {
@@ -102,82 +76,6 @@ class FrontentController extends Controller
             ];
         }
     }
-
-
-    // public function index()
-    // {
-    //     $accessToken = session('access_token');
-    //     $profile= $this->getProfile();
-    //     $username= $profile['username'];
-
-    //     $getBestSellingProduct = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/Product/BestSelling',
-    //         $this->token ?? null
-    //     );
-
-    //     $getExploreNetwork = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/Home/ExploreNetwork',
-    //         $this->token ?? null
-    //     );
-
-    //     $getCommunityStats = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/Home/CommunityStats',
-    //         $this->token ?? null
-    //     );
-
-    //     $getExploreTeam = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/Home/ExploreTeam',
-    //         $this->token ?? null
-    //     );
-
-    //     if (
-    //         $getBestSellingProduct->successful() &&
-    //         $getExploreNetwork->successful()  &&
-    //         $getCommunityStats->successful() &&
-    //         $getExploreTeam->successful()
-    //     ){
-
-    //         $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
-    //         $exploreNetwork = $getExploreNetwork->json('result') ?? [];
-
-    //         $exploreTeam = $getExploreTeam->json('result') ?? [];
-    //         $exploreTeamText = $getExploreTeam->json('text') ?? [];
-
-    //         $result = $getCommunityStats->json('result') ?? [];
-    //         $communityText = $getCommunityStats->json('text') ?? [];
-    //         $communityStats = [
-    //             [
-    //                 "icon" => "#com_1",
-    //                 "title" => $result['registeredUsers'] ?? 'N/A',
-    //                 "sub_title" => "Registered Users",
-    //                 "desc" => "At Gamata.com, we are proud to connect farmers, consumers, and agricultural enthusiasts in a thriving online ecosystem."
-    //             ],
-    //             [
-    //                 "icon" => "#com_2",
-    //                 "title" => $result['freshProducts'] ?? 'N/A',
-    //                 "sub_title" => "Fresh Products",
-    //                 "desc" => "Offering a wide range of fresh vegetables, farm supplies, and essential products, all conveniently in one place."
-    //             ],
-    //             [
-    //                 "icon" => "#com_3",
-    //                 "title" => $result['deliveries'] ?? 'N/A',
-    //                 "sub_title" => "Deliveries",
-    //                 "desc" => "Building strong connections between farms and homes across regions, fostering community and sustainable living."
-    //             ]
-    //         ];
-
-    //         return view('websitePages.index', compact(
-    //             'username',
-    //             'bestSellingItems',
-    //             'exploreNetwork',
-    //             'communityStats',
-    //             'communityText',
-    //             'exploreTeam',
-    //             'exploreTeamText',
-    //         ));
-    //     }
-    //     return view('websitePages.index', ['bestSellingItems' => []]);
-    // }
 
     public function index()
     {
@@ -322,24 +220,6 @@ class FrontentController extends Controller
         }
     }
 
-
-    // public function subscribe(Request $request)
-    // {
-    //     $request->validate([
-    //         'email' => 'required|email'
-    //     ]);
-
-    //     $apiResponse = Http::asForm()
-    //         ->post('http://feapi.aethriasolutions.com/api/v1/subscribe/Insert', [
-    //             'email' => $request->email,
-    //         ]);
-    //     $response = $apiResponse->json();
-
-    //     return response()->json([
-    //         'msg' => $response['text'] ?? 'Unknown response'
-    //     ], 200);
-    // }
-
     public function subscribe(Request $request)
     {
         try {
@@ -363,32 +243,88 @@ class FrontentController extends Controller
         }
     }
 
-    public function product()
+    // public function product()
+    // {
+    //     $profile = $this->getProfile();
+    //     $username = $profile['username'];
+    //     $page = request('page', 1);
+    //     $itemsPerPage = 9; // per page items
+    //     $getAllProduct = $this->apiRequest(
+    //         'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page='.$itemsPerPage.'&page='.$page.'&Lan=En',
+    //         $this->token ?? null
+    //     );
+    //     $responseData = $getAllProduct->json();
+    //     $paginatedProducts = $responseData['data'] ?? [];
+    //     $pagination = $responseData['payload']['pagination'] ?? [];
+    //     $ctg = $responseData['payload']['categories'] ?? [];
+    //     $sellers = $responseData['payload']['sellers'] ?? [];
+    //     $fresh_products = $responseData['payload']['fresh_products'] ?? [];
+    //     $districts = $responseData['payload']['districts'] ?? [];
+
+    //     return view('websitePages.product', compact(
+    //         'paginatedProducts',
+    //         'pagination',
+    //         'ctg',
+    //         'sellers',
+    //         'fresh_products',
+    //         'districts',
+    //         'username',
+    //     ));
+    // }
+
+    public function product(Request $request)
     {
         $profile = $this->getProfile();
         $username = $profile['username'];
-        $page = request('page', 1);
-        $itemsPerPage = 9; // per page items
-        $getAllProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page='.$itemsPerPage.'&page='.$page.'&Lan=En',
-            $this->token ?? null
-        );
+    
+        $page = $request->get('page', 1);
+        $itemsPerPage = $request->get('items_per_page', 9); // Default 9 per page
+    
+        // API call
+        $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=9999&page=1&Lan=En";
+        $getAllProduct = $this->apiRequest($apiUrl, $this->token ?? null);
         $responseData = $getAllProduct->json();
-        $paginatedProducts = $responseData['data'] ?? [];
-        $pagination = $responseData['payload']['pagination'] ?? [];
+
         $ctg = $responseData['payload']['categories'] ?? [];
         $sellers = $responseData['payload']['sellers'] ?? [];
         $fresh_products = $responseData['payload']['fresh_products'] ?? [];
         $districts = $responseData['payload']['districts'] ?? [];
+ 
+        $allProducts = $responseData['data'] ?? [];
+        $collection = collect($allProducts);
+        $paginatedProducts = new LengthAwarePaginator(
+            $collection->forPage($page, $itemsPerPage),
+            $collection->count(),
+            $itemsPerPage,
+            $page,
+            ['path' => url()->current(), 'query' => $request->query()]
+        );
 
+
+        $from = ($paginatedProducts->currentPage() - 1) * $paginatedProducts->perPage() + 1;
+        $to = $from + $paginatedProducts->count() - 1;
+        $total = $paginatedProducts->total();
+        $pagination['from'] = $from;
+        $pagination['to'] = $to;
+        $pagination['total'] = $total;
+    
+        $pagination = [
+            'page' => $page,
+            'items_per_page' => $itemsPerPage,
+            'total' => $collection->count(),
+            'last_page' => ceil($collection->count() / $itemsPerPage),
+            'from' => $from,
+            'to' => $to,
+        ];
+    
         return view('websitePages.product', compact(
             'paginatedProducts',
             'pagination',
+            'username',
             'ctg',
             'sellers',
             'fresh_products',
             'districts',
-            'username',
         ));
     }
 
@@ -418,25 +354,51 @@ class FrontentController extends Controller
         }
     }
 
-
-    public function relatedProducts($childCode)
+    public function relatedProducts($childCode, Request $request)
     {
-        $accessToken = session('access_token');
-        $profile= $this->getProfile();
-        $username= $profile['username'];
+        $page = (int) $request->get('page', 1);
+        $itemsPerPage = (int) $request->get('items_per_page', 2); // <-- per page items configurable
+    
+        // Fetch all related products from API (no pagination needed there)
         $getRelatedProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=6',
+            "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode,
             $this->token ?? null
         );
-
+    
         if ($getRelatedProduct->successful()) {
             $productArray = $getRelatedProduct->json()['data'] ?? [];
-            if (empty($productArray)) {
-                return response()->json(['message' => 'Product not found']);
+            $collection = collect($productArray);
+    
+            if ($collection->isEmpty()) {
+                return response()->json(['related_products' => [], 'pagination' => []]);
             }
-            return response()->json(['related_products' => $productArray], 200);
+    
+            // Paginate manually
+            $paginatedProducts = new \Illuminate\Pagination\LengthAwarePaginator(
+                $collection->forPage($page, $itemsPerPage),
+                $collection->count(),
+                $itemsPerPage,
+                $page,
+                ['path' => url()->current()]
+            );
+    
+            return response()->json([
+                'related_products' => array_values($paginatedProducts->items()),
+                'pagination' => [
+                    'current_page' => $paginatedProducts->currentPage(),
+                    'last_page' => $paginatedProducts->lastPage(),
+                    'total' => $paginatedProducts->total(),
+                    'per_page' => $paginatedProducts->perPage(),
+                    'from' => $paginatedProducts->firstItem(),
+                    'to' => $paginatedProducts->lastItem(),
+                ]
+            ]);
         }
+    
+        return response()->json(['related_products' => [], 'pagination' => []]);
     }
+    
+    
 
     public function community()
     {

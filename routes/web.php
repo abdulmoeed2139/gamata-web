@@ -58,7 +58,7 @@ Route::get('/get-blog/{blog_id}', [FrontentController::class, 'getSingleBlog'])-
 Route::get('/index', [FrontentController::class, 'index'])->name('index');
 Route::get('/verify-otp', [FrontentController::class, 'verifyOTP']);
 Route::get('/contact', [FrontentController::class, 'contact'])->name('contact');
-Route::get('/related-products/{childCode}', [FrontentController::class, 'relatedProducts'])->name('contact');
+Route::get('/related-products/{childCode}', [FrontentController::class, 'relatedProducts'])->name('related-products');
 Route::post('/insert-anonymous-inquiry', [FrontentController::class, 'InsertAnonymousInquiry'])->name('contact');
 Route::post('/create-comment', [FrontentController::class, 'createComment'])->name('create-comment');
 Route::post('/create-post', [FrontentController::class, 'createPost'])->name('create-post');

@@ -273,7 +273,7 @@
             <div class="col-2">
                 <div class="hm-food-slider owl-carousel">
                     @foreach ($bestSellingItems as $item)
-                        <a href="{{ url('product-view') }}" class="item-link">
+                        <a href="{{ url('product-view/') }}/{{ $item['productID'] }}" class="item-link">
                             <div class="item">
                                 <div class="wrap">
                                     <div class="wishlist">

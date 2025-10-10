@@ -10,6 +10,22 @@
   height: 20px;
   fill: #121212 !important;
 }
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0,0,0,0.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 </style>
 
 
@@ -124,7 +140,20 @@
                         Filter
              </a> --}}
         </div>
-        <div class="col-2">
+        <div class="col-2" style="position: relative;">
+
+            <!-- Loader (spinner only) -->
+            <div id="loader" style="
+                display: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1000;
+            ">
+                <div class="spinner"></div>
+            </div>
+
             <div class="top-bar">
                 <div class="row-1">
                     <div class="left">
@@ -136,14 +165,9 @@
                             <use xlink:href="#column"></use>
                         </svg>
                     </div>
-                    {{-- <div class="right">
-                        <div class="text">
-                            Showing 1-9 of 132 Results
-                        </div>
-                    </div> --}}
                     <div class="right">
                         <div class="text">
-                            Showing {{ $pagination['from'] ?? 0 }}–{{ $pagination['to'] ?? 0 }} of {{ $pagination['total'] ?? 0 }} Results
+                            Showing {{ $pagination['from'] }}–{{ $pagination['to'] }} of {{ $pagination['total'] }} Results
                         </div>
                     </div>
                 </div>
@@ -183,8 +207,8 @@
             <div class="pagination">
                 {{-- Left Arrow --}}
                 <div class="arrow-left">
-                    @if(isset($pagination['links'][0]['url']))
-                        <a href="{{ url()->current() }}?page={{ max(($pagination['page'] ?? 1) - 1, 1) }}">
+                    @if($paginatedProducts->onFirstPage() == false)
+                        <a href="{{ $paginatedProducts->previousPageUrl() }}">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z" fill="#000000"></path>
                             </svg>
@@ -194,19 +218,19 @@
 
                 {{-- Page Numbers --}}
                 <div class="numbers">
-                    @foreach($pagination['links'] ?? [] as $link)
-                        <div class="num {{ $link['active'] ? 'active' : '' }}">
-                            <a href="{{ url()->current() }}?page={{ $link['page'] }}" style="text-decoration: none; color: #707070;">
-                                {!! $link['label'] !!}
+                    @for($i = 1; $i <= $paginatedProducts->lastPage(); $i++)
+                        <div class="num {{ $paginatedProducts->currentPage() == $i ? 'active' : '' }}">
+                            <a href="{{ $paginatedProducts->url($i) }}" style="text-decoration: none; color: #707070;">
+                                {{ $i }}
                             </a>
                         </div>
-                    @endforeach
+                    @endfor
                 </div>
 
                 {{-- Right Arrow --}}
                 <div class="arrow-right">
-                    @if(isset($pagination['links'][0]['url']))
-                        <a href="{{ url()->current() }}?page={{ min(($pagination['page'] ?? 1) + 1, $pagination['last_page'] ?? 1) }}">
+                    @if($paginatedProducts->hasMorePages())
+                        <a href="{{ $paginatedProducts->nextPageUrl() }}">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z" fill="#000000"></path>
                             </svg>
@@ -224,118 +248,85 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
-    $('.product-link').click(function(e){
+
+    let currentChildCode = null; 
+    let relatedProductsContainer = $('#food-list');
+
+    $('.product-link').click(function(e) {
         e.preventDefault();
-        var childCode = $(this).data('child-code');
+        currentChildCode = $(this).data('child-code');
+        loadRelatedProducts(currentChildCode, 1);
+    });
+
+    function loadRelatedProducts(childCode, page) {
+        $('#loader').show(); // loader visible
+        $('.pagination').empty();
+        relatedProductsContainer.empty();
+        $('.related-pagination').remove();
+
         $.ajax({
             url: '{{ url("related-products") }}/' + childCode,
             type: 'GET',
-            success: function(response){
-                var $foodList = $('#food-list');
-                $foodList.empty(); // Existing products ko remove kar do
+            data: { page: page, items_per_page: 1 },
+            success: function(response) {
+                relatedProductsContainer.empty();
+                $('.related-pagination').remove();
+                $('.pagination').empty();
+                setTimeout(function() {
+                    $('#loader').hide();
 
-                if(response.related_products && response.related_products.length > 0){
-                    response.related_products.forEach(function(item){
-                        var productHtml = `
-                            <a href="{{ url('product-view') }}/${item.sell_Code}" class="product-link">
-                                <div class="items">
-                                    <div class="wrap">
-                                        <div class="wishlist">
-                                            <svg>
-                                                <use xlink:href="#heart"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="image">
-                                            <img src="${item.imageUri}/${item.image01}" alt="Best Selling Item">
-                                        </div>
-                                        <div class="content">
-                                            <div class="pro-name">
-                                                <div class="sin">${item.product_Name_Sinhala}</div>
-                                                <div class="eng">${item.product_Name_English}</div>
-                                                <div class="tam">${item.product_Name_Tamil}</div>
+                    if (response.related_products && response.related_products.length > 0) {
+                        response.related_products.forEach(function(item) {
+                            let productHtml = `
+                                <a href="{{ url('product-view') }}/${item.sell_Code}" class="product-link">
+                                    <div class="items">
+                                        <div class="wrap">
+                                            <div class="wishlist">
+                                                <svg><use xlink:href="#heart"></use></svg>
                                             </div>
-                                            <div class="price">${item.unit_Price}</div>
-                                            <div class="stock">${item.quantity}</div>
-                                            <div class="common-btn-1">
-                                                <svg>
-                                                    <use xlink:href="#btn_arr"></use>
-                                                </svg>
-                                                Buy Now
+                                            <div class="image">
+                                                <img src="${item.imageUri}/${item.image01}" alt="Product">
+                                            </div>
+                                            <div class="content">
+                                                <div class="pro-name">
+                                                    <div class="sin">${item.product_Name_Sinhala}</div>
+                                                    <div class="eng">${item.product_Name_English}</div>
+                                                    <div class="tam">${item.product_Name_Tamil}</div>
+                                                </div>
+                                                <div class="price">${item.unit_Price}</div>
+                                                <div class="stock">${item.quantity}</div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>`;
-                        $foodList.append(productHtml);
-                    });
-                } else {
-                    $foodList.html('<div class="no-product">Product not found</div>');
-                }
+                                </a>`;
+                            relatedProductsContainer.append(productHtml);
+                        });
+
+                        // Create pagination
+                        let $pagination = $('<div class="related-pagination" style="margin-top:20px; text-align:center;"></div>');
+                        for (let i = 1; i <= response.pagination.last_page; i++) {
+                            let activeClass = (i === response.pagination.current_page) ? 'active' : '';
+                            $pagination.append(`<button class="page-btn ${activeClass}" data-page="${i}">${i}</button>`);
+                        }
+                        relatedProductsContainer.after($pagination);
+
+                        // Button click
+                        $('.page-btn').off('click').on('click', function() {
+                            let page = $(this).data('page');
+                            loadRelatedProducts(childCode, page);
+                        });
+
+                    } else {
+                        relatedProductsContainer.html('<div class="no-product">No related products found</div>');
+                    }
+                }, 100);
             },
-            error: function(xhr){
+            error: function(xhr) {
                 console.log('Error:', xhr.responseText);
-                $('#food-list').html('<div class="no-product">Something went wrong!</div>');
+                relatedProductsContainer.html('<div class="no-product">Something went wrong!</div>');
             }
         });
-    });
-
-});
-
-$(document).ready(function(){
-
-    $(document).ready(function(){
-
-    // Jab number pe click ho
-    $('.pagination .num').on('click', function(){
-        $('.pagination .num').removeClass('active');
-        $(this).addClass('active');
-    });
-
-    // Right arrow (Next)
-    $('.pagination .arrow-right').on('click', function(){
-        var $active = $('.pagination .num.active');
-        var $next = $active.next('.num');
-
-        if ($next.length) { // agar next element exist karta hai
-            $active.removeClass('active');
-            $next.addClass('active');
-        }
-    });
-
-    // Left arrow (Previous)
-    $(document).ready(function(){
-
-// Jab number pe click ho
-$('.pagination .num').on('click', function(){
-    $('.pagination .num').removeClass('active');
-    $(this).addClass('active');
-});
-
-// Right arrow (Next)
-$('.pagination .arrow-right').on('click', function(){
-    var $active = $('.pagination .num.active');
-    var $next = $active.next('.num');
-
-    if ($next.length) { // agar next element exist karta hai
-        $active.removeClass('active');
-        $next.addClass('active');
     }
-});
-
-// Left arrow (Previous)
-$('.pagination .arrow-left').on('click', function(){
-    var $active = $('.pagination .num.active');
-    var $prev = $active.prev('.num');
-
-    if ($prev.length) { // agar previous element exist karta hai
-        $active.removeClass('active');
-        $prev.addClass('active');
-    }
-});
-
-});
-
-});
 
 });
 

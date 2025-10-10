@@ -84,26 +84,26 @@ font-size:18px !important;
                 <div class="owl-carousel product-img-carousel">
                     <div class="item" data-id="0">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 1"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 1">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                     <div class="item" data-id="1">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 2"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 2">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                     <div class="item" data-id="2">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 3"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 3">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                     <div class="item" data-id="3">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 4"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 4">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                 </div>
@@ -112,26 +112,26 @@ font-size:18px !important;
                 <div class="owl-carousel product-thumb-carousel">
                     <div class="item" data-id="0">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 1"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 1">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                     <div class="item" data-id="1">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 2"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 2">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                     <div class="item" data-id="2">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 3"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 3">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                     <div class="item" data-id="3">
                         <div class="image">
-                            {{-- <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 4"> --}}
-                            <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1">
+                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 4">
+                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
                         </div>
                     </div>
                 </div>
