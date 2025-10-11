@@ -51,17 +51,6 @@ class FrontentController extends Controller
         }
     }
 
-
-    // // Helper method for API calls
-    // private function apiRequest($url, $token = null)
-    // {
-    //     $request = Http::acceptJson();
-    //     if ($token) {
-    //         $request = $request->withToken($token);
-    //     }
-    //     return $request->get($url);
-    // }
-
     private function apiRequest($url, $token = null)
     {
         try {
@@ -109,13 +98,21 @@ class FrontentController extends Controller
                 $this->token ?? null
             );
 
-            if (
-                $getBestSellingProduct->successful() &&
-                $getExploreNetwork->successful() &&
-                $getCommunityStats->successful() &&
-                $getExploreTeam->successful() &&
-                $getBlogs->successful()
-            ) {
+            // dd([
+            //     'bestSelling' => $getBestSellingProduct->successful(),
+            //     'network' => $getExploreNetwork->successful(),
+            //     'stats' => $getCommunityStats->successful(),
+            //     'team' => $getExploreTeam->successful(),
+            //     'blogs' => $getBlogs->successful(),
+            // ]);
+
+            // if (
+            //     $getBestSellingProduct->successful() &&
+            //     $getExploreNetwork->successful() &&
+            //     $getCommunityStats->successful() &&
+            //     $getExploreTeam->successful() &&
+            //     $getBlogs->successful()
+            // ) {
 
                 $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
                 $exploreNetwork = $getExploreNetwork->json('result') ?? [];
@@ -156,11 +153,12 @@ class FrontentController extends Controller
                     'exploreTeamText',
                     'blogs',
                 ));
-            }
+            // } else {
 
-            return view('websitePages.index', ['bestSellingItems' => []]);
+            // }
+
+            // return view('websitePages.index', ['bestSellingItems' => []]);
         } catch (\Exception $e) {
-            // Exception message ko log ya array me return kar sakte ho
             return view('websitePages.index', [
                 'bestSellingItems' => [],
                 'error' => $e->getMessage(),
@@ -276,10 +274,10 @@ class FrontentController extends Controller
     {
         $profile = $this->getProfile();
         $username = $profile['username'];
-    
+
         $page = $request->get('page', 1);
         $itemsPerPage = $request->get('items_per_page', 9); // Default 9 per page
-    
+
         // API call
         $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=9999&page=1&Lan=En";
         $getAllProduct = $this->apiRequest($apiUrl, $this->token ?? null);
@@ -289,7 +287,7 @@ class FrontentController extends Controller
         $sellers = $responseData['payload']['sellers'] ?? [];
         $fresh_products = $responseData['payload']['fresh_products'] ?? [];
         $districts = $responseData['payload']['districts'] ?? [];
- 
+
         $allProducts = $responseData['data'] ?? [];
         $collection = collect($allProducts);
         $paginatedProducts = new LengthAwarePaginator(
@@ -307,7 +305,7 @@ class FrontentController extends Controller
         $pagination['from'] = $from;
         $pagination['to'] = $to;
         $pagination['total'] = $total;
-    
+
         $pagination = [
             'page' => $page,
             'items_per_page' => $itemsPerPage,
@@ -316,7 +314,7 @@ class FrontentController extends Controller
             'from' => $from,
             'to' => $to,
         ];
-    
+
         return view('websitePages.product', compact(
             'paginatedProducts',
             'pagination',
@@ -358,21 +356,21 @@ class FrontentController extends Controller
     {
         $page = (int) $request->get('page', 1);
         $itemsPerPage = (int) $request->get('items_per_page', 2); // <-- per page items configurable
-    
+
         // Fetch all related products from API (no pagination needed there)
         $getRelatedProduct = $this->apiRequest(
             "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode,
             $this->token ?? null
         );
-    
+
         if ($getRelatedProduct->successful()) {
             $productArray = $getRelatedProduct->json()['data'] ?? [];
             $collection = collect($productArray);
-    
+
             if ($collection->isEmpty()) {
                 return response()->json(['related_products' => [], 'pagination' => []]);
             }
-    
+
             // Paginate manually
             $paginatedProducts = new \Illuminate\Pagination\LengthAwarePaginator(
                 $collection->forPage($page, $itemsPerPage),
@@ -381,7 +379,7 @@ class FrontentController extends Controller
                 $page,
                 ['path' => url()->current()]
             );
-    
+
             return response()->json([
                 'related_products' => array_values($paginatedProducts->items()),
                 'pagination' => [
@@ -394,11 +392,11 @@ class FrontentController extends Controller
                 ]
             ]);
         }
-    
+
         return response()->json(['related_products' => [], 'pagination' => []]);
     }
-    
-    
+
+
 
     // public function community()
     // {
@@ -410,7 +408,7 @@ class FrontentController extends Controller
     //         $this->token ?? null
     //     );
 
-    //     if ($getCommunity->successful()) { 
+    //     if ($getCommunity->successful()) {
     //         $community = $getCommunity->json('data') ?? [];
     //         foreach ($community as &$post) {
     //             $getPostComment = $this->apiRequest(
@@ -444,8 +442,8 @@ class FrontentController extends Controller
             $this->token ?? null
         );
 
-        
-        if ($getCommunity->successful()) { 
+
+        if ($getCommunity->successful()) {
             $responseData = $getCommunity->json();
             $community = $responseData['data'] ?? [];
             $pagination = $responseData['payload']['pagination'] ?? [];

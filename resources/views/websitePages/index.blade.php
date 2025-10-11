@@ -186,76 +186,6 @@
         </div>
     </section>
 
-    <!-- Item List -->
-    <?php
-    $bestSellingProducts = [
-        [
-            'image' => asset('assets/Images/items/1.png'),
-            'sin' => 'ලංකා ලොකු ළුණු',
-            'eng' => 'Lanka Big Onion',
-            'tam' => 'சிலோன் பெரிய வெங்காயம்',
-            'price' => 'Rs. <span>260.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-        [
-            'image' => asset('assets/Images/items/2.png'),
-            'sin' => 'කොල මිරිස්',
-            'eng' => 'Green Chillies',
-            'tam' => 'பச்சை மிளகாய்',
-            'price' => 'Rs. <span>260.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-        [
-            'image' => asset('assets/Images/items/3.png'),
-            'sin' => 'කරවිල',
-            'eng' => 'Bitter Gourd',
-            'tam' => 'பாகற்காய்',
-            'price' => 'Rs. <span>160.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-        [
-            'image' => asset('assets/Images/items/4.png'),
-            'sin' => 'කුරුඳු කූරු',
-            'eng' => 'Cinnamon Sticks',
-            'tam' => 'இலவங்கப்பட்டை குச்சிகள்',
-            'price' => 'Rs. <span>60.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-        [
-            'image' => asset('assets/Images/items/5.png'),
-            'sin' => 'බතල',
-            'eng' => 'Sweet Potatoes',
-            'tam' => 'இனிப்பு உருளைக்கிழங்கு',
-            'price' => 'Rs. <span>260.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-        [
-            'image' => asset('assets/Images/items/6.png'),
-            'sin' => 'බණ්ඩක්කා',
-            'eng' => 'Ladies Fingers',
-            'tam' => 'வெண்டைக்காய்',
-            'price' => 'Rs. <span>260.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-        [
-            'image' => asset('assets/Images/items/7.png'),
-            'sin' => 'කොල පිපිඤ්ඤා',
-            'eng' => 'Green Cucumber',
-            'tam' => 'பச்சை வெள்ளரி',
-            'price' => 'Rs. <span>160.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-        [
-            'image' => asset('assets/Images/items/8.png'),
-            'sin' => 'බෙල්පෙපර්',
-            'eng' => 'Bell Pepper Green',
-            'tam' => 'பெல் மிளகு பச்சை',
-            'price' => 'Rs. <span>60.00</span> (1kg)',
-            'stock' => '100 Kilo Available in Stock',
-        ],
-    ];
-    ?>
-
     <!-- Best Selling Items Section -->
     <section class="item-list">
         <div class="wrapper">
@@ -282,7 +212,9 @@
                                 <div class="wrap">
                                     <div class="wishlist">
                                         <svg>
-                                            <use xlink:href="#heart"></use>
+                                            @if (session('access_token'))
+                                                <use xlink:href="#heart"></use>
+                                            @endif
                                         </svg>
                                     </div>
                                     <div class="image">
@@ -442,142 +374,47 @@
 
                         <!--     </div>-->
                         <div class="address-slider owl-carousel">
-                            @foreach ($exploreNetwork as $item)
-                                <div class="item">
-                                    <div class="wrap">
-                                        <div class="location">
-                                            <span>{{ $item['city'] }}</span><br>
-                                            {{ $item['address'] }}
-                                        </div>
-                                        <div class="tel">
-                                            <div class="icon">
-                                                <svg>
-                                                    <use xlink:href="#call"></use>
-                                                </svg>
+                            @if (isset($exploreNetwork))
+                                @foreach ($exploreNetwork as $item)
+                                    <div class="item">
+                                        <div class="wrap">
+                                            <div class="location">
+                                                <span>{{ $item['city'] }}</span><br>
+                                                {{ $item['address'] }}
                                             </div>
+                                            <div class="tel">
+                                                <div class="icon">
+                                                    <svg>
+                                                        <use xlink:href="#call"></use>
+                                                    </svg>
+                                                </div>
 
-                                            <a href="tel:{{ $item['phone'] }}" class="number">{{ $item['phone'] }}</a>
-                                        </div>
-                                        <div class="mail">
-                                            <div class="icon">
-                                                <svg>
-                                                    <use xlink:href="#email"></use>
-                                                </svg>
+                                                <a href="tel:{{ $item['phone'] }}" class="number">{{ $item['phone'] }}</a>
                                             </div>
-                                            <a href="mailto:{{ $item['email'] }}"
-                                                class="email">{{ $item['email'] }}</a>
+                                            <div class="mail">
+                                                <div class="icon">
+                                                    <svg>
+                                                        <use xlink:href="#email"></use>
+                                                    </svg>
+                                                </div>
+                                                <a href="mailto:{{ $item['email'] }}"
+                                                    class="email">{{ $item['email'] }}</a>
+                                            </div>
+                                            <a href="#" target="_blank" class="common-btn-1 btn-secondary">
+                                                <svg>
+                                                    <use xlink:href="#btn_arr"></use>
+                                                </svg>
+                                                Get Directions
+                                            </a>
                                         </div>
-                                        <a href="#" target="_blank" class="common-btn-1 btn-secondary">
-                                            <svg>
-                                                <use xlink:href="#btn_arr"></use>
-                                            </svg>
-                                            Get Directions
-                                        </a>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
     </section>
-
-    <!-- Journal Section -->
-    {{-- <section class="journal-section">
-        <div class="wrapper">
-            <div class="col-1">
-                <div class="content">
-                    <div class="top">
-                        <div class="title">
-                            Online Journal
-                        </div>
-                        <div class="desc">
-                            Morem Insum Dolorsitame Consectetureon Mdiniscine Elitsed Doeiusmod
-                        </div>
-                    </div>
-                    <a href="{{ url('/posts') }}" id = "blogBtn" class="common-btn-1 btn-secondary">
-                        <svg>
-                            <use xlink:href="#btn_arr"></use>
-                        </svg>
-                        Explore
-                    </a>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="journal-carousel owl-carousel">
-                    <div class="open-modal-btn item" style="cursor:pointer">
-                        <div class="image">
-                            <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image">
-                        </div>
-                        <div class="content">
-                            <div class="category">Market Access</div>
-                            <div class="desc">
-                                <div class="title">
-                                    Breaking Barriers Connecting Farmers to Markets
-                                </div>
-                                <div class="date">
-                                    November 18, 2024
-                                </div>
-                                <span class="open-modal-btn common-btn-1 btn-secondary">
-                                    <svg>
-                                        <use xlink:href="#btn_arr"></use>
-                                    </svg>
-                                    Explore
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item white open-modal-btn" style="cursor:pointer">
-                        <div class="image">
-                            <img src="{{ asset('assets/Images/jwbg.jpg') }}" alt="journal Image">
-                        </div>
-                        <div class="content">
-                            <div class="category">Market Access</div>
-                            <div class="desc">
-                                <div class="title">
-                                    Breaking Barriers Connecting Farmers to Markets
-                                </div>
-                                <div class="date">
-                                    November 18, 2024
-                                </div>
-                                <span class="open-modal-btn common-btn-1 btn-secondary">
-                                    <svg>
-                                        <use xlink:href="#btn_arr"></use>
-                                    </svg>
-                                    Explore
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item open-modal-btn" style="cursor:pointer">
-                        <div class="image">
-                            <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image">
-                        </div>
-                        <div class="content">
-                            <div class="category">Market Access</div>
-                            <div class="desc">
-                                <div class="title">
-                                    Breaking Barriers Connecting Farmers to Markets
-                                </div>
-                                <div class="date">
-                                    November 18, 2024
-                                </div>
-                                <span class="common-btn-1">
-                                    <svg>
-                                        <use xlink:href="#btn_arr"></use>
-                                    </svg>
-                                    Explore
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section> --}}
 
     <!-- Journal Section -->
     <section class="journal-section">
@@ -602,32 +439,58 @@
             </div>
             <div class="col-2">
                 <div class="journal-carousel owl-carousel">
-                    @foreach ($blogs as $item)
-                        <a href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item">
-                        {{-- <div class="item open-modal-btn" style="cursor:pointer"> --}}
-                            <div class="image">
-                                {{-- <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image"> --}}
-                                <img src="{{ $item['imageUri'].'/'.$item['image'] }}" alt="journal Image">
-                            </div>
-                            <div class="content">
-                                <div class="category">{{ $item['category'] ?? 'Market Access' }}</div>
-                                <div class="desc">
-                                    <div class="title">
-                                        {{ $item['subject'] ?? 'Breaking Barriers Connecting Farmers to Markets' }}
-                                    </div>
-                                    <div class="date">
-                                        {{ Carbon\Carbon::parse($item['createdOn'])->format('F d, Y') }}
-                                    </div>
-                                    <span class="common-btn-1">
-                                        <svg><use xlink:href="#btn_arr"></use></svg>
-                                        Explore
-                                    </span>
-
+                    @if (isset($blogs))
+                        @foreach ($blogs as $item)
+                            <a href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item">
+                            {{-- <div class="item open-modal-btn" style="cursor:pointer"> --}}
+                                <div class="image">
+                                    {{-- <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image"> --}}
+                                    <img src="{{ $item['imageUri'].'/'.$item['image'] }}" alt="journal Image">
                                 </div>
-                            </div>
-                        {{-- </div> --}}
+                                <div class="content">
+                                    <div class="category">{{ $item['category'] ?? 'Market Access' }}</div>
+                                    <div class="desc">
+                                        <div class="title">
+                                            {{ $item['subject'] ?? 'Breaking Barriers Connecting Farmers to Markets' }}
+                                        </div>
+                                        <div class="date">
+                                            {{ Carbon\Carbon::parse($item['createdOn'])->format('F d, Y') }}
+                                        </div>
+                                        <span class="common-btn-1">
+                                            <svg><use xlink:href="#btn_arr"></use></svg>
+                                            Explore
+                                        </span>
+
+                                    </div>
+                                </div>
+                            {{-- </div> --}}
+                                </a>
+                        @endforeach
+                    @else
+                        @for ($i = 0; $i < 2; $i++)
+                            <a href="#" class="open-modal-btn item" style="text-decoration: none; color: inherit;">
+                                <div class="image">
+                                    <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image">
+                                </div>
+
+                                <div class="content">
+                                    <div class="category">Market Access</div>
+                                    <div class="desc">
+                                        <div class="title">
+                                            Breaking Barriers Connecting Farmers to Markets
+                                        </div>
+                                        <div class="date">
+                                            November 18, 2024
+                                        </div>
+                                        <span class="common-btn-1">
+                                            <svg><use xlink:href="#btn_arr"></use></svg>
+                                            Explore
+                                        </span>
+                                    </div>
+                                </div>
                             </a>
-                    @endforeach
+                        @endfor
+                    @endif
                 </div>
             </div>
         </div>
@@ -673,36 +536,37 @@
             </div>
             <div class="col-2">
                 <div class="community-slider owl-carousel">
-                    {{-- @foreach ($community_stats as $stat)
-                    <div class="item">
-                        <div class="icon">
-                            <svg>
-                                <use xlink:href="#com_2"></use>
-                            </svg>
-                        </div>
-                        <div class="content">
-                            <div class="title">{{$stat['title']}}</div>
-                            <div class="sub-title">{{$stat['sub_title']}}</div>
-                            <div class="desc">{{$stat['desc']}}</div>
-                        </div>
-                    </div>
-                @endforeach --}}
-
-
-                    @foreach ($communityStats as $stat)
-                        <div class="item">
-                            <div class="icon">
-                                <svg>
-                                    <use xlink:href="{{ $stat['icon'] }}"></use>
-                                </svg>
+                    @if (isset($communityStats))
+                        @foreach ($communityStats as $stat)
+                            <div class="item">
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="{{ $stat['icon'] }}"></use>
+                                    </svg>
+                                </div>
+                                <div class="content">
+                                    <div class="title">{{ $stat['title'] }}</div>
+                                    <div class="sub-title">{{ $stat['sub_title'] }}</div>
+                                    <div class="desc">{{ $stat['desc'] }}</div>
+                                </div>
                             </div>
-                            <div class="content">
-                                <div class="title">{{ $stat['title'] }}</div>
-                                <div class="sub-title">{{ $stat['sub_title'] }}</div>
-                                <div class="desc">{{ $stat['desc'] }}</div>
+                        @endforeach
+                    @else
+                        @foreach ($community_stats as $stat)
+                            <div class="item">
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#com_2"></use>
+                                    </svg>
+                                </div>
+                                <div class="content">
+                                    <div class="title">{{$stat['title']}}</div>
+                                    <div class="sub-title">{{$stat['sub_title']}}</div>
+                                    <div class="desc">{{$stat['desc']}}</div>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
 
 
 
@@ -741,7 +605,7 @@
         <div class="wrapper">
             <div class="col-1">
                 <div class="common-title">
-                    {{ $exploreTeamText }}
+                    {{ isset($exploreTeamText) ?? 'Explore our team' }}
                 </div>
                 <a href="{{ url('/product') }}" class="common-btn-1 btn-secondary">
                     <svg>
@@ -752,17 +616,31 @@
             </div>
             <div class="col-2">
                 <div class="team-slider owl-carousel">
-                    @foreach ($exploreTeam as $member)
-                        <div class="item">
-                            <div class="image">
-                                <img src="{{ $member['imageUri'] }}" alt="{{ $member['imageUri'] }}">
+                    @if (isset($exploreTeam))
+                        @foreach ($exploreTeam as $member)
+                            <div class="item">
+                                <div class="image">
+                                    <img src="{{ $member['imageUri'] }}/{{ $member['image'] }}" alt="{{ $member['imageUri'] }}">
+                                </div>
+                                <div class="content">
+                                    <div class="name">{{ $member['name'] }}</div>
+                                    <div class="position">{{ $member['position'] }}</div>
+                                </div>
                             </div>
-                            <div class="content">
-                                <div class="name">{{ $member['name'] }}</div>
-                                <div class="position">{{ $member['position'] }}</div>
+                        @endforeach
+                    @else
+                        @foreach ($team_members as $member)
+                            <div class="item">
+                                <div class="image">
+                                    <img src="{{ $member['image'] }}" alt="">
+                                </div>
+                                <div class="content">
+                                    <div class="name">{{ $member['name'] }}</div>
+                                    <div class="position">{{ $member['position'] }}</div>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

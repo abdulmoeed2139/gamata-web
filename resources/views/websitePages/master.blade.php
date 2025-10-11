@@ -527,7 +527,7 @@
                                     <use xlink:href="#user"></use>
                                 </svg>
                                 <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
-                                <label for="profile ">{{ $username ?? 'Login' }}</label>
+                                <label for="profile ">{{ isset($username) ? (strlen($username) > 10 ? substr($username, 0, 8) . '..' : $username) : 'Login' }}</label>
                                 <div class="arrow-down"></div>
                             </a>
                         @else
@@ -537,7 +537,7 @@
                                 </svg>
                                 <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
                                 <label for="profile">Login</label>
-                               
+
                             </a>
                         @endif
 
@@ -634,7 +634,7 @@
         !Request::is('login-by-password')
     )
 
-    
+
         <div class="popup">
             <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
         </div>
@@ -657,7 +657,7 @@
                <div class="popup">
                                     <!-- <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup"> -->
                </div>
-                                        
+
           @endif
     @endif
 
@@ -1516,7 +1516,7 @@
         // profileDropdown.classList.remove('active');
         // });
 
-        
+
 
 
         const openBtn = document.querySelector('.popup');
@@ -1620,24 +1620,24 @@
 
     document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(".auth-btn");
-  
+
     buttons.forEach(button => {
       if (!button.querySelector(".spinner")) {
         const spinner = document.createElement("span");
         spinner.classList.add("spinner");
         spinner.style.display = "none";
         spinner.innerHTML = `
-          <img src="{{ asset('assets/Images/iconn.png') }}" 
+          <img src="{{ asset('assets/Images/iconn.png') }}"
                alt="Gamata Logo"
                class="login-logo-uni">
         `;
         button.appendChild(spinner);
       }
-  
+
       const spinner = button.querySelector(".spinner");
       const originalHTML = button.innerHTML; // button ka original content save
       const icon = button.querySelector("img"); // button ke andar icon agar ho
-  
+
       // Back press par button restore ho jaye
       window.addEventListener("pageshow", function () {
         button.classList.remove("loading");
@@ -1646,27 +1646,27 @@
         button.style.pointerEvents = "auto";
         button.innerHTML = originalHTML;
       });
-  
+
       button.addEventListener("click", function (e) {
-  
+
         // Button disable aur loading state
         button.classList.add("loading");
         button.style.pointerEvents = "none";
-  
+
         spinner.style.display = "inline-block";
         button.innerHTML = `
           Please wait...  <span class="spinner">
-          
+
           </span>
         `;
-  
+
         // Spinner animation (optional)
         const newImg = button.querySelector(".spin-anim");
       //   if (newImg) {
       //     newImg.style.transition = "transform 0.3s linear";
       //     newImg.style.animation = "spin 1s linear infinite";
       //   }
-  
+
         setTimeout(() => {
           button.classList.remove("loading");
           button.innerHTML = originalHTML;

@@ -263,7 +263,11 @@ color:#fff  !important;
                             <div class="items">
                                 <div class="wrap">
                                     <div class="wishlist">
-                                        <svg><use xlink:href="#heart"></use></svg>
+                                        <svg>
+                                            @if (session('access_token'))
+                                                <use xlink:href="#heart"></use>
+                                            @endif
+                                        </svg>
                                     </div>
                                     <div class="image">
                                         <img src="{{$item['imageUrl'].'/'.$item['childImage']}}" alt="Best Selling Item">
@@ -333,7 +337,7 @@ color:#fff  !important;
 <script>
 $(document).ready(function(){
 
-    let currentChildCode = null; 
+    let currentChildCode = null;
     let relatedProductsContainer = $('#food-list');
 
     $('.product-link').click(function(e) {
@@ -347,7 +351,12 @@ $(document).ready(function(){
         $('.pagination').empty();
         relatedProductsContainer.empty();
         $('.related-pagination').remove();
-
+        let isLoggedIn = {{ session('access_token') ? 'true' : 'false' }};
+        if (isLoggedIn) {
+            wishlistIcon = `<svg><use xlink:href="#heart"></use></svg>`;
+        } else {
+            wishlistIcon = '';
+        }
         $.ajax({
             url: '{{ url("related-products") }}/' + childCode,
             type: 'GET',
@@ -366,7 +375,7 @@ $(document).ready(function(){
                                     <div class="items">
                                         <div class="wrap">
                                             <div class="wishlist">
-                                                <svg><use xlink:href="#heart"></use></svg>
+                                                <svg>${wishlistIcon}</use></svg>
                                             </div>
                                             <div class="image">
                                                 <img src="${item.imageUri}/${item.image01}" alt="Product">
