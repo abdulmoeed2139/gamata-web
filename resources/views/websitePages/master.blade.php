@@ -691,7 +691,7 @@
                     </div>
                     <div class="box-2">
                         <form id="emailForm" action="/" method="post">
-                            <input type="email" name="newsletter-email" id="email"
+                            <input type="email" name="newsletter-email" id="newsletter-email"
                                 placeholder="Enter Your Email Here" required>
                         </form>
                     </div>
@@ -1473,7 +1473,7 @@
                     data: $("#subscribeForm").serialize(),
                     success: function(response) {
                         toastr.success(response.msg);
-
+                        $("#newsletter-email").val("");
                         console.log(response);
                     },
                     error: function(xhr) {
@@ -1481,7 +1481,9 @@
                         if (xhr.responseJSON && xhr.responseJSON.msg) {
                             errorMsg = xhr.responseJSON.msg;
                         }
-                        alert(errorMsg);
+                        // alert(errorMsg);
+                        $("#newsletter-email").val("");
+                        toastr.error(errorMsg);
                         console.error(xhr);
                     }
                 });

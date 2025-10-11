@@ -605,7 +605,7 @@
         <div class="wrapper">
             <div class="col-1">
                 <div class="common-title">
-                    {{ isset($exploreTeamText) ?? 'Explore our team' }}
+                    {{ $exploreTeamText ?? 'Explore our team' }}
                 </div>
                 <a href="{{ url('/product') }}" class="common-btn-1 btn-secondary">
                     <svg>
