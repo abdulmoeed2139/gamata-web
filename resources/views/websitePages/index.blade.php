@@ -439,7 +439,7 @@
             </div>
             <div class="col-2">
                 <div class="journal-carousel owl-carousel">
-                    @if (isset($blogs))
+                    @if (isset($blogs) && !empty($blogs))
                         @foreach ($blogs as $item)
                             <a href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item">
                             {{-- <div class="item open-modal-btn" style="cursor:pointer"> --}}
