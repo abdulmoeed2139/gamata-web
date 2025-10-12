@@ -270,7 +270,7 @@ color:#fff  !important;
                                         </svg>
                                     </div>
                                     <div class="image">
-                                        <img src="{{$item['imageUrl'].'/'.$item['childImage']}}" alt="Best Selling Item">
+                                        <img src="{{$item['imageUri'].'/'.$item['imageUrl']}}" alt="Best Selling Item">
                                     </div>
                                     <div class="content">
                                         <div class="pro-name">
