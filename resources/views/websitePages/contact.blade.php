@@ -5,7 +5,7 @@
         <div class="product-banner">
             <div class="wrapper">
                 <div class="breadcrum">
-                    <a href="{{ url('/index') }}" class="link">
+                    <a href="{{ url(app()->getLocale().'/index') }}" class="link">
                         {{ __('messages.home') }}
                     </a>
                     <svg>
@@ -52,7 +52,7 @@
 
 
 
-              <form class="login-form-uni" id="contactForm" action="{{ url('/insert-anonymous-inquiry') }}" method="POST">
+              <form class="login-form-uni" id="contactForm" action="{{ url(app()->getLocale().'/insert-anonymous-inquiry') }}" method="POST">
                     @csrf
                     <div id="Contactform">
 

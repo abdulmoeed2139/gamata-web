@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index()
     {
         if(session('access_token')){
-            return redirect()->route('index');
+            return redirect()->route('index', app()->getLocale());
         } else{
             return view('auth.login');
         }

@@ -1,4 +1,4 @@
-{{-- 750800036,777397860,0750800984,770923527, 0771234312, 771000312
+{{-- 750800036,777397860,0750800984,770923527, 0771234312, 771000312, 765783782
 khabeeskhan123@gmail.com --}}
 
 @extends('websitePages.master')
@@ -108,6 +108,8 @@ khabeeskhan123@gmail.com --}}
                     </label>
                     <input type="email" id="email" value="{{ old('email') }}" class="login-input-uni"
                         name="email" required>
+                    <input type="hidden" id="phone" value="{{ request('mobile') }}"
+                        name="phone" required>
                     @error('email')
                         <p class="text-danger"> {{ $message }}</p>
                     @enderror
@@ -192,7 +194,7 @@ khabeeskhan123@gmail.com --}}
                     {{ __('messages.recaptcha_note') }}
                     <a href="{{ asset('assets/downloads/Gamata Privacy Policy.pdf') }}" download="Gamata Privacy Policy.pdf">
                         {{ __('messages.privacy_policy') }}
-                    </a> 
+                    </a>
                     {{ __('messages.and') }}
                     <a href="{{ asset('assets/downloads/Gamata-legal-v1.0-DRAFT.pdf') }}" download="Gamata-legal-v1.0-DRAFT.pdf">
                         {{ __('messages.terms_conditions') }}
@@ -215,6 +217,6 @@ khabeeskhan123@gmail.com --}}
             }, 3000);
         });
 
-      
+
     </script>
 @endsection

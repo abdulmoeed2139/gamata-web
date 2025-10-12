@@ -492,7 +492,7 @@
         !Request::is('/') &&
         !Request::is('login') &&
         !Request::is('verify-otp') &&
-        !Request::is('register') &&
+        !Request::is('register.form') &&
         !Request::is('forgot-password') &&
         !Request::is('forgot-password/verify-otp') &&
         !Request::is('forgot-password/reset') &&
@@ -593,14 +593,14 @@
                                         <a href="#">{{ __('messages.settings') }}</a>
                                     </li>
                                     <li class="profile-menus">
-                                        <a href="{{ route('logout') }}">{{ __('messages.logout') }}</a>
+                                        <a href="{{ route('logout', app()->getLocale()) }}">{{ __('messages.logout') }}</a>
                                     </li>
                                 </ul>
 
                             </div>
                         @endif
 
-                        <a href="{{ url('/en/app-banner') }}" class="icon cart">
+                        <a href="{{ url(app()->getLocale().'/app-banner') }}" class="icon cart">
                             <svg>
                                 <use xlink:href="#bag"></use>
                             </svg>
@@ -675,7 +675,7 @@
 
             <!-- Search Bar (Hidden by Default) -->
             <div class="search-bar">
-                <form class="search-form" action="{{ url('/en/product') }}" method="GET">
+                <form class="search-form" action="{{ url(app()->getLocale().'/product') }}" method="GET">
                     <div class="wrapper">
                         <svg>
                             <use xlink:href="#search"></use>
@@ -689,27 +689,19 @@
 
         </header>
     @endif
-    <!-- @if (
-        !Request::is('/') &&
-        !Request::is('login') &&
-        !Request::is('verify-otp') &&
-        !Request::is('register') &&
-        !Request::is('forgot-password') &&
-        !Request::is('forgot-password/verify-otp') &&
-        !Request::is('forgot-password/reset') &&
-        !Request::is('login-by-password')
-    )
 
 
-        <div class="popup">
-            <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
-        </div>
-    @endif -->
+
+
+
+
+
+
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
         !Request::is('verify-otp') &&
-        !Request::is('register') &&
+        !Request::is('register.form') &&
         !Request::is('forgot-password') &&
         !Request::is('forgot-password/verify-otp') &&
         !Request::is('forgot-password/reset') &&
@@ -734,7 +726,7 @@
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
-        !Request::is('register') &&
+        !Request::is('register.form') &&
         !Request::is('forgot-password') &&
         !Request::is('forgot-password/verify-otp') &&
         !Request::is('forgot-password/reset') &&
@@ -1487,7 +1479,7 @@
     $(".open-modal-btn").on("click", function () {
         var code = $(this).data("code");
         $.ajax({
-            url: "{{ url('get-blog') }}/" + code, // Laravel blade me chalega
+            url: "{{ url('/get-blog') }}/" + code, // Laravel blade me chalega
             type: "get",
             success: function (response) {
                 var rawDate = response.data.createdOn;
@@ -1497,7 +1489,6 @@
                     "July", "August", "September", "October", "November", "December"
                 ];
                 var formattedDate = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-
                 $("#blog-content").html(response.data.body_English);
                 $("#blog-date").text(formattedDate);
                 $("#blog-ctg").text(response.data.category);
@@ -1546,7 +1537,7 @@
                                 // hidden input fill karo
                 $("#emailForSubscribe").val(emailValue);
                 $.ajax({
-                    url: "{{ url('subscribe') }}",
+                    url: "{{ url(app()->getLocale().'/subscribe') }}",
                     type: "POST",
                     data: $("#subscribeForm").serialize(),
                     success: function(response) {

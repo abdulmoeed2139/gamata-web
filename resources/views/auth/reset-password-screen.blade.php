@@ -59,7 +59,7 @@
             <input type="password" id="confirmPassword" name="confirmPassword" class="login-input-uni">
 
             <button type="submit" class="auth-btn common-btn-1">
-                {{ __('reset_password') }} 
+                {{ __('reset_password') }}
                 <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
             </button>
         </div>
@@ -100,7 +100,7 @@
                 $("#passwordError")
                     .text("Both fields are required.")
                     .show()
-                   
+
                 return;
             }
 
@@ -108,13 +108,13 @@
                 $("#passwordError")
                     .text("Passwords do not match.")
                     .show()
-                  
+
                 return;
             }
 
             let formData= $(this).serialize();
             $.ajax({
-                url: "{{ url('/forgot-password/reset') }}",
+                url: "{{ url(app()->getLocale().'/forgot-password/reset') }}",
                 type: "POST",
                 data: formData,
                 success:function(response){
@@ -124,7 +124,7 @@
                             .text(response.message) // ✅ fixed key
                             .removeClass("hidden")
                             .show()
-                          
+
                             window.location.href="{{ url('/') }}";
                     }
                 },
@@ -143,7 +143,7 @@
                         .text(errorMsg)
                         .removeClass("hidden")
                         .show()
-                       
+
                 }
             });
         });

@@ -6,7 +6,7 @@
     <div class="product-banner">
         <div class="wrapper">
             <div class="breadcrum">
-                <a href="{{ url('/index') }}" class="link">{{ __('messages.home') }}</a>
+                <a href="{{ url(app()->getLocale().'/index') }}" class="link">{{ __('messages.home') }}</a>
                 <svg><use xlink:href="#breadcrum"></use></svg>
                 <div class="current">{{ __('messages.journal') }}</div>
             </div>

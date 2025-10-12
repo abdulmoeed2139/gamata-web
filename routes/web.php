@@ -7,6 +7,15 @@ use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Auth\ForgotPasswordCustomController;
 
 
+
+
+Route::get('/', function(){
+    return redirect(app()->getLocale().'/login');
+});
+Route::get('/related-products/{childCode}', [FrontentController::class, 'relatedProducts'])->name('related-products');
+Route::get('/get-blog/{blog_id}', [FrontentController::class, 'getSingleBlog'])->name('get-single-blog');
+
+
 // Language-prefixed group
 Route::group(['prefix' => '{lang}', 'middleware' => 'setlocale'], function () {
 
@@ -19,16 +28,13 @@ Route::group(['prefix' => '{lang}', 'middleware' => 'setlocale'], function () {
     Route::post('/password-login', [AuthController::class, 'loginByPassword'])->name('loginByPassword');
     Route::get('/posts', [FrontentController::class, 'blogs'])->name('blogs');
     Route::post('/subscribe', [FrontentController::class, 'subscribe'])->name('subscribe');
-    Route::get('/get-blog/{blog_id}', [FrontentController::class, 'getSingleBlog'])->name('get-single-blog');
     Route::get('/verify-otp', [FrontentController::class, 'verifyOTP']);
     Route::get('/contact', [FrontentController::class, 'contact'])->name('contact');
-    Route::get('/related-products/{childCode}', [FrontentController::class, 'relatedProducts'])->name('related-products');
     Route::post('/insert-anonymous-inquiry', [FrontentController::class, 'InsertAnonymousInquiry'])->name('contact');
     Route::post('/create-comment', [FrontentController::class, 'createComment'])->name('create-comment');
     Route::post('/create-post', [FrontentController::class, 'createPost'])->name('create-post');
     Route::post('/like-post', [FrontentController::class, 'likePost'])->name('like-post');
-    Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-    // Route::get('/forgot-password', [ForgotPasswordCustomController::class, 'showForgotForm'])->name('password.request');
+    Route::get('/forgot-password', [ForgotPasswordCustomController::class, 'showForgotForm'])->name('password.request');
 
     // Main index page
     Route::get('/index', [FrontentController::class, 'index'])->name('index');
@@ -37,6 +43,7 @@ Route::group(['prefix' => '{lang}', 'middleware' => 'setlocale'], function () {
 
     Route::get('/community', [FrontentController::class, 'community']);
     Route::get('/product-view/{product_id}', [FrontentController::class, 'producttInner']);
+
     Route::get('/element', [HomeController::class, 'element']);
     Route::get('/welcome', [HomeController::class, 'welcome']);
     Route::get('/app-banner', [FrontentController::class, 'appBanner'])->name('appBanner');
@@ -59,7 +66,6 @@ Route::group(['prefix' => '{lang}', 'middleware' => 'setlocale'], function () {
 
 
 // Route::get('/', [HomeController::class, 'index']);
-Route::get('/', [AuthController::class, 'loginForm']);
 Route::get('/resend-otp', [AuthController::class, 'resendOTP']);
 // Route::post('/otp-verify', [AuthController::class, 'getToken']);
 Route::post('/otp-verify', [AuthController::class, 'verifyOtp']);

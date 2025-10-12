@@ -33,7 +33,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('auth.dashboard');
+            return redirect()->route('auth.dashboard', app()->getLocale());
         }
 
         return back()->withErrors([
@@ -53,17 +53,16 @@ class AuthController extends Controller
         $validator= Validator::make($request->all(), [
             'first_name' => 'required',
             'email' => 'required|email',
-            'Phone' => 'required|min:9',
+            'phone' => 'required|min:9',
             'password' => 'required|confirmed|min:8',
         ]);
-
         if($validator->fails()){
             return redirect()->back()->withErrors($validator);
         } else {
             try {
 
                 // Phone number check
-                $phone = $request->Phone;
+                $phone = $request->phone;
                 if (substr($phone, 0, 1) !== '0') {
                     $phone = '0' . $phone;
                 }
@@ -85,7 +84,7 @@ class AuthController extends Controller
                 if($responseData['text']== 'Email '.$request->email.' is already registered.'){
                     return redirect()->back()->with('message', $responseData['text']);
                 }
-                return redirect('/login')->with('message', $responseData['text'] ?? 'Something went wrong');
+                return redirect(app()->getLocale().'/login')->with('message', $responseData['text'] ?? 'Something went wrong');
             } catch (Exception $exp) {
                 return redirect()->back()->with('message', $exp->getMessage() ?? 'Something went wrong');
             }
@@ -96,7 +95,8 @@ class AuthController extends Controller
     public function logout()
     {
         session()->flush();
-        return redirect('/index');
+        return redirect(
+            app()->getLocale().'/index');
     }
 
     // Send OTP
@@ -210,7 +210,7 @@ class AuthController extends Controller
     public function PasswordForm()
     {
         if(session('access_token')){
-            return redirect()->route('index');
+            return redirect()->route('index', app()->getLocale());
         } else{
             return view('auth.password-screen');
         }
@@ -320,7 +320,7 @@ class AuthController extends Controller
             'lan'      => 'en',
         ];
 
-        $response = Http::acceptJson()->post('http://feapi.aethriasolutions.com/api/v1/Account/VerifyOtp?' . http_build_query($params));
+        $response = Http::acceptJson()->asForm()->post('http://feapi.aethriasolutions.com/api/v1/Account/VerifyOtp?' . http_build_query($params));
         $data = $response->json();
         // dd($data);
         if(isset($data['status']) && $data['status']=='s'){

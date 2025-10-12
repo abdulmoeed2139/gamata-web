@@ -95,7 +95,7 @@
         <div class="product-banner">
             <div class="wrapper">
                 <div class="breadcrum">
-                    <a href="{{ url('/index') }}" class="link">
+                    <a href="{{ url(app()->getLocale().'/index') }}" class="link">
                         {{ __('messages.home') }}
 
                     </a>
@@ -108,7 +108,7 @@
                     </div>
                 </div>
                  <div class="heading">{{ __('messages.heading') }}</div>
-                    
+
                 <div class="desc">
                      {{ __('messages.desc') }}</div>
                 </div>
@@ -495,7 +495,7 @@
                             </a>
                         @endif
                     </div> -->
- 
+
                     <div class="pagination postsPagination">
                         {{-- Left Arrow --}}
                         <div class="arrow-left">
@@ -627,7 +627,7 @@
                 e.preventDefault();
                 let formData = new FormData(this);
                 $.ajax({
-                    url: '{{ url('/create-post') }}',
+                    url: '{{ url(app()->getLocale()."/create-post") }}',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -636,209 +636,119 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        console.log('Post created successfully:', response);
-                        alert('Post created successfully!');
-                        $('.write-post-form')[0].reset();
+                        if(response.message){
+                            console.log('Post created successfully:', response);
+                            alert('Post created successfully!');
+                            $('.write-post-form')[0].reset();
 
-                        const newPost = `
-                    <div class="image-post">
-                        <div class="wrapper">
-                            <div class="row-1">
-                                <div class="pofile">
-                                    <div class="image">
-                                        <img src="${URL.createObjectURL(formData.get('coverUpload'))}" alt="user">
-                                    </div>
-                                    <div class="name">
-                                        <div class="text">You</div>
-                                        <div class="date">Just now</div>
-                                    </div>
-                                </div>
-                                <div class="icon">
-                                    <svg><use xlink:href="#three_dot"></use></svg>
-                                </div>
-                            </div>
-                            <div class="row-2">
-                                <div class="text">${formData.get('post_name')}</div>
-                            </div>
-                            <div class="row-3">
-                                <div class="image">
-                                    <img src="${URL.createObjectURL(formData.get('image01'))}" alt="post image">
-                                </div>
-                            </div>
-                            <div class="row-4">
-                                <div class="col-1">
-                                    <div class="box red">
-                                        <div class="icon"><svg><use xlink:href="#heart"></use></svg></div>
-                                        <div class="text">0</div>
-                                    </div>
-                                    <div class="box">
-                                        <div class="icon"><svg><use xlink:href="#msgs"></use></svg></div>
-                                        <div class="text">0</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="image-post">
-                        <div class="wrapper">
-                            <div class="row-5">
-                                <div class="wrap">
-                                    <ul class="main-cmnt">
-                                        <li class="has-sub">
-                                            <div class="wrp">
-                                                <div class="rw-1">
-                                                    <div class="image">
-                                                        <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="dsvv">
-                                                    </div>
+                            const newPost = `
+                                <div class="image-post">
+                                    <div class="wrapper">
+                                        <div class="row-1">
+                                            <div class="pofile">
+                                                <div class="image">
+                                                    <img src="${URL.createObjectURL(formData.get('coverUpload'))}" alt="user">
                                                 </div>
-                                                <div class="rw-2">
-                                                    <div class="cl-1">
-                                                        <div class="name">Kai Kyle</div>
-                                                        <div class="time">12 minutes ago</div>
-                                                    </div>
-                                                    <div class="cl-2">
-                                                        <div class="comment">
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                                                            in voluptate velit esse
-                                                        </div>
-                                                    </div>
-                                                    <div class="cl-3">
-                                                        <div class="wrap">
-                                                            <div class="icon">
-                                                            <svg>
-                                                                <use xlink:href="#heart"></use>
-                                                            </svg>
-                                                            </div>
-                                                            <div class="text">
-                                                                2.3k
-                                                            </div>
-                                                        </div>
-                                                        <div class="wrap">
-                                                            <div class="icon">
-                                                            <svg>
-                                                                <use xlink:href="#msgs"></use>
-                                                            </svg>
-                                                            </div>
-                                                            <div class="text">
-                                                                Reply
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="name">
+                                                    <div class="text">You</div>
+                                                    <div class="date">Just now</div>
                                                 </div>
                                             </div>
-
-                                            <ul class="sub-com">
-                                                <li>
-                                                    <div class="wrp">
-                                                        <div class="rw-1">
-                                                            <div class="image">
-                                                                <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="dsvv">
-                                                            </div>
-                                                        </div>
-                                                        <div class="rw-2">
-                                                            <div class="cl-1">
-                                                                <div class="name">Kai Kyle</div>
-                                                                <div class="time">12 minutes ago</div>
-                                                            </div>
-                                                            <div class="cl-2">
-                                                                <div class="comment">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                                                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                                                                    in voluptate velit esse
-                                                                </div>
-                                                            </div>
-                                                            <div class="cl-3">
-                                                                <div class="wrap">
-                                                                    <div class="icon">
-                                                                    <svg>
-                                                                        <use xlink:href="#heart"></use>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        2.3k
-                                                                    </div>
-                                                                </div>
-                                                                <div class="wrap">
-                                                                    <div class="icon">
-                                                                    <svg>
-                                                                        <use xlink:href="#msgs"></use>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        Reply
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="wrp">
-                                                        <div class="rw-1">
-                                                            <div class="image">
-                                                                <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="dsvv">
-                                                            </div>
-                                                        </div>
-                                                        <div class="rw-2">
-                                                            <div class="cl-1">
-                                                                <div class="name">Kai Kyle</div>
-                                                                <div class="time">12 minutes ago</div>
-                                                            </div>
-                                                            <div class="cl-2">
-                                                                <div class="comment">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                                                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                                                                    in voluptate velit esse
-                                                                </div>
-                                                            </div>
-                                                            <div class="cl-3">
-                                                                <div class="wrap">
-                                                                    <div class="icon">
-                                                                    <svg>
-                                                                        <use xlink:href="#heart"></use>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        2.3k
-                                                                    </div>
-                                                                </div>
-                                                                <div class="wrap">
-                                                                    <div class="icon">
-                                                                    <svg>
-                                                                        <use xlink:href="#msgs"></use>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        Reply
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                            <div class="icon">
+                                                <svg><use xlink:href="#three_dot"></use></svg>
+                                            </div>
+                                        </div>
+                                        <div class="row-2">
+                                            <div class="text">${formData.get('post_name')}</div>
+                                        </div>
+                                        <div class="row-3">
+                                            <div class="image">
+                                                <img src="${URL.createObjectURL(formData.get('image01'))}" alt="post image">
+                                            </div>
+                                        </div>
+                                        <div class="row-4">
+                                            <div class="col-1">
+                                                <div class="box red">
+                                                    <div class="icon"><svg><use xlink:href="#heart"></use></svg></div>
+                                                    <div class="text">0</div>
+                                                </div>
+                                                <div class="box">
+                                                    <div class="icon"><svg><use xlink:href="#msgs"></use></svg></div>
+                                                    <div class="text">0</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row-6">
-                                <div class="sub-btn">
-                                    <a href="#">Show more</a>
+                                <div class="image-post">
+                                    <div class="wrapper">
+                                        <div class="row-5">
+                                            <div class="wrap">
+                                                <ul class="main-cmnt">
+                                                    <li class="has-sub">
+                                                        <div class="wrp">
+                                                            <div class="rw-1">
+                                                                <div class="image">
+                                                                    <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="dsvv">
+                                                                </div>
+                                                            </div>
+                                                            <div class="rw-2">
+                                                                <div class="cl-1">
+                                                                    <div class="name">Kai Kyle</div>
+                                                                    <div class="time">12 minutes ago</div>
+                                                                </div>
+                                                                <div class="cl-2">
+                                                                    <div class="comment">
+                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                                                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                                                                        in voluptate velit esse
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cl-3">
+                                                                    <div class="wrap">
+                                                                        <div class="icon">
+                                                                        <svg>
+                                                                            <use xlink:href="#heart"></use>
+                                                                        </svg>
+                                                                        </div>
+                                                                        <div class="text">
+                                                                            2.3k
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="wrap">
+                                                                        <div class="icon">
+                                                                        <svg>
+                                                                            <use xlink:href="#msgs"></use>
+                                                                        </svg>
+                                                                        </div>
+                                                                        <div class="text">
+                                                                            Reply
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row-6">
+                                            <div class="sub-btn">
+                                                <a href="#">Show more</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                        $('.postDev').prepend(newPost);
-
+                            `;
+                            $('.postDev').prepend(newPost);
+                        } else {
+                            console.log('Error:', response);
+                        }
                     },
                     error: function(xhr) {
                         console.log('Error:', xhr.responseText);
-                        window.location.href = "{{ url('/login') }}";
+                        // window.location.href = "{{ url(app()->getLocale().'/login') }}";
                     }
                 });
             });
@@ -849,7 +759,7 @@
                 var form = $(this);
                 var formData = form.serialize();
                 $.ajax({
-                    url: '{{ url("create-comment") }}',
+                    url: '{{ url(app()->getLocale()."/create-comment") }}',
                     method: 'POST',
                     data: formData,
                     success: function(response) {
@@ -895,7 +805,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.log(error);
-                        window.location.href = "{{ url('/login') }}";
+                        window.location.href = "{{ url(app()->getLocale().'/login') }}";
                     }
                 })
             });
@@ -912,7 +822,7 @@
                 let currentCount = parseInt(countElement.text().replace(/,/g, '')) || 0;
 
                 $.ajax({
-                    url: '{{ url('/like-post') }}', // apni route ka URL
+                    url: '{{ url(app()->getLocale()."/like-post") }}', // apni route ka URL
                     type: 'POST',
                     data: {
                         postId: postId,
@@ -935,7 +845,7 @@
                     },
                     error: function(xhr) {
                         console.log('Error:', xhr.responseText);
-                        window.location.href ="{{ url('/login') }}";
+                        window.location.href ="{{ url(app()->getLocale().'/login') }}";
                     }
                 });
             });

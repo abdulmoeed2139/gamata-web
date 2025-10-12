@@ -106,58 +106,46 @@ class FrontentController extends Controller
             //     'blogs' => $getBlogs->successful(),
             // ]);
 
-            // if (
-            //     $getBestSellingProduct->successful() &&
-            //     $getExploreNetwork->successful() &&
-            //     $getCommunityStats->successful() &&
-            //     $getExploreTeam->successful() &&
-            //     $getBlogs->successful()
-            // ) {
+            $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
+            $exploreNetwork = $getExploreNetwork->json('result') ?? [];
+            $exploreTeam = $getExploreTeam->json('result') ?? [];
+            $exploreTeamText = $getExploreTeam->json('text') ?? [];
+            $result = $getCommunityStats->json('result') ?? [];
+            $communityText = $getCommunityStats->json('text') ?? [];
+            $blogs = $getBlogs->json('data') ?? [];
 
-                $bestSellingItems = $getBestSellingProduct->json('data') ?? [];
-                $exploreNetwork = $getExploreNetwork->json('result') ?? [];
-                $exploreTeam = $getExploreTeam->json('result') ?? [];
-                $exploreTeamText = $getExploreTeam->json('text') ?? [];
-                $result = $getCommunityStats->json('result') ?? [];
-                $communityText = $getCommunityStats->json('text') ?? [];
-                $blogs = $getBlogs->json('data') ?? [];
+            $communityStats = [
+                [
+                    "icon" => "#com_1",
+                    "title" => $result['registeredUsers'] ?? 'N/A',
+                    "sub_title" => "Registered Users",
+                    "desc" => "At Gamata.com, we are proud to connect farmers, consumers, and agricultural enthusiasts in a thriving online ecosystem."
+                ],
+                [
+                    "icon" => "#com_2",
+                    "title" => $result['freshProducts'] ?? 'N/A',
+                    "sub_title" => "Fresh Products",
+                    "desc" => "Offering a wide range of fresh vegetables, farm supplies, and essential products, all conveniently in one place."
+                ],
+                [
+                    "icon" => "#com_3",
+                    "title" => $result['deliveries'] ?? 'N/A',
+                    "sub_title" => "Deliveries",
+                    "desc" => "Building strong connections between farms and homes across regions, fostering community and sustainable living."
+                ]
+            ];
 
-                $communityStats = [
-                    [
-                        "icon" => "#com_1",
-                        "title" => $result['registeredUsers'] ?? 'N/A',
-                        "sub_title" => "Registered Users",
-                        "desc" => "At Gamata.com, we are proud to connect farmers, consumers, and agricultural enthusiasts in a thriving online ecosystem."
-                    ],
-                    [
-                        "icon" => "#com_2",
-                        "title" => $result['freshProducts'] ?? 'N/A',
-                        "sub_title" => "Fresh Products",
-                        "desc" => "Offering a wide range of fresh vegetables, farm supplies, and essential products, all conveniently in one place."
-                    ],
-                    [
-                        "icon" => "#com_3",
-                        "title" => $result['deliveries'] ?? 'N/A',
-                        "sub_title" => "Deliveries",
-                        "desc" => "Building strong connections between farms and homes across regions, fostering community and sustainable living."
-                    ]
-                ];
+            return view('websitePages.index', compact(
+                'username',
+                'bestSellingItems',
+                'exploreNetwork',
+                'communityStats',
+                'communityText',
+                'exploreTeam',
+                'exploreTeamText',
+                'blogs',
+            ));
 
-                return view('websitePages.index', compact(
-                    'username',
-                    'bestSellingItems',
-                    'exploreNetwork',
-                    'communityStats',
-                    'communityText',
-                    'exploreTeam',
-                    'exploreTeamText',
-                    'blogs',
-                ));
-            // } else {
-
-            // }
-
-            // return view('websitePages.index', ['bestSellingItems' => []]);
         } catch (\Exception $e) {
             return view('websitePages.index', [
                 'bestSellingItems' => [],
@@ -170,7 +158,7 @@ class FrontentController extends Controller
     public function verifyOTP()
     {
         if(session('access_token')){
-            return redirect()->route('index');
+            return redirect()->route('index', app()->getLocale());
         } else {
             return view('auth.verify-otp');
         }
@@ -327,13 +315,13 @@ class FrontentController extends Controller
     }
 
 
-    public function producttInner($sellcode)
+    public function producttInner($lang, $sellcode)
     {
         $accessToken = session('access_token');
         $profile= $this->getProfile();
         $username= $profile['username'];
         $getProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Product/ViewMore/6?mobile=0776563157&lan=En&parent=0'.$sellcode,
+            'http://feapi.aethriasolutions.com/api/v1/Product/ViewMore/6?mobile=0776563157&lan=En&parent='.$sellcode,
             $this->token ?? null
         );
 
@@ -355,7 +343,7 @@ class FrontentController extends Controller
     public function relatedProducts($childCode, Request $request)
     {
         $page = (int) $request->get('page', 1);
-        $itemsPerPage = (int) $request->get('items_per_page', 2); // <-- per page items configurable
+        $itemsPerPage = (int) $request->get('items_per_page', 2);
 
         // Fetch all related products from API (no pagination needed there)
         $getRelatedProduct = $this->apiRequest(
@@ -547,18 +535,20 @@ class FrontentController extends Controller
 
     public function createPost(Request $request)
     {
+
         if(session('access_token')){
             $profile= $this->getProfile();
             $FK_UserID= $profile['FK_UserID'];
-            $validator= Validator::make($request->all(), [
-                'coverImageUpload' => 'required',
-                'post_name' => 'required',
+            $validator = Validator::make($request->all(), [
+                'coverUpload' => 'required|mimes:png,jpg,jpeg|max:2048',
+                'image01'          => 'nullable|mimes:png,jpg,jpeg|max:2048',
+                'post_name'        => 'required',
             ]);
             if($validator->fails()){
-                return response()->json('error', $validator->errors());
+                return response()->json(['error' => $validator->errors()]);
             } else {
                 try {
-                $http = Http::withHeaders([
+                    $http = Http::withHeaders([
                                 'Authorization' => 'Bearer ' . session('access_token'),
                             ])->withOptions(['verify' => false]);
 

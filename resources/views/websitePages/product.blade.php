@@ -38,7 +38,7 @@
         <div class="product-banner">
             <div class="wrapper">
                 <div class="breadcrum">
-                    <a href="{{ url('/index') }}" class="link">
+                    <a href="{{ url(app()->getLocale().'/index') }}" class="link">
                        {{ __('messages.home') }}
                     </a>
                     <svg>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                  <div class="heading">{{ __('messages.heading') }}</div>
-                    
+
                 <div class="desc">
                      {{ __('messages.desc') }}</div>
                 </div>
@@ -283,7 +283,7 @@ $(document).ready(function(){
             wishlistIcon = '';
         }
         $.ajax({
-            url: '{{ url("related-products") }}/' + childCode,
+            url: '{{ url("/related-products") }}/' + childCode,
             type: 'GET',
             data: { page: page, items_per_page: 1 },
             success: function(response) {
@@ -292,11 +292,11 @@ $(document).ready(function(){
                 $('.pagination').empty();
                 setTimeout(function() {
                     $('#loader').hide();
-
+                    console.log(response.related_products);
                     if (response.related_products && response.related_products.length > 0) {
                         response.related_products.forEach(function(item) {
                             let productHtml = `
-                                <a href="{{ url('product-view') }}/${item.sell_Code}" class="product-link">
+                                <a href="{{ url(app()->getLocale().'/product-view') }}/${item.sell_Code}" class="product-link">
                                     <div class="items">
                                         <div class="wrap">
                                             <div class="wishlist">

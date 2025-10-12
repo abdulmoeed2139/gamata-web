@@ -85,7 +85,7 @@ font-size:18px !important;
                     @for ($i = 0; $i < 4; $i++)
                         <div class="item" data-id="{{ $i }}">
                             <div class="image">
-                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" 
+                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}"
                                      alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
                             </div>
                         </div>
@@ -97,7 +97,7 @@ font-size:18px !important;
                     @for ($i = 0; $i < 4; $i++)
                         <div class="item" data-id="{{ $i }}">
                             <div class="image">
-                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" 
+                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}"
                                      alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
                             </div>
                         </div>
@@ -143,7 +143,7 @@ font-size:18px !important;
 
                 <div class="row-3">
                     <div class="btn-1">
-                        <a href="{{ url('/app-banner') }}" class="common-btn-1">
+                        <a href="{{ url(app()->getLocale().'/app-banner') }}" class="common-btn-1">
                             <svg>
                                 <use xlink:href="#btn_arr"></use>
                             </svg>
@@ -151,7 +151,7 @@ font-size:18px !important;
                         </a>
                     </div>
                     <div class="btn-2">
-                        <a href="{{ url('/app-banner') }}" class="common-btn-1">
+                        <a href="{{ url('app()->getLocale()./app-banner') }}" class="common-btn-1">
                             <svg>
                                 <use xlink:href="#btn_arr"></use>
                             </svg>
@@ -189,7 +189,7 @@ font-size:18px !important;
         <div class="col-2">
             <div class="hm-food-slider owl-carousel recents hm-food-slider owl-loaded owl-drag">
                 @foreach ($bestSellingItems as $item)
-                    <a href="{{ url('product-view/'.$item['productID']) }}" class="item-link">
+                    <a href="{{ url(app()->getLocale().'/product-view/'.$item['productID']) }}" class="item-link">
                         <div class="item">
                             <div class="wrap">
                                 <div class="wishlist">

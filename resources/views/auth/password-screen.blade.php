@@ -41,12 +41,12 @@
         <input type="hidden" id="phoneNumber" name="phoneNumber">
 
         <button type="submit" class="auth-btn common-btn-1">
-            {{ __('messages.continue') }} 
+            {{ __('messages.continue') }}
             <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
         </button>
 
         <div class="forgot-password-uni" style="padding-top:20px;">
-            <a href="{{ route('password.request') }}" class="backButton">{{ __('messages.forgot_password') }}</a>
+            <a href="{{ route('password.request', app()->getLocale()) }}" class="backButton">{{ __('messages.forgot_password') }}</a>
         </div>
     </div>
 </form>
@@ -68,13 +68,13 @@
         $('#phoneNumber').val(getNumber);
         let formData = $(this).serialize();
         $.ajax({
-            url: "{{ url('password-login') }}",
+            url: "{{ url(app()->getLocale().'/password-login') }}",
             type: "POST",
             data: formData,
             success:function(response){
                 console.log(response.message);
                 if(response.status== true){
-                    window.location.href="{{ url('/index') }}";
+                    window.location.href="{{ url(app()->getLocale().'/index') }}";
                     // $("#passwordError")
                     //     .text(Object.values(response.message)[0][0])
                     //     .show().delay(3000).fadeOut();
@@ -93,13 +93,13 @@
                     $("#passwordError")
                         .text(firstError)
                         .css("display", "block")
-                        
+
                 }
             }
         });
     });
 
-    
+
 
 </script>
 

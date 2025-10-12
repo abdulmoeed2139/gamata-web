@@ -59,7 +59,7 @@
             $("#numberForm-old").submit(function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ url('send-otp') }}",
+                    url: "{{ url(app()->getLocale().'/send-otp') }}",
                     type: "GET",
                     data: {
                         mobile: $("#mobile").val(),
@@ -75,7 +75,7 @@
 
                             setTimeout(function() {
                                 window.location.href =
-                                    "{{ url('/verify-otp') }}?mobile=" + $("#mobile")
+                                    "{{ url(app()->getLocale().'/verify-otp') }}?mobile=" + $("#mobile")
                                     .val();
                             }, 1500);
                         } else {
@@ -116,12 +116,12 @@
                     success: function(response) {
                         if (response.message == 'OTP_SEND') {
                             window.location.href =
-                                "{{ url('/verify-otp') }}?mobile=" + $("#mobile")
+                                "{{ url(app()->getLocale().'/verify-otp') }}?mobile=" + $("#mobile")
                                 .val();
                         } else if (response.message == 'password_already_exists') {
                             $("#mobileError")
                                 window.location.href =
-                                    "{{ url('/login-by-password') }}?mobile=" + $(
+                                    "{{ url(app()->getLocale().'/login-by-password') }}?mobile=" + $(
                                         "#mobile").val();
                         }
                     },

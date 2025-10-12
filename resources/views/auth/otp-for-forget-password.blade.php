@@ -3,7 +3,7 @@
 
 <div class="login-wrapper-uni">
     <div class="login-left-uni">
-        <a href="{{ url(app()->getLocale() . '/index') }}"> 
+        <a href="{{ url(app()->getLocale() . '/index') }}">
             <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
         </a>
 
@@ -125,7 +125,7 @@
             resendOTP.addEventListener("click", function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ url('resend-otp') }}",
+                    url: "{{ url(app()->getLocale().'/resend-otp') }}",
                     type: "get",
                     data: { phoneNumber: phoneNumber },
                     success: function(response) {
@@ -155,7 +155,7 @@
                 let urlParams = new URLSearchParams(window.location.search);
                 let mobile = urlParams.get("mobile");
                 $.ajax({
-                    url: "{{ url('/forgot-password/verifyotp') }}",
+                    url: "{{ url(app()->getLocale().'/forgot-password/verifyotp') }}",
                     type: "POST",
                     data: {
                         otpCode: otpCode,
@@ -168,7 +168,7 @@
                             setTimeout(() => {
                                 $("#otpError").text(response.result).removeClass("hidden");
                             }, 2000);
-                            window.location.href="{{ url('/forgot-password/reset?mobile=') }}"+mobile;
+                            window.location.href="{{ url(app()->getLocale().'/forgot-password/reset?mobile=') }}"+mobile;
                         }
                     },
                     error: function(xhr){

@@ -347,7 +347,7 @@
                                         <div class="wrap">
                                             <div class="location">
                                             <span>{{ __('messages.city_' . strtolower($item['city'])) }}</span><br>
-                                            {{ __('messages.address_' . strtolower($item['city'])) }}
+                                            {{ __('messages.address_' . strtolower($item['address'])) }}
                                             </div>
                                             <div class="tel">
                                                 <div class="icon">
@@ -371,30 +371,11 @@
                                             <svg>
                                                 <use xlink:href="#btn_arr"></use>
                                             </svg>
-                                             {{ __('messages.get_directions') }}                                        </a>
+                                             {{ __('messages.get_directions') }}
+                                        </a>
                                     </div>
                                 </div>
                             @endforeach
-                                                <a href="tel:{{ $item['phone'] }}" class="number">{{ $item['phone'] }}</a>
-                                            </div>
-                                            <div class="mail">
-                                                <div class="icon">
-                                                    <svg>
-                                                        <use xlink:href="#email"></use>
-                                                    </svg>
-                                                </div>
-                                                <a href="mailto:{{ $item['email'] }}"
-                                                    class="email">{{ $item['email'] }}</a>
-                                            </div>
-                                            <a href="#" target="_blank" class="common-btn-1 btn-secondary">
-                                                <svg>
-                                                    <use xlink:href="#btn_arr"></use>
-                                                </svg>
-                                                 {{ __('messages.get_directions') }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                @endforeach
                             @endif
                         </div>
                     </div>

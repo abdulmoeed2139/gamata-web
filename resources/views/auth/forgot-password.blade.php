@@ -68,7 +68,7 @@
         e.preventDefault();
         var formData= $(this).serialize();
         $.ajax({
-            url: "{{ url('get-otp-for-forget-password') }}",
+            url: "{{ url(app()->getLocale().'/get-otp-for-forget-password') }}",
             type: "GET",
             data: formData,
             success:function(response){
@@ -80,7 +80,7 @@
                         // .show().delay(3000).fadeOut();
 
                     // setTimeout(function(){
-                        window.location.href = "{{ url('/forgot-password/verify-otp') }}?mobile=" + $("#mobile").val();
+                        window.location.href = "{{ url(app()->getLocale().'/forgot-password/verify-otp') }}?mobile=" + $("#mobile").val();
                     // }, 1000);
                 } else if (response.message == 'password_already_exists') {
                     $("#mobileError")
@@ -90,7 +90,7 @@
                         .show()
 
                         setTimeout(function(){
-                            window.location.href = "{{ url('/login-by-password') }}?mobile=" + $("#mobile").val();
+                            window.location.href = "{{ url(app()->getLocale().'/login-by-password') }}?mobile=" + $("#mobile").val();
                         }, 1000);
                 }
             },

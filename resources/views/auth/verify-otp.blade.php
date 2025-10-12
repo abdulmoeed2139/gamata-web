@@ -125,7 +125,7 @@
             resendOTP.addEventListener("click", function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ url('get-result') }}",
+                    url: "{{ url(app()->getLocale().'/get-result') }}",
                     type: "get",
                     data: { mobile: phoneNumber },
                     success: function(response) {
@@ -153,7 +153,7 @@
                 }
 
                 $.ajax({
-                    url: "{{ url('otp-verify') }}",
+                    url: "{{ url(app()->getLocale().'/otp-verify') }}",
                     type: "POST",
                     data: {
                         otpCode: otpCode,
@@ -167,7 +167,7 @@
                                 $("#otpError").text(response.data.message).removeClass("hidden");
                             }, 2000);
                         } else {
-                            window.location.href="{{ url('/register?mobile=') }}"+phoneNumber;
+                            window.location.href="{{ url(app()->getLocale().'/register?mobile=') }}"+phoneNumber;
                         }
                     },
                     error: function(xhr){
@@ -182,7 +182,7 @@
                 });
             });
         });
-   
+
 
     </script>
 @endsection

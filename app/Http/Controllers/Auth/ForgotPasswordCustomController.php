@@ -13,7 +13,7 @@ class ForgotPasswordCustomController extends Controller
     public function showForgotForm()
     {
         if(session('access_token')){
-            return redirect()->route('index');
+            return redirect()->route('index', app()->getLocale());
         } else{
             return view('auth.forgot-password');
         }
@@ -42,7 +42,7 @@ class ForgotPasswordCustomController extends Controller
     public function verifyOtp(Request $request)
     {
         if(session('access_token')){
-            return redirect()->route('index');
+            return redirect()->route('index', app()->getLocale());
         } else{
             return view('auth.otp-for-forget-password');
         }
@@ -52,7 +52,7 @@ class ForgotPasswordCustomController extends Controller
     public function resetPassword(Request $request)
     {
         if(session('access_token')){
-            return redirect()->route('index');
+            return redirect()->route('index', app()->getLocale());
         } else{
             return view('auth.reset-password-screen');
         }
