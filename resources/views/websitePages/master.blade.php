@@ -1458,7 +1458,7 @@
             });
             $("#subscribeBtn").on("click", function(e) {
                 e.preventDefault();
-                let emailValue = $("#email").val().trim();
+                let emailValue = $("#newsletter-email").val().trim();
                 if (emailValue === "") {
                     toastr.error("Please enter your valid email", "Error");
 
