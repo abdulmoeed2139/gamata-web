@@ -8,44 +8,49 @@
 </style>
 <div class="login-wrapper-uni">
     <div class="login-left-uni">
-        <a href="{{ url('index') }}">
+        <a href="{{ url(app()->getLocale() . '/index') }}">
             <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
         </a>
 
-        <form class="login-form-uni" id="LoginByPasswordForm">
-            @csrf
-            <div id="stepPassword">
-            <small id="passwordError" class="error-text alert-danger" style="color:red;display:none;">Password is required</small>
+  <form class="login-form-uni" id="LoginByPasswordForm">
+    @csrf
+    <div id="stepPassword">
+        <small id="passwordError" class="error-text alert-danger" style="color:red;display:none;">
+            {{ __('messages.password_required') }}
+        </small>
 
-                <label for="password" class="login-label-uni">Enter Your Password
-                <span class="info-wrapper">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="info-icon">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12" y2="8"></line>
-                    </svg>
-                    <span class="custom-popover">Enter your password here</span>
-                </span>
-                </label>
-                <input type="password" id="password" name="password" class="login-input-uni" placeholder="">
-                <input type="hidden" id="phoneNumber" name="phoneNumber">
+        <label for="password" class="login-label-uni">
+            {{ __('messages.enter_password') }}
+            <span class="info-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="info-icon">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="8"></line>
+                </svg>
+                <span class="custom-popover">{{ __('messages.enter_password_here') }}</span>
+            </span>
+        </label>
+        <input type="password" id="password" name="password" class="login-input-uni" placeholder="">
+        <input type="hidden" id="phoneNumber" name="phoneNumber">
 
-                <button type="submit" class="auth-btn common-btn-1">
-                    Continue <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
-                </button>
+        <button type="submit" class="auth-btn common-btn-1">
+            {{ __('messages.continue') }} 
+            <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
+        </button>
 
-                <div class="forgot-password-uni" style="padding-top:20px;">
-                    <a href="{{ route('password.request') }}" class="backButton">Forgot your password?</a>
-                </div>
-            </div>
-        </form>
+        <div class="forgot-password-uni" style="padding-top:20px;">
+            <a href="{{ route('password.request') }}" class="backButton">{{ __('messages.forgot_password') }}</a>
+        </div>
+    </div>
+</form>
+
     </div>
 
     <div class="login-right-uni"></div>

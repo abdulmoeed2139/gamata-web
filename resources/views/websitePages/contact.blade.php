@@ -6,26 +6,25 @@
             <div class="wrapper">
                 <div class="breadcrum">
                     <a href="{{ url('/index') }}" class="link">
-                        Home
+                        {{ __('messages.home') }}
                     </a>
                     <svg>
                         <use xlink:href="#breadcrum"></use>
                     </svg>
                     <div class="current">
-                        Contact Us
+                        {{ __('messages.contact_us') }}
                     </div>
                 </div>
                 <div class="heading">
-                    Shop the Best of Gamata
+                    {{ __('messages.shop_best') }}
                 </div>
                 <div class="desc">
-                    Explore fresh products, connect with featured sellers, and shop with ease. From trending items to
-                    detailed searches, Gamata makes
-                    buying and selling effortless for the farming community.
+                    {{ __('messages.shop_desc') }}
                 </div>
             </div>
         </div>
     </section>
+
 
 
 
@@ -53,23 +52,21 @@
 
 
 
-                <form class="login-form-uni" id="contactForm" action="{{ url('/insert-anonymous-inquiry') }}"
-                    method="POST">
+              <form class="login-form-uni" id="contactForm" action="{{ url('/insert-anonymous-inquiry') }}" method="POST">
                     @csrf
                     <div id="Contactform">
-                        <!--<label class="login-label-uni" style="margin-bottom:30px">Contact Us</label>-->
 
                         <!-- First & Last Name -->
                         <div class="inline-field" style="display: flex; gap: 10px; margin-bottom:15px;">
                             <div style="flex:1;">
-                                <label for="first-name" class="login-label-uni">First Name</label>
+                                <label for="first-name" class="login-label-uni">{{ __('messages.first_name') }}</label>
                                 <input type="text" id="first_name" name="first_name" class="login-input-uni" required>
                                 @error('first_name')
                                     <p class="text-danger"> {{ $message }} </p>
                                 @enderror
                             </div>
                             <div style="flex:1;">
-                                <label for="last-name" class="login-label-uni">Last Name</label>
+                                <label for="last-name" class="login-label-uni">{{ __('messages.last_name') }}</label>
                                 <input type="text" id="last_name" name="last_name" class="login-input-uni" required>
                                 @error('last_name')
                                     <p class="text-danger"> {{ $message }} </p>
@@ -79,7 +76,7 @@
 
                         <!-- Email -->
                         <div style="margin-bottom:15px;">
-                            <label for="email" class="login-label-uni">Email</label>
+                            <label for="email" class="login-label-uni">{{ __('messages.email') }}</label>
                             <input type="email" id="email" name="email" class="login-input-uni" required>
                             @error('email')
                                 <p class="text-danger"> {{ $message }} </p>
@@ -88,7 +85,7 @@
 
                         <!-- Subject -->
                         <div style="margin-bottom:15px;">
-                            <label for="subject" class="login-label-uni">Subject</label>
+                            <label for="subject" class="login-label-uni">{{ __('messages.subject') }}</label>
                             <input type="text" id="subject" name="subject" class="login-input-uni" required>
                             @error('subject')
                                 <p class="text-danger"> {{ $message }} </p>
@@ -97,19 +94,20 @@
 
                         <!-- Message -->
                         <div style="margin-bottom:15px;">
-                            <label for="message" class="login-label-uni">Message</label>
-                            <textarea id="message" name="message" class="login-input-uni" name="message" rows="5" required></textarea>
+                            <label for="message" class="login-label-uni">{{ __('messages.message') }}</label>
+                            <textarea id="message" name="message" class="login-input-uni" rows="5" required></textarea>
                             @error('message')
                                 <p class="text-danger"> {{ $message }} </p>
                             @enderror
                         </div>
 
                         <button type="submit" class="auth-btn common-btn-1">
-                            Submit <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo"
-                                class="login-logo-uni">
+                            {{ __('messages.submit') }}
+                            <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
                         </button>
                     </div>
                 </form>
+
             </div>
 
             <div class="contact-right">

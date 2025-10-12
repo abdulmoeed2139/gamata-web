@@ -82,66 +82,35 @@ font-size:18px !important;
             <div class="product-gallery">
                 <!-- Main (Large) Carousel -->
                 <div class="owl-carousel product-img-carousel">
-                    <div class="item" data-id="0">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 1">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
+                    @for ($i = 0; $i < 4; $i++)
+                        <div class="item" data-id="{{ $i }}">
+                            <div class="image">
+                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" 
+                                     alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="item" data-id="1">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 2">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
-                        </div>
-                    </div>
-                    <div class="item" data-id="2">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 3">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
-                        </div>
-                    </div>
-                    <div class="item" data-id="3">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}" alt="Main Image 4">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
-                        </div>
-                    </div>
+                    @endfor
                 </div>
 
                 <!-- Thumbnail (Small) Carousel -->
                 <div class="owl-carousel product-thumb-carousel">
-                    <div class="item" data-id="0">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 1">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
+                    @for ($i = 0; $i < 4; $i++)
+                        <div class="item" data-id="{{ $i }}">
+                            <div class="image">
+                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" 
+                                     alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="item" data-id="1">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 2">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
-                        </div>
-                    </div>
-                    <div class="item" data-id="2">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 3">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
-                        </div>
-                    </div>
-                    <div class="item" data-id="3">
-                        <div class="image">
-                            <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}" alt="Main Image 4">
-                            <!-- <img src="{{ asset('assets/Images/items/1.png') }}" alt="Main Image 1"> -->
-                        </div>
-                    </div>
+                    @endfor
                 </div>
             </div>
         </div>
+
         <div class="col-2">
             <div class="content">
                 <div class="row-1">
                     <div class="save">
-                        <div class="text-1">Saving: </div>
+                        <div class="text-1">{{ __('messages.saving') }}: </div>
                         <div class="text-2">26% off</div>
                     </div>
                     <div class="title">{{ $product['name_English'] }}</div>
@@ -149,8 +118,9 @@ font-size:18px !important;
                     <div class="price-2">Rs. <span>250.00</span> {{ $product['uomGroups'] }}</div>
                     <div class="desc">{{ $product['product_Description'] }}</div>
                 </div>
+
                 <div class="row-2">
-                    <div class="title">Package Sizes:</div>
+                    <div class="title">{{ __('messages.package_sizes') }}:</div>
                     <div class="attributes">
                         <div class="att active">
                             <div class="text-1">250g</div>
@@ -170,13 +140,14 @@ font-size:18px !important;
                         </div>
                     </div>
                 </div>
+
                 <div class="row-3">
                     <div class="btn-1">
                         <a href="{{ url('/app-banner') }}" class="common-btn-1">
                             <svg>
                                 <use xlink:href="#btn_arr"></use>
                             </svg>
-                            Buy Now
+                            {{ __('messages.buy_now') }}
                         </a>
                     </div>
                     <div class="btn-2">
@@ -184,7 +155,7 @@ font-size:18px !important;
                             <svg>
                                 <use xlink:href="#btn_arr"></use>
                             </svg>
-                            Add to cart
+                            {{ __('messages.add_to_cart') }}
                         </a>
                     </div>
                 </div>
@@ -193,23 +164,25 @@ font-size:18px !important;
 
     @else
     <div class="col-3">
-        <h3> Product Not Found </h3>
+        <h3>{{ __('messages.product_not_found') }}</h3>
     </div>
     @endif
 </div>
 </div>
+
 <div class="product-carousel">
     <div class="wrapper">
         <div class="col-1">
             <div class="common-title">
-                Explore Other Products
+                {{ __('messages.explore_other_products') }}
             </div>
             <div class="common-desc">
-                Discover Gamata's presence across the region. Our branches are here to support your agricultural journey, wherever you are.
+                {{ __('messages.explore_other_products_desc') }}
             </div>
         </div>
     </div>
 </div>
+
 <!-- Best Selling Items Section -->
 <section class="item-list">
     <div class="wrapper">
@@ -224,19 +197,19 @@ font-size:18px !important;
                                 </div>
                                 <div class="image">
                                     <img src="{{ $item['imageUri'].'/'.$item['image']}}"
-                                        alt="{{ $item['name_English'] ?? 'Product' }}">
+                                        alt="{{ $item['name_English'] ?? __('messages.product') }}">
                                 </div>
                                 <div class="content">
                                     <div class="pro-name">
-                                        <div class="sin">{{ $item['name_Sinhala'] ?? 'N/A' }}</div>
-                                        <div class="eng">{{ $item['name_English'] ?? 'N/A' }}</div>
-                                        <div class="tam">{{ $item['name_Tamil'] ?? 'N/A' }}</div>
+                                        <div class="sin">{{ $item['name_Sinhala'] ?? __('messages.n_a') }}</div>
+                                        <div class="eng">{{ $item['name_English'] ?? __('messages.n_a') }}</div>
+                                        <div class="tam">{{ $item['name_Tamil'] ?? __('messages.n_a') }}</div>
                                     </div>
                                     <div class="price">Rs. {{ $item['average_Price'] ?? 0 }}</div>
-                                    <div class="stock">Stock: {{ $item['total_Quantity'] ?? 0 }}</div>
+                                    <div class="stock">{{ __('messages.stock') }}: {{ $item['total_Quantity'] ?? 0 }}</div>
                                     <span class="common-btn-1">
                                         <svg><use xlink:href="#btn_arr"></use></svg>
-                                        Buy Now
+                                        {{ __('messages.buy_now') }}
                                     </span>
                                 </div>
                             </div>
@@ -247,6 +220,7 @@ font-size:18px !important;
         </div>
     </div>
 </section>
+
 <script>
 jQuery(document).ready(function($){
     $(".hm-food-slider").owlCarousel({

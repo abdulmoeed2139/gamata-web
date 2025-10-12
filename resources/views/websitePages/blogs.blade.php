@@ -6,48 +6,47 @@
     <div class="product-banner">
         <div class="wrapper">
             <div class="breadcrum">
-                <a href="{{ url('/index') }}" class="link">Home</a>
+                <a href="{{ url('/index') }}" class="link">{{ __('messages.home') }}</a>
                 <svg><use xlink:href="#breadcrum"></use></svg>
-                <div class="current">Journal</div>
+                <div class="current">{{ __('messages.journal') }}</div>
             </div>
             <div class="heading">
-                Planned Your Harvest Today
+                {{ __('messages.banner_heading') }}
             </div>
             <div class="desc">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley
+                {{ __('messages.banner_desc') }}
             </div>
         </div>
     </div>
 
     <!-- Blogs Section -->
     <section class="product-listing blogsSec">
-
         <div class="wrapper">
             <div class="col-12">
-                     <div class="heading">Blog Category</div>
+                <div class="heading">{{ __('messages.blog_category') }}</div>
             </div>
 
             <div class="col-12">
                 <div class="blogs">
                     @if ($blogs)
                         @foreach ($blogs as $item)
-                        <a href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item" style="text-decoration: none; color: inherit;">
+                            <a href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item" style="text-decoration: none; color: inherit;">
                                 <div class="image">
-                                    <img src="{{ $item['imageUri'].'/'.$item['image'] }}" alt="journal Image">
+                                    <img src="{{ $item['imageUri'].'/'.$item['image'] }}" alt="{{ __('messages.journal_image') }}">
                                 </div>
 
                                 <div class="content">
-                                    <div class="category">{{ $item['category'] ?? 'Market Access' }}</div>
+                                    <div class="category">{{ $item['category'] ?? __('messages.default_category') }}</div>
                                     <div class="desc">
                                         <div class="title">
-                                            {{ $item['subject'] ?? 'Breaking Barriers Connecting Farmers to Markets' }}
+                                            {{ $item['subject'] ?? __('messages.default_subject') }}
                                         </div>
                                         <div class="date">
                                             {{ Carbon\Carbon::parse($item['createdOn'])->format('F d, Y') }}
                                         </div>
                                         <span class="common-btn-1">
                                             <svg><use xlink:href="#btn_arr"></use></svg>
-                                            Explore
+                                            {{ __('messages.explore') }}
                                         </span>
                                     </div>
                                 </div>
@@ -57,33 +56,33 @@
                         @for ($i = 0; $i < 2; $i++)
                             <a href="#" class="open-modal-btn item" style="text-decoration: none; color: inherit;">
                                 <div class="image">
-                                    <img src="{{ asset('assets/Images/j1.png') }}" alt="journal Image">
+                                    <img src="{{ asset('assets/Images/j1.png') }}" alt="{{ __('messages.journal_image') }}">
                                 </div>
 
                                 <div class="content">
-                                    <div class="category">Market Access</div>
+                                    <div class="category">{{ __('messages.default_category') }}</div>
                                     <div class="desc">
                                         <div class="title">
-                                            Breaking Barriers Connecting Farmers to Markets
+                                            {{ __('messages.default_subject') }}
                                         </div>
                                         <div class="date">
                                             November 18, 2024
                                         </div>
                                         <span class="common-btn-1">
                                             <svg><use xlink:href="#btn_arr"></use></svg>
-                                            Explore
+                                            {{ __('messages.explore') }}
                                         </span>
                                     </div>
                                 </div>
                             </a>
                         @endfor
                     @endif
-
                 </div>
             </div>
         </div>
     </section>
 </section>
+
 
     {{-- <div class="custom-modal" id="modal1">
         <div class="modal-content">

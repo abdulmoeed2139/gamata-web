@@ -475,11 +475,15 @@
 </head>
 
 @php
-    $bodyClass =  session('access_token') ? 'logged-in' : 'logged-out';
+    $bodyClass = session('access_token') ? 'logged-in' : 'logged-out';
 
+    // Current page segment
     $currentSegment = request()->segment(count(request()->segments()));
 
-    $finalClass = trim("$bodyClass $currentSegment");
+    $currentLang = app()->getLocale(); 
+
+    // Combine all classes
+    $finalClass = trim("$bodyClass $currentSegment $currentLang");
 @endphp
 
 <body class="{{ $finalClass }}">
@@ -495,7 +499,7 @@
     )
         <header class="">
             <nav class="nav-container">
-                <a href="{{ url('index') }}" class="logo">
+                <a href="{{ url(app()->getLocale().'/index') }}" class="logo">
                     <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
                 </a>
 
@@ -503,18 +507,42 @@
                 <div class="main-menu">
 
                     <ul>
-                        <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
+                        {{-- <li><a href="{{ url('/en/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
                         </li>
-                        <li><a href="{{ url('/product') }}"
+                        <li><a href="{{ url('/en/product') }}"
                                 class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                        <li><a href="{{ url('/community') }}"
+                        <li><a href="{{ url('/en/community') }}"
                                 class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                        <li><a href="{{ url('/app-banner') }}"
+                        <li><a href="{{ url('/en/app-banner') }}"
                                 class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                        <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
+                        <li><a href="{{ url('/en/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
                         </li>
-                        <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
-                                Us</a></li>
+                        <li><a href="{{ url('/en/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
+                                Us</a></li> --}}
+
+                                {{-- <a href="{{ url(app()->getLocale() . '/index') }}" class="logo">
+    <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
+</a> --}}
+
+                <li><a href="{{ url(app()->getLocale() . '/index') }}" class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
+                    {{ __('messages.home') }}
+                </a></li>
+                <li><a href="{{ url(app()->getLocale() . '/product') }}" class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
+                    {{ __('messages.shop') }}
+                </a></li>
+                <li><a href="{{ url(app()->getLocale() . '/community') }}" class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
+                    {{ __('messages.community') }}
+                </a></li>
+                <li><a href="{{ url(app()->getLocale() . '/app-banner') }}" class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
+                    {{ __('messages.my_plan') }}
+                </a></li>
+                <li><a href="{{ url(app()->getLocale() . '/posts') }}" class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
+                    {{ __('messages.journal') }}
+                </a></li>
+                <li><a href="{{ url(app()->getLocale() . '/contact') }}" class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
+                    {{ __('messages.contact_us') }}
+                </a></li>
+
                     </ul>
                 </div>
 
@@ -531,12 +559,21 @@
                                 <div class="arrow-down"></div>
                             </a>
                         @else
-                            <a href="{{ url('/login') }}" class="icon user" id="">
-                                <svg>
-                                    <use xlink:href="#user"></use>
-                                </svg>
-                                <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
-                                <label for="profile">Login</label>
+                            <a href="{{ url(app()->getLocale().'/login') }}" class="icon user" id="">
+                               
+                                <label for="profile">{{ __('messages.login') }}</label>
+                                 <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
+
+                                 <svg width="15" height="25" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <rect width="12" height="22" fill="url(#pattern0_2015_344)"/>
+                                    <defs>
+                                    <pattern id="pattern0_2015_344" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlink:href="#image0_2015_344" transform="scale(0.0416667 0.0227273)"/>
+                                    </pattern>
+                                    <image id="image0_2015_344" width="24" height="44" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAsCAMAAABIQohxAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAbxQTFRF/////v7+/Pz8+/v7+vr68fHx6Ojo7Ozs/f399vb27u7u29vby8vL1NTU8vLy+fn53Nzcv7+/paWlmpqaqamp0NDQ+Pj4np6ehYWFfHx8iYmJrKys6urq9PT05eXlvb29oqKikZGRgICAdHR0eHh4jY2NtLS01dXV7+/v0dHRo6OjlJSUnJyckpKSfn5+enp6mZmZtbW13d3d8/Pz19fXvLy8srKyk5OTj4+PoaGhjIyM5OTk9fX16+vrxMTEm5ubsLCw0tLSw8PDoKCgwMDAhoaG3t7esbGxiIiIzMzMr6+v4ODgtra29/f339/fvr6+lpaWxsbG4+Pj6enp09PTuLi4qKioycnJlZWV5+fn5ubms7Ozt7e3h4eHg4ODz8/P4uLixcXF2traqqqqu7u72dnZnZ2dyMjIra2tx8fHrq6uq6urkJCQjo6OmJiYf39/goKCb29vaGhocHBwzc3NpqamdXV1ysrK4eHhn5+fwcHB2NjY8PDwubm57e3tioqKwsLCpKSk1tbWd3d3gYGBeXl5ampqfX19dnZ2Z2dnbGxshISEp6enl5eXe3t7zs7OcXFxi4uLurq6c3NzmNW6rgAAA5FJREFUeJxlk1tsU3Ucx8/vtD2nPb2s7brZbgxKd9My1nWwlWKVmzi5lGFExKkjvhhjMCYaXiTxwZgoJj6Y+IC86MM2gyAGWW3INjbZyjqHrCCUbJ0NtZedXlivW3t6OcfTlg7Jfg//5P/7/P75/25fQCoGCABCIwhTuVZOQAGgQGNUGVUAzsaXjHoK8HOiVWHJH5cmqP8BVBHFMKwIsng2kXkCOHXwxFw0swaqxOKyM6gECPvpSj5IJySIpY0ltBTTgo1NGkpf7wR4pGC9q8KkZK7GnedRZbCdAMgIpjvTMggwXuPUCyMlwIf94GoBjzrmrm0AuLEreZ2fKAJOsy5SE6aVQJL6S9vvCPMa1UimCKrSx4GNHzex4N9GcHI8LYnbDABeeAdmwwqDzeTQX34Vhd9opjX0kGJbV3/ojxjyYrjVchjGO2zC7CvgdpBcQBW9t/huQUKFRNQ7kOu7h5XElpWolX2Bq/deKByxd3n1bCEha7t82YFoUgvAqXsDkr8Igls7XN5jZGYzDDRrLRHzReASb15TN08u6upTkN713csPnW/7dUPVPqiNf2Jrk8IXiGRHlWxhUW+V9/K42Xk7mMWNA8Iu5kLW+KeJzJ84Zxj74PfXr2y+BYKP5p6Rz/RkvhFINPsGfdWhM8PRfqC+hYYaIzulwSP3eDhJivDaZy/ib7GNGIOG5M5qrVMz1L0clJLxgyFXzjj1HpzNsOCQbBZdODWxRXozzGv7h0QItD9Q/xk0PIft+fI1lde+B7USJ+PLQ8ZgQPrSHRMIOrNpos134AqTO4ZmBN8LGXEs15SKsnU8D4Xm5ZmTA+ITzA2nKZVIo55taTtb+QHteUmSBEybU6aPzk4iRKrfpvkVOMZGC/3+PQuj5ytS3IkqJPXhVZXPmwHOwcnPf4of/1qEd2/9EfPxmjpjPpfhrh9QFD0buJTczVh7g+zMTzvHz6zkf0hSwEdquuQR17ucUTzmVqvmdUqrNOhPsTNHUCGzLWbKL9V5HulyjqMP7hoW5CNUca/wdi4WIAz33eIOSx8iGnXRK3R5E/OfekY/PnfK3bQyYYg2/T1I0eXdBVzSevt06P686PDMhk2RDefDj5ealaUian6w2odFkz/L1PaiPpg1DebB/Fff9M3uaV5ZhLAmZ/NcC4mnFwtPybkEYtrhup6v1oNauX/vmGxpPeCqNvZMOSLMOsDPGWfa5zDqMfgPmg6KqJU7TbsAAAAASUVORK5CYII="/>
+                                    </defs>
+                                 </svg>
+
                                
                             </a>
                         @endif
@@ -546,22 +583,23 @@
                             <div class="profile-dropdown">
                                 <ul>
                                     <li class="profile-menus">
-                                        <a href="#">My Dashboard</a>
+                                        <a href="#">{{ __('messages.my_dashboard') }}</a>
                                     </li>
                                     <li class="profile-menus">
-                                        <a href="#">My Profile</a>
+                                        <a href="#">{{ __('messages.my_profile') }}</a>
                                     </li>
                                     <li class="profile-menus">
-                                        <a href="#">Settings</a>
+                                        <a href="#">{{ __('messages.settings') }}</a>
                                     </li>
                                     <li class="profile-menus">
-                                        <a href="{{ route('logout') }}">Logout</a>
+                                        <a href="{{ route('logout') }}">{{ __('messages.logout') }}</a>
                                     </li>
                                 </ul>
+
                             </div>
                         @endif
 
-                        <a href="{{ url('/app-banner') }}" class="icon cart">
+                        <a href="{{ url('/en/app-banner') }}" class="icon cart">
                             <svg>
                                 <use xlink:href="#bag"></use>
                             </svg>
@@ -569,7 +607,7 @@
                     </div>
 
                     <!-- Language Selector -->
-                    <div class="language">
+                    <!-- <div class="language">
                         <div class="title">
                             Select your Language
                         </div>
@@ -590,7 +628,34 @@
                                 </svg>
                             </a>
                         </div>
+                    </div> -->
+
+
+                 <!-- Language Selector -->
+                    <div class="language">
+                        <div class="title">
+                            Select your Language
+                        </div>
+                        <div class="wrap">
+                            <a href="#" class="lan" data-lang="si">
+                                <svg>
+                                    <use xlink:href="#sinhala"></use>
+                                </svg>
+                            </a>
+                            <a href="#" class="lan active" data-lang="en">
+                                <svg>
+                                    <use xlink:href="#english"></use>
+                                </svg>
+                            </a>
+                            <a href="#" class="lan" data-lang="ta">
+                                <svg>
+                                    <use xlink:href="#tamil"></use>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
+
+
 
                     <!-- Search Button -->
                     <button class="search-toggle">
@@ -609,36 +674,21 @@
 
             <!-- Search Bar (Hidden by Default) -->
             <div class="search-bar">
-                <form class="search-form" action="{{ url('/product') }}" method="GET">
+                <form class="search-form" action="{{ url('/en/product') }}" method="GET">
                     <div class="wrapper">
                         <svg>
                             <use xlink:href="#search"></use>
                         </svg>
-                        <input type="text" name="search" placeholder="Search Your Keyword" class="search-input"
+                        <input type="text" name="search" placeholder="{{ __('messages.search_your_keyword') }}" class="search-input"
                             autocomplete="off">
-                        <button type="submit" class="search-button">Search</button>
+                        <button type="submit" class="search-button">{{ __('messages.search') }}</button>
                     </div>
                 </form>
             </div>
 
         </header>
     @endif
-    <!-- @if (
-        !Request::is('/') &&
-        !Request::is('login') &&
-        !Request::is('verify-otp') &&
-        !Request::is('register') &&
-        !Request::is('forgot-password') &&
-        !Request::is('forgot-password/verify-otp') &&
-        !Request::is('forgot-password/reset') &&
-        !Request::is('login-by-password')
-    )
-
     
-        <div class="popup">
-            <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
-        </div>
-    @endif -->
     @if (
         !Request::is('/') &&
         !Request::is('login') &&
@@ -685,14 +735,14 @@
                             <use xlink:href="#news_icon"></use>
                         </svg>
                         <div class="text">
-                            Newsletter Signup
-                            <span>Uptodate with our latest news and insights</span>
+                             {{ __('messages.newsletter_signup') }}
+                            <span>{{ __('messages.newsletter_desc') }}</span>
                         </div>
                     </div>
                     <div class="box-2">
                         <form id="emailForm" action="/" method="post">
                             <input type="email" name="newsletter-email" id="email"
-                                placeholder="Enter Your Email Here" required>
+                                placeholder="{{ __('messages.enter_email_here') }}" required>
                         </form>
                     </div>
 
@@ -704,7 +754,7 @@
                                 <svg>
                                     <use xlink:href="#btn_arr"></use>
                                 </svg>
-                                Subscribe
+                                  {{ __('messages.subscribe') }}
                             </a>
                         </form>
                     </div>
@@ -714,46 +764,49 @@
                 <div class="wrapper-1">
                     <div class="row-1">
                         <div class="box">
-                            <ul class="footer-menu mobile-fmenu">
+                           <ul class="footer-menu mobile-fmenu">
+    <li>
+        <a href="{{ url(app()->getLocale() . '/index') }}" 
+           class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
+           {{ __('messages.home') }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ url(app()->getLocale() . '/product') }}" 
+           class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
+           {{ __('messages.shop') }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ url(app()->getLocale() . '/community') }}" 
+           class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
+           {{ __('messages.community') }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ url(app()->getLocale() . '/app-banner') }}" 
+           class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
+           {{ __('messages.my_plan') }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ url(app()->getLocale() . '/posts') }}" 
+           class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
+           {{ __('messages.journal') }}
+        </a>
+    </li>
+    <li>
+        <a href="{{ url(app()->getLocale() . '/contact') }}" 
+           class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
+           {{ __('messages.contact_us') }}
+        </a>
+    </li>
+</ul>
 
-
-                                <li><a href="{{ url('/index') }}"
-                                        class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
-                                <li><a href="{{ url('/product') }}"
-                                        class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                                <li><a href="{{ url('/community') }}"
-                                        class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                                <li><a href="{{ url('/app-banner') }}"
-                                        class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                                <li><a href="{{ url('/posts') }}"
-                                        class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
-                                <li><a href="{{ url('/contact') }}"
-                                        class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
-                                <!--<a href="{{ url('/index') }}" class="active">-->
-                                <!--    <li>Home</li>-->
-                                <!--</a>-->
-                                <!--<a href="{{ url('/product') }}">-->
-                                <!--    <li>Shop</li>-->
-                                <!--</a>-->
-                                <!--<a href="{{ url('/community') }}">-->
-                                <!--    <li>Community</li>-->
-                                <!--</a>-->
-
-                                <!--<a href="{{ url('/app-banner') }}">-->
-                                <!--    <li>My Plan</li>-->
-                                <!--</a>-->
-                                <!--<a href="{{ url('/posts') }}">-->
-                                <!--    <li>Journal</li>-->
-                                <!--</a>-->
-
-                                <!--<a href="{{ url('/contact') }}">-->
-                                <!--    <li>Contact Us</li>-->
-                                <!--</a>-->
-                            </ul>
                         </div>
                         <div class="box-1">
                             <div class="title">
-                                Head Office
+                               {{ __('messages.head_office') }}
                             </div>
                             <div class="text">
                                 Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo
@@ -762,7 +815,7 @@
                         </div>
                         <div class="box-2">
                             <div class="title">
-                                Email
+                               {{ __('messages.email') }}
                             </div>
                             <div class="text">
                                 <a href="mailto:info@aethriasolutions.com">info@aethriasolutions.com</a>
@@ -770,7 +823,7 @@
                         </div>
                         <div class="box-3">
                             <div class="title">
-                                Contact
+                               {{ __('messages.contact') }}
                             </div>
                             <div class="text">
                                 <a href="tel:�6�7+94 771 856 567">94 771 856 56767</a>
@@ -779,43 +832,48 @@
                     </div>
                     <div class="row-2">
                         <div class="box-1">
-                            <ul class="footer-menu">
+                         <ul class="footer-menu">
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/index') }}" 
+                                class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
+                                {{ __('messages.home') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/product') }}" 
+                                class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
+                                {{ __('messages.shop') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/community') }}" 
+                                class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
+                                {{ __('messages.community') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/app-banner') }}" 
+                                class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
+                                {{ __('messages.my_plan') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/posts') }}" 
+                                class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
+                                {{ __('messages.journal') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/contact') }}" 
+                                class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
+                                {{ __('messages.contact_us') }}
+                                </a>
+                            </li>
+                        </ul>
 
-                                <li><a href="{{ url('/index') }}"
-                                        class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
-                                <li><a href="{{ url('/product') }}"
-                                        class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                                <li><a href="{{ url('/community') }}"
-                                        class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                                <li><a href="{{ url('/app-banner') }}"
-                                        class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                                <li><a href="{{ url('/posts') }}"
-                                        class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
-                                <li><a href="{{ url('/contact') }}"
-                                        class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
-                                <!--<a href="{{ url('/index') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
-                                <!--    <li>Home</li>-->
-                                <!--</a>-->
-                                <!--<a href="{{ url('/product') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
-                                <!--    <li>Shop</li>-->
-                                <!--</a>-->
-                                <!--<a href="{{ url('/community') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
-                                <!--    <li>Community</li>-->
-                                <!--</a>-->
-                                <!--<a href="{{ url('/app-banner') }}" >-->
-                                <!--    <li>My Plan</li>-->
-                                <!--</a>-->
-                                <!--<a href="{{ url('/posts') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
-                                <!--    <li>Journal</li>-->
-                                <!--</a>-->
-
-                                <!--<a href="{{ url('/contact') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
-                                <!--    <li>Contact Us</li>-->
-                                <!--</a>-->
-                            </ul>
                         </div>
                         <div class="box-2">
-                            <div class="title">We Are Available on</div>
+                            <div class="title">{{ __('messages.we_are_available_on') }}</div>
                             <div class="image">
                                 <img src="{{ asset('assets/Images/playstore.png') }}" alt="playsore">
                                 <img src="{{ asset('assets/Images/appstore.png') }}" alt="appstore">
@@ -863,8 +921,8 @@
                     </div>
                     <div class="row-3">
                         <div class="cont">
-                            <div class="copyright">© 2024 Gamata.lk, All Rights Reserved </div>
-                            <div class="author">Designed and Developed by <a href="https://aethriasolutions.com/"
+                            <div class="copyright">{{ __('messages.copyright') }}</div>
+                            <div class="author">{{ __('messages.designed_by') }}<a href="https://aethriasolutions.com/"
                                     target="_blank">Aethria</a></div>
                         </div>
                     </div>
@@ -886,13 +944,12 @@
                             <img class="chat-bot-img" src="{{ asset('assets/Images/gamata-chat-icon.png') }}"
                                 alt="chat-bot-icon">
                             <div class="chat-bot-text">
-                                Welcome to Gamata! How can I help you today?
-                            </div>
+                            {{ __('messages.chat_welcome') }}                            </div>
                         </div>
                     </div>
                     <div class="chat-type-area">
                         <form id="chat_form" onsubmit="return false;">
-                            <input id="text-message" type="text" placeholder="Type here...">
+                            <input id="text-message" type="text" placeholder="{{ __('messages.chat_placeholder') }}">
                             <button type="submit">
                                 <i class="fas fa-arrow-up"></i>
                             </button>
@@ -1465,7 +1522,12 @@
                     return;
                 }
 
-                // hidden input fill karo
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailValue)) {
+                    toastr.error("Please enter a valid email address", "Error");
+                    return;
+                }
+                                // hidden input fill karo
                 $("#emailForSubscribe").val(emailValue);
                 $.ajax({
                     url: "{{ url('subscribe') }}",
@@ -1473,7 +1535,7 @@
                     data: $("#subscribeForm").serialize(),
                     success: function(response) {
                         toastr.success(response.msg);
-
+                        $("#email").val("");
                         console.log(response);
                     },
                     error: function(xhr) {
@@ -1655,7 +1717,7 @@
   
         spinner.style.display = "inline-block";
         button.innerHTML = `
-          Please wait...  <span class="spinner">
+         {{ __('messages.please_wait') }}...  <span class="spinner">
           
           </span>
         `;
@@ -1675,6 +1737,11 @@
       });
     });
   });
+
+
+
+
+
 
 
     </script>

@@ -1,5 +1,8 @@
 @extends('websitePages.master')
 @section('content')
+
+
+
 <style>
 .search-bars input::placeholder {
     color: black !important;
@@ -21,89 +24,6 @@
 }
 
 
-/* .postsPagination .arrow-right {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: none;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: 0.0520833333vw solid #d9d9d9;
-    }
-
- .postsPagination .numbers {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 32px;
-    }
-
-.postsPagination .num.active {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        background: #9fcd22;
-        width: 2.4479166667vw;
-        height: 2.4479166667vw;
-        border-radius: 50%;
-        box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.3));
-    }
-
-.postsPagination .num.active a{
-color:#fff  !important;
-}
-
-.postsPagination.numbers .num {
-        color: #707070;
-        text-align: center;
-        font-family: "Roboto", serif;
-        font-size: 0.9895833333vw;
-        font-weight: 400;
-        line-height: 0.7291666667vw;
-    }
-
-.postsPagination .arrow-right {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: none;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: 0.0520833333vw solid #d9d9d9;
-    }
-
- .postsPagination .arrow-left:hover {
-        border-radius: 50%;
-        border: none;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        background: #9fcd22;
-        border: 1px solid #9fcd22;
-    }
-
-.postsPagination .arrow-right:hover,  .postsPagination .arrow-left:hover {
-    border-radius: 50%;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background: #9fcd22;
-    border: 0.0520833333vw solid #9fcd22;
-} */
-
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -113,28 +33,29 @@ color:#fff  !important;
 </style>
 
 
-<div class="product-banner">
-    <div class="wrapper">
-        <div class="breadcrum">
-            <a href="{{ url('/index') }}" class="link">
-                Home
-            </a>
-            <svg>
-                <use xlink:href="#breadcrum"></use>
-            </svg>
-            <div class="current">
-                Our Products
+    <!-- Banner Section -->
+    <section>
+        <div class="product-banner">
+            <div class="wrapper">
+                <div class="breadcrum">
+                    <a href="{{ url('/index') }}" class="link">
+                       {{ __('messages.home') }}
+                    </a>
+                    <svg>
+                        <use xlink:href="#breadcrum"></use>
+                    </svg>
+                    <div class="current">
+                      {{ __('messages.shop') }}
+                    </div>
+                </div>
+                 <div class="heading">{{ __('messages.heading') }}</div>
+                    
+                <div class="desc">
+                     {{ __('messages.desc') }}</div>
+                </div>
             </div>
         </div>
-        <div class="heading">
-            Shop the Best of Gamata
-        </div>
-        <div class="desc">
-            Explore fresh products, connect with featured sellers, and shop with ease. From trending items to detailed searches, Gamata makes
-            buying and selling effortless for the farming community.
-        </div>
-    </div>
-</div>
+    </section>
 
 <!-- Listing -->
 <div class="product-listing">
@@ -142,7 +63,7 @@ color:#fff  !important;
         <div class="col-1">
             <div class="search-bars">
                 <div class="wrapper">
-                    <input type="text" placeholder="Search your Product">
+                    <input type="text" placeholder="{{ __('messages.Search_your_Product') }}">
                     <svg>
                         <use xlink:href="#inner_search"></use>
                     </svg>
@@ -150,7 +71,7 @@ color:#fff  !important;
             </div>
             <div class="filter">
                 <div class="filter-header">
-                    <span class="filter-title">Sellers</span>
+                    <span class="filter-title">{{ __('messages.Sellers') }}</span>
                     <span class="toggle-icon">−</span>
                 </div>
                 <div class="filter-content">
@@ -161,7 +82,7 @@ color:#fff  !important;
             </div>
             <div class="filter">
                 <div class="filter-header">
-                    <span class="filter-title">Fresh Products</span>
+                    <span class="filter-title">{{ __('messages.Fresh_Products') }}</span>
                     <span class="toggle-icon">−</span>
                 </div>
                 <div class="filter-content">
@@ -172,7 +93,7 @@ color:#fff  !important;
             </div>
             <div class="filter">
                 <div class="filter-header">
-                    <span class="filter-title">Categories</span>
+                    <span class="filter-title">{{ __('messages.Categories') }}</span>
                     <span class="toggle-icon">−</span>
                 </div>
                 <div class="filter-content">
@@ -183,7 +104,7 @@ color:#fff  !important;
             </div>
             <div class="filter">
                 <div class="filter-header">
-                    <span class="filter-title">District</span>
+                    <span class="filter-title"> {{ __('messages.District') }}</span>
                     <span class="toggle-icon">−</span>
                 </div>
                 <div class="filter-content">
@@ -194,25 +115,27 @@ color:#fff  !important;
             </div>
             <div class="filter">
                 <div class="filter-header">
-                    <span class="filter-title">Price</span>
+                    <span class="filter-title">{{ __('messages.Price') }}</span>
                     <span class="toggle-icon">−</span>
                 </div>
                 <div class="filter-content">
                     <div class="price">
                         <div class="price-input">
-                            <label for="min-price">Min</label>
-                            <input type="text" id="min-price" placeholder="Rs. 1,000">
+                            <label for="min-price">{{ __('messages.price_min_label') }}</label>
+                            <input type="text" id="min-price" placeholder="{{ __('messages.price_min_placeholder') }}">
                         </div>
                         <div class="price-input">
-                            <label for="max-price">Max</label>
-                            <input type="text" id="max-price" placeholder="Rs. 1,000,000">
+                            <label for="max-price">{{ __('messages.price_max_label') }}</label>
+                            <input type="text" id="max-price" placeholder="{{ __('messages.price_max_placeholder') }}">
                         </div>
                     </div>
+
+
                      <a href="#" target="_blank" class="common-btn-1 btn-p">
                         <svg>
                             <use xlink:href="#btn_arr"></use>
                         </svg>
-                      Filter
+                      {{ __('messages.Filter') }}
                     </a>
 
                 </div>
@@ -221,7 +144,7 @@ color:#fff  !important;
                         <svg>
                             <use xlink:href="#btn_arr"></use>
                         </svg>
-                        Filter
+                        {{ __('Filter') }}
              </a> --}}
         </div>
         <div class="col-2" style="position: relative;">
@@ -241,7 +164,7 @@ color:#fff  !important;
             <div class="top-bar">
                 <div class="row-1">
                     <div class="left">
-                        <div class="text">Sort</div>
+                        <div class="text">{{ __('messages.sort')  }}</div>
                         <svg id= "gridViewBtn" class=" sort-grid active">
                             <use xlink:href="#grid"></use>
                         </svg>
@@ -251,7 +174,9 @@ color:#fff  !important;
                     </div>
                     <div class="right">
                         <div class="text">
-                            Showing {{ $pagination['from'] }}–{{ $pagination['to'] }} of {{ $pagination['total'] }} Results
+                        {{ __('messages.showing_results', ['from'=>$pagination['from'], 'to'=>$pagination['to'], 'total'=>$pagination['total']]) }}
+
+                            <!-- Showing {{ $pagination['from'] }}–{{ $pagination['to'] }} of {{ $pagination['total'] }} Results -->
                         </div>
                     </div>
                 </div>
@@ -278,7 +203,7 @@ color:#fff  !important;
                                         <div class="stock">{{$item['totalAvlQty']}}</div>
                                         <div class="common-btn-1">
                                             <svg><use xlink:href="#btn_arr"></use></svg>
-                                            Buy Now
+                                           {{ __('messages.buy_now') }}
                                         </div>
                                     </div>
                                 </div>
@@ -413,6 +338,8 @@ $(document).ready(function(){
     }
 
 });
+
+
 
 
 </script>

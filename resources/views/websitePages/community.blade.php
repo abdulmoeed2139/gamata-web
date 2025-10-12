@@ -91,28 +91,26 @@
     </style>
 
     <!-- Banner Section -->
-    <!-- Banner Section -->
     <section>
         <div class="product-banner">
             <div class="wrapper">
                 <div class="breadcrum">
                     <a href="{{ url('/index') }}" class="link">
-                        Home
+                        {{ __('messages.home') }}
+
                     </a>
                     <svg>
                         <use xlink:href="#breadcrum"></use>
                     </svg>
                     <div class="current">
-                        Community
+                        {{ __('messages.community') }}
+
                     </div>
                 </div>
-                <div class="heading">
-                    Shop the Best of Gamata
-                </div>
+                 <div class="heading">{{ __('messages.heading') }}</div>
+                    
                 <div class="desc">
-                    Explore fresh products, connect with featured sellers, and shop with ease. From trending items to
-                    detailed searches, Gamata makes
-                    buying and selling effortless for the farming community.
+                     {{ __('messages.desc') }}</div>
                 </div>
             </div>
         </div>
@@ -140,7 +138,7 @@
                                 <use xlink:href="#feed"></use>
                             </svg>
                         </div>
-                        <div class="text">News Feed</div>
+                        <div class="text">{{ __('messages.news_feed') }}</div>
                     </div>
                     <div class="wrap" style="display: none">
                         <div class="icon">
@@ -191,7 +189,7 @@
                 <div class="write-post">
                     <form enctype="multipart/form-data" class="write-post-form">
                         <div class="wrap-1">
-                            <input type="text" id="post_name" name="post_name" placeholder="Write your thoughts..."
+                            <input type="text" id="post_name" name="post_name" placeholder="{{ __('messages.write_your_thoughts') }}"
                                 required>
                             <div class="icon">
                                 <svg>
@@ -206,7 +204,7 @@
                                     <svg>
                                         <use xlink:href="#upload_image"></use>
                                     </svg>
-                                    <div class="text">Add an Image</div>
+                                    <div class="text">{{ __('messages.add_image') }}</div>
                                 </label>
                                 <input type="file" id="imageUploadd" name="image01" accept="image/*"
                                     style="display: none;">
@@ -221,13 +219,13 @@
                             <svg>
                             <use xlink:href="#upload_image"></use>
                             </svg>
-                            <div class="text">Add Cover Image</div>
+                            <div class="text">{{ __('messages.add_cover_image') }}</div>
                         </label>
                         <input type="file" id="coverUpload" name="coverUpload" accept="image/*" style="display: none">
                         <div class="file-name" id="coverImagefile"></div>
                         </div>
                             <div class="box">
-                                <button type="submit">Post</button>
+                                <button type="submit">{{ __('messages.post') }}</button>
                             </div>
                         </div>
                     </form>
@@ -235,14 +233,14 @@
 
 
                 <div class="dropdown">
-                    <div class="text">Sort by</div>
+                        <div class="text">{{ __('messages.sort_by') }}</div>
                     <select name="cars" id="cars">
-                        <option value="">Most Reacted</option>
-                        <option value="date">Date</option>
-                        <option value="name">Name</option>
-                        <option value="time">Time</option>
-                        <option value="order">Order</option>
-                    </select>
+                    <option value="">{{ __('messages.most_reacted') }}</option>
+                    <option value="date">{{ __('messages.date') }}</option>
+                    <option value="name">{{ __('messages.name') }}</option>
+                    <option value="time">{{ __('messages.time') }}</option>
+                    <option value="order">{{ __('messages.order') }}</option>
+                </select>
                 </div>
                 <div class="postDev">
                     @foreach ($community as $item)
