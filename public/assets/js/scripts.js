@@ -101,48 +101,48 @@ $(document).on('click', function (e) {
 });
 
 
-   window.addEventListener("scroll", function () {
+window.addEventListener("scroll", function () {
     const header = document.querySelector("header");
 
     // Sirf tab chale jab screen width >= 1200 ho
     if (window.innerWidth >= 1200) {
-      if (window.scrollY > 50) {
-        header.classList.add("is-sticky");
-      } else {
-        header.classList.remove("is-sticky");
-      }
-    } else {
-      // Agar mobile/tablet ho to sticky class hata do
-      header.classList.remove("is-sticky");
-    }
-  });
-  
-  
-
-      window.addEventListener("scroll", function () {
-        const header = document.querySelector(".nav-container");
-    
-        if (window.innerWidth < 1200) {
-          if (window.scrollY > 50) {
+        if (window.scrollY > 50) {
             header.classList.add("is-sticky");
-          } else {
-            header.classList.remove("is-sticky");
-          }
         } else {
-          // Agar desktop ho to sticky class hata do
-          header.classList.remove("is-sticky");
+            header.classList.remove("is-sticky");
         }
-      });
+    } else {
+        // Agar mobile/tablet ho to sticky class hata do
+        header.classList.remove("is-sticky");
+    }
+});
+
+
+
+window.addEventListener("scroll", function () {
+    const header = document.querySelector(".nav-container");
+
+    if (window.innerWidth < 1200) {
+        if (window.scrollY > 50) {
+            header.classList.add("is-sticky");
+        } else {
+            header.classList.remove("is-sticky");
+        }
+    } else {
+        // Agar desktop ho to sticky class hata do
+        header.classList.remove("is-sticky");
+    }
+});
 
 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl, {
-    trigger: window.innerWidth < 768 ? 'click' : 'hover'
-  })
+    return new bootstrap.Popover(popoverTriggerEl, {
+        trigger: window.innerWidth < 768 ? 'click' : 'hover'
+    })
 })
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var input = document.querySelector("#mobile");
     window.intlTelInput(input, {
         initialCountry: "lk", // default Sri Lanka
@@ -151,81 +151,138 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const languages = document.querySelectorAll(".lan");
 
-const languages = document.querySelectorAll(".lan");
+    const savedLang = localStorage.getItem("selectedLang") || "en";
 
-languages.forEach(lang => {
-    lang.addEventListener("click", function(e) {
-        e.preventDefault();
+    languages.forEach(lang => {
+        if (lang.dataset.lang === savedLang) {
+            lang.classList.add("active");
+        } else {
+            lang.classList.remove("active");
+        }
+    });
 
-        // sab se active class hatao
-        languages.forEach(l => l.classList.remove("active"));
+    languages.forEach(lang => {
+        lang.addEventListener("click", function (e) {
+            e.preventDefault();
 
-        // jis par click hua hai usko active karo
-        this.classList.add("active");
+            languages.forEach(l => l.classList.remove("active"));
+
+            this.classList.add("active");
+
+            const selectedLang = this.dataset.lang;
+            localStorage.setItem("selectedLang", selectedLang);
+
+            window.location.href = `/${selectedLang}`;
+        });
     });
 });
 
 
 document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(".auth-btn");
-  
+
     buttons.forEach(button => {
-      if (!button.querySelector(".spinner")) {
-        const spinner = document.createElement("span");
-        spinner.classList.add("spinner");
-        spinner.style.display = "none";
-        spinner.innerHTML = `
+        if (!button.querySelector(".spinner")) {
+            const spinner = document.createElement("span");
+            spinner.classList.add("spinner");
+            spinner.style.display = "none";
+            spinner.innerHTML = `
           <img src="{{ asset('assets/Images/iconn.png') }}" 
                alt="Gamata Logo"
                class="login-logo-uni">
         `;
-        button.appendChild(spinner);
-      }
-  
-      const spinner = button.querySelector(".spinner");
-      const originalHTML = button.innerHTML; // button ka original content save
-      const icon = button.querySelector("img"); // button ke andar icon agar ho
-  
-      // Back press par button restore ho jaye
-      window.addEventListener("pageshow", function () {
-        button.classList.remove("loading");
-        if (spinner) spinner.style.display = "none";
-        if (icon) icon.style.display = "";
-        button.style.pointerEvents = "auto";
-        button.innerHTML = originalHTML;
-      });
-  
-      button.addEventListener("click", function (e) {
-  
-        // Button disable aur loading state
-        button.classList.add("loading");
-        button.style.pointerEvents = "none";
-  
-        spinner.style.display = "inline-block";
-        button.innerHTML = `
-          Please wait...  <span class="spinner">
-          
+            button.appendChild(spinner);
+        }
+
+        const spinner = button.querySelector(".spinner");
+        const originalHTML = button.innerHTML;
+        const icon = button.querySelector("img");
+        const pleaseWaitText = "Please wait";
+
+
+        window.addEventListener("pageshow", function () {
+            button.classList.remove("loading");
+            if (spinner) spinner.style.display = "none";
+            if (icon) icon.style.display = "";
+            button.style.pointerEvents = "auto";
+            button.innerHTML = originalHTML;
+        });
+
+        button.addEventListener("click", function (e) {
+
+            // Button disable aur loading state
+            button.classList.add("loading");
+            button.style.pointerEvents = "none";
+
+            spinner.style.display = "inline-block";
+            button.innerHTML = `
+           <span>${pleaseWaitText}...</span>  <span class="spinner">
+
           </span>
         `;
-  
-        // Spinner animation (optional)
-        const newImg = button.querySelector(".spin-anim");
-      //   if (newImg) {
-      //     newImg.style.transition = "transform 0.3s linear";
-      //     newImg.style.animation = "spin 1s linear infinite";
-      //   }
-  
-        setTimeout(() => {
-          button.classList.remove("loading");
-          button.innerHTML = originalHTML;
-          button.style.pointerEvents = "auto";
-        }, 1000);
-      });
+
+            // Spinner animation (optional)
+            const newImg = button.querySelector(".spin-anim");
+            //   if (newImg) {
+            //     newImg.style.transition = "transform 0.3s linear";
+            //     newImg.style.animation = "spin 1s linear infinite";
+            //   }
+
+            setTimeout(() => {
+                button.classList.remove("loading");
+                button.innerHTML = originalHTML;
+                button.style.pointerEvents = "auto";
+            }, 1000);
+        });
     });
-  });
-  
-  
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const subscribeButtonUnique = document.getElementById("subscribeBtn");
+
+    subscribeButtonUnique.addEventListener("click", function (e) {
+
+        // Disable button and show loading text + spinner
+        subscribeButtonUnique.innerHTML = `
+      Submitting...
+    `;
+        subscribeButtonUnique.style.pointerEvents = "none";
+        subscribeButtonUnique.classList.add("unique-loading");
+
+        // Simulate a successful subscription (e.g., 2 seconds delay)
+        setTimeout(() => {
+            // Reset button to original state
+            subscribeButtonUnique.innerHTML = `
+        <svg><use xlink:href="#btn_arr"></use></svg>
+        Subscribe
+      `;
+            subscribeButtonUnique.style.pointerEvents = "auto";
+            subscribeButtonUnique.classList.remove("unique-loading");
+        }, 2000);
+    });
+
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const langLinks = document.querySelectorAll(".lan");
+
+    langLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            // e.preventDefault();
+
+            const selectedLang = this.getAttribute("data-lang");
+            const currentPath = window.location.pathname.split('/').slice(2).join('/');
+            // Example: /en/index → ['en','index'] → index
+
+            window.location.href = `/${selectedLang}/${currentPath}`;
+        });
+    });
+});
 
 /*
 *****************

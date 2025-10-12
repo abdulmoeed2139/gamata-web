@@ -15,39 +15,39 @@
             @endif
 
 
-            <a href="{{ url('index') }}">
-                <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
+    <a href="{{ url(app()->getLocale() . '/index') }}">
+        <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
             </a>
-            <form class="login-form-uni" id="numberForm" action="">
-                <!-- STEP 1: MOBILE NUMBER -->
-                <div id="stepMobile">
-                     <small id="mobileError" class="error-text alert-danger"
-                        style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Mobile number is
-                        incorrect</small>
-                    <label for="mobile" id="mobileLabel" class="login-label-uni">
-                        Enter Mobile Number
-                        <span class="info-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-icon">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12" y2="8"></line>
-                            </svg>
-                            <span class="custom-popover">Enter your mobile number</span>
-                        </span>
+    <form class="login-form-uni" id="numberForm" action="">
+     <div id="stepMobile">
+        <small id="mobileError" class="error-text alert-danger"
+            style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">
+            {{ __('messages.mobile_incorrect') }}
+        </small>
 
+        <label for="mobile" id="mobileLabel" class="login-label-uni">
+            {{ __('messages.enter_mobile_number') }}
+            <span class="info-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-icon">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="8"></line>
+                </svg>
+                <span class="custom-popover">{{ __('messages.enter_mobile_help') }}</span>
+            </span>
+        </label>
 
-                    </label>
+        <input type="tel" id="mobile" class="login-input-uni" placeholder="" inputmode="numeric"
+            maxlength="9" pattern="[0-9]*" required>
 
-                    <input type="tel" id="mobile" class="login-input-uni " placeholder="" inputmode="numeric"
-                        maxlength="9" pattern="[0-9]*" required>
+        <button type="submit" id="continueBtn" class="auth-btn common-btn-1">
+            {{ __('messages.continue') }}
+            <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
+        </button>
+    </div>
+</form>
 
-
-                    <button type="submit" id="continueBtn" class="auth-btn common-btn-1">
-                        Continue <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
-                    </button>
-                </div>
-            </form>
         </div>
 
         <div class="login-right-uni"></div>
@@ -107,7 +107,7 @@
             $("#numberForm").submit(function(e) {
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ url('get-result') }}",
+                    url: "{{ url(app()->getLocale() . '/get-result') }}",
                     type: "GET",
                     data: {
                         mobile: $("#mobile").val(),

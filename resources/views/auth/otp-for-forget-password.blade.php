@@ -3,17 +3,17 @@
 
 <div class="login-wrapper-uni">
     <div class="login-left-uni">
-        <a href="{{ url('index') }}">
+        <a href="{{ url(app()->getLocale() . '/index') }}"> 
             <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
         </a>
 
         <form class="login-form-uni" id="verifyOtpForPasswordResetForm">
             <!-- STEP 2: OTP -->
             <div id="stepOtp" class="">
-            <span id="otpError" class="error-text alert-danger hidden">Please enter a valid 6-digit OTP</span>
+            <span id="otpError" class="error-text alert-danger hidden">{{ __('messages.otp_error') }}</span>
 
                  <label for="mobile" class="login-label-uni">
-                    Enter OTP
+                {{ __('messages.enter_otp') }}
 
                     <span class="info-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12" y2="8"></line>
                     </svg>
-                    <span class="custom-popover">Enter the 6-digit code sent to your mobile</span>
+                    <span class="custom-popover">{{ __('messages.enter_6_digit_otp') }}</span>
                   </span>
 
 
@@ -43,13 +43,13 @@
                 </div>
 
                 <button type="submit" class="auth-btn common-btn-1">
-                    Continue <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
+                 {{ __('messages.continue') }} <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
                 </button>
                 <div class="resendOtp" style="padding-top:20px;">
                     <a href="javascript:void(0)" class="backButton" id="resendLink" style="pointer-events:none; opacity:0.6;">
-                        Resend OTP 01:00s
+                      {{ __('messages.resend_otp_timer', ['time' => '01:00s']) }}
                     </a>
-                    <a href="javascript:void(0)" id="resendOTP" style="display:none;">Resend OTP</a>
+                    <a href="javascript:void(0)" id="resendOTP" style="display:none;">{{ __('messages.resend_otp') }}</a>
                 </div>
             </div>
 
@@ -109,7 +109,7 @@
                     let minutes = Math.floor(timer / 60);
                     let seconds = timer % 60;
                     seconds = seconds < 10 ? "0" + seconds : seconds;
-                    resendLink.textContent = `Resend OTP ${minutes}:${seconds}s`;
+                    resendLink.textContent = `{{ __('messages.resend_otp') }} ${minutes}:${seconds}s`;
 
                     if (timer <= 0) {
                         clearInterval(countdown);

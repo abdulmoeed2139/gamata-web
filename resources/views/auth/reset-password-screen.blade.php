@@ -3,20 +3,23 @@
 
 <div class="login-wrapper-uni">
     <div class="login-left-uni">
-        <a href="{{ url('index') }}">
+    <a href="{{ url(app()->getLocale() . '/index') }}">
             <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
         </a>
 
-        <form class="login-form-uni" id="resetPasswordForm">
-            @csrf
-            <!-- STEP 3: PASSWORD RESET -->
+    <form class="login-form-uni" id="resetPasswordForm">
+        @csrf
+        <!-- STEP 3: PASSWORD RESET -->
 
-            <div id="stepPassword">
-            <small id="passwordError" class="error-text alert-danger" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Password must be at least 8 characters</small>
+        <div id="stepPassword">
+            <small id="passwordError" class="error-text alert-danger" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">
+                {{ __('password_min_error') }}
+            </small>
 
-                <label class="login-label-uni">New Password
+            <label class="login-label-uni">
+                {{ __('new_password') }}
 
-                    <span class="info-wrapper">
+                <span class="info-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="none"
@@ -29,16 +32,15 @@
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12" y2="8"></line>
                     </svg>
-                    <span class="custom-popover">Enter your new password here</span>
-                  </span>
+                    <span class="custom-popover">{{ __('enter_new_password') }}</span>
+                </span>
+            </label>
+            <input type="password" id="password" name="new_password" class="login-input-uni">
+            <input type="hidden" value="{{ request('mobile') }}" name="mobile">
 
-
-                </label>
-                <input type="password" id="password" name="new_password" class="login-input-uni">
-                <input type="hidden" value="{{ request('mobile') }}" name="mobile">
-
-                <label class="login-label-uni" >Confirm Password
-                    <span class="info-wrapper">
+            <label class="login-label-uni">
+                {{ __('confirm_password') }}
+                <span class="info-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="none"
@@ -51,17 +53,18 @@
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12" y2="8"></line>
                     </svg>
-                    <span class="custom-popover">Enter match password</span>
-                  </span>
-                </label>
-                <input type="password" id="confirmPassword" name="confirmPassword" class="login-input-uni">
+                    <span class="custom-popover">{{ __('enter_match_password') }}</span>
+                </span>
+            </label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="login-input-uni">
 
-                <button type="submit" class="auth-btn common-btn-1">
-                    Reset Password <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
-                </button>
-            </div>
+            <button type="submit" class="auth-btn common-btn-1">
+                {{ __('reset_password') }} 
+                <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
+            </button>
+        </div>
+    </form>
 
-        </form>
     </div>
 
     <div class="login-right-uni"></div>

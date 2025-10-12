@@ -3,19 +3,18 @@
 
 <div class="login-wrapper-uni">
     <div class="login-left-uni">
-        <a href="{{ url('index') }}">
-            <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo" class="login-logo-uni">
+        <a href="{{ url(app()->getLocale() . '/index') }}">
+            <img src="{{ asset('assets/Images/logo.png') }}" alt="{{ __('messages.gamata_logo') }}" class="login-logo-uni">
         </a>
 
         <form class="login-form-uni" id="verifyForForgetPasswordForm">
             @csrf
             <!-- STEP 1: MOBILE NUMBER -->
             <div id="stepMobile">
-            <span id="mobileError" class="error-text alert-danger" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">Please enter a valid number</span>
+            <span id="mobileError" class="error-text alert-danger" style="font-size: 14px; margin-top: 0px; display:none; margin-bottom:14px">   {{ __('messages.enter_valid_number') }}</span>
 
                 <label for="mobile" id="mobileLabel" class="login-label-uni">
-                    Enter Mobile Number
-
+                    {{ __('messages.enter_mobile_number') }}
                     <span class="info-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -29,7 +28,7 @@
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12" y2="8"></line>
                     </svg>
-                    <span class="custom-popover">Enter your mobile number</span>
+                    <span class="custom-popover">{{ __('messages.enter_mobile_number') }}</span>
                   </span>
 
                 </label>
@@ -37,7 +36,7 @@
                 <input type="hidden" id="mode" name="mode" value="forgot_password">
 
                 <button type="submit" id="continueBtn" class="auth-btn common-btn-1">
-                    Get OTP <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
+                      {{ __('messages.get_otp') }}  <img src="{{ asset('assets/Images/iconn.png') }}" alt="{{ __('messages.gamata_logo') }}" class="login-logo-uni">
                 </button>
             </div>
         </form>

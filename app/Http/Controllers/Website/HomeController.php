@@ -16,10 +16,10 @@ class HomeController extends Controller
         }
     }
 
-    // public function community()
-    // {
-    //     return view('websitePages.community');
-    // }
+    public function community()
+    {
+        return view('websitePages.community');
+    }
 
     public function product()
     {
