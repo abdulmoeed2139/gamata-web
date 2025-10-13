@@ -209,8 +209,8 @@
                                             <div class="eng">{{ $item['name_English'] ?? 'N/A' }}</div>
                                             <div class="tam">{{ $item['name_Tamil'] ?? 'N/A' }}</div>
                                         </div>
-                                        <div class="price">Rs. {{ $item['average_Price'] ?? 0 }}</div>
-                                        <div class="stock">Stock: {{ $item['total_Quantity'] ?? 0 }}</div>
+                                        <div class="price">Rs. <span>{{ $item['average_Price'] ?? 0 }}</span> (1Kg)</div>
+                                        <div class="stock">{{ $item['total_Quantity'] ?? 0 }} {{ __('messages.kilo_available_in_stock') }} </div>
                                         <span class="common-btn-1">
                                             <svg>
                                                 <use xlink:href="#btn_arr"></use>

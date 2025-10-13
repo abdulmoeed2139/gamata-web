@@ -282,5 +282,6 @@ return [
     'n_a' => 'N/A',
     'account_description' =>'Lorem ipsum odor amet, consectetuer adipiscing elit. Cubilia orci elementum mauris senectus tincidunt taciti ante eu. Quis convallis nascetur est vitae; elementum sociosqu per',
     'account_desc' =>'Lorem ipsum odor amet, consectetuer adipiscing elit. Cubilia orci elementum mauris senectus tincidunt taciti ante eu. Quis convallis nascetur est vitae; elementum sociosqu per',
+    'kilo_available_in_stock' => 'Kilo Available in Stock',
 
 ];

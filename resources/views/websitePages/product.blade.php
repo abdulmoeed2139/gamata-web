@@ -203,8 +203,8 @@
                                             <div class="eng">{{$item['childNameEnglish']}}</div>
                                             <div class="tam">{{$item['childNameTamil']}}</div>
                                         </div>
-                                        <div class="price">{!! $item['avgPrice'] !!}</div>
-                                        <div class="stock">{{$item['totalAvlQty']}}</div>
+                                        <div class="price">Rs. <span>{!! $item['avgPrice'] !!}</span> (1 Kg)</div>
+                                        <div class="stock">{{$item['totalAvlQty']}} {{ __('messages.kilo_available_in_stock') }} </div>
                                         <div class="common-btn-1">
                                             <svg><use xlink:href="#btn_arr"></use></svg>
                                            {{ __('messages.buy_now') }}
@@ -311,20 +311,25 @@ $(document).ready(function(){
                                                     <div class="eng">${item.product_Name_English}</div>
                                                     <div class="tam">${item.product_Name_Tamil}</div>
                                                 </div>
-                                                <div class="price">${item.unit_Price}</div>
-                                                <div class="stock">${item.quantity}</div>
-                                            </div>
+                                                <div class="price">Rs. <span>${item.unit_Price}</span> (1Kg)</div>
+                                                <div class="stock">${item.quantity} {{ __('messages.kilo_available_in_stock') }} </div>
+                                                 <div class="common-btn-1">
+                                                        <svg><use xlink:href="#btn_arr"></use></svg>
+                                                    {{ __('messages.buy_now') }}
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>
                                 </a>`;
                             relatedProductsContainer.append(productHtml);
+                            $('.postsPagination').hide();
                         });
 
                         // Create pagination
-                        let $pagination = $('<div class="related-pagination" style="margin-top:20px; text-align:center;"></div>');
+                        let $pagination = $('<div class="related-pagination " style="margin-top:20px; text-align:center;"></div>');
                         for (let i = 1; i <= response.pagination.last_page; i++) {
                             let activeClass = (i === response.pagination.current_page) ? 'active' : '';
-                            $pagination.append(`<button class="page-btn ${activeClass}" data-page="${i}">${i}</button>`);
+                            $pagination.append(`<button class="page-btn num ${activeClass}" data-page="${i}">${i}</button>`);
                         }
                         relatedProductsContainer.after($pagination);
 

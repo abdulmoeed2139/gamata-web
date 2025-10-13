@@ -17,7 +17,7 @@
             </small>
 
             <label class="login-label-uni">
-                {{ __('new_password') }}
+                {{ __('messages.new_password') }}
 
                 <span class="info-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@
             <input type="hidden" value="{{ request('mobile') }}" name="mobile">
 
             <label class="login-label-uni">
-                {{ __('confirm_password') }}
+                {{ __('messages.confirm_password') }}
                 <span class="info-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -59,7 +59,7 @@
             <input type="password" id="confirmPassword" name="confirmPassword" class="login-input-uni">
 
             <button type="submit" class="auth-btn common-btn-1">
-                {{ __('reset_password') }}
+                {{ __('messages.reset_password') }}
                 <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
             </button>
         </div>
