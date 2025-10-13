@@ -290,7 +290,7 @@
                                             } elseif ($n < 900000) {
                                                 $n_format = number_format($n / 1000, $precision);
                                                 $suffix = 'k';
-                                            } elseif ($n < 900000000) {
+                                            } elseif ($n < 900000000) {     
                                                 $n_format = number_format($n / 1000000, $precision);
                                                 $suffix = 'M';
                                             } else {
