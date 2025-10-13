@@ -733,7 +733,9 @@
         !Request::is('login-by-password')
     )
 
-    <footer class="site-footer">
+
+
+       <footer class="site-footer">
 
         <div class="wrapper">
             <div class="col-1">
@@ -743,12 +745,12 @@
                             <use xlink:href="#news_icon"></use>
                         </svg>
                         <div class="text">
-                             {{ __('messages.newsletter_signup') }}
+                            {{ __('messages.newsletter_signup') }}
                             <span>{{ __('messages.newsletter_desc') }}</span>
                         </div>
                     </div>
                     <div class="box-2">
-                        <form id="emailForm" action="/" method="post">
+                         <form id="emailForm" action="/" method="post">
                             <input type="email" name="newsletter-email" id="newsletter-email"
                                 placeholder="{{ __('messages.enter_email_here') }}" required>
                         </form>
@@ -772,44 +774,43 @@
                 <div class="wrapper-1">
                     <div class="row-1">
                         <div class="box">
-                                                    <div class="box">
-                           <ul class="footer-menu mobile-fmenu">
-    <li>
-        <a href="{{ url(app()->getLocale() . '/index') }}"
-           class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
-           {{ __('messages.home') }}
-        </a>
-    </li>
-    <li>
-        <a href="{{ url(app()->getLocale() . '/product') }}"
-           class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
-           {{ __('messages.shop') }}
-        </a>
-    </li>
-    <li>
-        <a href="{{ url(app()->getLocale() . '/community') }}"
-           class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
-           {{ __('messages.community') }}
-        </a>
-    </li>
-    <li>
-        <a href="{{ url(app()->getLocale() . '/app-banner') }}"
-           class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
-           {{ __('messages.my_plan') }}
-        </a>
-    </li>
-    <li>
-        <a href="{{ url(app()->getLocale() . '/posts') }}"
-           class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
-           {{ __('messages.journal') }}
-        </a>
-    </li>
-    <li>
-        <a href="{{ url(app()->getLocale() . '/contact') }}"
-           class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
-           {{ __('messages.contact_us') }}
-        </a>
-    </li>
+                             <ul class="footer-menu mobile-fmenu">
+                                <li>
+                                    <a href="{{ url(app()->getLocale() . '/index') }}"
+                                    class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
+                                    {{ __('messages.home') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url(app()->getLocale() . '/product') }}"
+                                    class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
+                                    {{ __('messages.shop') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url(app()->getLocale() . '/community') }}"
+                                    class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
+                                    {{ __('messages.community') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url(app()->getLocale() . '/app-banner') }}"
+                                    class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
+                                    {{ __('messages.my_plan') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url(app()->getLocale() . '/posts') }}"
+                                    class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
+                                    {{ __('messages.journal') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url(app()->getLocale() . '/contact') }}"
+                                    class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
+                                    {{ __('messages.contact_us') }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div class="box-1">
@@ -820,6 +821,175 @@
                                 Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo
                                 01, Sri Lanka
                             </div>
+                        </div>
+                        <div class="box-2">
+                            <div class="title">
+                               {{ __('messages.email') }}
+                            </div>
+                            <div class="text">
+                                <a href="mailto:info@aethriasolutions.com">info@aethriasolutions.com</a>
+                            </div>
+                        </div>
+                        <div class="box-3">
+                            <div class="title">
+                                  {{ __('messages.contact') }}
+                            </div>
+                            <div class="text">
+                                <a href="tel:�6�7+94 771 856 567">94 771 856 56767</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-2">
+                        <div class="box-1">
+                        <ul class="footer-menu">
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/index') }}"
+                                class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
+                                {{ __('messages.home') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/product') }}"
+                                class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
+                                {{ __('messages.shop') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/community') }}"
+                                class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
+                                {{ __('messages.community') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/app-banner') }}"
+                                class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
+                                {{ __('messages.my_plan') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/posts') }}"
+                                class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
+                                {{ __('messages.journal') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url(app()->getLocale() . '/contact') }}"
+                                class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
+                                {{ __('messages.contact_us') }}
+                                </a>
+                            </li>
+                        </ul>
+
+                        </div>
+                        <div class="box-2">
+                            <div class="title">{{ __('messages.we_are_available_on') }}</div>
+                            <div class="image">
+                                <img src="{{ asset('assets/Images/playstore.png') }}" alt="playsore">
+                                <img src="{{ asset('assets/Images/appstore.png') }}" alt="appstore">
+                            </div>
+                        </div>
+                        <div class="box-3">
+                            <ul>
+                                <a href="#" target="_blank">
+                                    <li>
+                                        <svg>
+                                            <use xlink:href="#fb_icon"></use>
+                                        </svg>
+                                    </li>
+                                </a>
+                                <a href="#" target="_blank">
+                                    <li>
+                                        <svg>
+                                            <use xlink:href="#x_icon"></use>
+                                        </svg>
+                                    </li>
+                                </a>
+                                <a href="#" target="_blank">
+                                    <li>
+                                        <svg>
+                                            <use xlink:href="#yt"></use>
+                                        </svg>
+                                    </li>
+                                </a>
+                                <a href="#" target="_blank">
+                                    <li>
+                                        <svg>
+                                            <use xlink:href="#linkedin"></use>
+                                        </svg>
+                                    </li>
+                                </a>
+                                <a href="#" target="_blank">
+                                    <li>
+                                        <svg>
+                                            <use xlink:href="#insta"></use>
+                                        </svg>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row-3">
+                        <div class="cont">
+                            <div class="copyright">{{ __('messages.copyright') }}</div>
+                            <div class="author">{{ __('messages.designed_by') }} <a href="https://aethriasolutions.com/"
+                                    target="_blank">Aethria</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <!-- Chat Modal -->
+        <div class="chat-box" id="chatModal">
+            <div class="message-inner">
+                <div class="top-bar">
+                    <div class="minus"></div>
+                    <div class="cross" id="closeChat">X</div>
+                </div>
+                <div class="bottom-cont">
+                    <div class="chat-display">
+                        <div class="chat-bot-message">
+                            <img class="chat-bot-img" src="{{ asset('assets/Images/gamata-chat-icon.png') }}"
+                                alt="chat-bot-icon">
+                            <div class="chat-bot-text">
+                            {{ __('messages.chat_welcome') }}                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-type-area">
+                        <form id="chat_form" onsubmit="return false;">
+                            <input id="text-message" type="text" placeholder="{{ __('messages.chat_placeholder') }}">
+                            <button type="submit">
+                                <i class="fas fa-arrow-up"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>          
+
+    {{-- <footer class="site-footer">
+
+        <div class="wrapper">
+            <div class="col-1">
+                <div class="row-1">
+                    
+                </div>
+            </div>
+            <div class="col-2">
+         <div class="wrapper-1">
+                    <div class="row-1">
+                       
+                        <div class="box-1">
+                            <div class="title">
+                               {{ __('messages.head_office') }}
+                        </div>
+                        <div class="text">
+                                Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo
+                                01, Sri Lanka
+                        </div>
                         </div>
                         <div class="box-2">
                             <div class="title">
@@ -967,7 +1137,7 @@
             </div>
         </div>
 
-    </footer>
+    </footer> --}}
 
     @endif
 

@@ -637,8 +637,9 @@
                     },
                     success: function(response) {
                         if(response.message){
-                            console.log('Post created successfully:', response);
-                            alert('Post created successfully!');
+                            // console.log('Post created successfully:', response);
+                             toastr.success("{{ session('message') }}");
+                            // alert('Post created successfully!');
                             $('.write-post-form')[0].reset();
 
                             const newPost = `
@@ -738,17 +739,20 @@
                                                 <a href="#">Show more</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>4
                                 </div>
                             `;
                             $('.postDev').prepend(newPost);
                         } else {
                             console.log('Error:', response);
+                            toastr.error("Please fill all the fields");
+
                         }
                     },
                     error: function(xhr) {
                         console.log('Error:', xhr.responseText);
                         // window.location.href = "{{ url(app()->getLocale().'/login') }}";
+
                     }
                 });
             });
@@ -776,7 +780,7 @@
                                 <img src="${userImage}" alt="user">
                             </div>
                         </div>
-                        <div class="rw-2" style="min-width:315px;">
+                        <div class="rw-2" style="min-width:200px;">
                             <div class="cl-1">
                                 <div class="name">${userName}</div>
                                 <div class="time">${dateTime}</div>

@@ -100,8 +100,33 @@
     box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.3));
 }
 
+.related-pagination .num.active {
+
+    color: #fff;
+    background: #9fcd22;
+    width: 2.4479166667vw;
+    height: 2.4479166667vw;
+    border-radius: 50%;
+    box-shadow: drop-shadow(3.219px 3.219px 12.877px rgba(149, 193, 31, 0.3));
+}
+
+
 .postsPagination .num.active a {
     color: #fff !important;
+}
+
+.related-pagination .num {
+    color: #707070;
+    text-align: center;
+    font-family: "Roboto", serif;
+    font-size: 0.9895833333vw;
+    font-weight: 400;
+    line-height: 0.7291666667vw;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
 .postsPagination .numbers .num {
@@ -1398,6 +1423,22 @@ footer .wrapper .col-2 .wrapper-1 .row-2 .box-1 .footer-menu li a {
     transition: all .3s ease;
 }
 
+.toast-success {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: 'Helvetica' !important;
+}
+
+
+/* footer .wrapper .col-2 .wrapper-1 .row-1 {
+    flex-direction: column;
+
+} */
+
+/* footer .wrapper .col-2 .wrapper-1 .row-2 {
+    padding: 0;
+
+} */
 
 .footer-menu li a.active {
     color: #fff;
@@ -1508,6 +1549,34 @@ footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu li a.active {
 body.logged-out.index.ta .site-footer .wrapper .col-2 .row-2 .footer-menu a {
     font-size: 9px;
 }
+
+
+.product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .image {
+    height: 170px;
+}
+
+.product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .image img {
+    object-fit: contain;
+}
+
+/* .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name .sin,
+.product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name .eng,
+.product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name .tam {
+    display: none;
+} */
+
+body.si .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name .sin {
+    display: block;
+}
+
+body.ta .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name .tam {
+    display: block;
+}
+
+body.en .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name .eng {
+    display: block;
+}
+
 
 @media (min-width: 1200px) {
     .banner-wrapper {
@@ -2892,6 +2961,11 @@ body .product-listing .common-btn-1 svg {
 }
 
 @media (min-width: 1200px) {
+
+    .item-list .wrapper .col-2 .hm-food-slider .item .wrap {
+        min-height: 200px;
+    }
+
     .item-list {
         margin-bottom: 5.2083333333vw;
         padding: 0 12.5vw;
@@ -3026,11 +3100,12 @@ body .product-listing .common-btn-1 svg {
     .item-list .wrapper .col-2 .hm-food-slider .item .wrap .content .price {
         color: #1d1d1b;
         text-align: center;
-        font-family: "Roboto", serif;
-        font-size: 0.8333333333vw;
+        font-family: "Helvetica", serif;
+        /* font-size: 0.8333333333vw; */
+        font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        line-height: 1.1458333333vw;
+        line-height: 27px;
         letter-spacing: -0.0166666667vw;
         padding-bottom: 0.5208333333vw;
     }
@@ -3043,10 +3118,10 @@ body .product-listing .common-btn-1 svg {
     .item-list .wrapper .col-2 .hm-food-slider .item .wrap .content .stock {
         color: #1d1d1b;
         text-align: center;
-        font-family: "Roboto", serif;
-        font-size: 0.7291666667vw;
+        font-family: "Helvetica", serif;
+        font-size: 14px;
         font-weight: 400;
-        line-height: 1.1458333333vw;
+        line-height: 24px;
         padding-bottom: 1.5625vw;
     }
 
@@ -4456,6 +4531,19 @@ body .product-listing .common-btn-1 svg {
     fill: #e1e1e1;
 }
 
+.journal-section .wrapper .col-2 .journal-carousel .owl-stage .owl-item img {
+    max-height: 302px !important;
+    object-fit: cover;
+}
+
+.journal-section .wrapper .col-2 .journal-carousel .owl-stage .owl-item .category {
+    background: #ffff !important;
+    padding: 2px 10px;
+    color: #9fcd22 !important;
+    font-weight: 600 !important;
+    width: max-content
+}
+
 @media (min-width: 1200px) {
     .journal-section {
         margin-bottom: 5.2083333333vw;
@@ -5090,7 +5178,7 @@ header.is-sticky,
 .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
 .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name {
@@ -5481,7 +5569,7 @@ header.is-sticky,
     .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .image img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        /* object-fit: cover; */
     }
 
     .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name {
@@ -5793,6 +5881,8 @@ header.is-sticky,
         width: 100%;
         overflow: hidden;
         cursor: pointer;
+        /* max-height: 370px; */
+
     }
 
     .product-listing .wrapper .col-2 .row-2 .grid-view a {
@@ -5836,7 +5926,7 @@ header.is-sticky,
     .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .image img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        /* object-fit: cover; */
     }
 
     .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content {
@@ -5845,7 +5935,8 @@ header.is-sticky,
         left: 0;
         right: 0;
         bottom: -3.125vw;
-        padding: 0 2.8645833333vw 1.5625vw;
+        /* padding: 0 2.8645833333vw 1.5625vw; */
+        padding: 15px 30px;
     }
 
     .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .pro-name {
@@ -5890,12 +5981,13 @@ header.is-sticky,
     .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .price {
         color: #1d1d1b;
         text-align: center;
-        font-family: "Roboto", serif;
-        font-size: 0.8333333333vw;
+        font-family: "Helvetica", serif;
+        /* font-size: 0.8333333333vw; */
+        font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        line-height: 1.1458333333vw;
-        letter-spacing: -0.0166666667vw;
+        line-height: 24px;
+        /* 8 letter-spacing: -0.0166666667vw; */
         padding-bottom: 0.5208333333vw;
     }
 
@@ -5907,10 +5999,11 @@ header.is-sticky,
     .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .stock {
         color: #1d1d1b;
         text-align: center;
-        font-family: "Roboto", serif;
-        font-size: 0.7291666667vw;
+        font-family: "Helvetica", serif;
+        /* font-size: 0.7291666667vw; */
+        font-size: 14px;
         font-weight: 400;
-        line-height: 1.1458333333vw;
+        line-height: 24px;
         padding-bottom: 1.5625vw;
     }
 
