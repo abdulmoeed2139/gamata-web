@@ -12,6 +12,17 @@ use App\Http\Controllers\Auth\ForgotPasswordCustomController;
 Route::get('/', function(){
     return redirect(app()->getLocale().'/login');
 });
+
+Route::get('/proxy-image', function (Illuminate\Http\Request $request) {
+    $url = $request->query('url');
+    if (!$url) abort(400, 'Missing URL');
+
+    $response = Http::withOptions(['verify' => false])->get($url);
+
+    return response($response->body(), 200)
+        ->header('Content-Type', $response->header('Content-Type'));
+});
+
 Route::get('/related-products/{childCode}', [FrontentController::class, 'relatedProducts'])->name('related-products');
 Route::get('/get-blog/{blog_id}', [FrontentController::class, 'getSingleBlog'])->name('get-single-blog');
 
