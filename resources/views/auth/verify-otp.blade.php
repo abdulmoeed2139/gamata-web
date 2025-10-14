@@ -54,18 +54,10 @@
                 </form>
 
                 <div class="resendOtp" style="padding-top:20px;">
-                    {{-- <a href="{{ route('password.request') }}" class="backButton">Resend OTP 00:34s</a> --}}
-                    {{-- <a href="{{ route('password.request') }}" class="backButton" id="resendLink" style="pointer-events:none; opacity:0.6;">
-                        Resend OTP 01:00s
-                    </a>
-                    <a href="" id="resendOTP">Resend OTP</a> --}}
-
                     <a href="javascript:void(0)" class="backButton" id="resendLink" style="pointer-events:none; opacity:0.6;">
-                        {{-- Resend OTP 01:00s --}}
-                          {{ __('messages.resend_otp_timer', ['time' => '01:00s']) }}
+                            {{ __('messages.resend_otp_timer', ['time' => '01:00s']) }}
                     </a>
                     <a href="javascript:void(0)" id="resendOTP" style="display:none;">{{ __('messages.resend_otp') }}</a>
-                    {{-- <p id="otpError" class="error-message hidden" style="color:red; font-size: 14px; margin-top: 5px;"></p> --}}
                 </div>
             </div>
         </form>
@@ -109,7 +101,8 @@
                     let minutes = Math.floor(timer / 60);
                     let seconds = timer % 60;
                     seconds = seconds < 10 ? "0" + seconds : seconds;
-                    resendLink.textContent = `   {{ __('messages.resend_otp_timer', ['time' => '01:00s']) }} ${minutes}:${seconds}s`;
+                    // resendLink.textContent = `   {{ __('messages.resend_otp_timer', ['time' => '01:00s']) }} ${minutes}:${seconds}s`;
+                    resendLink.textContent = `{{ __('messages.resend_otp') }} ${minutes}:${seconds}s`;
 
                     if (timer <= 0) {
                         clearInterval(countdown);
