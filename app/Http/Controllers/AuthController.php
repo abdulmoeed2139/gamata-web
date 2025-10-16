@@ -19,7 +19,11 @@ class AuthController extends Controller
     // Show login form
     public function loginForm()
     {
-        return view('auth.login');
+        if(!session('access_token')){
+            return view('auth.login');
+        } else {
+            return redirect(app()->getLocale().'/index');
+        }
     }
 
     // Login process

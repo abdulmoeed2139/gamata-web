@@ -30,8 +30,7 @@ class FrontentController extends Controller
                     session('phone_number'),
                     $phone,
                     session('access_token'),
-                    "http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en",
-                    $profile['firstName']
+                    "http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en"
                     ]);
                 if ($profile) {
                     $userName = $profile['firstName'] ?? '';
@@ -711,6 +710,7 @@ class FrontentController extends Controller
                     ->post('http://feapi.aethriasolutions.com/api/Postlike/v1/Insert', $params);
 
                 $resultArray = $response->json();
+                dd($resultArray);
                 return response()->json(['message' => $resultArray['text'] ?? 'No response'], 200);
 
             } catch (Exception $exp) {
