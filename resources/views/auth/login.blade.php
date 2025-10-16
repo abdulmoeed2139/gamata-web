@@ -106,6 +106,8 @@
 
             $("#numberForm").submit(function(e) {
                 e.preventDefault();
+                let $btn = $("#continueBtn");
+                $btn.prop("disabled", true);
                 $.ajax({
                     url: "{{ url(app()->getLocale() . '/get-result') }}",
                     type: "GET",
@@ -114,6 +116,7 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
+                        $btn.prop("disabled", false);
                         if (response.message == 'OTP_SEND') {
                             window.location.href =
                                 "{{ url(app()->getLocale().'/verify-otp') }}?mobile=" + $("#mobile")
@@ -126,6 +129,7 @@
                         }
                     },
                     error: function(xhr) {
+                        $btn.prop("disabled", false);
                         let res = JSON.parse(xhr.responseText);
                         let errorObj = {};
                         try {

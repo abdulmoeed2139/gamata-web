@@ -288,7 +288,7 @@
                                             } elseif ($n < 900000) {
                                                 $n_format = number_format($n / 1000, $precision);
                                                 $suffix = 'k';
-                                            } elseif ($n < 900000000) {     
+                                            } elseif ($n < 900000000) {
                                                 $n_format = number_format($n / 1000000, $precision);
                                                 $suffix = 'M';
                                             } else {
@@ -638,7 +638,7 @@
                     success: function(response) {
                         if(response.message){
                             // console.log('Post created successfully:', response);
-                             toastr.success("{{ session('message') }}");
+                             toastr.success(response.message);
                             // alert('Post created successfully!');
                             $('.write-post-form')[0].reset();
 
@@ -739,7 +739,7 @@
                                                 <a href="#">Show more</a>
                                             </div>
                                         </div>
-                                    </div>4
+                                    </div>
                                 </div>
                             `;
                             $('.postDev').prepend(newPost);
@@ -751,7 +751,7 @@
                     },
                     error: function(xhr) {
                         console.log('Error:', xhr.responseText);
-                        // window.location.href = "{{ url(app()->getLocale().'/login') }}";
+                        window.location.href = "{{ url(app()->getLocale().'/login') }}";
 
                     }
                 });

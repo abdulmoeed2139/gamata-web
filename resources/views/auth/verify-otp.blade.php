@@ -46,12 +46,12 @@
 
 
 
-                <form id="OTPForm">
+                {{-- <form id="OTPForm"> --}}
                     <input type="hidden" name="mobile" value="{{ request('mobile') }}"/>
                     <button type="submit" class="auth-btn common-btn-1 ">
                           {{ __('messages.continue') }}<img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
                     </button>
-                </form>
+                {{-- </form> --}}
 
                 <div class="resendOtp" style="padding-top:20px;">
                     <a href="javascript:void(0)" class="backButton" id="resendLink" style="pointer-events:none; opacity:0.6;">

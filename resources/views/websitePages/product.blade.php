@@ -59,12 +59,19 @@
         <div class="wrapper">
             <div class="col-1">
                 <div class="search-bars">
-                    <div class="wrapper">
-                        <input type="text" placeholder="{{ __('messages.Search_your_Product') }}">
-                        <svg>
-                            <use xlink:href="#inner_search"></use>
-                        </svg>
-                    </div>
+                    <form action="{{ url(app()->getLocale().'/product') }}" method="GET">
+                        <div class="wrapper">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ __('messages.Search_your_Product') }}">
+                            {{-- <svg>
+                                <use xlink:href="#inner_search"></use>
+                            </svg> --}}
+                            <button type="submit" class="search-button">
+                                <svg>
+                                    <use xlink:href="#inner_search"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="filter">
                     <div class="filter-header">
@@ -73,7 +80,7 @@
                     </div>
                     <div class="filter-content">
                         @foreach ($sellers as $item)
-                            <label><input type="checkbox">{{ $item }}</label>
+                            <label><input type="checkbox">{{ $item['sellerName'] }}</label>
                         @endforeach
                     </div>
                 </div>
@@ -106,7 +113,7 @@
                     </div>
                     <div class="filter-content">
                         @foreach ($districts as $item)
-                            <label><input type="checkbox">{{ $item }}</label>
+                            <label><input type="checkbox">{{ $item['name_English'] }}</label>
                         @endforeach
                     </div>
                 </div>
@@ -183,46 +190,84 @@
                 </div>
                 <div class="row-2">
                     <div id="food-list" class="food-list grid-view">
-                        @foreach ($paginatedProducts as $item)
-                            <a href="#" data-child-code="{{ $item['childCode'] }}" class="product-link">
-                                <div class="items">
-                                    <div class="wrap">
-                                        <div class="wishlist">
-                                            <svg>
-                                                @if (session('access_token'))
-                                                    <use xlink:href="#heart"></use>
-                                                @endif
-                                            </svg>
-                                        </div>
-                                        <div class="image">
-                                            <img src="{{ $item['imageUri'] . '/' . $item['imageUrl'] }}"
-                                                alt="Best Selling Item">
-                                        </div>
-                                        <div class="content">
-                                            <div class="pro-name">
-                                                <div class="sin">{{ $item['childNameSinhala'] }}</div>
-                                                <div class="eng">{{ $item['childNameEnglish'] }}</div>
-                                                <div class="tam">{{ $item['childNameTamil'] }}</div>
-                                            </div>
-                                            <div class="price">Rs. <span>{!! $item['avgPrice'] !!}</span> (1 Kg)</div>
-                                            <div class="stock">{{ $item['totalAvlQty'] }}
-                                                {{ __('messages.kilo_available_in_stock') }} </div>
-                                            <div class="common-btn-1">
+                        @if (request('childCode'))
+                            @forelse ($paginatedProducts as $item)
+                                <a href="{{ url(app()->getLocale().'/product-view/'.$item['sell_Code']) }}">
+                                    <div class="items">
+                                        <div class="wrap">
+                                            <div class="wishlist">
                                                 <svg>
-                                                    <use xlink:href="#btn_arr"></use>
+                                                    @if (session('access_token'))
+                                                        <use xlink:href="#heart"></use>
+                                                    @endif
                                                 </svg>
-                                                {{ __('messages.buy_now') }}
+                                            </div>
+                                            <div class="image">
+                                                <img src="{{ $item['imageUri'] . '/' . $item['image01'] }}" alt="Best Selling Item">
+                                            </div>
+                                            <div class="content">
+                                                <div class="pro-name">
+                                                    <div class="sin">{{ $item['product_Name_Sinhala'] }}</div>
+                                                    <div class="eng">{{ $item['product_Name_English'] }}</div>
+                                                    <div class="tam">{{ $item['product_Name_Tamil'] }}</div>
+                                                </div>
+                                                <div class="price">Rs. <span>{!! $item['unit_Price'] !!}</span> (1 Kg)</div>
+                                                <div class="stock">{{ $item['quantity'] }}
+                                                    {{ __('messages.kilo_available_in_stock') }} </div>
+                                                <div class="common-btn-1">
+                                                    <svg>
+                                                        <use xlink:href="#btn_arr"></use>
+                                                    </svg>
+                                                    {{ __('messages.buy_now') }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        @endforeach
+                                </a>
+                            @empty
+                                <a href="#">Product Not Found</a>
+                            @endforelse
+                        @else
+                            @foreach ($paginatedProducts as $item)
+                                <a href="#" data-child-code="{{ $item['childCode'] }}" class="product-link">
+                                    <div class="items">
+                                        <div class="wrap">
+                                            <div class="wishlist">
+                                                <svg>
+                                                    @if (session('access_token'))
+                                                        <use xlink:href="#heart"></use>
+                                                    @endif
+                                                </svg>
+                                            </div>
+                                            <div class="image">
+                                                <img src="{{ $item['imageUri'] . '/' . $item['imageUrl'] }}"
+                                                    alt="Best Selling Item">
+                                            </div>
+                                            <div class="content">
+                                                <div class="pro-name">
+                                                    <div class="sin">{{ $item['childNameSinhala'] }}</div>
+                                                    <div class="eng">{{ $item['childNameEnglish'] }}</div>
+                                                    <div class="tam">{{ $item['childNameTamil'] }}</div>
+                                                </div>
+                                                <div class="price">Rs. <span>{!! $item['avgPrice'] !!}</span> (1 Kg)</div>
+                                                <div class="stock">{{ $item['totalAvlQty'] }}
+                                                    {{ __('messages.kilo_available_in_stock') }} </div>
+                                                <div class="common-btn-1">
+                                                    <svg>
+                                                        <use xlink:href="#btn_arr"></use>
+                                                    </svg>
+                                                    {{ __('messages.buy_now') }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
 
                 <div class="postsPagination">
-                    {{-- Left Arrow --}}
                     <div class="arrow-left">
                         @if ($paginatedProducts->onFirstPage() == false)
                             <a href="{{ $paginatedProducts->previousPageUrl() }}">
@@ -236,7 +281,6 @@
                         @endif
                     </div>
 
-                    {{-- Page Numbers --}}
                     <div class="numbers">
                         @for ($i = 1; $i <= $paginatedProducts->lastPage(); $i++)
                             <div class="num {{ $paginatedProducts->currentPage() == $i ? 'active' : '' }}">
@@ -248,7 +292,6 @@
                         @endfor
                     </div>
 
-                    {{-- Right Arrow --}}
                     <div class="arrow-right">
                         @if ($paginatedProducts->hasMorePages())
                             <a href="{{ $paginatedProducts->nextPageUrl() }}">
@@ -317,7 +360,7 @@
                                                 <svg>${wishlistIcon}</use></svg>
                                             </div>
                                             <div class="image">
-                                                <img src="{{ url('/proxy-image?url=' . urlencode($item['imageUri'] . '/' . $item['imageUrl'])) }}" alt="...">
+                                                <img src="${item.imageUri}/${item.image01}" alt="...">
                                             </div>
                                             <div class="content">
                                                 <div class="pro-name">

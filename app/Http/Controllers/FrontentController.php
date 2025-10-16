@@ -25,6 +25,14 @@ class FrontentController extends Controller
                     ->acceptJson()
                     ->get("http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
                 $profile = $profileResponse->json('data') ?? [];
+                dd([
+                    $profileResponse,
+                    session('phone_number'),
+                    $phone,
+                    session('access_token'),
+                    "http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en",
+                    $profile['firstName']
+                    ]);
                 if ($profile) {
                     $userName = $profile['firstName'] ?? '';
                     $code = $profile['code'];
@@ -258,50 +266,146 @@ class FrontentController extends Controller
     //     ));
     // }
 
+    // public function product(Request $request)
+    // {
+    //     $profile = $this->getProfile();
+    //     $username = $profile['username'];
+
+    //     $page = $request->get('page', 1);
+    //     $itemsPerPage = $request->get('items_per_page', 9);
+    //     $childCode = $request->get('childCode');
+
+    //     // Get All Product Api
+    //     $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En";
+    //     $getAllProduct = $this->apiRequest($apiUrl, $this->token ?? null);
+    //     $responseData = $getAllProduct->json();
+
+    //     // Filter Sidebar Attributes
+    //     $ctg = $responseData['categories'] ?? [];
+    //     $sellers = $responseData['sellers'] ?? [];
+    //     $fresh_products = $responseData['fresh_products'] ?? [];
+    //     $districts = $responseData['districts'] ?? [];
+    //         $allProducts = $responseData['data'] ?? [];
+    //         $collection = collect($allProducts);
+    //         $paginatedProducts = new LengthAwarePaginator(
+    //             $collection->forPage($page, $itemsPerPage),
+    //             $collection->count(),
+    //             $itemsPerPage,
+    //             $page,
+    //             ['path' => url()->current(), 'query' => $request->query()]
+    //         );
+
+    //         $from = ($paginatedProducts->currentPage() - 1) * $paginatedProducts->perPage() + 1;
+    //         $to = $from + $paginatedProducts->count() - 1;
+    //         $total = $paginatedProducts->total();
+    //         $pagination['from'] = $from;
+    //         $pagination['to'] = $to;
+    //         $pagination['total'] = $total;
+
+    //         $pagination = [
+    //             'page' => $page,
+    //             'items_per_page' => $itemsPerPage,
+    //             'total' => $collection->count(),
+    //             'last_page' => ceil($collection->count() / $itemsPerPage),
+    //             'from' => $from,
+    //             'to' => $to,
+    //         ];
+
+    //     return view('websitePages.product', compact(
+    //         'paginatedProducts',
+    //         'pagination',
+    //         'username',
+    //         'ctg',
+    //         'sellers',
+    //         'fresh_products',
+    //         'districts',
+    //     ));
+    // }
+
     public function product(Request $request)
     {
         $profile = $this->getProfile();
         $username = $profile['username'];
 
+        $search = $request->get('search');
         $page = $request->get('page', 1);
-        $itemsPerPage = $request->get('items_per_page', 9); // Default 9 per page
+        $itemsPerPage = $request->get('items_per_page', 9);
+        $childCode = $request->get('childCode');
 
-        // API call
-        $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=9999&page=1&Lan=En";
+        // Fetch All Product Api
+        $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En&search=".$search;
         $getAllProduct = $this->apiRequest($apiUrl, $this->token ?? null);
         $responseData = $getAllProduct->json();
 
-        $ctg = $responseData['payload']['categories'] ?? [];
-        $sellers = $responseData['payload']['sellers'] ?? [];
-        $fresh_products = $responseData['payload']['fresh_products'] ?? [];
-        $districts = $responseData['payload']['districts'] ?? [];
+        // Fetch all related products from API
+        $apiUrl2 = "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode;
+        $getRelatedProduct = $this->apiRequest($apiUrl2, $this->token ?? null);
+        $responseData2 = $getRelatedProduct->json();
 
-        $allProducts = $responseData['data'] ?? [];
-        $collection = collect($allProducts);
-        $paginatedProducts = new LengthAwarePaginator(
-            $collection->forPage($page, $itemsPerPage),
-            $collection->count(),
-            $itemsPerPage,
-            $page,
-            ['path' => url()->current(), 'query' => $request->query()]
-        );
+        // Filter Sidebar Attributes
+        $ctg = $responseData['categories'] ?? [];
+        $fresh_products = $responseData['fresh_products'] ?? [];
+        $sellers = $responseData['top_Sellers'] ?? [];
+        $districts = $responseData['districts'] ?? [];
 
+        if(isset($childCode)){
 
-        $from = ($paginatedProducts->currentPage() - 1) * $paginatedProducts->perPage() + 1;
-        $to = $from + $paginatedProducts->count() - 1;
-        $total = $paginatedProducts->total();
-        $pagination['from'] = $from;
-        $pagination['to'] = $to;
-        $pagination['total'] = $total;
+            $productArray = $getRelatedProduct->json()['data'] ?? [];
+            $collection = collect($productArray);
 
-        $pagination = [
-            'page' => $page,
-            'items_per_page' => $itemsPerPage,
-            'total' => $collection->count(),
-            'last_page' => ceil($collection->count() / $itemsPerPage),
-            'from' => $from,
-            'to' => $to,
-        ];
+            // Paginate manually
+            $paginatedProducts = new \Illuminate\Pagination\LengthAwarePaginator(
+                $collection->forPage($page, $itemsPerPage),
+                $collection->count(),
+                $itemsPerPage,
+                $page,
+                ['path' => url()->current()]
+            );
+
+            $from = ($paginatedProducts->currentPage() - 1) * $paginatedProducts->perPage() + 1;
+            $to = $from + $paginatedProducts->count() - 1;
+            $total = $paginatedProducts->total();
+            $pagination['from'] = $from;
+            $pagination['to'] = $to;
+            $pagination['total'] = $total;
+
+            $pagination = [
+                'page' => $page,
+                'items_per_page' => $itemsPerPage,
+                'total' => $collection->count(),
+                'last_page' => ceil($collection->count() / $itemsPerPage),
+                'from' => $from,
+                'to' => $to,
+            ];
+
+        } else {
+
+            $allProducts = $responseData['data'] ?? [];
+            $collection = collect($allProducts);
+            $paginatedProducts = new LengthAwarePaginator(
+                $collection->forPage($page, $itemsPerPage),
+                $collection->count(),
+                $itemsPerPage,
+                $page,
+                ['path' => url()->current(), 'query' => $request->query()]
+            );
+
+            $from = ($paginatedProducts->currentPage() - 1) * $paginatedProducts->perPage() + 1;
+            $to = $from + $paginatedProducts->count() - 1;
+            $total = $paginatedProducts->total();
+            $pagination['from'] = $from;
+            $pagination['to'] = $to;
+            $pagination['total'] = $total;
+
+            $pagination = [
+                'page' => $page,
+                'items_per_page' => $itemsPerPage,
+                'total' => $collection->count(),
+                'last_page' => ceil($collection->count() / $itemsPerPage),
+                'from' => $from,
+                'to' => $to,
+            ];
+        }
 
         return view('websitePages.product', compact(
             'paginatedProducts',
@@ -343,7 +447,7 @@ class FrontentController extends Controller
     public function relatedProducts($childCode, Request $request)
     {
         $page = (int) $request->get('page', 1);
-        $itemsPerPage = (int) $request->get('items_per_page', 2);
+        $itemsPerPage = (int) $request->get('items_per_page', 9);
 
         // Fetch all related products from API (no pagination needed there)
         $getRelatedProduct = $this->apiRequest(
@@ -370,6 +474,7 @@ class FrontentController extends Controller
 
             return response()->json([
                 'related_products' => array_values($paginatedProducts->items()),
+                'pagination_products' => $paginatedProducts,
                 'pagination' => [
                     'current_page' => $paginatedProducts->currentPage(),
                     'last_page' => $paginatedProducts->lastPage(),
@@ -383,8 +488,6 @@ class FrontentController extends Controller
 
         return response()->json(['related_products' => [], 'pagination' => []]);
     }
-
-
 
     // public function community()
     // {
@@ -489,7 +592,7 @@ class FrontentController extends Controller
                 'Email' => $request['email'],
             ];
 
-            $response = Http::withOptions([
+            $response = Http::asForm()->withOptions([
                 'verify' => false
             ])->post('http://feapi.aethriasolutions.com/api/v1/UserRequest/InsertAnonymousInquiry', $params);
             $result= $response->json('text');
@@ -540,8 +643,8 @@ class FrontentController extends Controller
             $profile= $this->getProfile();
             $FK_UserID= $profile['FK_UserID'];
             $validator = Validator::make($request->all(), [
-                'coverUpload' => 'required|mimes:png,jpg,jpeg|max:2048',
-                'image01'          => 'nullable|mimes:png,jpg,jpeg|max:2048',
+                'coverUpload' => 'required|mimes:png,jpg,jpeg',
+                'image01'          => 'nullable|mimes:png,jpg,jpeg',
                 'post_name'        => 'required',
             ]);
             if($validator->fails()){

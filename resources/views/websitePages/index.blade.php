@@ -189,7 +189,7 @@
             <div class="col-2">
                 <div class="hm-food-slider owl-carousel">
                     @foreach ($bestSellingItems as $item)
-                        <a href="{{ url(app()->getLocale().'/product-view/'.$item['productID']) }}" class="item-link">
+                        <a href="{{ url(app()->getLocale().'/product?childCode='.$item['productID']) }}" class="item-link">
                             <div class="item">
                                 <div class="wrap">
                                     <div class="wishlist">
@@ -346,8 +346,8 @@
                                     <div class="item">
                                         <div class="wrap">
                                             <div class="location">
-                                            <span>{{ __('messages.city_' . strtolower($item['city'])) }}</span><br>
-                                            {{ __('messages.address_' . strtolower($item['address'])) }}
+                                            <span>{{ $item['city'] }}</span><br>
+                                            {{ $item['address'] }}
                                             </div>
                                             <div class="tel">
                                                 <div class="icon">

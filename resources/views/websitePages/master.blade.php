@@ -968,20 +968,20 @@
             </div>
         </div>
 
-    </footer>          
+    </footer>
 
     {{-- <footer class="site-footer">
 
         <div class="wrapper">
             <div class="col-1">
                 <div class="row-1">
-                    
+
                 </div>
             </div>
             <div class="col-2">
          <div class="wrapper-1">
                     <div class="row-1">
-                       
+
                         <div class="box-1">
                             <div class="title">
                                {{ __('messages.head_office') }}

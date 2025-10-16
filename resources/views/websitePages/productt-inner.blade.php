@@ -85,7 +85,7 @@ font-size:18px !important;
                     @for ($i = 0; $i < 4; $i++)
                         <div class="item" data-id="{{ $i }}">
                             <div class="image">
-                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells{{ $product['imageURl'] }}"
+                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}"
                                      alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
                             </div>
                         </div>
