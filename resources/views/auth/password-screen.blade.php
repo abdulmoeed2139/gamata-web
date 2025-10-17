@@ -59,8 +59,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 
-
-
     $("#LoginByPasswordForm").submit(function(e){
         e.preventDefault();
         let urlParams = new URLSearchParams(window.location.search);

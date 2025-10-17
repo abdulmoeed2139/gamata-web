@@ -240,7 +240,7 @@ class AuthController extends Controller
 
         $response = Http::asForm()->withOptions([
             'verify' => false
-        ])->post('http://feapi.aethriasolutions.com/api/v1/Account/LoginByPassword', $params);
+        ])->post('https://feapi.aethriasolutions.com/api/v1/Account/LoginByPassword', $params);
         $data= $response->json();
         if(isset($data['isAuthenticated']) && $data['isAuthenticated']==false){
             return response()->json(['message' => $data['message']], 401);
