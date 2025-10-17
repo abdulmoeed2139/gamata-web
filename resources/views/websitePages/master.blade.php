@@ -638,17 +638,17 @@
                             Select your Language
                         </div>
                         <div class="wrap">
-                            <a href="#" class="lan" data-lang="si">
+                            <a href="#" class="lan {{ app()->getLocale() == 'si' ? 'active' : '' }}" data-lang="si">
                                 <svg>
                                     <use xlink:href="#sinhala"></use>
                                 </svg>
                             </a>
-                            <a href="#" class="lan active" data-lang="en">
+                            <a href="#" class="lan {{ app()->getLocale() == 'en' ? 'active' : '' }}" data-lang="en">
                                 <svg>
                                     <use xlink:href="#english"></use>
                                 </svg>
                             </a>
-                            <a href="#" class="lan" data-lang="ta">
+                            <a href="#" class="lan {{ app()->getLocale() == 'ta' ? 'active' : '' }}" data-lang="ta">
                                 <svg>
                                     <use xlink:href="#tamil"></use>
                                 </svg>

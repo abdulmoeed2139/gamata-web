@@ -154,28 +154,35 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const languages = document.querySelectorAll(".lan");
 
-    const savedLang = localStorage.getItem("selectedLang") || "en";
+    // Get current locale from URL path instead of localStorage
+    const pathSegments = window.location.pathname.split('/');
+    const currentLocale = pathSegments[1] && ['en', 'si', 'ta'].includes(pathSegments[1]) ? pathSegments[1] : 'en';
 
+    // Set active class based on current URL locale
     languages.forEach(lang => {
-        if (lang.dataset.lang === savedLang) {
+        if (lang.dataset.lang === currentLocale) {
             lang.classList.add("active");
         } else {
             lang.classList.remove("active");
         }
     });
 
+    // Update localStorage with current locale
+    localStorage.setItem("selectedLang", currentLocale);
+
+    // Handle click events
     languages.forEach(lang => {
         lang.addEventListener("click", function (e) {
             e.preventDefault();
 
             languages.forEach(l => l.classList.remove("active"));
-
             this.classList.add("active");
 
             const selectedLang = this.dataset.lang;
             localStorage.setItem("selectedLang", selectedLang);
 
-            window.location.href = `/${selectedLang}`;
+            const currentPath = window.location.pathname.split('/').slice(2).join('/');
+            window.location.href = `/${selectedLang}/${currentPath}`;
         });
     });
 });
