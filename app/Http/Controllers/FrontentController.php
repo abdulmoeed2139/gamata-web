@@ -23,15 +23,15 @@ class FrontentController extends Controller
                 $phone = '0'.session('phone_number');
                 $profileResponse = Http::withToken($accessToken)
                     ->acceptJson()
-                    ->get("http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
+                    ->get("https://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
                 $profile = $profileResponse->json('data') ?? [];
-                dd([
-                    $profileResponse,
-                    session('phone_number'),
-                    $phone,
-                    session('access_token'),
-                    "http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en"
-                    ]);
+                // dd([
+                //     $profileResponse,
+                //     session('phone_number'),
+                //     $phone,
+                //     session('access_token'),
+                //     "http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en"
+                //     ]);
                 if ($profile) {
                     $userName = $profile['firstName'] ?? '';
                     $code = $profile['code'];
