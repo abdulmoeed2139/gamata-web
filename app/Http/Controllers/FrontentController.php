@@ -49,9 +49,8 @@ class FrontentController extends Controller
                 'FK_UserID' => $code,
             ];
         } catch (\Exception $e) {
-            // Exception message ko return array me bhi dal diya
             return [
-                'username' => 'Admin',
+                'username' => 'login',
                 'FK_UserID' => '',
                 'error' => $e->getMessage(),
             ];
@@ -528,7 +527,7 @@ class FrontentController extends Controller
         $itemsPerPage = 12; // API ka default
 
         $getCommunity = $this->apiRequest(
-            "http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page={$itemsPerPage}&sort=id&order=desc&postType=Pending&page={$page}",
+            "https://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page={$itemsPerPage}&sort=id&order=desc&postType=Pending&page={$page}",
             $this->token ?? null
         );
 
@@ -539,7 +538,7 @@ class FrontentController extends Controller
             $pagination = $responseData['payload']['pagination'] ?? [];
             foreach ($community as &$post) {
                 $getPostComment = $this->apiRequest(
-                    'http://feapi.aethriasolutions.com/api/PostComment/v1/GetDetails/' . $post['code'],
+                    'https://feapi.aethriasolutions.com/api/PostComment/v1/GetDetails/' . $post['code'],
                     $accessToken ?? null
                 );
                 $comments = $getPostComment->successful() ? $getPostComment->json('data') : [];
@@ -616,7 +615,7 @@ class FrontentController extends Controller
                             'Authorization' => 'Bearer '.session('access_token'),
                         ])
                         ->withOptions(['verify' => false])
-                        ->post('http://feapi.aethriasolutions.com/api/PostComment/v1/Insert', [
+                        ->post('https://feapi.aethriasolutions.com/api/PostComment/v1/Insert', [
                             'Comment' => $request['comment'],
                             'Commented_DateTime' => $request['dateTime'],
                             'FK_UserID' => $request['fK_UserID'],
@@ -670,7 +669,7 @@ class FrontentController extends Controller
                         );
                     }
 
-                    $response = $http->post('http://feapi.aethriasolutions.com/api/v1/community/NewPost', [
+                    $response = $http->post('https://feapi.aethriasolutions.com/api/v1/community/NewPost', [
                         'FK_UserID' => $FK_UserID,
                         'Post_English' => $request->post_name,
                         'Publish_DateTime' => Carbon::now(),
@@ -707,10 +706,9 @@ class FrontentController extends Controller
                     ])
                     ->withOptions(['verify' => false])
                     ->asForm()
-                    ->post('http://feapi.aethriasolutions.com/api/Postlike/v1/Insert', $params);
+                    ->post('https://feapi.aethriasolutions.com/api/Postlike/v1/Insert', $params);
 
                 $resultArray = $response->json();
-                dd($resultArray);
                 return response()->json(['message' => $resultArray['text'] ?? 'No response'], 200);
 
             } catch (Exception $exp) {
