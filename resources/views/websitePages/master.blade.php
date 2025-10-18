@@ -1692,16 +1692,36 @@
             });
             $("#subscribeBtn").on("click", function(e) {
                 e.preventDefault();
+
                 let emailValue = $("#newsletter-email").val().trim();
                 if (emailValue === "") {
-                    toastr.error("Please enter your valid email", "Error");
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+
+                        toastr.error("Please enter your valid email", "Error");
 
                     return;
                 }
 
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailPattern.test(emailValue)) {
-                    toastr.error("Please enter a valid email address", "Error");
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+
+                        toastr.error("Please enter a valid email address", "Error");
+
                     return;
                 }
                                 // hidden input fill karo
@@ -1711,12 +1731,30 @@
                     type: "POST",
                     data: $("#subscribeForm").serialize(),
                     success: function(response) {
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+
                         toastr.success(response.msg);
                         $("#newsletter-email").val("");
                         console.log(response);
                     },
                     error: function(xhr) {
-                        let errorMsg = "Something went wrong!";
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+                        // let errorMsg = "Something went wrong!";
+
                         if (xhr.responseJSON && xhr.responseJSON.msg) {
                             errorMsg = xhr.responseJSON.msg;
                         }
