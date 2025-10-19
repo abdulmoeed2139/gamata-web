@@ -300,7 +300,7 @@ class FrontentController extends Controller
         $search = $request->get('search');
         $page = $request->get('page', 1);
         $itemsPerPage = $request->get('items_per_page', 9);
-        $childCode = $request->get('childCode') ?? 6;
+        $childCode = $request->get('childCode');
 
         // Fetch All Product Api
         $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En&search=".$search;
@@ -308,7 +308,8 @@ class FrontentController extends Controller
         $responseData = $getAllProduct->json();
 
         // Fetch all related products from API
-        $apiUrl2 = "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode;
+        $apiUrl2 = "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=6";
+        // .$childCode;
         $getRelatedProduct = $this->apiRequest($apiUrl2, $this->token ?? null);
         $responseData2 = $getRelatedProduct->json();
 
