@@ -521,7 +521,7 @@
                     loading = true;
                     document.getElementById('postLoader').style.display = 'block'; // 🔹 loader show
 
-                    fetch(`/get-post?page=${nextPage}`, {
+                    fetch(`{{ url('get-post') }}?page=${nextPage}`, {
                         headers: { "X-Requested-With": "XMLHttpRequest" },
                     })
                     .then(response => response.text())
