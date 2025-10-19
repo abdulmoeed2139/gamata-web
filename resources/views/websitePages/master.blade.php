@@ -508,17 +508,17 @@
                 <div class="main-menu">
 
                     <ul>
-                        {{-- <li><a href="{{ url('/en/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
+                        {{-- <li><a href="{{ url('/'.app()->getLocale().'/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
                         </li>
-                        <li><a href="{{ url('/en/product') }}"
+                        <li><a href="{{ url('/'.app()->getLocale().'/product') }}"
                                 class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                        <li><a href="{{ url('/en/community') }}"
+                        <li><a href="{{ url('/'.app()->getLocale().'/community') }}"
                                 class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                        <li><a href="{{ url('/en/app-banner') }}"
+                        <li><a href="{{ url('/'.app()->getLocale().'/app-banner') }}"
                                 class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                        <li><a href="{{ url('/en/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
+                        <li><a href="{{ url('/'.app()->getLocale().'/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
                         </li>
-                        <li><a href="{{ url('/en/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
+                        <li><a href="{{ url('/'.app()->getLocale().'/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
                                 Us</a></li> --}}
 
                                 {{-- <a href="{{ url(app()->getLocale() . '/index') }}" class="logo">
