@@ -5,12 +5,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <style>
-.recents .image img{
+/* .recents .image img{
 height:250px !important;
 }
 .recents .content{
 padding:0 !important;
-}
+} */
 .recents .wrap{
 padding-bottom:0 !important;
 }
@@ -49,15 +49,55 @@ margin-bottom:0;
 font-size:18px !important;
 }
 
+/* .product-img-carousel .item .image img {
+    height: 450px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.product-thumb-carousel {
+    .owl-stage {
+        .owl-item {
+            .item {
+                .image {
+                    img {
+                        width: 100%;
+                        height: 120px; // Fixed height for consistent alignment
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+} */
+
+
+.recents .image img{
+    height:250px !important;
+}
+.recents .content{
+    padding:0 !important;
+}
+/* ... अन्य styles ... */
+
 .product-img-carousel .item .image img {
     height: 450px !important;
     width: 100% !important;
     object-fit: cover !important;
 }
+
+.product-thumb-carousel .owl-stage .owl-item .item .image img {
+    width: 100% !important;
+    height: 120px !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 8px;
+}
 /*.recents  .item .wrap .content{*/
 /*    position:static !important;*/
 /*}*/
 </style>
+
 <div class="product-banner">
 <div class="wrapper">
     <div class="breadcrum">
@@ -88,10 +128,10 @@ font-size:18px !important;
             <div class="product-gallery">
                 <!-- Main (Large) Carousel -->
                 <div class="owl-carousel product-img-carousel">
-                    @if($product['image01'] != 'Select.png')
+                    @if(isset($product['images'][0]) && $product['images'][0] != 'Select.png')
                     <div class="item" data-id="01">
                         <div class="image">
-                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['image01'] }}"
+                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['images'][0] }}"
                                 alt="{{ __('messages.main_image') }} 01">
                         </div>
                     </div>
@@ -100,20 +140,16 @@ font-size:18px !important;
 
                 <!-- Thumbnail (Small) Carousel -->
                 <div class="owl-carousel product-thumb-carousel">
-                <!-- @for ($i = 0; $i < 4; $i++) -->
-                    <!-- @php
-                        $imageFields = ['image01', 'image02', 'image03', 'image04'];
-                        $imageFile = $product[$imageFields[$i]] ?? 'Select.png';
-                    @endphp -->
-                    @if($product['image02'] != 'Select.png')
+                @foreach ($product['images'] as $image)
+                    @if($image != 'Select.png')
                     <div class="item" data-id="02">
                         <div class="image">
-                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['image02'] }}"
-                                alt="{{ __('messages.main_image') }} 02">
+                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $image }}"
+                                alt="{{ __('messages.main_image') }} {{ $loop->iteration }}">
                         </div>
                     </div>
                     @endif
-                <!-- @endfor -->
+                @endforeach
                 </div>
             </div>
         </div>
