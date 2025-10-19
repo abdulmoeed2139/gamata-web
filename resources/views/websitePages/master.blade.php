@@ -584,7 +584,7 @@
                             <div class="profile-dropdown">
                                 <ul>
                                     <li class="profile-menus">
-                                        <a href="#">{{ __('messages.my_dashboard') }}</a>
+                                        <a href="{{route('appBanner')}}">{{ __('messages.my_dashboard') }}</a>
                                     </li>
                                     <li class="profile-menus">
                                         <a href="#">{{ __('messages.my_profile') }}</a>
