@@ -236,35 +236,6 @@ class FrontentController extends Controller
         }
     }
 
-    // public function product()
-    // {
-    //     $profile = $this->getProfile();
-    //     $username = $profile['username'];
-    //     $page = request('page', 1);
-    //     $itemsPerPage = 9; // per page items
-    //     $getAllProduct = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page='.$itemsPerPage.'&page='.$page.'&Lan=En',
-    //         $this->token ?? null
-    //     );
-    //     $responseData = $getAllProduct->json();
-    //     $paginatedProducts = $responseData['data'] ?? [];
-    //     $pagination = $responseData['payload']['pagination'] ?? [];
-    //     $ctg = $responseData['payload']['categories'] ?? [];
-    //     $sellers = $responseData['payload']['sellers'] ?? [];
-    //     $fresh_products = $responseData['payload']['fresh_products'] ?? [];
-    //     $districts = $responseData['payload']['districts'] ?? [];
-
-    //     return view('websitePages.product', compact(
-    //         'paginatedProducts',
-    //         'pagination',
-    //         'ctg',
-    //         'sellers',
-    //         'fresh_products',
-    //         'districts',
-    //         'username',
-    //     ));
-    // }
-
     // public function product(Request $request)
     // {
     //     $profile = $this->getProfile();
@@ -525,13 +496,12 @@ class FrontentController extends Controller
         $username = $profile['username'];
 
         $page = request()->get('page', 1);
-        $itemsPerPage = 12; // API ka default
+        $itemsPerPage = 3; // API ka default
 
         $getCommunity = $this->apiRequest(
             "https://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page={$itemsPerPage}&sort=id&order=desc&postType=Pending&page={$page}",
             $this->token ?? null
         );
-
 
         if ($getCommunity->successful()) {
             $responseData = $getCommunity->json();
@@ -549,6 +519,10 @@ class FrontentController extends Controller
                     return strtotime($b['commented_DateTime']) - strtotime($a['commented_DateTime']);
                 });
                 $post['comments'] = $comments;
+            }
+
+            if (request()->ajax()) {
+                return view('websitePages.partials.community_posts', compact('community'))->render();
             }
 
             return view('websitePages.community', compact('username', 'community', 'pagination'));

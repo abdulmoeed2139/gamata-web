@@ -75,6 +75,23 @@
             }
         }
 
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #9fcd22; /* soft green */
+            border-right: 4px solid #9fcd22; /* lighter green for gradient feel */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 0.8s ease-in-out infinite;
+            margin: 0 auto;
+            box-shadow: 0 0 6px rgba(46, 204, 113, 0.4);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
 
         @media screen and (max-width:767px) {
 
@@ -361,71 +378,6 @@
                         </div>
                         <div class="image-post comment-container">
                             <div class="wrapper">
-                                <div class="row-1" style="display: none;">
-                                    <div class="pofile">
-                                        <div class="image">
-                                            <img src="{{ asset('assets/Images/community/user.jpg') }}" alt="user">
-                                        </div>
-                                        <div class="name">
-                                            <div class="text">
-                                                John f kennedy
-                                            </div>
-                                            <div class="date">
-                                                9 minutes ago
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="icon">
-                                        <svg>
-                                            <use xlink:href="#three_dot"></use>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="row-3" style="display: none;">
-                                    <div class="content">
-                                        How's tech changing farming these days? Are drones and stuff actually useful for
-                                        small farms?
-                                    </div>
-                                </div>
-                                <div class="row-4" style="display: none;">
-                                    <div class="col-1">
-                                        <div class="box red">
-                                            <div class="icon">
-                                                <svg>
-                                                    <use xlink:href="#heart"></use>
-                                                </svg>
-                                            </div>
-                                            <div class="text">2.3k</div>
-                                        </div>
-                                        <div class="box">
-                                            <div class="icon">
-                                                <svg>
-                                                    <use xlink:href="#msgs"></use>
-                                                </svg>
-                                            </div>
-                                            <div class="text">245</div>
-                                        </div>
-                                        <div class="box"></div>
-                                        <div class="box">
-                                            <div class="icon">
-                                                <svg>
-                                                    <use xlink:href="#share"></use>
-                                                </svg>
-                                            </div>
-                                            <div class="text">32</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <input type="text" id="lname" name="lname"
-                                            placeholder="Write Your Comment Here">
-                                        <div class="icon submitBtn">
-                                            <svg>
-                                                <use xlink:href="#send"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="loader" style="display: none;"></div>
-                                    </div>
-                                </div>
                                 <div class="row-5">
                                     <div class="wrap">
                                         <ul class="main-cmnt">
@@ -468,77 +420,11 @@
                             </div>
                         </div>
                     @endforeach
+                    <div id="load-more-trigger" data-next-page="2"></div>
 
-
-                    <!-- <div class="pagination">
-                        {{-- Left Arrow --}}
-                        @if($pagination['page'] > 1)
-                            <a href="{{ url()->current() }}?page={{ $pagination['page'] - 1 }}">
-                                &laquo; Previous
-                            </a>
-                        @endif
-
-                        {{-- Page Numbers --}}
-                        @foreach($pagination['links'] as $link)
-                            @if($link['label'] != 'Next &raquo;' && $link['label'] != '&laquo; Previous')
-                                <a href="{{ url()->current() }}?page={{ $link['page'] }}"
-                                class="{{ $link['active'] ? 'active' : '' }}">
-                                {{ $link['label'] }}
-                                </a>
-                            @endif
-                        @endforeach
-
-                        {{-- Right Arrow --}}
-                        @if($pagination['page'] < $pagination['last_page'])
-                            <a href="{{ url()->current() }}?page={{ $pagination['page'] + 1 }}">
-                                Next &raquo;
-                            </a>
-                        @endif
-                    </div> -->
-
-                    <div class="pagination postsPagination">
-                        {{-- Left Arrow --}}
-                        <div class="arrow-left">
-                            @if(isset($pagination['page']) && $pagination['page'] > 1)
-                                <a href="{{ url()->current() }}?page={{ $pagination['page'] - 1 }}">
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z"
-                                            fill="#000000"></path>
-                                    </svg>
-                                </a>
-                            @endif
-                        </div>
-
-                        {{-- Page Numbers --}}
-                        <div class="numbers">
-                            @if(isset($pagination['links']))
-                                @foreach($pagination['links'] as $link)
-                                    @if(is_numeric($link['label'])) {{-- Sirf numbers show kare --}}
-                                        <div class="num {{ $link['active'] ? 'active' : '' }}">
-                                            <a href="{{ url()->current() }}?page={{ $link['page'] }}" style="text-decoration: none; color: #707070;">
-                                                {{ $link['label'] }}
-                                            </a>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </div>
-
-                        {{-- Right Arrow --}}
-                        <div class="arrow-right">
-                            @if(isset($pagination['page'], $pagination['last_page']) && $pagination['page'] < $pagination['last_page'])
-                                <a href="{{ url()->current() }}?page={{ $pagination['page'] + 1 }}">
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z"
-                                            fill="#000000"></path>
-                                    </svg>
-                                </a>
-                            @endif
-                        </div>
+                    <div id="postLoader" style="display:none; text-align:center; padding:20px;">
+                        <div class="spinner"></div>
                     </div>
-
 
                 </div>
 
@@ -557,67 +443,119 @@
         // Video File Name Show
         // Cover Image File Name Show - ADD THIS
         document.getElementById("coverUpload").addEventListener("change", function() {
-        let fileName = this.files[0] ? this.files[0].name : "";
-        document.getElementById("coverImagefile").textContent = fileName;
+            let fileName = this.files[0] ? this.files[0].name : "";
+            document.getElementById("coverImagefile").textContent = fileName;
         });
 
         document.addEventListener("DOMContentLoaded", function () {
-    const allPosts = document.querySelectorAll(".comment-container"); // har post ka container
+            const allPosts = document.querySelectorAll(".comment-container"); // har post ka container
 
-    allPosts.forEach(post => {
-        const comments = post.querySelectorAll(".comment-item");
-        const toggleBtn = post.querySelector("#toggle-comments");
-        if (!toggleBtn || comments.length === 0) return;
+            allPosts.forEach(post => {
+                const comments = post.querySelectorAll(".comment-item");
+                const toggleBtn = post.querySelector("#toggle-comments");
+                if (!toggleBtn || comments.length === 0) return;
 
-        const step = 3;
-        let visibleCount = step;
+                const step = 3;
+                let visibleCount = step;
 
-        // Pehle 3 comments show karo
-        comments.forEach((comment, index) => {
-            if (index < visibleCount) comment.classList.add("show");
+                // Pehle 3 comments show karo
+                comments.forEach((comment, index) => {
+                    if (index < visibleCount) comment.classList.add("show");
+                });
+
+                // Agar 3 se kam comments hain to button hide kar do
+                if (comments.length <= step) {
+                    toggleBtn.style.display = "none";
+                    return; // Is post ke liye aage kuch mat karo
+                }
+
+                // Button click functionality
+                toggleBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    if (toggleBtn.textContent === "Show more") {
+                        // Next 3 comments show karo
+                        let nextCount = visibleCount + step;
+                        for (let i = visibleCount; i < nextCount && i < comments.length; i++) {
+                            comments[i].classList.add("show");
+                        }
+                        visibleCount = Math.min(nextCount, comments.length);
+
+                        // Agar sab show ho gaye to button text change karo
+                        if (visibleCount >= comments.length) {
+                            toggleBtn.textContent = "Show less";
+                        }
+                    } else {
+                        // Last wale 3 comments hide karo (pehle 3 visible rehne do)
+                        let hideCount = visibleCount - step;
+                        for (let i = visibleCount - 1; i >= hideCount && i >= 0; i--) {
+                            if (i >= step) comments[i].classList.remove("show");
+                        }
+                        visibleCount = Math.max(hideCount, step);
+
+                        // Agar sirf 3 comments visible hain to button text reset karo
+                        if (visibleCount <= step) {
+                            toggleBtn.textContent = "Show more";
+                        }
+                    }
+                });
+            });
         });
-
-        // Agar 3 se kam comments hain to button hide kar do
-        if (comments.length <= step) {
-            toggleBtn.style.display = "none";
-            return; // Is post ke liye aage kuch mat karo
-        }
-
-        // Button click functionality
-        toggleBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            if (toggleBtn.textContent === "Show more") {
-                // Next 3 comments show karo
-                let nextCount = visibleCount + step;
-                for (let i = visibleCount; i < nextCount && i < comments.length; i++) {
-                    comments[i].classList.add("show");
-                }
-                visibleCount = Math.min(nextCount, comments.length);
-
-                // Agar sab show ho gaye to button text change karo
-                if (visibleCount >= comments.length) {
-                    toggleBtn.textContent = "Show less";
-                }
-            } else {
-                // Last wale 3 comments hide karo (pehle 3 visible rehne do)
-                let hideCount = visibleCount - step;
-                for (let i = visibleCount - 1; i >= hideCount && i >= 0; i--) {
-                    if (i >= step) comments[i].classList.remove("show");
-                }
-                visibleCount = Math.max(hideCount, step);
-
-                // Agar sirf 3 comments visible hain to button text reset karo
-                if (visibleCount <= step) {
-                    toggleBtn.textContent = "Show more";
-                }
-            }
-        });
-    });
-});
 
     </script>
 
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let loading = false;
+            let observer = new IntersectionObserver(handleIntersect, { threshold: 0.3 });
+            let trigger = document.getElementById('load-more-trigger');
+            observer.observe(trigger);
+
+            function handleIntersect(entries) {
+                if (entries[0].isIntersecting && !loading) {
+                    let nextPage = trigger.dataset.nextPage;
+                    if (!nextPage) return;
+
+                    loading = true;
+                    document.getElementById('postLoader').style.display = 'block'; // 🔹 loader show
+
+                    fetch(`/get-post?page=${nextPage}`, {
+                        headers: { "X-Requested-With": "XMLHttpRequest" },
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        let parser = new DOMParser();
+                        let doc = parser.parseFromString(html, 'text/html');
+                        let newPosts = doc.querySelectorAll('.image-post');
+                        let paginationData = doc.querySelector('.pagination');
+                        let next = doc.querySelector('[rel="next"]');
+
+                        if (newPosts.length > 0) {
+                            let container = document.querySelector('.postDev');
+                            newPosts.forEach(post => {
+                                // document.querySelector('.postDev').appendChild(post);
+                                container.insertBefore(post, document.getElementById('load-more-trigger'));
+                            });
+
+                            // Update next page number
+                            trigger.dataset.nextPage = parseInt(nextPage) + 1;
+                        } else {
+                            trigger.dataset.nextPage = '';
+                        }
+                    })
+                    .catch(() => {
+                        console.error('Error loading more posts');
+                    })
+                    .finally(() => {
+                        document.getElementById('postLoader').style.display = 'none'; // 🔹 loader hide
+                        loading = false;
+                    });
+                }
+            }
+        });
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
