@@ -25,7 +25,8 @@ Route::get('/proxy-image', function (Illuminate\Http\Request $request) {
 
 Route::get('/related-products/{childCode}', [FrontentController::class, 'relatedProducts'])->name('related-products');
 Route::get('/get-blog/{blog_id}', [FrontentController::class, 'getSingleBlog'])->name('get-single-blog');
-Route::get('/get-post', [FrontentController::class, 'community'])->name('get-single-blog');
+Route::get('/get-post', [FrontentController::class, 'community'])->name('get-post');
+Route::get('/get-product', [FrontentController::class, 'product'])->name('get-product');
 
 
 // Language-prefixed group

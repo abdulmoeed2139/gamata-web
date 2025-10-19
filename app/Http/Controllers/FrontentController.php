@@ -25,13 +25,6 @@ class FrontentController extends Controller
                     ->acceptJson()
                     ->get("https://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
                 $profile = $profileResponse->json('data') ?? [];
-                // dd([
-                //     $profileResponse,
-                //     session('phone_number'),
-                //     $phone,
-                //     session('access_token'),
-                //     "http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en"
-                //     ]);
                 if ($profile) {
                     $userName = $profile['firstName'] ?? '';
                     $code = $profile['code'];
@@ -323,7 +316,6 @@ class FrontentController extends Controller
             $productArray = $getRelatedProduct->json()['data'] ?? [];
             $collection = collect($productArray);
 
-            // Paginate manually
             $paginatedProducts = new \Illuminate\Pagination\LengthAwarePaginator(
                 $collection->forPage($page, $itemsPerPage),
                 $collection->count(),
@@ -375,6 +367,13 @@ class FrontentController extends Controller
                 'from' => $from,
                 'to' => $to,
             ];
+        }
+
+        if (request()->ajax()) {
+            return response()->json([
+                'paginatedProducts' => $paginatedProducts,
+                'pagination' => $pagination
+            ]);
         }
 
         return view('websitePages.product', compact(
@@ -458,36 +457,6 @@ class FrontentController extends Controller
 
         return response()->json(['related_products' => [], 'pagination' => []]);
     }
-
-    // public function community()
-    // {
-    //     $accessToken = session('access_token');
-    //     $profile = $this->getProfile();
-    //     $username = $profile['username'];
-    //     $getCommunity = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=12&sort=id&order=desc&postType=Pending&page=1',
-    //         $this->token ?? null
-    //     );
-
-    //     if ($getCommunity->successful()) {
-    //         $community = $getCommunity->json('data') ?? [];
-    //         foreach ($community as &$post) {
-    //             $getPostComment = $this->apiRequest(
-    //                 'http://feapi.aethriasolutions.com/api/PostComment/v1/GetDetails/' . $post['code'],
-    //                 $accessToken ?? null
-    //             );
-    //             $comments = $getPostComment->successful() ? $getPostComment->json('data') : [];
-
-    //             // ✅ Latest comment top order By DESC Code (jugaar)
-    //             usort($comments, function($a, $b) {
-    //                 return strtotime($b['commented_DateTime']) - strtotime($a['commented_DateTime']);
-    //             });
-    //             $post['comments'] = $comments;
-    //         }
-
-    //         return view('websitePages.community', compact('username', 'community'));
-    //     }
-    // }
 
     public function community()
     {

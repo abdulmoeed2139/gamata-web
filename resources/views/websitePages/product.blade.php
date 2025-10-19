@@ -58,9 +58,9 @@
         <div class="wrapper">
             <div class="col-1">
                 <div class="search-bars">
-                    <form action="{{ url(app()->getLocale().'/product') }}" method="GET">
+                    <form id="productSearchForm" method="GET">
                         <div class="wrapper">
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ __('messages.Search_your_Product') }}">
+                            <input type="text" class="productSearchBox" name="search" value="{{ request('search') }}" placeholder="{{ __('messages.Search_your_Product') }}">
                             {{-- <svg>
                                 <use xlink:href="#inner_search"></use>
                             </svg> --}}
@@ -169,13 +169,13 @@
                 <!-- Loader (spinner only) -->
                 <div id="loader"
                     style="
-                display: none;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 1000;
-            ">
+                        display: none;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1000;
+                    ">
                     <div class="spinner"></div>
                 </div>
 
@@ -194,7 +194,6 @@
                             <div class="text">
                                 {{ __('messages.showing_results', ['from' => $pagination['from'], 'to' => $pagination['to'], 'total' => $pagination['total']]) }}
 
-                                <!-- Showing {{ $pagination['from'] }}–{{ $pagination['to'] }} of {{ $pagination['total'] }} Results -->
                             </div>
                         </div>
                     </div>
@@ -222,7 +221,7 @@
                                                     <div class="eng">{{ $item['product_Name_English'] }}</div>
                                                     <div class="tam">{{ $item['product_Name_Tamil'] }}</div>
                                                 </div>
-                                                <div class="price">Rs. <span>{!! $item['unit_Price'] !!}</span> (1 Kg)</div>
+                                                <div class="price">Rs. <span>{!! number_format($item['unit_Price'], 2) !!}</span> (1 Kg)</div>
                                                 <div class="stock">{{ $item['quantity'] }}
                                                     {{ __('messages.kilo_available_in_stock') }} </div>
                                                 <div class="common-btn-1">
@@ -260,7 +259,7 @@
                                                     <div class="eng">{{ $item['childNameEnglish'] }}</div>
                                                     <div class="tam">{{ $item['childNameTamil'] }}</div>
                                                 </div>
-                                                <div class="price">Rs. <span>{!! $item['avgPrice'] !!}</span> (1 Kg)</div>
+                                                <div class="price">Rs. <span>{!! number_format($item['avgPrice'], 2) !!}</span> (1 Kg)</div>
                                                 <div class="stock">{{ $item['totalAvlQty'] }}
                                                     {{ __('messages.kilo_available_in_stock') }} </div>
                                                 <div class="common-btn-1">
@@ -326,10 +325,81 @@
     <script>
         $(document).ready(function() {
 
+            $('#productSearchForm').submit(function(e){
+                e.preventDefault();
+
+                // Both Pagination hide
+                $('.postsPagination').hide();
+                $('.related-pagination').hide();
+
+                const searchValue = $(this).val().trim();
+                const formData = $(this).serialize();
+                $("#food-list").html('');
+                $('#loader').show();
+                $.ajax({
+                        url: "{{ url('get-product') }}",
+                        type: 'GET',
+                        data: formData,
+                        success: function(response) {
+                            $('#loader').hide();
+                            $("#food-list").html(''); // Clear any previous results
+
+                            const products = response.paginatedProducts.data;
+                            if(products.length >= 9){
+                                $('.postsPagination').show();
+                            }
+
+                            if (products.length === 0) {
+                                $("#food-list").html('<p>No products found.</p>');
+                                return;
+                            }
+
+                            products.forEach(function(item) {
+                                let htmlContent = `
+                                    <a href="#" data-child-code="${item.childCode}" class="product-link">
+                                        <div class="items">
+                                            <div class="wrap">
+                                                <div class="wishlist">
+                                                    <svg>
+                                                        <use xlink:href="#heart"></use>
+                                                    </svg>
+                                                </div>
+                                                <div class="image">
+                                                    <img src="${item.imageUri}/${item.imageUrl}" alt="${item.childNameEnglish}">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="pro-name">
+                                                        <div class="sin">${item.childNameSinhala}</div>
+                                                        <div class="eng">${item.childNameEnglish}</div>
+                                                        <div class="tam">${item.childNameTamil}</div>
+                                                    </div>
+                                                    <div class="price">Rs. <span>${parseFloat(item.avgPrice).toLocaleString(undefined, {minimumFractionDigits: 2})}</span> (1 Kg)</div>
+                                                    <div class="stock">${item.totalAvlQty} {{ __('messages.kilo_available_in_stock') }}</div>
+                                                    <div class="common-btn-1">
+                                                        <svg>
+                                                            <use xlink:href="#btn_arr"></use>
+                                                        </svg>
+                                                        {{ __('messages.buy_now') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                `;
+                                $("#food-list").append(htmlContent);
+                            });
+                        },
+                        error: function(xhr) {
+                            console.log("Error:", xhr);
+                        }
+                    });
+            });
+
+
             let currentChildCode = null;
             let relatedProductsContainer = $('#food-list');
 
-            $('.product-link').click(function(e) {
+            $(document).on('click', '.product-link', function(e) {
                 e.preventDefault();
                 currentChildCode = $(this).data('child-code');
                 loadRelatedProducts(currentChildCode, 1);
@@ -365,7 +435,7 @@
                                 0) {
                                 response.related_products.forEach(function(item) {
                                     let productHtml = `
-                                <a href="{{ url(app()->getLocale() . '/product-view') }}/${item.sell_Code}" class="product-link">
+                                <a href="{{ url(app()->getLocale() . '/product-view') }}/${item.sell_Code}">
                                     <div class="items">
                                         <div class="wrap">
                                             <div class="wishlist">
