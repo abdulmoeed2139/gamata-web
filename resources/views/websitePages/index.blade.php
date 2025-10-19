@@ -138,7 +138,7 @@
                        {{ __('messages.banner_title') }}
 
                 </div>
-                <div class="steps-cards owl-carousel" style="display: flex; justify-content: center; align-items: center;">
+                <div class="steps-cards owl-carousel" style="display: flex; justify-content: center;">
                     @foreach ($steps as $step)
                         <div class="item" style="text-align: center;">
                             <div class="title">

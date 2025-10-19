@@ -192,11 +192,11 @@ body.forgot-password .popup {
 }
 
 
-body img[alt="Flowers"] {
+/* body img[alt="Flowers"] {
     width: auto !important;
     object-fit: default !important;
     height: auto !important;
-}
+} */
 
 .language a.lan.active,
 a.lan.active svg {
@@ -1577,6 +1577,9 @@ body.en .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content
     display: block;
 }
 
+.community-inner .wrapper .col-2 .write-post form {
+    border: 0.0520833333vw solid #e1e1e1;
+}
 
 @media (min-width: 1200px) {
     .journal-section .wrapper::after {
@@ -2256,7 +2259,9 @@ select#cars {
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 0;
-        row-gap: 25px;
+        /* row-gap: 2px; */
+
+
     }
 
     .sec-1 .wrapper .col-1 .steps-cards .item {
@@ -2268,6 +2273,11 @@ select#cars {
 }
 
 @media (min-width: 1200px) {
+
+    #blogBtn {
+        width: 100%;
+    }
+
     .sec-1 {
         margin-bottom: 5.2083333333vw;
         padding: 3.125vw 12.5vw 2.6041666667vw 6.7708333333vw;
@@ -2303,7 +2313,9 @@ select#cars {
     }
 
     .sec-1 .wrapper .col-1 .steps-cards {
-        row-gap: 0.9375vw;
+        /* row-gap: 0.9375vw; */
+        row-gap: 8px;
+
     }
 
     .sec-1 .wrapper .col-1 .steps-cards .item {
@@ -4560,7 +4572,19 @@ body .product-listing .common-btn-1 svg {
 
 @media (min-width: 1200px) {
 
+    body.ta footer .wrapper .col-2 .wrapper-1 .row-2 .box-1 .footer-menu li a,
+    body.si footer .wrapper .col-2 .wrapper-1 .row-2 .box-1 .footer-menu li a {
+        font-size: 10px !important;
 
+    }
+
+    .item-list .wrapper .col-2 .hm-food-slider .item .wrap .common-btn-1 {
+        opacity: 0;
+    }
+
+    .item-list .wrapper .col-2 .hm-food-slider .item .wrap:hover .common-btn-1 {
+        opacity: 1;
+    }
 
     .journal-section {
 
@@ -4592,7 +4616,9 @@ body .product-listing .common-btn-1 svg {
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
-        padding: 4.9479166667vw 5.7291666667vw 2.6041666667vw 3.125vw;
+        /* padding: 4.9479166667vw 5.7291666667vw 2.6041666667vw 3.125vw; */
+        padding: 2.947917vw 5.7291666667vw 2.6041666667vw 3.125vw;
+
     }
 
     .journal-section .wrapper .col-1 .content .top .title {
@@ -9347,6 +9373,7 @@ label.login-label-uni svg {
         width: 100% !important;
 
     }
+
 
 
     body.ta .explore-section select#cars {
