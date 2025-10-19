@@ -424,7 +424,7 @@ class FrontentController extends Controller
         $profile= $this->getProfile();
         $username= $profile['username'];
         $getProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Product/ViewMore/6?mobile=0776563157&lan=En&parent='.$sellcode,
+            'https://feapi.aethriasolutions.com/api/v1/Product/ViewMore/6?mobile=0776563157&lan=En&parent='.$sellcode,
             $this->token ?? null
         );
 
