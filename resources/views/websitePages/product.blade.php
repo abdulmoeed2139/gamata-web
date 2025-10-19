@@ -29,7 +29,6 @@
         }
     </style>
 
-
     <!-- Banner Section -->
     <section>
         <div class="product-banner">
@@ -102,7 +101,13 @@
                     </div>
                     <div class="filter-content">
                         @foreach ($ctg as $item)
-                            <label><input type="checkbox">{{ $item['productNameEnglish'] }}</label>
+                            @if (app()->getLocale() == "en")
+                                <label><input type="checkbox">{{ $item['productNameEnglish'] }}</label>
+                            @elseif (app()->getLocale() == "si")
+                                <label><input type="checkbox">{{ $item['productNameSinhala'] }}</label>
+                            @elseif (app()->getLocale() == "ta")
+                                <label><input type="checkbox">{{ $item['productNameTamil'] }}</label>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -113,7 +118,13 @@
                     </div>
                     <div class="filter-content">
                         @foreach ($districts as $item)
-                            <label><input type="checkbox">{{ $item['name_English'] }}</label>
+                            @if (app()->getLocale() == "en")
+                                <label><input type="checkbox">{{ $item['name_English'] }}</label>
+                            @elseif (app()->getLocale() == "si")
+                                <label><input type="checkbox">{{ $item['name_Sinhala'] }}</label>
+                            @elseif (app()->getLocale() == "ta")
+                                <label><input type="checkbox">{{ $item['name_Tamil'] }}</label>
+                            @endif
                         @endforeach
                     </div>
                 </div>
