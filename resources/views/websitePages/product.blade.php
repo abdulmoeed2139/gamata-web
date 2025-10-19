@@ -325,6 +325,7 @@
             });
 
             function loadRelatedProducts(childCode, page) {
+                $('.postsPagination').hide();
                 $('#loader').show(); // loader visible
                 $('.pagination').empty();
                 relatedProductsContainer.empty();
@@ -340,7 +341,7 @@
                     type: 'GET',
                     data: {
                         page: page,
-                        items_per_page: 1
+                        items_per_page: 9
                     },
                     success: function(response) {
                         relatedProductsContainer.empty();
@@ -379,7 +380,6 @@
                                     </div>
                                 </a>`;
                                     relatedProductsContainer.append(productHtml);
-                                    $('.postsPagination').hide();
                                 });
 
                                 // Create pagination

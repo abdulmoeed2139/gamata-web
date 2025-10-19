@@ -450,7 +450,7 @@ class FrontentController extends Controller
 
         // Fetch all related products from API (no pagination needed there)
         $getRelatedProduct = $this->apiRequest(
-            "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode,
+            "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page={$itemsPerPage}&page={$page}&Lan=si&productId=".$childCode,
             $this->token ?? null
         );
 
