@@ -523,6 +523,7 @@
 <section class="journal-section">
     <div class="wrapper">
         <div class="col-1">
+            <div class="leftCol">
             <div class="content">
                 <div class="top">
                     <div class="title">
@@ -538,6 +539,7 @@
                     </svg>
                     {{ __('messages.explore') }}
                 </a>
+            </div>
             </div>
         </div>
         <div class="col-2">

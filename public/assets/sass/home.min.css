@@ -1579,6 +1579,20 @@ body.en .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content
 
 
 @media (min-width: 1200px) {
+    .journal-section .wrapper::after {
+        bottom: 0px;
+
+    }
+
+    .journal-section .wrapper .col-2 .journal-carousel {
+        max-height: 94.5% !important;
+        overflow: hidden;
+    }
+
+    .sec-1 .wrapper .col-1 .steps-cards {
+        column-gap: 7px;
+    }
+
     .banner-wrapper {
         height: 100%;
     }
@@ -4532,7 +4546,7 @@ body .product-listing .common-btn-1 svg {
 }
 
 .journal-section .wrapper .col-2 .journal-carousel .owl-stage .owl-item img {
-    max-height: 362px !important;
+    /* max-height: 362px !important; */
     object-fit: cover;
 }
 
@@ -4545,7 +4559,12 @@ body .product-listing .common-btn-1 svg {
 }
 
 @media (min-width: 1200px) {
+
+
+
     .journal-section {
+
+
         margin-bottom: 5.2083333333vw;
     }
 
@@ -4784,7 +4803,8 @@ body .product-listing .common-btn-1 svg {
         background-repeat: no-repeat, repeat;
         background-size: cover;
         background-position: center;
-        bottom: 0;
+        bottom: 4%;
+
         left: auto;
         right: 37.3958333333vw;
         z-index: -1;
