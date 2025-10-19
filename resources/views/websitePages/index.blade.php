@@ -1,5 +1,6 @@
 @extends('websitePages.master')
 @section('content')
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
         integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -101,9 +102,9 @@
                        {{ __('messages.banner_title') }}
 
                 </div>
-                <div class="steps-cards owl-carousel">
+                <div class="steps-cards owl-carousel" style="display: flex; justify-content: center; align-items: center;">
                     @foreach ($steps as $step)
-                        <div class="item">
+                        <div class="item" style="text-align: center;">
                             <div class="title">
                                 {{ $step['title'] }}
                             </div>
@@ -111,7 +112,7 @@
                                 {{ $step['desc'] }}
                             </div>
                         </div>
-                    @endforeach;
+                    @endforeach
                 </div>
             </div>
 
@@ -557,6 +558,7 @@
         </div>
     </div>
 </section>
+
 
 
 
