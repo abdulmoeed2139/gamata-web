@@ -1,6 +1,42 @@
 @extends('websitePages.master')
 @section('content')
+<style>
+/* Best selling products alignment fix */
+.hm-food-slider .item {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
 
+.hm-food-slider .item .wrap {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.hm-food-slider .item .content {
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.hm-food-slider .item .pro-name {
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
+
+.hm-food-slider .item .price,
+.hm-food-slider .item .stock {
+    margin: 8px 0 !important;
+}
+
+.hm-food-slider .item .common-btn-1 {
+    margin-top: auto !important;
+    align-self: flex-start !important;
+}
+</style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
         integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
