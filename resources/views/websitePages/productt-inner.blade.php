@@ -48,6 +48,12 @@ margin-bottom:0;
 .recents .pro-name div {
 font-size:18px !important;
 }
+
+.product-img-carousel .item .image img {
+    height: 350px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
 /*.recents  .item .wrap .content{*/
 /*    position:static !important;*/
 /*}*/
@@ -68,7 +74,7 @@ font-size:18px !important;
             <use xlink:href="#breadcrum"></use>
         </svg>
         <div class="current">
-            {{$product['name_English'] ?? 'Product Not Found'}}
+        {{$product['productName'] ?? 'Product Not Found'}}
         </div>
     </div>
 </div>
@@ -82,42 +88,54 @@ font-size:18px !important;
             <div class="product-gallery">
                 <!-- Main (Large) Carousel -->
                 <div class="owl-carousel product-img-carousel">
-                    @for ($i = 0; $i < 4; $i++)
-                        <div class="item" data-id="{{ $i }}">
-                            <div class="image">
-                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}"
-                                     alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
-                            </div>
+                    @if($product['image01'] != 'Select.png')
+                    <div class="item" data-id="01">
+                        <div class="image">
+                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['image01'] }}"
+                                alt="{{ __('messages.main_image') }} 01">
                         </div>
-                    @endfor
+                    </div>
+                    @endif
                 </div>
 
                 <!-- Thumbnail (Small) Carousel -->
                 <div class="owl-carousel product-thumb-carousel">
-                    @for ($i = 0; $i < 4; $i++)
-                        <div class="item" data-id="{{ $i }}">
-                            <div class="image">
-                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}"
-                                     alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
-                            </div>
+                <!-- @for ($i = 0; $i < 4; $i++) -->
+                    <!-- @php
+                        $imageFields = ['image01', 'image02', 'image03', 'image04'];
+                        $imageFile = $product[$imageFields[$i]] ?? 'Select.png';
+                    @endphp -->
+                    @if($product['image02'] != 'Select.png')
+                    <div class="item" data-id="02">
+                        <div class="image">
+                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['image02'] }}"
+                                alt="{{ __('messages.main_image') }} 02">
                         </div>
-                    @endfor
+                    </div>
+                    @endif
+                <!-- @endfor -->
                 </div>
             </div>
         </div>
 
         <div class="col-2">
             <div class="content">
-                <div class="row-1">
-                    <div class="save">
-                        <div class="text-1">{{ __('messages.saving') }}: </div>
-                        <div class="text-2">26% off</div>
-                    </div>
-                    <div class="title">{{ $product['name_English'] }}</div>
-                    <div class="price-1">Rs. <span>260.00</span> {{ $product['uomGroups'] }}</div>
-                    <div class="price-2">Rs. <span>250.00</span> {{ $product['uomGroups'] }}</div>
-                    <div class="desc">{{ $product['product_Description'] }}</div>
+            <div class="row-1">
+                <div class="save">
+                    <div class="text-1">{{ __('messages.saving') }}: </div>
+                    <div class="text-2">{{ $product['discount'] ?? 0 }}% off</div>
                 </div>
+                <div class="title">{{ $product['productName'] }}</div>
+                
+                @if(isset($product['priceCut']) && $product['priceCut'] > 0)
+                    <div class="price-1">Rs. <span>{{ $product['unit_Price'] + $product['priceCut'] }}</span> {{ $product['uom'] }}</div>
+                    <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
+                @else
+                    <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
+                @endif
+                
+                <div class="desc">{{ $product['productDescription'] }}</div>
+            </div>
 
                 <div class="row-2">
                     <div class="title">{{ __('messages.package_sizes') }}:</div>
@@ -140,6 +158,7 @@ font-size:18px !important;
                         </div>
                     </div>
                 </div>
+                
 
                 <div class="row-3">
                     <div class="btn-1">
