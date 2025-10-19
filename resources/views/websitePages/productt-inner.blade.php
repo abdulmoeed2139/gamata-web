@@ -50,7 +50,7 @@ font-size:18px !important;
 }
 
 .product-img-carousel .item .image img {
-    height: 350px !important;
+    height: 450px !important;
     width: 100% !important;
     object-fit: cover !important;
 }
