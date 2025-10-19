@@ -300,7 +300,7 @@ class FrontentController extends Controller
         $search = $request->get('search');
         $page = $request->get('page', 1);
         $itemsPerPage = $request->get('items_per_page', 9);
-        $childCode = $request->get('childCode');
+        $childCode = $request->get('childCode') ?? 6;
 
         // Fetch All Product Api
         $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En&search=".$search;
@@ -316,8 +316,7 @@ class FrontentController extends Controller
         $ctg = $responseData['categories'] ?? [];
         $fresh_products = $responseData['fresh_products'] ?? [];
         $sellers = $responseData['top_Sellers'] ?? [];
-        $districts = $responseData['districts'] ?? [];
-
+        $districts = $responseData2['districts'] ?? [];
         if(isset($childCode)){
 
             $productArray = $getRelatedProduct->json()['data'] ?? [];
