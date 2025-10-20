@@ -508,17 +508,17 @@
                 <div class="main-menu">
 
                     <ul>
-                        {{-- <li><a href="{{ url('/en/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
+                        {{-- <li><a href="{{ url('/'.app()->getLocale().'/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
                         </li>
-                        <li><a href="{{ url('/en/product') }}"
+                        <li><a href="{{ url('/'.app()->getLocale().'/product') }}"
                                 class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                        <li><a href="{{ url('/en/community') }}"
+                        <li><a href="{{ url('/'.app()->getLocale().'/community') }}"
                                 class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                        <li><a href="{{ url('/en/app-banner') }}"
+                        <li><a href="{{ url('/'.app()->getLocale().'/app-banner') }}"
                                 class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                        <li><a href="{{ url('/en/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
+                        <li><a href="{{ url('/'.app()->getLocale().'/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
                         </li>
-                        <li><a href="{{ url('/en/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
+                        <li><a href="{{ url('/'.app()->getLocale().'/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
                                 Us</a></li> --}}
 
                                 {{-- <a href="{{ url(app()->getLocale() . '/index') }}" class="logo">
@@ -584,7 +584,7 @@
                             <div class="profile-dropdown">
                                 <ul>
                                     <li class="profile-menus">
-                                        <a href="#">{{ __('messages.my_dashboard') }}</a>
+                                        <a href="{{route('appBanner', app()->getLocale())}}">{{ __('messages.my_dashboard') }}</a>
                                     </li>
                                     <li class="profile-menus">
                                         <a href="#">{{ __('messages.my_profile') }}</a>
@@ -1692,16 +1692,36 @@
             });
             $("#subscribeBtn").on("click", function(e) {
                 e.preventDefault();
+
                 let emailValue = $("#newsletter-email").val().trim();
                 if (emailValue === "") {
-                    toastr.error("Please enter your valid email", "Error");
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+
+                        toastr.error("Please enter your valid email", "Error");
 
                     return;
                 }
 
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailPattern.test(emailValue)) {
-                    toastr.error("Please enter a valid email address", "Error");
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+
+                        toastr.error("Please enter a valid email address", "Error");
+
                     return;
                 }
                                 // hidden input fill karo
@@ -1711,12 +1731,30 @@
                     type: "POST",
                     data: $("#subscribeForm").serialize(),
                     success: function(response) {
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+
                         toastr.success(response.msg);
                         $("#newsletter-email").val("");
                         console.log(response);
                     },
                     error: function(xhr) {
-                        let errorMsg = "Something went wrong!";
+                        // let $button = $('#subscribeBtn');
+                        // let buttonElement = $button[0];
+                        
+                        // // Remove loading state properly
+                        // buttonElement.classList.remove("loading");
+                        // buttonElement.innerHTML = buttonElement._originalHTML;
+                        // $button.css("pointerEvents", "auto");
+                        // buttonElement._isLoading = false;
+                        // let errorMsg = "Something went wrong!";
+
                         if (xhr.responseJSON && xhr.responseJSON.msg) {
                             errorMsg = xhr.responseJSON.msg;
                         }

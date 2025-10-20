@@ -226,25 +226,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
             spinner.style.display = "inline-block";
             button.innerHTML = `
-           <span>${pleaseWaitText}...</span>  <span class="spinner">
+            <span>${pleaseWaitText}...</span>  <span class="spinner">
 
-          </span>
-        `;
+            </span>
+            `;
+
+            // Store for later restoration
+            button._originalHTML = originalHTML;
 
             // Spinner animation (optional)
-            const newImg = button.querySelector(".spin-anim");
+            // const newImg = button.querySelector(".spin-anim");
             //   if (newImg) {
             //     newImg.style.transition = "transform 0.3s linear";
             //     newImg.style.animation = "spin 1s linear infinite";
             //   }
 
-            setTimeout(() => {
-                button.classList.remove("loading");
-                button.innerHTML = originalHTML;
-                button.style.pointerEvents = "auto";
-            }, 1000);
+            // setTimeout(() => {
+            //     button.classList.remove("loading");
+            //     button.innerHTML = originalHTML;
+            //     button.style.pointerEvents = "auto";
+            // }, 1000);
         });
     });
+
+    // Add this function to remove loading state
+    window.removeButtonLoading = function(button) {
+        if (button && button._isLoading) {
+            button.classList.remove("loading");
+            button.innerHTML = button._originalHTML;
+            button.style.pointerEvents = "auto";
+            button._isLoading = false;
+        }
+    };
 });
 
 

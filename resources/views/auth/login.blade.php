@@ -73,11 +73,11 @@
                                 .addClass("text-success")
                                 .show()
 
-                            setTimeout(function() {
+                            // setTimeout(function() {
                                 window.location.href =
                                     "{{ url(app()->getLocale().'/verify-otp') }}?mobile=" + $("#mobile")
                                     .val();
-                            }, 1500);
+                            // }, 1500);
                         } else {
                             $("#mobileError")
                                 .text(response.message)

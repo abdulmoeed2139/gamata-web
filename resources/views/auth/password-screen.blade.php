@@ -40,7 +40,7 @@
         <input type="password" id="password" name="password" class="login-input-uni" placeholder="">
         <input type="hidden" id="phoneNumber" name="phoneNumber">
 
-        <button type="submit" class="auth-btn common-btn-1">
+        <button type="submit" id="passwordSubmit" class="auth-btn common-btn-1">
             {{ __('messages.continue') }}
             <img src="{{ asset('assets/Images/iconn.png') }}" alt="Gamata Logo" class="login-logo-uni">
         </button>
@@ -59,8 +59,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 
-
-
     $("#LoginByPasswordForm").submit(function(e){
         e.preventDefault();
         let urlParams = new URLSearchParams(window.location.search);
@@ -72,15 +70,37 @@
             type: "POST",
             data: formData,
             success:function(response){
-                console.log(response.message);
-                if(response.status== true){
-                    window.location.href="{{ url(app()->getLocale().'/index') }}";
-                    // $("#passwordError")
-                    //     .text(Object.values(response.message)[0][0])
-                    //     .show().delay(3000).fadeOut();
+                let $button = $('#passwordSubmit');
+                let buttonElement = $button[0];
+                
+                // Remove loading state properly
+                buttonElement.classList.remove("loading");
+                buttonElement.innerHTML = buttonElement._originalHTML;
+                $button.css("pointerEvents", "auto");
+                buttonElement._isLoading = false;
+                
+                // console.log(response.message);
+                if(response.status == true) {
+                    window.location.href = "{{ url(app()->getLocale().'/index') }}";
                 }
+                // console.log(response.message);
+                // if(response.status== true){
+                //     window.location.href="{{ url(app()->getLocale().'/index') }}";
+                //     // $("#passwordError")
+                //     //     .text(Object.values(response.message)[0][0])
+                //     //     .show().delay(3000).fadeOut();
+                // }
             },
             error:function(xhr){
+                // Fix: Same approach for error handler
+                let $button = $('#passwordSubmit');
+                let buttonElement = $button[0];
+                
+                buttonElement.classList.remove("loading");
+                buttonElement.innerHTML = buttonElement._originalHTML;
+                $button.css("pointerEvents", "auto");
+                buttonElement._isLoading = false;
+
                 console.log("Error:", xhr.responseJSON);
                 if(xhr.status === 422){
                     let errors = xhr.responseJSON.message;

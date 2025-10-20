@@ -25,13 +25,6 @@ class FrontentController extends Controller
                     ->acceptJson()
                     ->get("https://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en");
                 $profile = $profileResponse->json('data') ?? [];
-                // dd([
-                //     $profileResponse,
-                //     session('phone_number'),
-                //     $phone,
-                //     session('access_token'),
-                //     "http://feapi.aethriasolutions.com/api/v1/Account/user?Mobile={$phone}&Lan=en"
-                //     ]);
                 if ($profile) {
                     $userName = $profile['firstName'] ?? '';
                     $code = $profile['code'];
@@ -235,35 +228,6 @@ class FrontentController extends Controller
         }
     }
 
-    // public function product()
-    // {
-    //     $profile = $this->getProfile();
-    //     $username = $profile['username'];
-    //     $page = request('page', 1);
-    //     $itemsPerPage = 9; // per page items
-    //     $getAllProduct = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page='.$itemsPerPage.'&page='.$page.'&Lan=En',
-    //         $this->token ?? null
-    //     );
-    //     $responseData = $getAllProduct->json();
-    //     $paginatedProducts = $responseData['data'] ?? [];
-    //     $pagination = $responseData['payload']['pagination'] ?? [];
-    //     $ctg = $responseData['payload']['categories'] ?? [];
-    //     $sellers = $responseData['payload']['sellers'] ?? [];
-    //     $fresh_products = $responseData['payload']['fresh_products'] ?? [];
-    //     $districts = $responseData['payload']['districts'] ?? [];
-
-    //     return view('websitePages.product', compact(
-    //         'paginatedProducts',
-    //         'pagination',
-    //         'ctg',
-    //         'sellers',
-    //         'fresh_products',
-    //         'districts',
-    //         'username',
-    //     ));
-    // }
-
     // public function product(Request $request)
     // {
     //     $profile = $this->getProfile();
@@ -336,7 +300,8 @@ class FrontentController extends Controller
         $responseData = $getAllProduct->json();
 
         // Fetch all related products from API
-        $apiUrl2 = "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode;
+        $apiUrl2 = "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=6";
+        // .$childCode;
         $getRelatedProduct = $this->apiRequest($apiUrl2, $this->token ?? null);
         $responseData2 = $getRelatedProduct->json();
 
@@ -344,14 +309,12 @@ class FrontentController extends Controller
         $ctg = $responseData['categories'] ?? [];
         $fresh_products = $responseData['fresh_products'] ?? [];
         $sellers = $responseData['top_Sellers'] ?? [];
-        $districts = $responseData['districts'] ?? [];
-
+        $districts = $responseData2['districts'] ?? [];
         if(isset($childCode)){
 
             $productArray = $getRelatedProduct->json()['data'] ?? [];
             $collection = collect($productArray);
 
-            // Paginate manually
             $paginatedProducts = new \Illuminate\Pagination\LengthAwarePaginator(
                 $collection->forPage($page, $itemsPerPage),
                 $collection->count(),
@@ -405,6 +368,13 @@ class FrontentController extends Controller
             ];
         }
 
+        if (request()->ajax()) {
+            return response()->json([
+                'paginatedProducts' => $paginatedProducts,
+                'pagination' => $pagination
+            ]);
+        }
+
         return view('websitePages.product', compact(
             'paginatedProducts',
             'pagination',
@@ -423,7 +393,7 @@ class FrontentController extends Controller
         $profile= $this->getProfile();
         $username= $profile['username'];
         $getProduct = $this->apiRequest(
-            'http://feapi.aethriasolutions.com/api/v1/Product/ViewMore/6?mobile=0776563157&lan=En&parent='.$sellcode,
+            'https://feapi.aethriasolutions.com/api/v1/Sell/ViewMore/6?mobile=0776563157&lan=En&parent='.$sellcode,
             $this->token ?? null
         );
 
@@ -449,7 +419,7 @@ class FrontentController extends Controller
 
         // Fetch all related products from API (no pagination needed there)
         $getRelatedProduct = $this->apiRequest(
-            "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode,
+            "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page={$itemsPerPage}&page={$page}&Lan=si&productId=".$childCode,
             $this->token ?? null
         );
 
@@ -487,36 +457,6 @@ class FrontentController extends Controller
         return response()->json(['related_products' => [], 'pagination' => []]);
     }
 
-    // public function community()
-    // {
-    //     $accessToken = session('access_token');
-    //     $profile = $this->getProfile();
-    //     $username = $profile['username'];
-    //     $getCommunity = $this->apiRequest(
-    //         'http://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page=12&sort=id&order=desc&postType=Pending&page=1',
-    //         $this->token ?? null
-    //     );
-
-    //     if ($getCommunity->successful()) {
-    //         $community = $getCommunity->json('data') ?? [];
-    //         foreach ($community as &$post) {
-    //             $getPostComment = $this->apiRequest(
-    //                 'http://feapi.aethriasolutions.com/api/PostComment/v1/GetDetails/' . $post['code'],
-    //                 $accessToken ?? null
-    //             );
-    //             $comments = $getPostComment->successful() ? $getPostComment->json('data') : [];
-
-    //             // ✅ Latest comment top order By DESC Code (jugaar)
-    //             usort($comments, function($a, $b) {
-    //                 return strtotime($b['commented_DateTime']) - strtotime($a['commented_DateTime']);
-    //             });
-    //             $post['comments'] = $comments;
-    //         }
-
-    //         return view('websitePages.community', compact('username', 'community'));
-    //     }
-    // }
-
     public function community()
     {
         $accessToken = session('access_token');
@@ -524,13 +464,12 @@ class FrontentController extends Controller
         $username = $profile['username'];
 
         $page = request()->get('page', 1);
-        $itemsPerPage = 12; // API ka default
+        $itemsPerPage = 3; // API ka default
 
         $getCommunity = $this->apiRequest(
             "https://feapi.aethriasolutions.com/api/v1/community/Post?items_per_page={$itemsPerPage}&sort=id&order=desc&postType=Pending&page={$page}",
             $this->token ?? null
         );
-
 
         if ($getCommunity->successful()) {
             $responseData = $getCommunity->json();
@@ -548,6 +487,10 @@ class FrontentController extends Controller
                     return strtotime($b['commented_DateTime']) - strtotime($a['commented_DateTime']);
                 });
                 $post['comments'] = $comments;
+            }
+
+            if (request()->ajax()) {
+                return view('websitePages.partials.community_posts', compact('community'))->render();
             }
 
             return view('websitePages.community', compact('username', 'community', 'pagination'));

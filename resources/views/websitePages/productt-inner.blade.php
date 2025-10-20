@@ -5,12 +5,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <style>
-.recents .image img{
+/* .recents .image img{
 height:250px !important;
 }
 .recents .content{
 padding:0 !important;
-}
+} */
 .recents .wrap{
 padding-bottom:0 !important;
 }
@@ -48,10 +48,56 @@ margin-bottom:0;
 .recents .pro-name div {
 font-size:18px !important;
 }
+
+/* .product-img-carousel .item .image img {
+    height: 450px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.product-thumb-carousel {
+    .owl-stage {
+        .owl-item {
+            .item {
+                .image {
+                    img {
+                        width: 100%;
+                        height: 120px; // Fixed height for consistent alignment
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+} */
+
+
+.recents .image img{
+    height:250px !important;
+}
+.recents .content{
+    padding:0 !important;
+}
+/* ... अन्य styles ... */
+
+.product-img-carousel .item .image img {
+    height: 450px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.product-thumb-carousel .owl-stage .owl-item .item .image img {
+    width: 100% !important;
+    height: 120px !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 8px;
+}
 /*.recents  .item .wrap .content{*/
 /*    position:static !important;*/
 /*}*/
 </style>
+
 <div class="product-banner">
 <div class="wrapper">
     <div class="breadcrum">
@@ -68,7 +114,7 @@ font-size:18px !important;
             <use xlink:href="#breadcrum"></use>
         </svg>
         <div class="current">
-            {{$product['name_English'] ?? 'Product Not Found'}}
+        {{$product['productName'] ?? 'Product Not Found'}}
         </div>
     </div>
 </div>
@@ -82,42 +128,50 @@ font-size:18px !important;
             <div class="product-gallery">
                 <!-- Main (Large) Carousel -->
                 <div class="owl-carousel product-img-carousel">
-                    @for ($i = 0; $i < 4; $i++)
-                        <div class="item" data-id="{{ $i }}">
-                            <div class="image">
-                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}"
-                                     alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
-                            </div>
+                    @if(isset($product['images'][0]) && $product['images'][0] != 'Select.png')
+                    <div class="item" data-id="01">
+                        <div class="image">
+                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['images'][0] }}"
+                                alt="{{ __('messages.main_image') }} 01">
                         </div>
-                    @endfor
+                    </div>
+                    @endif
                 </div>
 
                 <!-- Thumbnail (Small) Carousel -->
                 <div class="owl-carousel product-thumb-carousel">
-                    @for ($i = 0; $i < 4; $i++)
-                        <div class="item" data-id="{{ $i }}">
-                            <div class="image">
-                                <img src="http://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['imageURl'] }}"
-                                     alt="{{ __('messages.main_image') }} {{ $i + 1 }}">
-                            </div>
+                @foreach ($product['images'] as $image)
+                    @if($image != 'Select.png')
+                    <div class="item" data-id="02">
+                        <div class="image">
+                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $image }}"
+                                alt="{{ __('messages.main_image') }} {{ $loop->iteration }}">
                         </div>
-                    @endfor
+                    </div>
+                    @endif
+                @endforeach
                 </div>
             </div>
         </div>
 
         <div class="col-2">
             <div class="content">
-                <div class="row-1">
-                    <div class="save">
-                        <div class="text-1">{{ __('messages.saving') }}: </div>
-                        <div class="text-2">26% off</div>
-                    </div>
-                    <div class="title">{{ $product['name_English'] }}</div>
-                    <div class="price-1">Rs. <span>260.00</span> {{ $product['uomGroups'] }}</div>
-                    <div class="price-2">Rs. <span>250.00</span> {{ $product['uomGroups'] }}</div>
-                    <div class="desc">{{ $product['product_Description'] }}</div>
+            <div class="row-1">
+                <div class="save">
+                    <div class="text-1">{{ __('messages.saving') }}: </div>
+                    <div class="text-2">{{ $product['discount'] ?? 0 }}% off</div>
                 </div>
+                <div class="title">{{ $product['productName'] }}</div>
+                
+                @if(isset($product['priceCut']) && $product['priceCut'] > 0)
+                    <div class="price-1">Rs. <span>{{ $product['unit_Price'] + $product['priceCut'] }}</span> {{ $product['uom'] }}</div>
+                    <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
+                @else
+                    <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
+                @endif
+                
+                <div class="desc">{{ $product['productDescription'] }}</div>
+            </div>
 
                 <div class="row-2">
                     <div class="title">{{ __('messages.package_sizes') }}:</div>
@@ -140,6 +194,7 @@ font-size:18px !important;
                         </div>
                     </div>
                 </div>
+                
 
                 <div class="row-3">
                     <div class="btn-1">
