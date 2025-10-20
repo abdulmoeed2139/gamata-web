@@ -288,19 +288,27 @@ class FrontentController extends Controller
     {
         $profile = $this->getProfile();
         $username = $profile['username'];
-
-        $search = $request->get('search');
         $page = $request->get('page', 1);
         $itemsPerPage = $request->get('items_per_page', 9);
         $childCode = $request->get('childCode');
 
+
+        $params= '';
+        if($request->category != ''){
+            $params= '&category='.$request->category;
+        } else if ($request->min_price != '' && $request->max_price != '') {
+            $params= '&min_price='.strtolower($request->min_price).'&max_price='.strtolower($request->max_price);
+        } else {
+            $params= '&search='.strtolower($request->search);
+        }
+
         // Fetch All Product Api
-        $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En&search=".$search;
+        $apiUrl = "http://feapi.aethriasolutions.com/api/v1/Product/GetAll?items_per_page=100&page=1&Lan=En".$params;
         $getAllProduct = $this->apiRequest($apiUrl, $this->token ?? null);
         $responseData = $getAllProduct->json();
 
         // Fetch all related products from API
-        $apiUrl2 = "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=6";
+        $apiUrl2 = "http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=".$childCode;
         // .$childCode;
         $getRelatedProduct = $this->apiRequest($apiUrl2, $this->token ?? null);
         $responseData2 = $getRelatedProduct->json();

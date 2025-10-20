@@ -100,15 +100,21 @@
                         <span class="toggle-icon">−</span>
                     </div>
                     <div class="filter-content">
+                        <form id="categoryForm">
                         @foreach ($ctg as $item)
-                            @if (app()->getLocale() == "en")
-                                <label><input type="checkbox">{{ $item['productNameEnglish'] }}</label>
-                            @elseif (app()->getLocale() == "si")
-                                <label><input type="checkbox">{{ $item['productNameSinhala'] }}</label>
-                            @elseif (app()->getLocale() == "ta")
-                                <label><input type="checkbox">{{ $item['productNameTamil'] }}</label>
-                            @endif
+                            <label>
+                                <input type="checkbox" name="category[]" class="category-checkbox"
+                                    data-english="{{ $item['productNameEnglish'] }}">
+                                @if(app()->getLocale() == "en")
+                                    {{ $item['productNameEnglish'] }}
+                                @elseif(app()->getLocale() == "si")
+                                    {{ $item['productNameSinhala'] }}
+                                @elseif(app()->getLocale() == "ta")
+                                    {{ $item['productNameTamil'] }}
+                                @endif
+                            </label>
                         @endforeach
+                        </form>
                     </div>
                 </div>
                 <div class="filter">
@@ -134,27 +140,28 @@
                         <span class="toggle-icon">−</span>
                     </div>
                     <div class="filter-content">
-                        <div class="price">
-                            <div class="price-input">
-                                <label for="min-price">{{ __('messages.price_min_label') }}</label>
-                                <input type="text" id="min-price"
-                                    placeholder="{{ __('messages.price_min_placeholder') }}">
+                        <form id="priceFilterForm">
+                            <div class="price">
+                                <div class="price-input">
+                                    <label for="min-price">{{ __('messages.price_min_label') }}</label>
+                                    <input type="number" name="min_price" id="min-price"
+                                        placeholder="{{ __('messages.price_min_placeholder') }}" required>
+                                </div>
+                                <div class="price-input">
+                                    <label for="max-price">{{ __('messages.price_max_label') }}</label>
+                                    <input type="number" name="max_price" id="max-price"
+                                        placeholder="{{ __('messages.price_max_placeholder') }}" required>
+                                </div>
                             </div>
-                            <div class="price-input">
-                                <label for="max-price">{{ __('messages.price_max_label') }}</label>
-                                <input type="text" id="max-price"
-                                    placeholder="{{ __('messages.price_max_placeholder') }}">
-                            </div>
-                        </div>
+                            <small class="error-message text-red-500"></small>
 
-
-                        <a href="#" target="_blank" class="common-btn-1 btn-p">
-                            <svg>
-                                <use xlink:href="#btn_arr"></use>
-                            </svg>
-                            {{ __('messages.Filter') }}
-                        </a>
-
+                            <button type="submit" class="common-btn-1 btn-p">
+                                <svg>
+                                    <use xlink:href="#btn_arr"></use>
+                                </svg>
+                                {{ __('messages.Filter') }}
+                            </button>
+                        </form>
                     </div>
                 </div>
                 {{-- <a href="#" target="_blank" class="common-btn-1 btn-p">
@@ -324,6 +331,37 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('#priceFilterForm').submit('click', function(e) {
+                e.preventDefault();
+                $('.postsPagination').hide();
+                $('.related-pagination').hide();
+
+                $('.error-message').text('');
+                let minPrice = $('#min-price').val().trim();
+                let maxPrice = $('#max-price').val().trim();
+                let isValid = true;
+                if (minPrice !== '' && maxPrice !== '' && parseFloat(minPrice) > parseFloat(maxPrice)) {
+                    $('#max-price').next('.error-message').text('Maximum price must be greater than minimum price.');
+                    isValid = false; }
+
+                if (isValid) {
+                    var formData = $('#priceFilterForm').serialize();
+                    searchProduct(formData);
+                }
+            });
+
+
+            $('.category-checkbox').on('click', function() {
+                $('.postsPagination').hide();
+                $('.related-pagination').hide();
+                var selected = [];
+                $('.category-checkbox:checked').each(function() {
+                    selected.push($(this).data('english').toLowerCase());
+                });
+                var formData= { category: selected.join(',') };
+                searchProduct(formData)
+            });
+
 
             $('#productSearchForm').submit(function(e){
                 e.preventDefault();
@@ -331,69 +369,72 @@
                 // Both Pagination hide
                 $('.postsPagination').hide();
                 $('.related-pagination').hide();
-
-                const searchValue = $(this).val().trim();
                 const formData = $(this).serialize();
+                searchProduct(formData)
+            });
+
+
+            function searchProduct(formData){
                 $("#food-list").html('');
                 $('#loader').show();
                 $.ajax({
-                        url: "{{ url('get-product') }}",
-                        type: 'GET',
-                        data: formData,
-                        success: function(response) {
-                            $('#loader').hide();
-                            $("#food-list").html(''); // Clear any previous results
+                    url: "{{ url('get-product') }}",
+                    type: 'GET',
+                    data: formData,
+                    success: function(response) {
+                        $('#loader').hide();
+                        $("#food-list").html(''); // Clear any previous results
 
-                            const products = response.paginatedProducts.data;
-                            if(products.length >= 9){
-                                $('.postsPagination').show();
-                            }
+                        const products = response.paginatedProducts.data;
+                        if(products.length >= 9){
+                            $('.postsPagination').show();
+                        }
 
-                            if (products.length === 0) {
-                                $("#food-list").html('<p>No products found.</p>');
-                                return;
-                            }
+                        if (products.length === 0) {
+                            $("#food-list").html('<p>No products found.</p>');
+                            return;
+                        }
 
-                            products.forEach(function(item) {
-                                let htmlContent = `
-                                    <a href="#" data-child-code="${item.childCode}" class="product-link">
-                                        <div class="items">
-                                            <div class="wrap">
-                                                <div class="wishlist">
+                        products.forEach(function(item) {
+                            let htmlContent = `
+                                <a href="#" data-child-code="${item.childCode}" class="product-link">
+                                    <div class="items">
+                                        <div class="wrap">
+                                            <div class="wishlist">
+                                                <svg>
+                                                    <use xlink:href="#heart"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="image">
+                                                <img src="${item.imageUri}/${item.imageUrl}" alt="${item.childNameEnglish}">
+                                            </div>
+                                            <div class="content">
+                                                <div class="pro-name">
+                                                    <div class="sin">${item.childNameSinhala}</div>
+                                                    <div class="eng">${item.childNameEnglish}</div>
+                                                    <div class="tam">${item.childNameTamil}</div>
+                                                </div>
+                                                <div class="price">Rs. <span>${parseFloat(item.avgPrice).toLocaleString(undefined, {minimumFractionDigits: 2})}</span> (1 Kg)</div>
+                                                <div class="stock">${item.totalAvlQty} {{ __('messages.kilo_available_in_stock') }}</div>
+                                                <div class="common-btn-1">
                                                     <svg>
-                                                        <use xlink:href="#heart"></use>
+                                                        <use xlink:href="#btn_arr"></use>
                                                     </svg>
-                                                </div>
-                                                <div class="image">
-                                                    <img src="${item.imageUri}/${item.imageUrl}" alt="${item.childNameEnglish}">
-                                                </div>
-                                                <div class="content">
-                                                    <div class="pro-name">
-                                                        <div class="sin">${item.childNameSinhala}</div>
-                                                        <div class="eng">${item.childNameEnglish}</div>
-                                                        <div class="tam">${item.childNameTamil}</div>
-                                                    </div>
-                                                    <div class="price">Rs. <span>${parseFloat(item.avgPrice).toLocaleString(undefined, {minimumFractionDigits: 2})}</span> (1 Kg)</div>
-                                                    <div class="stock">${item.totalAvlQty} {{ __('messages.kilo_available_in_stock') }}</div>
-                                                    <div class="common-btn-1">
-                                                        <svg>
-                                                            <use xlink:href="#btn_arr"></use>
-                                                        </svg>
-                                                        {{ __('messages.buy_now') }}
-                                                    </div>
+                                                    {{ __('messages.buy_now') }}
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                `;
-                                $("#food-list").append(htmlContent);
-                            });
-                        },
-                        error: function(xhr) {
-                            console.log("Error:", xhr);
-                        }
-                    });
-            });
+                                    </div>
+                                </a>
+                            `;
+                            $("#food-list").append(htmlContent);
+                        });
+                    },
+                    error: function(xhr) {
+                        console.log("Error:", xhr);
+                    }
+                });
+            }
 
 
             let currentChildCode = null;
