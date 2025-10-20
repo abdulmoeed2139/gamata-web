@@ -1522,9 +1522,9 @@ footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu li a.active {
     filter: invert(0.54) contrast(8);
 }
 
-.product-listing .wrapper .col-2 .row-2 .food-list.list-view .items .wrap .content .common-btn-1 {
+/* .product-listing .wrapper .col-2 .row-2 .food-list.list-view .items .wrap .content .common-btn-1 {
     margin-right: 4.392386530014641vw;
-}
+} */
 
 .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content .common-btn-1 {
     text-align: center;
@@ -1666,6 +1666,37 @@ display:flex !important;
 justify-content:center;
 align-items:center;
 }
+
+/* ===== Preloader Styles ===== */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* background: #fff;  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #fff;
+  border-top: 6px solid #9fcd22; /* Loader color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Loader Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 
 @media (min-width: 1200px) {
     .journal-section .wrapper::after {
