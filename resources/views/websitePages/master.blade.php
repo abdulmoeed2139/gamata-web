@@ -1140,7 +1140,13 @@
     </footer> --}}
 
     @endif
+    
 
+        <!-- 🔸 Preloader Start -->
+        <!-- <div id="preloader">
+        <div class="loader"></div>
+        </div> -->
+        <!-- 🔸 Preloader End -->
 
     <!-- All Blogs Modal Code Start -->
     <div class="custom-modal" id="modal1">
@@ -1953,10 +1959,9 @@
         }, 1000);
       });
     });
+    
+
   });
-
-
-
 
 
 
