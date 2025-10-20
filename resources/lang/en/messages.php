@@ -276,12 +276,15 @@ return [
     'add_to_cart' => 'Add to Cart',
     'product_not_found' => 'Product Not Found',
     'explore_other_products' => 'Explore Other Products',
-    'explore_other_products_desc' => 'Check out other items you might like',
+    'explore_other_products_desc' => 'Discover Gamata presence across the region. Our branches are here to support your agricultural journey, wherever you are',
     'product' => 'Product',
     'stock' => 'Stock',
     'n_a' => 'N/A',
     'account_description' =>'Lorem ipsum odor amet, consectetuer adipiscing elit. Cubilia orci elementum mauris senectus tincidunt taciti ante eu. Quis convallis nascetur est vitae; elementum sociosqu per',
     'account_desc' =>'Lorem ipsum odor amet, consectetuer adipiscing elit. Cubilia orci elementum mauris senectus tincidunt taciti ante eu. Quis convallis nascetur est vitae; elementum sociosqu per',
     'kilo_available_in_stock' => 'Kilo Available in Stock',
+    'product_title' => 'Our Products',
+    'select_your_language' => 'Select your Language',
+
 
 ];

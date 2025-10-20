@@ -52,24 +52,24 @@
                 'title' => 'Farm. <span>Connect. Grow.</span>',
                 'button_text' => 'Register Now',
                 'button_link' => url(app()->getLocale().'/login'),            ],
-            [
-                'type' => 'image',
-                'mobile' => asset('assets/Images/banner/m-banner-1.png'),
-                'tablet' => asset('assets/Images/banner/t-banner-1.png'),
-                'desktop' => asset('assets/Images/banner/d-banner-1.png'),
-                'subtitle' => 'Linking Farmers and Businesses',
-                'title' => 'Lorem Ipsuim Dolar Sit Amet',
-                'button_text' => 'Register Now',
-                'button_link' => url(app()->getLocale().'/login'),            ],
-            [
-                'type' => 'image',
-                'mobile' => asset('assets/Images/banner/m-banner-2.png'),
-                'tablet' => asset('assets/Images/banner/t-banner-2.png'),
-                'desktop' => asset('assets/Images/banner/d-banner-2.png'),
-                'subtitle' => 'Linking Farmers and Businesses',
-                'title' => 'Lorem Ipsuim Dolar Sit Amet',
-                'button_text' => 'Register Now',
-                'button_link' => url(app()->getLocale().'/login'),            ],
+            // [
+            //     'type' => 'image',
+            //     'mobile' => asset('assets/Images/banner/m-banner-1.png'),
+            //     'tablet' => asset('assets/Images/banner/t-banner-1.png'),
+            //     'desktop' => asset('assets/Images/banner/d-banner-1.png'),
+            //     'subtitle' => 'Linking Farmers and Businesses',
+            //     'title' => 'Lorem Ipsuim Dolar Sit Amet',
+            //     'button_text' => 'Register Now',
+            //     'button_link' => url(app()->getLocale().'/login'),            ],
+            // [
+            //     'type' => 'image',
+            //     'mobile' => asset('assets/Images/banner/m-banner-2.png'),
+            //     'tablet' => asset('assets/Images/banner/t-banner-2.png'),
+            //     'desktop' => asset('assets/Images/banner/d-banner-2.png'),
+            //     'subtitle' => 'Linking Farmers and Businesses',
+            //     'title' => 'Lorem Ipsuim Dolar Sit Amet',
+            //     'button_text' => 'Register Now',
+            //     'button_link' => url(app()->getLocale().'/login'),            ],
         ];
 
     @endphp
@@ -84,12 +84,12 @@
                             <source src="{{ $banner['src'] }}" type="video/mp4">
                         </video>
                     @else
-                        <picture>
+                        {{-- <picture>
                             <source srcset="{{ $banner['mobile'] }}" media="(max-width: 767px)">
                             <source srcset="{{ $banner['tablet'] }}" media="(max-width: 991px)">
                             <source srcset="{{ $banner['desktop'] }}" media="(min-width: 1199px)">
                             <img src="{{ $banner['desktop'] }}" alt="Banner Image">
-                        </picture>
+                        </picture> --}}
                     @endif
 
                     <div class="banner-content">
@@ -546,7 +546,7 @@
             <div class="journal-carousel owl-carousel">
                     @if (isset($blogs) && !empty($blogs))
                         @foreach ($blogs as $item)
-                            <a href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item">
+                            <div href="#" data-code="{{ $item['code'] }}" class="open-modal-btn item">
                                 <div class="image">
                                     <img src="{{ $item['imageUri'].'/'.$item['image'] }}" alt="journal Image">
                                 </div>
@@ -565,7 +565,7 @@
                                         </span>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         @endforeach
                     @else
                         @for ($i = 0; $i < 2; $i++)

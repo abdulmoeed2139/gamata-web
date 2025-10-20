@@ -610,7 +610,7 @@
                     <!-- Language Selector -->
                     <!-- <div class="language">
                         <div class="title">
-                            Select your Language
+                           {{ __('messages.select_your_language') }}
                         </div>
                         <div class="wrap">
                             <a href="#" class="lan">
@@ -635,7 +635,7 @@
                  <!-- Language Selector -->
                     <div class="language">
                         <div class="title">
-                            Select your Language
+                          {{ __('messages.select_your_language') }}
                         </div>
                         <div class="wrap">
                             <a href="#" class="lan {{ app()->getLocale() == 'si' ? 'active' : '' }}" data-lang="si">
