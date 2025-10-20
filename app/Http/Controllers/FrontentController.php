@@ -317,7 +317,12 @@ class FrontentController extends Controller
         $ctg = $responseData['categories'] ?? [];
         $fresh_products = $responseData['fresh_products'] ?? [];
         $sellers = $responseData['top_Sellers'] ?? [];
-        $districts = $responseData2['districts'] ?? [];
+
+        $getDistrict= $this->apiRequest('http://feapi.aethriasolutions.com/api/v1/Sell/GetAllSellsByProduct/?items_per_page=100&page=1&Lan=si&productId=6', $this->token ?? null);
+        $districtResponse= $getDistrict->json();
+        $districts = $districtResponse['districts'] ?? [];
+
+
         if(isset($childCode)){
 
             $productArray = $getRelatedProduct->json()['data'] ?? [];
