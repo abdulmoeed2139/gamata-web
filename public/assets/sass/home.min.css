@@ -9365,6 +9365,9 @@ label.login-label-uni svg {
 }
 
 @media (max-width: 767px) {
+    .product-listing .wrapper .col-2 .row-2 .food-list.list-view .items .wrap .content .common-btn-1 {
+    margin-right: auto;
+}
 
 
     body.community.ta .community-inner .wrapper .col-2 .write-post .wrap-2 {
