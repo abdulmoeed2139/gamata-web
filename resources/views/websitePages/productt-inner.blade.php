@@ -1,313 +1,376 @@
 @extends('websitePages.master')
 @section('content')
+
+<!-- 🟩 Owl Carousel CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 <style>
-/* .recents .image img{
-height:250px !important;
+/* ===== Product Gallery Slider Styles ===== */
+.product-page .product-gallery .owl-nav .prev,
+.product-page .product-gallery .owl-nav .next {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
 }
-.recents .content{
-padding:0 !important;
-} */
-.recents .wrap{
-padding-bottom:0 !important;
+
+.product-page .item-list .wrapper .col-2 .recents  .owl-stage-outer .owl-stage{
+padding-top:10px;
 }
-.recents .wrap .image img{
-height:165px !important;
-object-fit:contain !important;
+
+.product-page .product-carousel {
+        margin-bottom: 2.208333vw;
 }
-.recents .item .wrap{
-height:370px !important;
+.product-page .product-gallery .owl-nav .prev { left: -25px; }
+.product-page .product-gallery .owl-nav .next { right: -25px; }
+
+.product-page .product-img-carousel .item img {
+  width: 100%;
+  min-height: 508px;
+  height: 508px;
+  object-fit: cover;
+  border-radius: 10px;
 }
-.recents .item .common-btn-1{
-bottom:0 !important;
+
+
+.product-page .product-thumb-carousel .item img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #E1E1E180;
+  transition: 0.3s;
 }
-.recents .item .wrap .content{
-bottom:-30px !important;
+
+.product-page .product-thumb-carousel .item{
+ border-radius: 8px;
 }
-.recents .item:hover .content {
- bottom:-14px !important;
+
+/* 🟩 Thumbnail carousel image spacing fix */
+.product-page .product-thumb-carousel .owl-item {
+  margin-right: 15px; 
 }
-.recents .item .content{
-padding-bottom:40px !important;
+/* Active thumbnail highlight */
+.product-page .product-thumb-carousel .item.active img {
+  border-color: #ff6600;
 }
-.recents .item:hover .common-btn-1{
-bottom:25px !important;
+
+.product-page .hm-food-slider.owl-carousel {
+  width: 100% !important;
+  max-width: 100% !important;
 }
-.recents .owl-item{
-margin:0 !important;
+
+.product-page .item-list.exploreProduct .wrapper,
+.product-page .item-list.exploreProduct .col-2 {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0 auto;
 }
-.recents .owl-nav {
+
+.product-page .hm-food-slider .item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product-page .item-list.exploreProduct {
+  overflow: hidden;
+}
+
+.product-page .hm-food-slider .owl-stage {
+  display: flex;
+}
+
+.product-page .hm-food-slider .owl-item {
+  padding: 0 5px;
+}
+
+
+body .product-page .product-thumb-carousel .owl-stage{
+width:100% !important;
+
+}
+
+body .product-page .product-thumb-carousel{
+    padding-top:15px;
+}
+
+@media screen and (max-width:767px){
+.product-page .product-thumb-carousel .item img{
+
+    height: 100px;
+}
+
+.product-page .product-img-carousel .item img {
+    min-height: 300px;
+    height: 300px;
+}
+
+.product-page .product-gallery{
+.owl-nav:nth-child(4){
 display:none !important;
 }
-.product-carousel {
-margin-bottom:0;
-}
-.recents .pro-name div {
-font-size:18px !important;
+
 }
 
-/* .product-img-carousel .item .image img {
-    height: 450px !important;
-    width: 100% !important;
-    object-fit: cover !important;
-}
 
-.product-thumb-carousel {
-    .owl-stage {
-        .owl-item {
-            .item {
-                .image {
-                    img {
-                        width: 100%;
-                        height: 120px; // Fixed height for consistent alignment
-                        object-fit: cover;
-                    }
-                }
-            }
-        }
-    }
-} */
-
-
-.recents .image img{
-    height:250px !important;
-}
-.recents .content{
-    padding:0 !important;
-}
-/* ... अन्य styles ... */
-
-.product-img-carousel .item .image img {
-    height: 450px !important;
-    width: 100% !important;
-    object-fit: cover !important;
-}
-
-.product-thumb-carousel .owl-stage .owl-item .item .image img {
-    width: 100% !important;
-    height: 120px !important;
-    object-fit: cover !important;
-    display: block !important;
-    border-radius: 8px;
-}
-/*.recents  .item .wrap .content{*/
-/*    position:static !important;*/
-/*}*/
 </style>
 
-<div class="product-banner">
-<div class="wrapper">
-    <div class="breadcrum">
-    <a href="{{url('index')}}" class="link">
-            Home
-        </a>
-        <svg>
-            <use xlink:href="#breadcrum"></use>
-        </svg>
-        <a href="{{url('product')}}" class="link">
-            Our Products
-        </a>
-        <svg>
-            <use xlink:href="#breadcrum"></use>
-        </svg>
-        <div class="current">
-        {{$product['productName'] ?? 'Product Not Found'}}
+<div class="product-page">
+
+    <!-- 🟨 Breadcrumb Section -->
+    <div class="product-banner">
+    <div class="wrapper">
+        <div class="breadcrum">
+        <a href="{{ url(app()->getLocale().'/index') }}" class="link">{{ __('messages.home') }}</a>
+        <svg><use xlink:href="#breadcrum"></use></svg>
+        <a href="{{ url(app()->getLocale().'/product') }}" class="link">{{ __('messages.product_title') }}</a>
+        <svg><use xlink:href="#breadcrum"></use></svg>
+        <div class="current">{{ $product['productName'] ?? 'Product Not Found' }}</div>
         </div>
     </div>
-</div>
-</div>
+    </div>
 
-<div class="product-inner">
-<div class="wrapper">
-    @if ($product)
-
+    <!-- 🟦 Product Section -->
+    <div class="product-inner">
+    <div class="wrapper">
+        @if ($product)
         <div class="col-1">
-            <div class="product-gallery">
-                <!-- Main (Large) Carousel -->
-                <div class="owl-carousel product-img-carousel">
-                    @if(isset($product['images'][0]) && $product['images'][0] != 'Select.png')
-                    <div class="item" data-id="01">
-                        <div class="image">
-                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $product['images'][0] }}"
-                                alt="{{ __('messages.main_image') }} 01">
-                        </div>
-                    </div>
-                    @endif
+        <div class="product-gallery">
+            <!-- Main Image Carousel -->
+            <div class="owl-carousel product-img-carousel main-img">
+            @if (isset($product['images']) && !empty($product['images']))
+            @foreach ($product['images'] as $image)
+                @if($image != 'Select.png')
+                <div class="item">
+                    <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $image }}" alt="{{ $loop->iteration }}">
                 </div>
-
-                <!-- Thumbnail (Small) Carousel -->
-                <div class="owl-carousel product-thumb-carousel">
-                @foreach ($product['images'] as $image)
-                    @if($image != 'Select.png')
-                    <div class="item" data-id="02">
-                        <div class="image">
-                            <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $image }}"
-                                alt="{{ __('messages.main_image') }} {{ $loop->iteration }}">
-                        </div>
-                    </div>
-                    @endif
-                @endforeach
-                </div>
-            </div>
-        </div>
-
-        <div class="col-2">
-            <div class="content">
-            <div class="row-1">
-                <div class="save">
-                    <div class="text-1">{{ __('messages.saving') }}: </div>
-                    <div class="text-2">{{ $product['discount'] ?? 0 }}% off</div>
-                </div>
-                <div class="title">{{ $product['productName'] }}</div>
-                
-                @if(isset($product['priceCut']) && $product['priceCut'] > 0)
-                    <div class="price-1">Rs. <span>{{ $product['unit_Price'] + $product['priceCut'] }}</span> {{ $product['uom'] }}</div>
-                    <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
-                @else
-                    <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
                 @endif
-                
-                <div class="desc">{{ $product['productDescription'] }}</div>
+            @endforeach
+
+            @endif
             </div>
 
-                <div class="row-2">
-                    <div class="title">{{ __('messages.package_sizes') }}:</div>
-                    <div class="attributes">
-                        <div class="att active">
-                            <div class="text-1">250g</div>
-                            <div class="text-2">Rs. <span>54.50</span></div>
-                        </div>
-                        <div class="att">
-                            <div class="text-1">500g</div>
-                            <div class="text-2">Rs. <span>163.50</span></div>
-                        </div>
-                        <div class="att">
-                            <div class="text-1">750g</div>
-                            <div class="text-2">Rs. <span>109.00</span></div>
-                        </div>
-                        <div class="att">
-                            <div class="text-1">1KG</div>
-                            <div class="text-2">Rs. <span>210.00</span></div>
-                        </div>
-                    </div>
+            <!-- Thumbnail Carousel -->
+            <div class="owl-carousel product-thumb-carousel">
+            @if (isset($product['images']) && !empty($product['images']))
+            @foreach ($product['images'] as $image)
+                @if($image != 'Select.png')
+                <div class="item">
+                    <img src="https://api.aethriasolutions.com/uploads/UploadImage/Sells/{{ $image }}" alt="Thumb {{ $loop->iteration }}">
                 </div>
-                
-
-                <div class="row-3">
-                    <div class="btn-1">
-                        <a href="{{ url(app()->getLocale().'/app-banner') }}" class="common-btn-1">
-                            <svg>
-                                <use xlink:href="#btn_arr"></use>
-                            </svg>
-                            {{ __('messages.buy_now') }}
-                        </a>
-                    </div>
-                    <div class="btn-2">
-                        <a href="{{ url('app()->getLocale()./app-banner') }}" class="common-btn-1">
-                            <svg>
-                                <use xlink:href="#btn_arr"></use>
-                            </svg>
-                            {{ __('messages.add_to_cart') }}
-                        </a>
-                    </div>
-                </div>
+                @endif
+            @endforeach
+            @endif
             </div>
         </div>
+        </div>
 
-    @else
-    <div class="col-3">
+        <div class="col-2">
+        <div class="content">
+            <div class="row-1">
+            <div class="save">
+                <div class="text-1">{{ __('messages.saving') }}: </div>
+                <div class="text-2">{{ $product['discount'] ?? 0 }}% off</div>
+            </div>
+            <div class="title">{{ $product['productName'] }}</div>
+            
+            @if(isset($product['priceCut']) && $product['priceCut'] > 0)
+                <div class="price-1">Rs. <span>{{ $product['unit_Price'] + $product['priceCut'] }}</span> {{ $product['uom'] }}</div>
+                <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
+            @else
+                <div class="price-2">Rs. <span>{{ $product['unit_Price'] }}</span> {{ $product['uom'] }}</div>
+            @endif
+            
+            <div class="desc">{{ $product['productDescription'] }}</div>
+            </div>
+
+            <div class="row-2">
+            <div class="title">{{ __('messages.package_sizes') }}:</div>
+            <div class="attributes">
+                <div class="att active">
+                <div class="text-1">250g</div>
+                <div class="text-2">Rs. <span>54.50</span></div>
+                </div>
+                <div class="att">
+                <div class="text-1">500g</div>
+                <div class="text-2">Rs. <span>163.50</span></div>
+                </div>
+                <div class="att">
+                <div class="text-1">750g</div>
+                <div class="text-2">Rs. <span>109.00</span></div>
+                </div>
+                <div class="att">
+                <div class="text-1">1KG</div>
+                <div class="text-2">Rs. <span>210.00</span></div>
+                </div>
+            </div>
+            </div>
+
+            <div class="row-3">
+            <div class="btn-1">
+                <a href="{{ url(app()->getLocale().'/app-banner') }}" class="common-btn-1">
+                <svg><use xlink:href="#btn_arr"></use></svg>
+                {{ __('messages.buy_now') }}
+                </a>
+            </div>
+            <div class="btn-2">
+                <a href="{{ url(app()->getLocale().'/app-banner') }}" class="common-btn-1">
+                <svg><use xlink:href="#btn_arr"></use></svg>
+                {{ __('messages.add_to_cart') }}
+                </a>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        @else
+        <div class="col-3">
         <h3>{{ __('messages.product_not_found') }}</h3>
+        </div>
+        @endif
     </div>
-    @endif
-</div>
-</div>
+    </div>
 
-<div class="product-carousel">
+    <!-- 🟧 Explore Other Products -->
+    <div class="product-carousel">
     <div class="wrapper">
         <div class="col-1">
-            <div class="common-title">
-                {{ __('messages.explore_other_products') }}
-            </div>
-            <div class="common-desc">
-                {{ __('messages.explore_other_products_desc') }}
-            </div>
+        <div class="common-title">{{ __('messages.explore_other_products') }}</div>
+        <div class="common-desc">{{ __('messages.explore_other_products_desc') }}</div>
         </div>
     </div>
-</div>
+    </div>
 
-<!-- Best Selling Items Section -->
-<section class="item-list">
+    <section class="item-list exploreProduct" style="padding-top:0;">
     <div class="wrapper">
         <div class="col-2">
-            <div class="hm-food-slider owl-carousel recents hm-food-slider owl-loaded owl-drag">
-                @foreach ($bestSellingItems as $item)
-                    <a href="{{ url(app()->getLocale().'/product-view/'.$item['productID']) }}" class="item-link">
-                        <div class="item">
-                            <div class="wrap">
-                                <div class="wishlist">
-                                    <svg><use xlink:href="#heart"></use></svg>
-                                </div>
-                                <div class="image">
-                                    <img src="{{ $item['imageUri'].'/'.$item['image']}}"
-                                        alt="{{ $item['name_English'] ?? __('messages.product') }}">
-                                </div>
-                                <div class="content">
-                                    <div class="pro-name">
-                                        <div class="sin">{{ $item['name_Sinhala'] ?? __('messages.n_a') }}</div>
-                                        <div class="eng">{{ $item['name_English'] ?? __('messages.n_a') }}</div>
-                                        <div class="tam">{{ $item['name_Tamil'] ?? __('messages.n_a') }}</div>
-                                    </div>
-                                    <div class="price">Rs. {{ $item['average_Price'] ?? 0 }}</div>
-                                    <div class="stock">{{ __('messages.stock') }}: {{ $item['total_Quantity'] ?? 0 }}</div>
-                                    <span class="common-btn-1">
-                                        <svg><use xlink:href="#btn_arr"></use></svg>
-                                        {{ __('messages.buy_now') }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
+        <div class="hm-food-slider owl-carousel recents hm-food-slider" style="padding-top:0;">
+            @foreach ($bestSellingItems as $item)
+            <a href="{{ url(app()->getLocale().'/product-view/'.$item['productID']) }}" class="item-link">
+            <div class="item">
+                <div class="wrap">
+                <div class="wishlist"><svg><use xlink:href="#heart"></use></svg></div>
+                <div class="image">
+                    <img src="{{ $item['imageUri'].'/'.$item['image']}}" alt="{{ $item['name_English'] ?? __('messages.product') }}">
+                </div>
+                <div class="content">
+                    <div class="pro-name">
+                    <div class="sin">{{ $item['name_Sinhala'] ?? __('messages.n_a') }}</div>
+                    <div class="eng">{{ $item['name_English'] ?? __('messages.n_a') }}</div>
+                    <div class="tam">{{ $item['name_Tamil'] ?? __('messages.n_a') }}</div>
+                    </div>
+                    <div class="price">Rs. {{ $item['average_Price'] ?? 0 }}</div>
+                    <div class="stock">{{ __('messages.stock') }}: {{ $item['total_Quantity'] ?? 0 }}</div>
+                    <span class="common-btn-1">
+                    <svg><use xlink:href="#btn_arr"></use></svg>
+                    {{ __('messages.buy_now') }}
+                    </span>
+                </div>
+                </div>
             </div>
+            </a>
+            @endforeach
+        </div>
         </div>
     </div>
-</section>
+    </section>
+
+
+</div>
+<!-- 🟩 jQuery + Owl Carousel JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 <script>
 jQuery(document).ready(function($){
-    $(".hm-food-slider").owlCarousel({
-        loop:true,
-        margin:20,
-        nav:true,
-        dots:false,
-        autoplay:true,
-        autoplayTimeout:3000,
-        responsive:{
-            0:{ items:1 },
-            768:{ items:2 },
-            1024:{ items:4 }
-        }
-    });
+
+  /* ===== Best Selling Items Slider ===== */
+$('.hm-food-slider').owlCarousel({
+  loop: true,
+  margin: 10,
+  nav: true,
+  dots: false,
+  responsive: {
+    0: {
+      items: 1 // 👈 mobile par 1 item per slide
+    },
+    600: {
+      items: 2
+    },
+    1000: {
+      items: 4
+    }
+  }
+});
+
+
+  /* ===== Product Gallery Slider ===== */
+  var sync1 = $(".product-img-carousel");
+  var sync2 = $(".product-thumb-carousel");
+  var slidesPerPage = 4;
+  var syncedSecondary = true;
+
+  sync1.owlCarousel({
+      items: 1,
+      slideSpeed: 2000,
+      nav: false,
+      autoplay: false,
+      dots: false,
+      loop: true,
+      responsiveRefreshRate: 200,
+    //   navText: ['<span class="prev">&#10094;</span>','<span class="next">&#10095;</span>']
+  }).on('changed.owl.carousel', syncPosition);
+
+  sync2.owlCarousel({
+      items: slidesPerPage,
+      dots: false,
+      nav: true,
+      smartSpeed: 200,
+      slideSpeed: 500,
+      slideBy: slidesPerPage,
+      responsiveRefreshRate: 100
+        // navText: ['<span class="prev"><svg width="20" height="20" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#left_arr"></use></svg></span>','<span class="next"><svg width="20" height="20" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#right_arr"></use></svg></span>']
+  }).on('changed.owl.carousel', syncPosition2);
+
+  function syncPosition(el) {
+      var count = el.item.count - 1;
+      var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+      if (current < 0) current = count;
+      if (current > count) current = 0;
+
+      sync2.find(".item").removeClass("active").eq(current).addClass("active");
+      var onscreen = sync2.find('.owl-item.active').length - 1;
+      var start = sync2.find('.owl-item.active').first().index();
+      var end = sync2.find('.owl-item.active').last().index();
+
+      if (current > end) {
+          sync2.trigger('to.owl.carousel', [current - onscreen, 100, true]);
+      }
+      if (current < start) {
+          sync2.trigger('to.owl.carousel', [current, 100, true]);
+      }
+  }
+
+  function syncPosition2(el) {
+      if (syncedSecondary) {
+          var number = el.item.index;
+          sync1.trigger('to.owl.carousel', [number, 100, true]);
+      }
+  }
+
+  sync2.on("click", ".item", function(e){
+      e.preventDefault();
+      var index = $(this).parent().index();
+      sync1.trigger("to.owl.carousel", [index, 300, true]);
+  });
+
 });
 </script>
+
 @endsection
-<script>
-jQuery(document).ready(function($){
-    $(".recents.hm-food-slider").owlCarousel({
-        loop:true,
-        margin:20,
-        nav:true,
-        dots:false,
-        autoplay:true,
-        autoplayTimeout:3000,
-        responsive:{
-            0:{ items:1 },
-            768:{ items:2 },
-            1024:{ items:2.1 }
-        }
-    });
-});
-</script>
