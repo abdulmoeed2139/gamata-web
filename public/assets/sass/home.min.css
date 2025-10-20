@@ -1581,6 +1581,12 @@ body.en .product-listing .wrapper .col-2 .row-2 .food-list .items .wrap .content
     border: 0.0520833333vw solid #e1e1e1;
 }
 
+.product-listing .wrapper .col-2 .row-2 .food-list.list-view .items .wrap .image {
+display:flex !important;
+justify-content:center;
+align-items:center;
+}
+
 @media (min-width: 1200px) {
     .journal-section .wrapper::after {
         bottom: 0px;
