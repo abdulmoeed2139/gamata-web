@@ -1143,9 +1143,9 @@
     
 
         <!-- 🔸 Preloader Start -->
-        <div id="preloader">
+        <!-- <div id="preloader">
         <div class="loader"></div>
-        </div>
+        </div> -->
         <!-- 🔸 Preloader End -->
 
     <!-- All Blogs Modal Code Start -->
