@@ -116,6 +116,13 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
+                        let $button = $('#continueBtn');
+                        let buttonElement = $button[0];
+                        
+                        buttonElement.classList.remove("loading");
+                        buttonElement.innerHTML = buttonElement._originalHTML;
+                        $button.css("pointerEvents", "auto");
+                        buttonElement._isLoading = false;
                         $btn.prop("disabled", false);
                         if (response.message == 'OTP_SEND') {
                             window.location.href =
@@ -129,6 +136,13 @@
                         }
                     },
                     error: function(xhr) {
+                        let $button = $('#continueBtn');
+                        let buttonElement = $button[0];
+                        
+                        buttonElement.classList.remove("loading");
+                        buttonElement.innerHTML = buttonElement._originalHTML;
+                        $button.css("pointerEvents", "auto");
+                        buttonElement._isLoading = false;
                         $btn.prop("disabled", false);
                         let res = JSON.parse(xhr.responseText);
                         let errorObj = {};
