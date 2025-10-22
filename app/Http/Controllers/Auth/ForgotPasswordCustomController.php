@@ -12,11 +12,7 @@ class ForgotPasswordCustomController extends Controller
     // Step 1: Show Forgot Password Page
     public function showForgotForm()
     {
-        if(session('access_token')){
-            return redirect()->route('index', app()->getLocale());
-        } else{
-            return view('auth.forgot-password');
-        }
+        return view('auth.forgot-password');
     }
 
     // Step 2: Send OTP to Mobile/Email
@@ -41,20 +37,27 @@ class ForgotPasswordCustomController extends Controller
     // Step 3: Verify OTP
     public function verifyOtp(Request $request)
     {
-        if(session('access_token')){
-            return redirect()->route('index', app()->getLocale());
-        } else{
-            return view('auth.otp-for-forget-password');
+        $request->validate(['otp' => 'required']);
+
+        if ($request->otp == session('reset_otp')) {
+            return response()->json(['success' => true]);
         }
+        return response()->json(['success' => false, 'message' => 'Invalid OTP']);
     }
 
     // Step 4: Reset Password
     public function resetPassword(Request $request)
     {
-        if(session('access_token')){
-            return redirect()->route('index', app()->getLocale());
-        } else{
-            return view('auth.reset-password-screen');
+        $request->validate(['password' => 'required|confirmed|min:6']);
+
+        $user = User::where('mobile', session('reset_mobile'))->first();
+        if ($user) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+            session()->forget(['reset_otp', 'reset_mobile']);
+            return redirect('/login')->with('success', 'Password reset successfully!');
         }
+
+        return back()->withErrors(['mobile' => 'Something went wrong!']);
     }
 }

@@ -1,0 +1,33 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 2312 54.255.235.185 >> ~/.ssh/known_hosts
+
+      - name: Deploy code to server
+        run: |
+          ssh -p 2312 collab@54.255.235.185 "
+            cd /opt/bitnami/apache/gamata &&
+            git pull origin main &&
+            composer install --no-interaction --prefer-dist &&
+            php artisan migrate --force
+          "

@@ -9,11 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if(session('access_token')){
-            return redirect()->route('index', app()->getLocale());
-        } else{
-            return view('auth.login');
-        }
+        return view('auth.login');
     }
 
     public function community()
@@ -30,11 +26,11 @@ class HomeController extends Controller
     // {
     //     return view('websitePages.product-inner');
     // }
-
-    // public function producttInner()
-    // {
-    //     return view('websitePages.productt-inner');
-    // }
+    
+    public function producttInner()
+    {
+        return view('websitePages.productt-inner');
+    }
 
     public function element()
     {

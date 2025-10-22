@@ -6,7 +6,7 @@
 
 body.logged-out header ,body.logged-out footer{
     display:none
-
+    
     }
 
 
@@ -14,10 +14,10 @@ body.logged-out header ,body.logged-out footer{
         text-align:center;
         color:#000000;
 
-
-
+   
+        
         }
-
+        
 
         #stepRegistration label span {
             font-size: 16px;
@@ -34,9 +34,9 @@ body.logged-out header ,body.logged-out footer{
             width:80%;
             padding:10px 45px;
             }
-
-
-
+        
+        
+        
     #stepRegistration input , #stepRegistration select{
         width:100%;
         }
@@ -54,11 +54,11 @@ body.logged-out header ,body.logged-out footer{
         margin-bottom: 0;
     }
 
-    /* form#loginForm {
+    form#loginForm {
         display:flex;
         align-items:center;
         justify-content:center;
-        } */
+        }
 #stepRegistration{
     max-width: 500px;
     margin: 20px auto;
@@ -70,7 +70,7 @@ body.logged-out header ,body.logged-out footer{
   width:100% !important;
 
   }
-
+  
   /* Label styling */
   #stepRegistration label {
     display: block;
@@ -78,7 +78,7 @@ body.logged-out header ,body.logged-out footer{
     margin-bottom: 10px;
     color: #333;
   }
-
+  
   /* Info icon styling */
   #stepRegistration label span {
     font-size: 12px;
@@ -86,7 +86,7 @@ body.logged-out header ,body.logged-out footer{
     margin-left: 4px;
     color: #666;
   }
-
+  
   /* Input and select fields */
   /* #stepRegistration input,
   #stepRegistration select {
@@ -98,22 +98,22 @@ body.logged-out header ,body.logged-out footer{
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
   } */
-
+  
   /* On focus effect */
 
-
+  
   /* Row styling for first and last name */
   #stepRegistration .row {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
   }
-
+  
   /* Field gap for single inputs */
   #stepRegistration div {
     margin-bottom: 15px;
   }
-
+  
   /* Submit button */
   /* #stepRegistration button {
     background: #9b59b6;
@@ -126,13 +126,13 @@ body.logged-out header ,body.logged-out footer{
     font-weight: bold;
     transition: background 0.3s;
   } */
-
+  
   /* #stepRegistration button:hover {
     background: #823d9f;
   }
    */
-
-
+    
+    
 
 .forgot-wrapper { display:flex; justify-content:center; align-items:center; height:100vh; background:#f6f6f6; }
 .forgot-box { width:350px; background:#fff; padding:30px; border-radius:10px;  }
@@ -168,9 +168,6 @@ body.logged-out header ,body.logged-out footer{
 
 .login-form-uni {
     width: 80%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     /* max-width: 283px; */
 }
 
@@ -180,7 +177,7 @@ body.logged-out header ,body.logged-out footer{
     justify-content: center;
     margin: 20px 0;
   }
-
+  
   .otp-input {
     width: 30px;
     height: 28px;
@@ -194,12 +191,12 @@ body.logged-out header ,body.logged-out footer{
     border-radius: 0;
     outline: none;
   }
-
+  
   .otp-input:focus {
     border-color: #3F5504;
     box-shadow: 0 0 8px rgba(63, 85, 4, 0.4);
   }
-
+  
 .login-input-uni {
 width: 283px;
 height: 40px;

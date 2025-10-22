@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Gamata.com</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,20 +17,20 @@
     <link rel="stylesheet" href="{{ asset('assets/sass/home.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/sass/style.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
 
     <style>
+    
+
         .login-right-uni {
             flex: 1;
             background: url('/assets/Images/login-page.jpg') no-repeat center center/cover;
         }
-
-        ..auth-btn {
-
-            text-decoration: none;
+        
+        ..auth-btn{
+            
+            text-decoration:none;
         }
 
 
@@ -58,27 +58,27 @@
                 z-index: 99;
                 visibility: hidden;
             }
-
-            footer .wrapper .col-1 .row-1 {
-                border-top: .0520833333vw solid #e1e1e1 !important;
+            
+            footer .wrapper .col-1 .row-1{
+                border-top:.0520833333vw solid #e1e1e1 !important;
             }
-
-            body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message .chat-bot-text {
-                background: #f1f5f9;
-                width: 16.9270833333vw;
-                padding: .5208333333vw .5208333333vw;
-                border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
-                font-size: .9375vw;
-                line-height: 1.0416666667vw;
-                max-width: 100%;
-            }
-
-
+            
+                body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message .chat-bot-text {
+                      background: #f1f5f9;
+                      width: 16.9270833333vw;
+                      padding: .5208333333vw .5208333333vw;
+                      border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
+                      font-size: .9375vw;
+                      line-height: 1.0416666667vw;
+                      max-width:100%;
+                      }
+                      
+                      
             .message-inner {
-                height: 100% !important;
-            }
+            height: 100% !important;
+        }
 
-
+            
         }
 
 
@@ -143,10 +143,9 @@
         .chat-box {
             display: none;
             position: fixed;
-            right: 6.604167vw;
-            ;
+            right: 6.604167vw;;
             bottom: 2.8645833333vw;
-            height: 35.458333vw;
+            height:  35.458333vw;
             width: 20.8333333333vw;
             background-color: #fff;
             /* border-radius: 10px; */
@@ -202,7 +201,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 10px;
-
+             
         }
 
         .chat-bot-img {
@@ -218,17 +217,16 @@
             max-width: 200px;
         }
 
-        .chat-bot-text {
-            background: #f1f5f9;
-            width: 100%;
-            padding: .5208333333vw .5208333333vw;
-            border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
-            font-size: 16px;
-            line-height: 26px;
-            font-family: "Roboto", serif;
-            font-weight: 400;
-        }
-
+      .chat-bot-text {
+        background: #f1f5f9;
+        width:100%;
+        padding: .5208333333vw .5208333333vw;
+        border-radius: .4166666667vw .4166666667vw .4166666667vw 0;
+        font-size: 16px;
+        line-height: 26px;
+        font-family: "Roboto", serif;
+        font-weight: 400;
+    }
         .chat-type-area {
             border-top: 1px solid #ddd;
             padding: 10px;
@@ -267,475 +265,391 @@
             width: .9375vw;
             height: .9375vw;
         }
-
-        .product-listing .wrapper .col-2 .top-bar .row-1 {
-            width: 100%;
+        
+        .product-listing .wrapper .col-2 .top-bar .row-1{
+            width:100%; 
         }
-
+        
         .product-listing .wrapper .col-1 .search-bars input::placeholder {
-            opacity: 0.3;
+        opacity:0.3;
         }
-
-        .journal-section .wrapper::after {
-            background: url('{{ asset('assets/Images/jdbg.png') }}') !important;
-
+        
+        .journal-section .wrapper::after{
+            background:url('{{ asset('assets/Images/jdbg.png') }}') !important;
+            
         }
-
-        footer::before {
-            background: none !important;
+        
+        footer::before{
+            background:none !important;
         }
+        
+         /*modal css*/
 
-        /*modal css*/
-
-        .custom-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            /*height: 100%;*/
-            overflow: auto;
-            /*background-color: #fff;*/
-        }
-
-        .custom-modal .modal-content {
-            position: relative;
-            background: #fff;
-            /*margin: 5% auto;*/
-            padding: 20px;
-            border-radius: 12px;
-            width: 100vw
-                /*max-width: 800px;*/
-                position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            /*padding-top:30px;*/
-        }
-
-        .custom-modal .close {
-            position: absolute;
-            top: 5px;
-            right: 12px;
-            font-size: 40px;
-            cursor: pointer;
-            font-weight: 700;
-            color: #92bd26;
-        }
-
-        @media (max-width: 1200px) {
-
-            body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message img {
-                width: 15px;
-                height: 15px;
+            .custom-modal {
+              display: none;
+              position: fixed;
+              z-index: 1000;
+              left: 0;
+              top: 0;
+              width: 100%;
+              /*height: 100%;*/
+              overflow: auto;
+              /*background-color: #fff;*/
             }
-
-            .chat-box {
-
-                width: 27.833333vw;
+            
+            .custom-modal .modal-content {
+              position: relative ;
+              background: #fff;
+              /*margin: 5% auto;*/
+              padding: 20px;
+              border-radius: 12px;
+              width:100vw 
+              /*max-width: 800px;*/
+              position: relative ;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+              /*padding-top:30px;*/
             }
-
+            
+            .custom-modal .close {
+                 position: absolute;
+                 top: 5px;
+                 right: 12px;
+                 font-size: 40px;
+                 cursor: pointer;
+                 font-weight: 700;
+                 color: #92bd26;
+            }
+        
+         @media (max-width: 1200px) {
+       
+        body .chat-box .message-inner .bottom-cont .chat-display .chat-bot-message img{
+            width:15px;
+            height:15px;
+        }
+        
+        .chat-box {
+            
+        width: 27.833333vw;
         }
 
-        @media screen and (max-width: 1200px) and (min-width:768px) {
-            .profile-dropdown.active {
-                background: #fff !important;
-            }
-
-            .profile-dropdown {
-                top: 80px;
-                box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
-                transition: .5s;
-            }
         }
-
+        
+         @media screen and (max-width: 1200px) and (min-width:768px) {
+    .profile-dropdown.active {
+        background: #fff !important;
+    }
+    .profile-dropdown {
+        top: 80px;
+        box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
+        transition: .5s;
+    }
+ }
+        
         @media (max-width: 1024px) {
-            .chat-box {
-                max-height: 350px !important;
-                bottom: 180px;
-                margin: auto;
-                width: 320px;
-                right: 30px;
-
-            }
-
-            body .message-inner {
-                max-height: 350px !important;
-            }
-
-            .chat-box {
-                height: auto;
-            }
-
-
-            body .popup {
-                bottom: 20px;
-            }
-
-            .chat-box {
-                bottom: 80px;
-            }
-
-            .card-container {
+           .chat-box{
+         max-height:350px !important;
+         bottom:180px;
+         margin:auto;
+         width: 320px;
+         right: 30px;
+         
+        }
+        
+        body .message-inner{
+        max-height:350px !important;
+        }
+        
+        .chat-box{
+        height:auto;        
+        }
+            
+            
+         body .popup {
+         bottom:20px;
+         }
+         
+             .chat-box {
+                 bottom:80px;
+             }
+             
+              .card-container {
                 grid-template-columns: repeat(2, 1fr) !important;
-
+               
             }
-
-            .blog-container {
-                flex-direction: column;
+            .blog-container{
+                flex-direction:column;
             }
         }
-
-        @media (max-width: 767px) {
+        
+         @media (max-width: 767px) {
             .journal-section .wrapper .col-1 {
-                background: url(/assets/Images/jdbg.png) !important;
-                background-repeat: no-repeat, repeat;
-                background-size: cover;
-                background-position: center;
-                padding: 20px;
+            background: url(/assets/Images/jdbg.png) !important;
+            background-repeat: no-repeat, repeat;
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }      
+        
+        .profile-dropdown{
+         top: 80px;
+         box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
+         transition: .5s;
+        }
+        
+        .profile-dropdown.active{
+        background:#fff !important
+        }
+        
+         .profile-menus a{
+         font-size:14px !important
+         }
+         
+         footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu a li{
+             font-size:16px;
+         }
+         
+         .chat-box{
+         max-height:350px !important;
+         bottom:180px;
+         margin:auto;
+         width: 320px;
+         right: 30px;
+         
+        }
+        
+        body .message-inner{
+        max-height:350px !important;
+        }
+        
+        .chat-box{
+        height:auto;        
+        }
+        
+        body .popup {
+         bottom:106px;
+         }
+         
+         
+        .login-wrapper-uni{
+        flex-direction:column;
             }
-
-            .profile-dropdown {
-                top: 80px;
-                box-shadow: 0 .2083333333vw .625vw rgba(0, 0, 0, .15);
-                transition: .5s;
-            }
-
-            .profile-dropdown.active {
-                background: #fff !important
-            }
-
-            .profile-menus a {
-                font-size: 14px !important
-            }
-
-            footer .wrapper .col-2 .wrapper-1 .row-1 .box .footer-menu a li {
-                font-size: 16px;
-            }
-
-            .chat-box {
-                max-height: 350px !important;
-                bottom: 180px;
-                margin: auto;
-                width: 320px;
-                right: 30px;
-
-            }
-
-            body .message-inner {
-                max-height: 350px !important;
-            }
-
-            .chat-box {
-                height: auto;
-            }
-
-            body .popup {
-                bottom: 106px;
-            }
-
-
-            .login-wrapper-uni {
-                flex-direction: column;
-            }
-
-            .login-right-uni {
+            
+            .login-right-uni{
                 /*min-height:300px !important;*/
-                display: none !important;
+                display:none !important;
             }
-
+            
             .login-left-uni {
-
-                min-height: 80vh;
-
+                
+                min-height:80vh;
+                padding-top:0 !important;
             }
-
+            
             p.recaptcha-note {
-                width: 100%;
-                padding: 0;
+                width:100%;
+                padding:0;
             }
-
+            
             .card-container {
                 grid-template-columns: repeat(1, 1fr) !important;
-
+               
             }
-
+            
             body .account-wrapper {
-                padding: 30px 8.5vw;
+                  padding: 30px 8.5vw;
             }
-
-            .card-container .card {
-                padding: 20px 22px;
+            
+            .card-container .card{
+                  padding: 20px 22px;
             }
-
+                 
         }
+         
     </style>
 
 
 
 </head>
 
-@php
-    $bodyClass = session('access_token') ? 'logged-in' : 'logged-out';
+<body class="{{ auth()->check() ? 'logged-in' : 'logged-out' }} {{ request()->segment(count(request()->segments())) }}" >
 
-    // Current page segment
-    $currentSegment = request()->segment(count(request()->segments()));
-        $currentLang = app()->getLocale();
+    <header class="">
+        <nav class="nav-container">
+            <a href="{{url('index')}}" class="logo">
+                <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
+            </a>
 
-    // Combine all classes
-    $finalClass = trim("$bodyClass $currentSegment $currentLang");
+            <!-- Menu Links (Desktop & Mobile) -->
+            <div class="main-menu">
+          
+                 <ul>
+                    <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
+                    <li><a href="{{ url('/product') }}" class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
+                    <li><a href="{{ url('/community') }}" class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
+                    <li><a href="{{ url('/app-banner') }}" class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
+                    <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
+                    <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
+                  </ul>
+            </div>
 
+            <!-- Right-Side Icons -->
+            <div class="nav-icons">
+                <div class="user-bag">
+                    <a href="#" class="icon user" id="profile-menu">
+                        @if(auth()->check())
+                            <svg>
+                                <use xlink:href="#user"></use>
+                            </svg>
+                        @else
+                        
+                         <svg>
+                                <use xlink:href="#user"></use>
+                         </svg>
+                            <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
+                        @endif
+                        <label for="profile">{{ auth()->check() ? auth()->user()->name : 'Admin' }}</label>
+                        <div class="arrow-down"></div>
+                    </a>
+                    <div class="profile-dropdown">
+                        <ul>
+                            <li class="profile-menus">
+                                <a href="#">My Dashboard</a>
+                            </li>
+                            <li class="profile-menus">
+                                <a href="#">My Profile</a>
+                            </li>
+                            <li class="profile-menus">
+                                <a href="#">Settings</a>
+                            </li>
+                            <li class="profile-menus">
+                                <a href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
 
-@endphp
-
-<body class="{{ $finalClass }}">
-    @if (
-        !Request::is('/') &&
-        !Request::is('login') &&
-        !Request::is('verify-otp') &&
-        !Request::is('register.form') &&
-        !Request::is('forgot-password') &&
-        !Request::is('forgot-password/verify-otp') &&
-        !Request::is('forgot-password/reset') &&
-        !Request::is('login-by-password')
-    )
-        <header class="">
-            <nav class="nav-container">
-                <a href="{{ url(app()->getLocale().'/index') }}" class="logo">
-                    <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
-                </a>
-
-                <!-- Menu Links (Desktop & Mobile) -->
-                <div class="main-menu">
-
-                    <ul>
-                        {{-- <li><a href="{{ url('/'.app()->getLocale().'/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a>
-                        </li>
-                        <li><a href="{{ url('/'.app()->getLocale().'/product') }}"
-                                class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
-                        <li><a href="{{ url('/'.app()->getLocale().'/community') }}"
-                                class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
-                        <li><a href="{{ url('/'.app()->getLocale().'/app-banner') }}"
-                                class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
-                        <li><a href="{{ url('/'.app()->getLocale().'/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a>
-                        </li>
-                        <li><a href="{{ url('/'.app()->getLocale().'/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact
-                                Us</a></li> --}}
-
-                                {{-- <a href="{{ url(app()->getLocale() . '/index') }}" class="logo">
-    <img src="{{ asset('assets/Images/logo.png') }}" alt="Gamata Logo">
-</a> --}}
-
-                <li><a href="{{ url(app()->getLocale() . '/index') }}" class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
-                    {{ __('messages.home') }}
-                </a></li>
-                <li><a href="{{ url(app()->getLocale() . '/product') }}" class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
-                    {{ __('messages.shop') }}
-                </a></li>
-                <li><a href="{{ url(app()->getLocale() . '/community') }}" class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
-                    {{ __('messages.community') }}
-                </a></li>
-                <li><a href="{{ url(app()->getLocale() . '/app-banner') }}" class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
-                    {{ __('messages.my_plan') }}
-                </a></li>
-                <li><a href="{{ url(app()->getLocale() . '/posts') }}" class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
-                    {{ __('messages.journal') }}
-                </a></li>
-                <li><a href="{{ url(app()->getLocale() . '/contact') }}" class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
-                    {{ __('messages.contact_us') }}
-                </a></li>
-
-                    </ul>
+                    <a href="{{ url('/app-banner') }}" class="icon cart">
+                        <svg>
+                            <use xlink:href="#bag"></use>
+                        </svg>
+                    </a>
                 </div>
 
-                <!-- Right-Side Icons -->
-                <div class="nav-icons">
-                    <div class="user-bag">
-                        @if (session('access_token'))
-                            <a href="#" class="icon user" id="profile-menu">
-                                <svg>
-                                    <use xlink:href="#user"></use>
-                                </svg>
-                                <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
-                                <label for="profile ">{{ isset($username) ? (strlen($username) > 10 ? substr($username, 0, 8) . '..' : $username) : 'Login' }}</label>
-                                <div class="arrow-down"></div>
-                            </a>
-                        @else
-                            <a href="{{ url(app()->getLocale().'/login') }}" class="icon user" id="">
-
-                                <label for="profile">{{ __('messages.login') }}</label>
-                                 <!--<img src="{{ asset('assets/Images/logout.png') }}" alt="User" class="user-avatar" style="width: 30px; height: 30px; border-radius: 100%; object-fit: cover; border:1px solid #00000029; padding:3px">-->
-
-                                 <svg width="15" height="25" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <rect width="12" height="22" fill="url(#pattern0_2015_344)"/>
-                                    <defs>
-                                    <pattern id="pattern0_2015_344" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                    <use xlink:href="#image0_2015_344" transform="scale(0.0416667 0.0227273)"/>
-                                    </pattern>
-                                    <image id="image0_2015_344" width="24" height="44" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAsCAMAAABIQohxAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAbxQTFRF/////v7+/Pz8+/v7+vr68fHx6Ojo7Ozs/f399vb27u7u29vby8vL1NTU8vLy+fn53Nzcv7+/paWlmpqaqamp0NDQ+Pj4np6ehYWFfHx8iYmJrKys6urq9PT05eXlvb29oqKikZGRgICAdHR0eHh4jY2NtLS01dXV7+/v0dHRo6OjlJSUnJyckpKSfn5+enp6mZmZtbW13d3d8/Pz19fXvLy8srKyk5OTj4+PoaGhjIyM5OTk9fX16+vrxMTEm5ubsLCw0tLSw8PDoKCgwMDAhoaG3t7esbGxiIiIzMzMr6+v4ODgtra29/f339/fvr6+lpaWxsbG4+Pj6enp09PTuLi4qKioycnJlZWV5+fn5ubms7Ozt7e3h4eHg4ODz8/P4uLixcXF2traqqqqu7u72dnZnZ2dyMjIra2tx8fHrq6uq6urkJCQjo6OmJiYf39/goKCb29vaGhocHBwzc3NpqamdXV1ysrK4eHhn5+fwcHB2NjY8PDwubm57e3tioqKwsLCpKSk1tbWd3d3gYGBeXl5ampqfX19dnZ2Z2dnbGxshISEp6enl5eXe3t7zs7OcXFxi4uLurq6c3NzmNW6rgAAA5FJREFUeJxlk1tsU3Ucx8/vtD2nPb2s7brZbgxKd9My1nWwlWKVmzi5lGFExKkjvhhjMCYaXiTxwZgoJj6Y+IC86MM2gyAGWW3INjbZyjqHrCCUbJ0NtZedXlivW3t6OcfTlg7Jfg//5P/7/P75/25fQCoGCABCIwhTuVZOQAGgQGNUGVUAzsaXjHoK8HOiVWHJH5cmqP8BVBHFMKwIsng2kXkCOHXwxFw0swaqxOKyM6gECPvpSj5IJySIpY0ltBTTgo1NGkpf7wR4pGC9q8KkZK7GnedRZbCdAMgIpjvTMggwXuPUCyMlwIf94GoBjzrmrm0AuLEreZ2fKAJOsy5SE6aVQJL6S9vvCPMa1UimCKrSx4GNHzex4N9GcHI8LYnbDABeeAdmwwqDzeTQX34Vhd9opjX0kGJbV3/ojxjyYrjVchjGO2zC7CvgdpBcQBW9t/huQUKFRNQ7kOu7h5XElpWolX2Bq/deKByxd3n1bCEha7t82YFoUgvAqXsDkr8Igls7XN5jZGYzDDRrLRHzReASb15TN08u6upTkN713csPnW/7dUPVPqiNf2Jrk8IXiGRHlWxhUW+V9/K42Xk7mMWNA8Iu5kLW+KeJzJ84Zxj74PfXr2y+BYKP5p6Rz/RkvhFINPsGfdWhM8PRfqC+hYYaIzulwSP3eDhJivDaZy/ib7GNGIOG5M5qrVMz1L0clJLxgyFXzjj1HpzNsOCQbBZdODWxRXozzGv7h0QItD9Q/xk0PIft+fI1lde+B7USJ+PLQ8ZgQPrSHRMIOrNpos134AqTO4ZmBN8LGXEs15SKsnU8D4Xm5ZmTA+ITzA2nKZVIo55taTtb+QHteUmSBEybU6aPzk4iRKrfpvkVOMZGC/3+PQuj5ytS3IkqJPXhVZXPmwHOwcnPf4of/1qEd2/9EfPxmjpjPpfhrh9QFD0buJTczVh7g+zMTzvHz6zkf0hSwEdquuQR17ucUTzmVqvmdUqrNOhPsTNHUCGzLWbKL9V5HulyjqMP7hoW5CNUca/wdi4WIAz33eIOSx8iGnXRK3R5E/OfekY/PnfK3bQyYYg2/T1I0eXdBVzSevt06P686PDMhk2RDefDj5ealaUian6w2odFkz/L1PaiPpg1DebB/Fff9M3uaV5ZhLAmZ/NcC4mnFwtPybkEYtrhup6v1oNauX/vmGxpPeCqNvZMOSLMOsDPGWfa5zDqMfgPmg6KqJU7TbsAAAAASUVORK5CYII="/>
-                                    </defs>
-                                 </svg>
-
-
-                            </a>
-                        @endif
-
-
-                        @if (session('access_token'))
-                            <div class="profile-dropdown">
-                                <ul>
-                                    <li class="profile-menus">
-                                        <a href="{{route('appBanner', app()->getLocale())}}">{{ __('messages.my_dashboard') }}</a>
-                                    </li>
-                                    <li class="profile-menus">
-                                        <a href="#">{{ __('messages.my_profile') }}</a>
-                                    </li>
-                                    <li class="profile-menus">
-                                        <a href="#">{{ __('messages.settings') }}</a>
-                                    </li>
-                                    <li class="profile-menus">
-                                        <a href="{{ route('logout', app()->getLocale()) }}">{{ __('messages.logout') }}</a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        @endif
-
-                        <a href="{{ url(app()->getLocale().'/app-banner') }}" class="icon cart">
+                <!-- Language Selector -->
+                <div class="language">
+                    <div class="title">
+                        Select your Language
+                    </div>
+                    <div class="wrap">
+                        <a href="#" class="lan active">
                             <svg>
-                                <use xlink:href="#bag"></use>
+                                <use xlink:href="#sinhala"></use>
+                            </svg>
+                        </a>
+                        <a href="#" class="lan">
+                            <svg>
+                                <use xlink:href="#english"></use>
+                            </svg>
+                        </a>
+                        <a href="#" class="lan">
+                            <svg>
+                                <use xlink:href="#tamil"></use>
                             </svg>
                         </a>
                     </div>
-
-                    <!-- Language Selector -->
-                    <!-- <div class="language">
-                        <div class="title">
-                           {{ __('messages.select_your_language') }}
-                        </div>
-                        <div class="wrap">
-                            <a href="#" class="lan">
-                                <svg>
-                                    <use xlink:href="#sinhala"></use>
-                                </svg>
-                            </a>
-                            <a href="#" class="lan active">
-                                <svg>
-                                    <use xlink:href="#english"></use>
-                                </svg>
-                            </a>
-                            <a href="#" class="lan">
-                                <svg>
-                                    <use xlink:href="#tamil"></use>
-                                </svg>
-                            </a>
-                        </div>
-                    </div> -->
-
-
-                 <!-- Language Selector -->
-                    <div class="language">
-                        <div class="title">
-                          {{ __('messages.select_your_language') }}
-                        </div>
-                        <div class="wrap">
-                            <a href="#" class="lan {{ app()->getLocale() == 'si' ? 'active' : '' }}" data-lang="si">
-                                <svg>
-                                    <use xlink:href="#sinhala"></use>
-                                </svg>
-                            </a>
-                            <a href="#" class="lan {{ app()->getLocale() == 'en' ? 'active' : '' }}" data-lang="en">
-                                <svg>
-                                    <use xlink:href="#english"></use>
-                                </svg>
-                            </a>
-                            <a href="#" class="lan {{ app()->getLocale() == 'ta' ? 'active' : '' }}" data-lang="ta">
-                                <svg>
-                                    <use xlink:href="#tamil"></use>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-
-
-                    <!-- Search Button -->
-                    <button class="search-toggle">
-                        <svg>
-                            <use xlink:href="#search"></use>
-                        </svg>
-                    </button>
-
-                    <!-- Mobile Menu Toggle -->
-                    <label class="main-menu-btn" for="main-menu-state">
-                        <span class="main-menu-btn-icon"></span>
-                        <div class="menu-txt">Menu</div>
-                    </label>
                 </div>
-            </nav>
 
-            <!-- Search Bar (Hidden by Default) -->
-            <div class="search-bar">
-                <form class="search-form" action="{{ url(app()->getLocale().'/product') }}" method="GET">
-                    <div class="wrapper">
-                        <svg>
-                            <use xlink:href="#search"></use>
-                        </svg>
-                        <input type="text" name="search" placeholder="{{ __('messages.search_your_keyword') }}" class="search-input"
-                            autocomplete="off">
-                        <button type="submit" class="search-button">{{ __('messages.search') }}</button>
-                    </div>
-                </form>
+                <!-- Search Button -->
+                <button class="search-toggle">
+                    <svg>
+                        <use xlink:href="#search"></use>
+                    </svg>
+                </button>
+
+                <!-- Mobile Menu Toggle -->
+                <label class="main-menu-btn" for="main-menu-state">
+                    <span class="main-menu-btn-icon"></span>
+                    <div class="menu-txt">Menu</div>
+                </label>
             </div>
+        </nav>
 
-        </header>
-    @endif
+        <!-- Search Bar (Hidden by Default) -->
+        <div class="search-bar">
+            <form class="search-form" action="{{ url('/product') }}" method="GET">
+                <div class="wrapper">
+                    <svg>
+                        <use xlink:href="#search"></use>
+                    </svg>
+                    <input type="text" name="search" placeholder="Search Your Keyword" class="search-input" autocomplete="off">
+                    <button type="submit" class="search-button">Search</button>
+                </div>
+            </form>
+        </div>
 
+    </header>
 
+    <div class="popup">
+        <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
+    </div>
 
-
-
-
-
-
-    @if (
-        !Request::is('/') &&
-        !Request::is('login') &&
-        !Request::is('verify-otp') &&
-        !Request::is('register.form') &&
-        !Request::is('forgot-password') &&
-        !Request::is('forgot-password/verify-otp') &&
-        !Request::is('forgot-password/reset') &&
-        !Request::is('login-by-password')
-    )
-    @if (session('access_token'))
-         <div class="popup">
-              <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup">
-              </div>
-              @else
-               <div class="popup">
-                                    <!-- <img src="{{ asset('assets/Images/msg-popup.png') }}" alt="popup"> -->
-               </div>
-
-          @endif
-    @endif
 
 
 
 
     @yield('content')
-    @if (
-        !Request::is('/') &&
-        !Request::is('login') &&
-        !Request::is('register.form') &&
-        !Request::is('forgot-password') &&
-        !Request::is('forgot-password/verify-otp') &&
-        !Request::is('forgot-password/reset') &&
-        !Request::is('login-by-password')
-    )
+            <!-- Modal -->
+            <div class="custom-modal" id="modal1">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                  <div class="blog-container">
+    
+                    <!-- Left Column -->
+                    <div class="blog-left-column">
+                      <img src="{{ asset('assets/Images/j1.png') }}" alt="Blog Image" class="blog-main-image">
+                
+                      <div class="blog-post-meta">
+                       <svg>
+                          <use xlink:href="#user"></use>
+                         </svg>
+                        <span>Posted by Admin · November 18, 2024</span>
+                      </div>
+                
+                      <div class="blog-content">
+                        <h2> Breaking Barriers Connecting Farmers to Markets</h2>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed at ligula non nulla posuere varius. 
+                          Phasellus id tortor nec lorem suscipit gravida. Duis feugiat, felis et aliquet cursus, erat justo eleifend sem, 
+                          sit amet facilisis eros lacus id justo.
+                        </p>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ligula non nulla posuere varius. 
+                          Phasellus id tortor nec lorem suscipit gravida. Duis feugiat erat justo eleifend sem.
+                        </p>
+                      </div>
+                    </div>
+                
+                    <!-- Right Column -->
+                    <div class="blog-right-column">
+                        <h3>Categories</h3>
+                      <div class="blog-search-box">
+                        <input type="text" placeholder="Search...">
+                      </div>
+                
+                      <div class="blog-categories">
+                        <ul>
+                          <li>Market Access</li>
+
+                        </ul>
+                      </div>
+                    </div>
+                
+                  </div>
+              </div>
+            </div>
 
 
 
-       <footer class="site-footer">
+    <footer class="site-footer">
 
         <div class="wrapper">
             <div class="col-1">
@@ -745,28 +659,23 @@
                             <use xlink:href="#news_icon"></use>
                         </svg>
                         <div class="text">
-                            {{ __('messages.newsletter_signup') }}
-                            <span>{{ __('messages.newsletter_desc') }}</span>
+                            Newsletter Signup
+                            <span>Uptodate with our latest news and insights</span>
                         </div>
                     </div>
                     <div class="box-2">
-                         <form id="emailForm" action="/" method="post">
-                            <input type="email" name="newsletter-email" id="newsletter-email"
-                                placeholder="{{ __('messages.enter_email_here') }}" required>
+                        <form action="/" method="post">
+                            <input type="email" name="newsletter-email" id="email"
+                                placeholder="Enter Your Email Here" required>
                         </form>
                     </div>
-
                     <div class="box-3">
-                        <form id="subscribeForm">
-                            @csrf
-                            <input type="hidden" name="email" id="emailForSubscribe">
-                            <a href="#" class="common-btn-1" id="subscribeBtn">
-                                <svg>
-                                    <use xlink:href="#btn_arr"></use>
-                                </svg>
-                                  {{ __('messages.subscribe') }}
-                            </a>
-                        </form>
+                        <a href="#" class="common-btn-1">
+                            <svg>
+                                <use xlink:href="#btn_arr"></use>
+                            </svg>
+                            Subscribe
+                        </a>
                     </div>
                 </div>
             </div>
@@ -774,57 +683,48 @@
                 <div class="wrapper-1">
                     <div class="row-1">
                         <div class="box">
-                             <ul class="footer-menu mobile-fmenu">
-                                <li>
-                                    <a href="{{ url(app()->getLocale() . '/index') }}"
-                                    class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
-                                    {{ __('messages.home') }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url(app()->getLocale() . '/product') }}"
-                                    class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
-                                    {{ __('messages.shop') }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url(app()->getLocale() . '/community') }}"
-                                    class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
-                                    {{ __('messages.community') }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url(app()->getLocale() . '/app-banner') }}"
-                                    class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
-                                    {{ __('messages.my_plan') }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url(app()->getLocale() . '/posts') }}"
-                                    class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
-                                    {{ __('messages.journal') }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url(app()->getLocale() . '/contact') }}"
-                                    class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
-                                    {{ __('messages.contact_us') }}
-                                    </a>
-                                </li>
+                            <ul class="footer-menu">
+                                
+                                
+                    <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
+                    <li><a href="{{ url('/product') }}" class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
+                    <li><a href="{{ url('/community') }}" class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
+                    <li><a href="{{ url('/app-banner') }}" class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
+                    <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
+                    <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
+                                <!--<a href="{{ url('/index') }}" class="active">-->
+                                <!--    <li>Home</li>-->
+                                <!--</a>-->
+                                <!--<a href="{{ url('/product') }}">-->
+                                <!--    <li>Shop</li>-->
+                                <!--</a>-->
+                                <!--<a href="{{ url('/community') }}">-->
+                                <!--    <li>Community</li>-->
+                                <!--</a>-->
+                                
+                                <!--<a href="{{ url('/app-banner') }}">-->
+                                <!--    <li>My Plan</li>-->
+                                <!--</a>-->
+                                <!--<a href="{{ url('/posts') }}">-->
+                                <!--    <li>Journal</li>-->
+                                <!--</a>-->
+                                
+                                <!--<a href="{{ url('/contact') }}">-->
+                                <!--    <li>Contact Us</li>-->
+                                <!--</a>-->
                             </ul>
                         </div>
                         <div class="box-1">
                             <div class="title">
-                               {{ __('messages.head_office') }}
+                                Head Office
                             </div>
                             <div class="text">
-                                Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo
-                                01, Sri Lanka
+                                Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo 01, Sri Lanka
                             </div>
                         </div>
                         <div class="box-2">
                             <div class="title">
-                               {{ __('messages.email') }}
+                                Email
                             </div>
                             <div class="text">
                                 <a href="mailto:info@aethriasolutions.com">info@aethriasolutions.com</a>
@@ -832,7 +732,7 @@
                         </div>
                         <div class="box-3">
                             <div class="title">
-                                  {{ __('messages.contact') }}
+                                Contact
                             </div>
                             <div class="text">
                                 <a href="tel:�6�7+94 771 856 567">94 771 856 56767</a>
@@ -841,48 +741,37 @@
                     </div>
                     <div class="row-2">
                         <div class="box-1">
-                        <ul class="footer-menu">
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/index') }}"
-                                class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
-                                {{ __('messages.home') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/product') }}"
-                                class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
-                                {{ __('messages.shop') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/community') }}"
-                                class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
-                                {{ __('messages.community') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/app-banner') }}"
-                                class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
-                                {{ __('messages.my_plan') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/posts') }}"
-                                class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
-                                {{ __('messages.journal') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/contact') }}"
-                                class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
-                                {{ __('messages.contact_us') }}
-                                </a>
-                            </li>
-                        </ul>
+                            <ul class="footer-menu">
+                                
+                                 <li><a href="{{ url('/index') }}" class="{{ request()->is('index') ? 'active' : '' }}">Home</a></li>
+                                <li><a href="{{ url('/product') }}" class="{{ request()->is('product') ? 'active' : '' }}">Shop</a></li>
+                                <li><a href="{{ url('/community') }}" class="{{ request()->is('community') ? 'active' : '' }}">Community</a></li>
+                                <li><a href="{{ url('/app-banner') }}" class="{{ request()->is('app-banner') ? 'active' : '' }}">My Plan</a></li>
+                                <li><a href="{{ url('/posts') }}" class="{{ request()->is('posts') ? 'active' : '' }}">Journal</a></li>
+                                <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact Us</a></li>
+                                <!--<a href="{{ url('/index') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
+                                <!--    <li>Home</li>-->
+                                <!--</a>-->
+                                <!--<a href="{{ url('/product') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
+                                <!--    <li>Shop</li>-->
+                                <!--</a>-->
+                                <!--<a href="{{ url('/community') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
+                                <!--    <li>Community</li>-->
+                                <!--</a>-->
+                                <!--<a href="{{ url('/app-banner') }}" >-->
+                                <!--    <li>My Plan</li>-->
+                                <!--</a>-->
+                                <!--<a href="{{ url('/posts') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
+                                <!--    <li>Journal</li>-->
+                                <!--</a>-->
 
+                                <!--<a href="{{ url('/contact') }}"  class="{{ request()->is('index') ? 'active' : '' }}">-->
+                                <!--    <li>Contact Us</li>-->
+                                <!--</a>-->
+                            </ul>
                         </div>
                         <div class="box-2">
-                            <div class="title">{{ __('messages.we_are_available_on') }}</div>
+                            <div class="title">We Are Available on</div>
                             <div class="image">
                                 <img src="{{ asset('assets/Images/playstore.png') }}" alt="playsore">
                                 <img src="{{ asset('assets/Images/appstore.png') }}" alt="appstore">
@@ -930,177 +819,8 @@
                     </div>
                     <div class="row-3">
                         <div class="cont">
-                            <div class="copyright">{{ __('messages.copyright') }}</div>
-                            <div class="author">{{ __('messages.designed_by') }} <a href="https://aethriasolutions.com/"
-                                    target="_blank">Aethria</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-            <!-- Chat Modal -->
-        <div class="chat-box" id="chatModal">
-            <div class="message-inner">
-                <div class="top-bar">
-                    <div class="minus"></div>
-                    <div class="cross" id="closeChat">X</div>
-                </div>
-                <div class="bottom-cont">
-                    <div class="chat-display">
-                        <div class="chat-bot-message">
-                            <img class="chat-bot-img" src="{{ asset('assets/Images/gamata-chat-icon.png') }}"
-                                alt="chat-bot-icon">
-                            <div class="chat-bot-text">
-                            {{ __('messages.chat_welcome') }}                            </div>
-                        </div>
-                    </div>
-                    <div class="chat-type-area">
-                        <form id="chat_form" onsubmit="return false;">
-                            <input id="text-message" type="text" placeholder="{{ __('messages.chat_placeholder') }}">
-                            <button type="submit">
-                                <i class="fas fa-arrow-up"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
-
-    {{-- <footer class="site-footer">
-
-        <div class="wrapper">
-            <div class="col-1">
-                <div class="row-1">
-
-                </div>
-            </div>
-            <div class="col-2">
-         <div class="wrapper-1">
-                    <div class="row-1">
-
-                        <div class="box-1">
-                            <div class="title">
-                               {{ __('messages.head_office') }}
-                        </div>
-                        <div class="text">
-                                Aethria Solutions (Pvt) Ltd <br>Level 35 & 37, World Trade Center, West Tower, Colombo
-                                01, Sri Lanka
-                        </div>
-                        </div>
-                        <div class="box-2">
-                            <div class="title">
-                               {{ __('messages.email') }}
-                            </div>
-                            <div class="text">
-                                <a href="mailto:info@aethriasolutions.com">info@aethriasolutions.com</a>
-                            </div>
-                        </div>
-                        <div class="box-3">
-                            <div class="title">
-                               {{ __('messages.contact') }}
-                            </div>
-                            <div class="text">
-                                <a href="tel:�6�7+94 771 856 567">94 771 856 56767</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row-2">
-                        <div class="box-1">
-                        <ul class="footer-menu">
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/index') }}"
-                                class="{{ request()->is(app()->getLocale().'/index') ? 'active' : '' }}">
-                                {{ __('messages.home') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/product') }}"
-                                class="{{ request()->is(app()->getLocale().'/product') ? 'active' : '' }}">
-                                {{ __('messages.shop') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/community') }}"
-                                class="{{ request()->is(app()->getLocale().'/community') ? 'active' : '' }}">
-                                {{ __('messages.community') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/app-banner') }}"
-                                class="{{ request()->is(app()->getLocale().'/app-banner') ? 'active' : '' }}">
-                                {{ __('messages.my_plan') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/posts') }}"
-                                class="{{ request()->is(app()->getLocale().'/posts') ? 'active' : '' }}">
-                                {{ __('messages.journal') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url(app()->getLocale() . '/contact') }}"
-                                class="{{ request()->is(app()->getLocale().'/contact') ? 'active' : '' }}">
-                                {{ __('messages.contact_us') }}
-                                </a>
-                            </li>
-                        </ul>
-
-                        </div>
-                        <div class="box-2">
-                            <div class="title">{{ __('messages.we_are_available_on') }}</div>
-                            <div class="image">
-                                <img src="{{ asset('assets/Images/playstore.png') }}" alt="playsore">
-                                <img src="{{ asset('assets/Images/appstore.png') }}" alt="appstore">
-                            </div>
-                        </div>
-                        <div class="box-3">
-                            <ul>
-                                <a href="#" target="_blank">
-                                    <li>
-                                        <svg>
-                                            <use xlink:href="#fb_icon"></use>
-                                        </svg>
-                                    </li>
-                                </a>
-                                <a href="#" target="_blank">
-                                    <li>
-                                        <svg>
-                                            <use xlink:href="#x_icon"></use>
-                                        </svg>
-                                    </li>
-                                </a>
-                                <a href="#" target="_blank">
-                                    <li>
-                                        <svg>
-                                            <use xlink:href="#yt"></use>
-                                        </svg>
-                                    </li>
-                                </a>
-                                <a href="#" target="_blank">
-                                    <li>
-                                        <svg>
-                                            <use xlink:href="#linkedin"></use>
-                                        </svg>
-                                    </li>
-                                </a>
-                                <a href="#" target="_blank">
-                                    <li>
-                                        <svg>
-                                            <use xlink:href="#insta"></use>
-                                        </svg>
-                                    </li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row-3">
-                        <div class="cont">
-                            <div class="copyright">{{ __('messages.copyright') }}</div>
-                            <div class="author">{{ __('messages.designed_by') }}<a href="https://aethriasolutions.com/"
+                            <div class="copyright">© 2024 Gamata.lk, All Rights Reserved </div>
+                            <div class="author">Designed and Developed by <a href="https://aethriasolutions.com/"
                                     target="_blank">Aethria</a></div>
                         </div>
                     </div>
@@ -1119,15 +839,15 @@
                 <div class="bottom-cont">
                     <div class="chat-display">
                         <div class="chat-bot-message">
-                            <img class="chat-bot-img" src="{{ asset('assets/Images/gamata-chat-icon.png') }}"
-                                alt="chat-bot-icon">
+                            <img class="chat-bot-img" src="{{ asset('assets/Images/gamata-chat-icon.png') }}" alt="chat-bot-icon">
                             <div class="chat-bot-text">
-                            {{ __('messages.chat_welcome') }}                            </div>
+                                Welcome to Gamata! How can I help you today?
+                            </div>
                         </div>
                     </div>
                     <div class="chat-type-area">
                         <form id="chat_form" onsubmit="return false;">
-                            <input id="text-message" type="text" placeholder="{{ __('messages.chat_placeholder') }}">
+                            <input id="text-message" type="text" placeholder="Type here...">
                             <button type="submit">
                                 <i class="fas fa-arrow-up"></i>
                             </button>
@@ -1137,52 +857,8 @@
             </div>
         </div>
 
-    </footer> --}}
+    </footer>
 
-    @endif
-    
-
-        <!-- 🔸 Preloader Start -->
-        <!-- <div id="preloader">
-        <div class="loader"></div>
-        </div> -->
-        <!-- 🔸 Preloader End -->
-
-    <!-- All Blogs Modal Code Start -->
-    <div class="custom-modal" id="modal1">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="blog-container">
-                <!-- Left Column -->
-                <div class="blog-left-column">
-                    <img id="blog-img" src="http://feapi.aethriasolutions.com/uploads/Blog/" alt="Blog Image" class="blog-main-image">
-                    <div class="blog-post-meta">
-                    <svg>
-                        <use xlink:href="#user"></use>
-                        </svg>
-                    <span>Posted by Admin · <span id="blog-date"> </span></span>
-                    </div>
-
-                    <div id="blog-content"></div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="blog-right-column">
-                    <h3>Categories</h3>
-                    <div class="blog-search-box">
-                        <input type="text" placeholder="Search...">
-                    </div>
-                    <div class="blog-categories">
-                        <ul>
-                            <li id="blog-ctg"></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- All Blogs Modal Code End -->
 
 
     <!-- svg inline sprite -->
@@ -1261,8 +937,8 @@
 
         <!-- Heart -->
         <!-- <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 16">
-        <path d="M17.4735 1.56783C15.4071 -0.522327 12.0455 -0.522327 9.97966 1.56783L9.49983 2.05302L9.02028 1.56783C6.95443 -0.52261 3.59255 -0.52261 1.52671 1.56783C-0.497192 3.61555 -0.510334 6.8614 1.49623 9.11819C3.32635 11.1758 8.72388 15.6212 8.95289 15.8094C9.10836 15.9372 9.29542 15.9995 9.48137 15.9995C9.48752 15.9995 9.49367 15.9995 9.49955 15.9992C9.69193 16.0082 9.8857 15.9415 10.0462 15.8094C10.2752 15.6212 15.6733 11.1758 17.504 9.11791C19.5103 6.8614 19.4971 3.61555 17.4735 1.56783ZM16.2569 7.98258C14.83 9.58641 10.9077 12.8942 9.49955 14.068C8.09137 12.8945 4.16997 9.58698 2.74334 7.98287C1.34355 6.40874 1.33041 4.16694 2.71286 2.76823C3.4189 2.05416 4.34613 1.69684 5.27335 1.69684C6.20057 1.69684 7.1278 2.05387 7.83384 2.76823L8.88857 3.83537C9.01412 3.9624 9.17239 4.03822 9.33848 4.06481C9.60804 4.12338 9.90052 4.04727 10.1102 3.83565L11.1655 2.76823C12.5779 1.3398 14.8753 1.34008 16.2868 2.76823C17.6692 4.16694 17.6561 6.40874 16.2569 7.98258Z"/>
-        </symbol> -->
+  <path d="M17.4735 1.56783C15.4071 -0.522327 12.0455 -0.522327 9.97966 1.56783L9.49983 2.05302L9.02028 1.56783C6.95443 -0.52261 3.59255 -0.52261 1.52671 1.56783C-0.497192 3.61555 -0.510334 6.8614 1.49623 9.11819C3.32635 11.1758 8.72388 15.6212 8.95289 15.8094C9.10836 15.9372 9.29542 15.9995 9.48137 15.9995C9.48752 15.9995 9.49367 15.9995 9.49955 15.9992C9.69193 16.0082 9.8857 15.9415 10.0462 15.8094C10.2752 15.6212 15.6733 11.1758 17.504 9.11791C19.5103 6.8614 19.4971 3.61555 17.4735 1.56783ZM16.2569 7.98258C14.83 9.58641 10.9077 12.8942 9.49955 14.068C8.09137 12.8945 4.16997 9.58698 2.74334 7.98287C1.34355 6.40874 1.33041 4.16694 2.71286 2.76823C3.4189 2.05416 4.34613 1.69684 5.27335 1.69684C6.20057 1.69684 7.1278 2.05387 7.83384 2.76823L8.88857 3.83537C9.01412 3.9624 9.17239 4.03822 9.33848 4.06481C9.60804 4.12338 9.90052 4.04727 10.1102 3.83565L11.1655 2.76823C12.5779 1.3398 14.8753 1.34008 16.2868 2.76823C17.6692 4.16694 17.6561 6.40874 16.2569 7.98258Z"/>
+ </symbol> -->
         <symbol id="heart" enable-background="new 0 0 24 24" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1601,179 +1277,7 @@
     </svg>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
 
-
-        /*------- Modal Jquery Code Start -------*/
-        // $(document).ready(function () {
-        //     var modal = $("#modal1");
-        //     $(".open-modal-btn").on("click", function () {
-        //         var code = $(this).data("code");
-        //         $.ajax({
-        //             url: "{{ url('get-blog') }}/"+ code,
-        //             type: "get",
-        //             success:function(response){
-
-        //                 var rawDate = response.data.createdOn;
-        //                 var date = new Date(rawDate);
-
-        //                 var months = [
-        //                     "January", "February", "March", "April", "May", "June",
-        //                     "July", "August", "September", "October", "November", "December"
-        //                 ];
-        //                 var formattedDate = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-        //                 $("#blog-content").html(response.data.body_English);
-        //                 $("#blog-date").text(formattedDate);
-        //                 $("#blog-ctg").text(response.data.category);
-        //                 $("#blog-img").attr("src", response.data.imageUri + "/" + response.data.image);
-        //                 $(".blog-content").text(response.data.subject);
-        //                 $(".blog-content").text(response.data.subject);
-        //                 $(".blog-content").text(response.data.subject);
-        //             }
-        //         });
-
-        //         modal.style.display = "flex";
-        //     });
-
-        //     $(".close").on("click", function () {
-        //         modal.style.display = "none";
-        //     });
-
-        //     $(window).on("click", function (e) {
-        //         if ($(e.target).is(modal)) {
-        //             // modal.hide();
-        //             modal.style.display = "none";
-
-        //         }
-        //     });
-        // });
-
-    $(document).ready(function () {
-    var modal = $("#modal1");
-
-    $(".open-modal-btn").on("click", function () {
-        var code = $(this).data("code");
-        $.ajax({
-            url: "{{ url('/get-blog') }}/" + code, // Laravel blade me chalega
-            type: "get",
-            success: function (response) {
-                var rawDate = response.data.createdOn;
-                var date = new Date(rawDate);
-                var months = [
-                    "January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ];
-                var formattedDate = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-                $("#blog-content").html(response.data.body_English);
-                $("#blog-date").text(formattedDate);
-                $("#blog-ctg").text(response.data.category);
-                $("#blog-img").attr("src", response.data.imageUri + "/" + response.data.image);
-                $(".blog-content").text(response.data.subject);
-
-                modal.css("display", "flex");
-            }
-        });
-    });
-
-    $(".close").on("click", function () {
-        modal.css("display", "none");
-    });
-
-    $(window).on("click", function (e) {
-        if ($(e.target).is(modal)) {
-            modal.css("display", "none");
-        }
-    });
-});
-
-        /*------- Modal Jquery Code End -------*/
-
-        /*------- Email Subscribe Jquery Code Start -------*/
-        $(document).ready(function () {
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                }
-            });
-            $("#subscribeBtn").on("click", function(e) {
-                e.preventDefault();
-
-                let emailValue = $("#newsletter-email").val().trim();
-                if (emailValue === "") {
-                        // let $button = $('#subscribeBtn');
-                        // let buttonElement = $button[0];
-                        
-                        // // Remove loading state properly
-                        // buttonElement.classList.remove("loading");
-                        // buttonElement.innerHTML = buttonElement._originalHTML;
-                        // $button.css("pointerEvents", "auto");
-                        // buttonElement._isLoading = false;
-
-                        toastr.error("Please enter your valid email", "Error");
-
-                    return;
-                }
-
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(emailValue)) {
-                        // let $button = $('#subscribeBtn');
-                        // let buttonElement = $button[0];
-                        
-                        // // Remove loading state properly
-                        // buttonElement.classList.remove("loading");
-                        // buttonElement.innerHTML = buttonElement._originalHTML;
-                        // $button.css("pointerEvents", "auto");
-                        // buttonElement._isLoading = false;
-
-                        toastr.error("Please enter a valid email address", "Error");
-
-                    return;
-                }
-                                // hidden input fill karo
-                $("#emailForSubscribe").val(emailValue);
-                $.ajax({
-                    url: "{{ url(app()->getLocale().'/subscribe') }}",
-                    type: "POST",
-                    data: $("#subscribeForm").serialize(),
-                    success: function(response) {
-                        // let $button = $('#subscribeBtn');
-                        // let buttonElement = $button[0];
-                        
-                        // // Remove loading state properly
-                        // buttonElement.classList.remove("loading");
-                        // buttonElement.innerHTML = buttonElement._originalHTML;
-                        // $button.css("pointerEvents", "auto");
-                        // buttonElement._isLoading = false;
-
-                        toastr.success(response.msg);
-                        $("#newsletter-email").val("");
-                        console.log(response);
-                    },
-                    error: function(xhr) {
-                        // let $button = $('#subscribeBtn');
-                        // let buttonElement = $button[0];
-                        
-                        // // Remove loading state properly
-                        // buttonElement.classList.remove("loading");
-                        // buttonElement.innerHTML = buttonElement._originalHTML;
-                        // $button.css("pointerEvents", "auto");
-                        // buttonElement._isLoading = false;
-                        // let errorMsg = "Something went wrong!";
-
-                        if (xhr.responseJSON && xhr.responseJSON.msg) {
-                            errorMsg = xhr.responseJSON.msg;
-                        }
-                        // alert(errorMsg);
-                        $("#newsletter-email").val("");
-                        toastr.error(errorMsg);
-                        console.error(xhr);
-                    }
-                });
-            });
-        });
-        /*------- Email Subscribe Jquery Code End -------*/
-    </script>
 
     <script src="{{ asset('assets/js/scripts-libs.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -1781,27 +1285,10 @@
         const profileBtn = document.getElementById('profile-menu');
         const profileDropdown = document.querySelector('.profile-dropdown');
 
-        // profileBtn.addEventListener('click', function(event) {
-        //     event.preventDefault();
-        //     profileDropdown.classList.toggle('active');
-        // });
-
-        profileBtn.addEventListener('mouseenter', function(event) {
+        profileBtn.addEventListener('click', function(event) {
             event.preventDefault();
             profileDropdown.classList.toggle('active');
         });
-
-        profileDropdown.addEventListener('mouseleave', function(event) {
-            event.preventDefault();
-            profileDropdown.classList.toggle('active');
-        });
-
-        // profileBtn.addEventListener('mouseleave', function(event) {
-        // event.preventDefault();
-        // profileDropdown.classList.remove('active');
-        // });
-
-
 
 
         const openBtn = document.querySelector('.popup');
@@ -1818,163 +1305,82 @@
         });
 
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const dropdown = document.querySelector(".custom-dropdown");
-            const header = dropdown.querySelector(".dropdown-header");
-            const list = dropdown.querySelector(".dropdown-list");
-            const selected = dropdown.querySelector(".dropdown-selected");
+        document.addEventListener("DOMContentLoaded", function () {
+  const dropdown = document.querySelector(".custom-dropdown");
+  const header = dropdown.querySelector(".dropdown-header");
+  const list = dropdown.querySelector(".dropdown-list");
+  const selected = dropdown.querySelector(".dropdown-selected");
 
-            header.addEventListener("click", function() {
-                header.classList.toggle("active");
-                list.classList.toggle("active");
-            });
-
-            list.querySelectorAll("li").forEach(item => {
-                item.addEventListener("click", function() {
-                    selected.textContent = this.textContent;
-                    header.classList.remove("active");
-                    list.classList.remove("active");
-                });
-            });
-
-            // Outside click close
-            document.addEventListener("click", function(e) {
-                if (!dropdown.contains(e.target)) {
-                    header.classList.remove("active");
-                    list.classList.remove("active");
-                }
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            if (window.location.pathname === "/") {
-                document.body.classList.add("no-slug");
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const modal = document.getElementById("modal1");
-            const openBtns = document.querySelectorAll(".open-modal-btn");
-            const closedBtn = modal.querySelector(".close");
-
-            // Open modal on any button click
-            openBtns.forEach(btn => {
-                btn.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    modal.style.display = "flex";
-
-                });
-            });
-
-            // Close modal
-            closedBtn.addEventListener("click", function() {
-                modal.style.display = "none";
-                document.body.style.overflow = "auto";
-
-            });
-
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var input = document.querySelector("#mobile");
-            window.intlTelInput(input, {
-                initialCountry: "lk", // default Sri Lanka
-                preferredCountries: ["lk", "pk", "in"],
-                separateDialCode: true
-            });
-        });
-
-        document.getElementById("mobile").addEventListener("input", function(e) {
-            this.value = this.value.replace(/[^0-9]/g, ''); // non-numeric ko hata do
-        });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('#flash-message').fadeOut('slow');
-            }, 3000);
-        });
-
-        document.getElementById("mobile").addEventListener("input", function (e) {
-            // Remove non-numeric characters
-            this.value = this.value.replace(/[^0-9]/g, '');
-            });
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".auth-btn");
-
-    buttons.forEach(button => {
-      if (!button.querySelector(".spinner")) {
-        const spinner = document.createElement("span");
-        spinner.classList.add("spinner");
-        spinner.style.display = "none";
-        spinner.innerHTML = `
-          <img src="{{ asset('assets/Images/iconn.png') }}"
-               alt="Gamata Logo"
-               class="login-logo-uni">
-        `;
-        button.appendChild(spinner);
-      }
-
-      const spinner = button.querySelector(".spinner");
-      const originalHTML = button.innerHTML; // button ka original content save
-      const icon = button.querySelector("img"); // button ke andar icon agar ho
-
-      // Back press par button restore ho jaye
-      window.addEventListener("pageshow", function () {
-        button.classList.remove("loading");
-        if (spinner) spinner.style.display = "none";
-        if (icon) icon.style.display = "";
-        button.style.pointerEvents = "auto";
-        button.innerHTML = originalHTML;
-      });
-
-      button.addEventListener("click", function (e) {
-
-        // Button disable aur loading state
-        button.classList.add("loading");
-        button.style.pointerEvents = "none";
-
-        spinner.style.display = "inline-block";
-        button.innerHTML = `
-          Please wait...  <span class="spinner">
-
-          </span>
-        `;
-
-        // Spinner animation (optional)
-        const newImg = button.querySelector(".spin-anim");
-      //   if (newImg) {
-      //     newImg.style.transition = "transform 0.3s linear";
-      //     newImg.style.animation = "spin 1s linear infinite";
-      //   }
-
-        setTimeout(() => {
-          button.classList.remove("loading");
-          button.innerHTML = originalHTML;
-          button.style.pointerEvents = "auto";
-        }, 1000);
-      });
-    });
-    
-
+  header.addEventListener("click", function () {
+    header.classList.toggle("active");
+    list.classList.toggle("active");
   });
 
+  list.querySelectorAll("li").forEach(item => {
+    item.addEventListener("click", function () {
+      selected.textContent = this.textContent;
+      header.classList.remove("active");
+      list.classList.remove("active");
+    });
+  });
+
+  // Outside click close
+  document.addEventListener("click", function (e) {
+    if (!dropdown.contains(e.target)) {
+      header.classList.remove("active");
+      list.classList.remove("active");
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.pathname === "/") {
+        document.body.classList.add("no-slug");
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const modal = document.getElementById("modal1");
+  const openBtns = document.querySelectorAll(".open-modal-btn");
+  const closedBtn = modal.querySelector(".close");
+
+  // Open modal on any button click
+  openBtns.forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      modal.style.display = "flex";
+  
+    });
+  });
+
+  // Close modal
+  closedBtn.addEventListener("click", function() {
+    modal.style.display = "none"; 
+    document.body.style.overflow = "auto";
+ 
+  });
+
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  var input = document.querySelector("#mobile");
+  window.intlTelInput(input, {
+    initialCountry: "lk", // default Sri Lanka
+    preferredCountries: ["lk", "pk", "in"],
+    separateDialCode: true
+  });
+});
+
+document.getElementById("mobile").addEventListener("input", function (e) {
+  this.value = this.value.replace(/[^0-9]/g, ''); // non-numeric ko hata do
+});
 
 
 
     </script>
-    <script src = "https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-    <!-- Owl Carousel JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <!-- Toastr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!-- Your custom scripts -->
-    <script src="scripts.js"></script>
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+
+
 </body>
 
 </html>

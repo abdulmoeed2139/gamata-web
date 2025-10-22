@@ -1,94 +1,83 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FrontentController;
 use App\Http\Controllers\Website\HomeController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ForgotPasswordCustomController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/community', [HomeController::class, 'community']);
+Route::get('/product', [HomeController::class, 'product']);
+Route::get('/product-view', [HomeController::class, 'producttInner']);
+Route::get('/element', [HomeController::class, 'element']);
+Route::get('/welcome', [HomeController::class, 'welcome']);
+
+
+use App\Http\Controllers\AuthController;
+
+// Register
+Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+// Login
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//forgot password
+Route::get('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('password.request');
+
+
+// Protected Dashboard
+Route::get('/dashboard', function () {
+    return view('auth.dashboard');
+})->middleware('auth')->name('dashboard');
+
+Route::get('/login2', function () {
+    return view('auth.login2');
+})->name('login2');
+
+
+Route::get('/posts', function () {
+    return view('websitePages.blogs');
+})->name('blogs');
+Route::get('/my-plans', function () {
+    return view('websitePages.myPlans');
+})->name('myPlans');
+
+Route::get('/index', function () {
+    return view('websitePages.index');
+})->name('index');
+
+Route::get('/contact', function () {
+    return view('websitePages.contact');
+})->name('contact');
+
+Route::get('/app-banner', function () {
+    return view('websitePages.app-banner');
+})->name('appBanner');
 
 
 
-Route::get('/', function(){
-    return redirect(app()->getLocale().'/login');
-});
-
-Route::get('/proxy-image', function (Illuminate\Http\Request $request) {
-    $url = $request->query('url');
-    if (!$url) abort(400, 'Missing URL');
-
-    $response = Http::withOptions(['verify' => false])->get($url);
-
-    return response($response->body(), 200)
-        ->header('Content-Type', $response->header('Content-Type'));
-});
-
-Route::get('/related-products/{childCode}', [FrontentController::class, 'relatedProducts'])->name('related-products');
-Route::get('/get-blog/{blog_id}', [FrontentController::class, 'getSingleBlog'])->name('get-single-blog');
-Route::get('/get-post', [FrontentController::class, 'community'])->name('get-post');
-Route::get('/get-product', [FrontentController::class, 'product'])->name('get-product');
-
-
-// Language-prefixed group
-Route::group(['prefix' => '{lang}', 'middleware' => 'setlocale'], function () {
-
-    Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
-    Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/login-by-password', [AuthController::class, 'PasswordForm'])->name('login-by-password');
-    Route::post('/password-login', [AuthController::class, 'loginByPassword'])->name('loginByPassword');
-    Route::get('/posts', [FrontentController::class, 'blogs'])->name('blogs');
-    Route::post('/subscribe', [FrontentController::class, 'subscribe'])->name('subscribe');
-    Route::get('/verify-otp', [FrontentController::class, 'verifyOTP']);
-    Route::get('/contact', [FrontentController::class, 'contact'])->name('contact');
-    Route::post('/insert-anonymous-inquiry', [FrontentController::class, 'InsertAnonymousInquiry'])->name('contact');
-    Route::post('/create-comment', [FrontentController::class, 'createComment'])->name('create-comment');
-    Route::post('/create-post', [FrontentController::class, 'createPost'])->name('create-post');
-    Route::post('/like-post', [FrontentController::class, 'likePost'])->name('like-post');
-    Route::get('/forgot-password', [ForgotPasswordCustomController::class, 'showForgotForm'])->name('password.request');
-
-    // Main index page
-    Route::get('/index', [FrontentController::class, 'index'])->name('index');
-    Route::get('/product', [FrontentController::class, 'product'])->name('product.index');
-
-
-    Route::get('/community', [FrontentController::class, 'community']);
-    Route::get('/product-view/{product_id}', [FrontentController::class, 'producttInner']);
-
-    Route::get('/element', [HomeController::class, 'element']);
-    Route::get('/welcome', [HomeController::class, 'welcome']);
-    Route::get('/app-banner', [FrontentController::class, 'appBanner'])->name('appBanner');
-
-
-    Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
-    Route::get('/dashboard', function () {
-        return view('auth.dashboard');
-    })->middleware('auth')->name('dashboard');
-
-
-
-
-    Route::get('/my-plans', function () {
-        return view('websitePages.myPlans');
-    })->name('myPlans');
-
-
-
-
-// Route::get('/', [HomeController::class, 'index']);
-Route::get('/resend-otp', [AuthController::class, 'resendOTP']);
-// Route::post('/otp-verify', [AuthController::class, 'getToken']);
-Route::post('/otp-verify', [AuthController::class, 'verifyOtp']);
-// Route::get('/send-otp', [AuthController::class, 'verifyNumber']);
-Route::get('/get-result', [AuthController::class, 'verifyMobileNumber']);
-Route::get('/sign-in', [AuthController::class, 'signIn']);
-Route::get('/get-otp-for-forget-password', [AuthController::class, 'verifyMobileNumber']);
-Route::get('/forgot-password/verify-otp', [ForgotPasswordCustomController::class, 'verifyOtp'])->name('password.verifyOtp');
-Route::post('/forgot-password/verifyotp', [AuthController::class, 'verifyOtp'])->name('password.verifyOtp');
+Route::get('/forgot-password', [ForgotPasswordCustomController::class, 'showForgotForm'])->name('password.request');
 Route::post('/forgot-password/send-otp', [ForgotPasswordCustomController::class, 'sendOtp'])->name('password.sendOtp');
-Route::get('/forgot-password/reset', [ForgotPasswordCustomController::class, 'resetPassword'])->name('password.reset');
-Route::post('/forgot-password/reset', [AuthController::class, 'resetPassword']);
-});
+Route::post('/forgot-password/verify-otp', [ForgotPasswordCustomController::class, 'verifyOtp'])->name('password.verifyOtp');
+Route::post('/forgot-password/reset', [ForgotPasswordCustomController::class, 'resetPassword'])->name('password.reset');

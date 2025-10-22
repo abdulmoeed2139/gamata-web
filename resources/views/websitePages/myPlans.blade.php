@@ -54,7 +54,7 @@
       margin-top: 10px;
     }
 
-
+  
 
     .plan-card button{
     padding:12px;
@@ -100,9 +100,9 @@
         display: flex;
         align-items:center;
         gap:10px;
-
+        
     }
-
+    
     .plan-start-date, .plan-end-date{
         font-weight:600;
         font-size:16px;
@@ -114,7 +114,7 @@
   justify-content: end;
 }
 
-.product-search
+.product-search 
  {
     padding: 12px 15px;
     border: 1px solid #d9d9d9;
@@ -204,7 +204,7 @@ padding-bottom:90px;
     <div class="product-banner">
         <div class="wrapper">
             <div class="breadcrum">
-                <a href="{{ url(app()->getLocale().'/index') }}" class="link">Home</a>
+                <a href="{{ url('/index') }}" class="link">Home</a>
                 <svg><use xlink:href="#breadcrum"></use></svg>
                 <div class="current">My Plan</div>
             </div>
@@ -217,12 +217,12 @@ padding-bottom:90px;
         </div>
     </div>
 
-
+    
 
     <!-- Cards Section -->
     <section class="product-listing plans">
         <div class="wrapper">
-
+            
             <div class="col-12">
                 <!-- Card 1 -->
                   <div class="product-toolbar">
@@ -239,7 +239,7 @@ padding-bottom:90px;
                     </button>
                     </div>
 
-
+                 
                 <div class="plan-card" data-start="2025-09-01" data-end="2026-03-01" style="position:relative;">
                 <img src="{{asset('assets/Images/items/1.png')}}" alt="Banana">
                 <div class="plan-card-content">
@@ -252,7 +252,7 @@ padding-bottom:90px;
                             <div class="plan-progress-bar"  >
                                 <div class="plan-progress" style="width:10%; "></div>
                                 <div class="plan-date">
-
+                                    
                                 <span class="plan-start-date"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                         <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -262,10 +262,10 @@ padding-bottom:90px;
                                 01.09.2025</span>  <span class="plan-end-date">01.03.2026</span>
                                 </div>
                             </div>
-                            </div>
+                            </div>                            
                         </div>
 
-
+                        
                     </div>
                 </div>
 
@@ -290,10 +290,10 @@ padding-bottom:90px;
                                 01.09.2025</span> <span class="plan-end-date">01.03.2026</span>
                                 </div>
                             </div>
-                            </div>
+                            </div>                            
                         </div>
 
-
+                        
                     </div>
                 </div>
 
@@ -314,14 +314,14 @@ padding-bottom:90px;
                                     <line x1="16" y1="2" x2="16" y2="6"></line>
                                     <line x1="8" y1="2" x2="8" y2="6"></line>
                                     <line x1="3" y1="10" x2="21" y2="10"></line>
-                                    </svg>01.09.2025</span>
+                                    </svg>01.09.2025</span> 
                                     <span class="plan-end-date">01.03.2026</span>
                                 </div>
                             </div>
-                            </div>
+                            </div>                            
                         </div>
 
-
+                        
                     </div>
                 </div>
             </div>
